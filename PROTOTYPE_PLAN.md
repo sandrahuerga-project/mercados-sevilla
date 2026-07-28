@@ -155,19 +155,24 @@ Ramas: `main` = desplegado estable; trabajo en ramas por flujo si se quiere prev
 - [x] Cero componentes de flujo hardcodeados: todo son datos + engine
 - [ ] S02 (cliente no recoge) vive dentro de C07 como rama; valorar si merece pantalla propia
 
-### Fase 3 — Vista Antonio (panel)
-- [ ] Panel Organism 03: resumen día, lista pedidos, filtros
-- [ ] P03: Aceptar / Listo (modal total final) / Por cobrar / Marcar cobrado / Entregado
-- [ ] P02 subida vídeo (mock)
-- [ ] C08: agotado en panel → alerta en vista Carmen (puente visible)
+### Fase 3 — Vista Antonio (panel) ✅ (2026-07-28)
+- [x] Panel Organism 03: resumen día, lista pedidos, filtros (incl. "Por cobrar")
+- [x] P03: Aceptar / Listo (pide total final) / Por cobrar / Marcar cobrado (Efectivo/Bizum/Tarjeta) / Problema / Agotado
+- [x] P02 subida vídeo (mock: grabar → enviado a suscriptores)
+- [x] Puente visible: bloque "Lo que le llega al cliente por WhatsApp" registra el mensaje que dispara cada acción
 
-### Fase 4 — Vista David + recorrido completo
-- [ ] C03+C05 multi-puesto, C06 repetir, PWA historial simulada
-- [ ] Modo "recorrido completo" encadenando los flujos (happy path §13)
+### Fase 4 — Rediseño del shell (pendiente, prioridad alta)
+Feedback de Sandra (2026-07-28): fuentes demasiado pequeñas en toda la web y el shell heredado de AI Studio no convence. Rediseñar antes de pulir nada más — probablemente implique retocar también PORTFOLIO_DESIGN.md y algunos flujos.
+- [ ] Subir escala tipográfica global (el dashboard usa 10-13px por defecto)
+- [ ] Replantear el shell: portada, navegación entre flujos, agrupación por vista (Carmen/David/Antonio) en vez de un grid plano de 13
+- [ ] Revisar PORTFOLIO_DESIGN.md con el nuevo criterio visual
+- [ ] Modo "recorrido completo" encadenando flujos (happy path §13)
+- [ ] PWA historial simulada (David)
 
 ### Fase 5 — Pulido
 - [ ] Responsive: perfecto en móvil (la demo se hace en móvil)
 - [ ] Página "sobre este prototipo" para portfolio: enlaza el sistema (DESIGN.md, CONTENT_SYSTEM.md como case study)
+- [ ] Assets reales: vídeo IA en Cloudinary, fotos de puestos
 - [ ] Vídeo de respaldo (para MAYOR_MEETING.md)
 
 ---
