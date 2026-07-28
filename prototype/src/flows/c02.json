@@ -1,0 +1,74 @@
+{
+  "id": "C02",
+  "label": "C02 Recurrente",
+  "description": "Saludo diario de activación — copy DESIGN.md §7.1",
+  "phone": {
+    "title": "Mercado San Gonzalo",
+    "subtitle": "Asistente oficial • En línea",
+    "avatarIcon": "ph ph-storefront",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY", "next": "saludo" },
+    "saludo": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:00",
+      "text": "Buenos días Carmen. Tu mercado es San Gonzalo.\n¿Compras allí hoy?",
+      "next": "opciones"
+    },
+    "opciones": {
+      "kind": "buttons",
+      "timestamp": "09:00",
+      "buttons": [
+        { "label": "Sí, allí voy", "next": "si-video" },
+        { "label": "Cambiar de mercado", "next": "cambiar" }
+      ]
+    },
+    "si-video": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:01",
+      "text": "Perfecto. Te paso lo que hay hoy en tus puestos.",
+      "next": "si-fin"
+    },
+    "si-fin": {
+      "kind": "end",
+      "note": "El pedido continúa en el flujo C03 — Pedido desde el vídeo del día"
+    },
+    "cambiar": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:01",
+      "text": "¿A qué mercado quieres pedir hoy?",
+      "next": "mercados"
+    },
+    "mercados": {
+      "kind": "buttons",
+      "timestamp": "09:01",
+      "buttons": [
+        { "label": "Mercado de Triana", "next": "triana" },
+        { "label": "Mercado de la Feria", "next": "feria" }
+      ]
+    },
+    "triana": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:02",
+      "text": "Hecho. Desde ahora te escribo con lo del Mercado de Triana.",
+      "next": "cambio-fin"
+    },
+    "feria": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:02",
+      "text": "Hecho. Desde ahora te escribo con lo del Mercado de la Feria.",
+      "next": "cambio-fin"
+    },
+    "cambio-fin": {
+      "kind": "end",
+      "note": "El flujo sigue con el vídeo del día del nuevo mercado (C03)"
+    }
+  }
+}

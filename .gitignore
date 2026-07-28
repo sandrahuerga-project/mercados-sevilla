@@ -9,3 +9,6 @@ coverage/
 !.env.example
 .vercel
 Video Fali pescadero.mp4
+
+.vercel
+.env*

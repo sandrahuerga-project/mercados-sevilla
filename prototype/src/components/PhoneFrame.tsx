@@ -110,10 +110,11 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
         <div className="h-[52px] bg-[#F0F2F5] border-t border-zinc-200 px-2.5 flex items-center justify-between space-x-2 z-40">
           <div className="flex-1 bg-white h-9 rounded-full px-3 flex items-center border border-zinc-200/80 shadow-sm">
             <span className="text-xl mr-2 cursor-pointer select-none opacity-70 hover:opacity-100">😊</span>
-            <input 
-              type="text" 
-              placeholder="Escribe un mensaje..." 
+            <input
+              type="text"
+              placeholder="Escribe un mensaje..."
               value={inputValue}
+              readOnly={!onInputChange}
               onChange={onInputChange}
               onKeyDown={onInputKeyPress}
               className="flex-1 text-[13px] bg-transparent outline-none text-zinc-800 placeholder-zinc-400 h-full"

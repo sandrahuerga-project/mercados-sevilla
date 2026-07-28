@@ -174,7 +174,7 @@ Ramas: `main` = desplegado estable; trabajo en ramas por flujo si se quiere prev
 
 - [ ] Congelar copy de los 10 flujos desde DESIGN.md §7 → JSONs (sin emoji en botones, "placero", léxico CONTENT_SYSTEM §3.1)
 - [ ] Dataset falso: 5 puestos San Gonzalo, productos, precios "estimados"
-- [ ] Assets: 1 vídeo real de mostrador (o stock digno), fotos de puestos, avatares
+- [ ] Assets: vídeo de mostrador **generado con IA** (similar al de Fali, sin usar su imagen) alojado en **Cloudinary** (no en el repo), fotos de puestos, avatares
 - [ ] Ajustar PROMPT_UI.md y PROMPT_UI_flujos_P1.md al split DESIGN/PORTFOLIO (aún referencian cards y chips con emoji del DESIGN antiguo) — o retirarlos si los specs JSON los sustituyen
 
 ---

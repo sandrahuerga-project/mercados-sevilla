@@ -1,0 +1,295 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - generic [ref=e12]: Sevilla, España
+        - heading "Plataforma Conversacional · Mercados de Sevilla" [level=1] [ref=e14]
+        - paragraph [ref=e15]: Demostración interactiva de flujos conversacionales de pedidos en WhatsApp Business para mercados de abastos municipales, diseñados bajo las directrices del PRD, restricciones reales de Meta API y el sistema de diseño local.
+      - button "✓ Ver C03 Referencia" [ref=e17] [cursor=pointer]
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - button "Contexto del Producto" [ref=e22] [cursor=pointer]
+        - button "Verificación de Restricciones API" [ref=e26] [cursor=pointer]
+        - button "Diccionario NLU Andaluz" [ref=e31] [cursor=pointer]
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - generic [ref=e38]: 🐟
+            - generic [ref=e39]: El Modelo Pescadería Fali
+          - paragraph [ref=e40]: "Fali (Mercado San Gonzalo, Triana) demostró que el canal conversacional gana al ecommerce tradicional: sube un vídeo del mostrador a las 9 AM, recibe audios desestructurados y entrega a domicilio o recogida cobrando en mano. Una tasa de conversión alta por cercanía y confianza."
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]: 🏛️
+            - generic [ref=e44]: Hybridación Institucional
+          - paragraph [ref=e45]:
+            - text: Frente a la aplicación estática municipal
+            - code [ref=e46]: mercadosdesevilla.es
+            - text: ", este simulador replica un bot que sirve de secretario. Procesa lenguaje natural y coordina pedidos multipuesto sin obligar al placero a actualizar inventarios manuales."
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: 🧑‍🍳
+            - generic [ref=e50]: Voz y Tono de la Capa Conversacional
+          - paragraph [ref=e51]: "Default: español andaluz cercano, sin chistes ni diminutivos condescendientes. Diseñado especialmente para personas mayores de 65 años (como Carmen, 71) que operan mediante mensajes libres y graban audios, asistiéndolas sin forzar pasarelas de pago digitales."
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - heading "Simuladores de Flujo Activo (WhatsApp Business)" [level=2] [ref=e55]
+          - paragraph [ref=e56]: Pulsa en los botones, inputs y flujos dentro de las pantallas para simular la conversación.
+        - generic [ref=e57]:
+          - generic [ref=e58]: "Escala:"
+          - button "Alta Densidad (70%)" [ref=e59] [cursor=pointer]
+          - button "Medio (85%)" [ref=e60] [cursor=pointer]
+          - button "Real (100%)" [ref=e61] [cursor=pointer]
+      - generic [ref=e62]:
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - generic [ref=e67]: C01 Onboarding
+            - heading "Primer contacto y alta con WhatsApp Flow" [level=3] [ref=e68]
+          - generic [ref=e69]:
+            - generic [ref=e74]: 09:00
+            - generic [ref=e84]:
+              - generic [ref=e85]:
+                - button [ref=e86] [cursor=pointer]
+                - generic [ref=e91]:
+                  - heading "Mercados de Sevilla" [level=4] [ref=e92]
+                  - generic [ref=e93]: Asistente oficial • En línea
+              - button [ref=e95] [cursor=pointer]
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - generic [ref=e103]: HOY
+                - generic [ref=e105]:
+                  - generic [ref=e106]: Asistente de Mercados
+                  - generic [ref=e107]:
+                    - text: Hola 👋 Soy el bot de Mercados de Sevilla. Te ayudo a comprar en los puestos del mercado sin moverte de casa.
+                    - generic [ref=e108]: 09:00
+                - generic [ref=e110]:
+                  - generic [ref=e111]: Asistente de Mercados
+                  - generic [ref=e112]:
+                    - text: Cuéntame quién eres en 30 segundos para configurar tu cuenta de reparto y puestos favoritos.
+                    - generic [ref=e113]: 09:00
+                - button "⚡ Empezar" [ref=e116] [cursor=pointer]:
+                  - generic [ref=e117]: ⚡
+                  - generic [ref=e118]: Empezar
+              - button "🔄 Reiniciar Simulación C01" [ref=e120] [cursor=pointer]
+            - generic [ref=e122]:
+              - generic [ref=e123] [cursor=pointer]: 😊
+              - textbox "Escribe un mensaje..." [ref=e124]
+              - button [ref=e126]
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - generic [ref=e139]: C02 Recurrente
+              - heading "Saludo diario de activación — copy DESIGN.md §7.1" [level=3] [ref=e140]
+            - generic [ref=e141]:
+              - generic [ref=e146]: 09:00
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - button [ref=e158] [cursor=pointer]
+                  - generic [ref=e163]:
+                    - heading "Mercado San Gonzalo" [level=4] [ref=e164]
+                    - generic [ref=e165]: Asistente oficial • En línea
+                - button [ref=e167] [cursor=pointer]
+              - generic [ref=e175]:
+                - generic [ref=e176] [cursor=pointer]: 😊
+                - textbox "Escribe un mensaje..." [ref=e177]
+                - button [ref=e179]
+          - button "Reiniciar C02" [ref=e188] [cursor=pointer]
+        - generic [ref=e190]:
+          - generic [ref=e191]:
+            - generic [ref=e192]: C11 Escalado
+            - heading "Handover a placero real con enrutamiento de vuelta" [level=3] [ref=e193]
+          - generic [ref=e194]:
+            - generic [ref=e199]: 09:00
+            - generic [ref=e209]:
+              - generic [ref=e210]:
+                - button [ref=e211] [cursor=pointer]
+                - generic [ref=e216]:
+                  - heading "Pescadería Fali" [level=4] [ref=e217]
+                  - generic [ref=e218]: Fali responderá pronto • En línea
+              - button [ref=e220] [cursor=pointer]
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - generic [ref=e228]: HOY
+                - generic [ref=e231]:
+                  - text: ¿Las acedías de hoy son de Sanlúcar?
+                  - generic [ref=e232]: 09:12
+                - generic [ref=e237]:
+                  - generic [ref=e238]: Pescadería Fali Asistente
+                  - generic [ref=e239]:
+                    - text: Te paso con Fali directamente. Suele responder en 5-10 min.
+                    - generic [ref=e240]: 09:12
+                - generic [ref=e242]: — Fali se ha unido a la conversación —
+                - generic [ref=e244]:
+                  - generic [ref=e245]:
+                    - generic [ref=e246]: Fali
+                    - generic [ref=e247]: PLACERO REAL
+                  - generic [ref=e248]:
+                    - text: Hola Carmen, sí, llegaron esta mañana de la lonja de Sanlúcar. Son de categoría. ¿Te aparto medio kilo?
+                    - generic [ref=e249]: 09:15
+                - generic [ref=e252]:
+                  - text: Sí porfa, para mañana.
+                  - generic [ref=e253]: 09:16
+                - generic [ref=e258]: — Fali ha pasado el chat al asistente —
+                - generic [ref=e260]:
+                  - generic [ref=e261]: Pescadería Fali Asistente
+                  - generic [ref=e262]:
+                    - text: Apuntado. ½ kg acedías de Sanlúcar para recogida mañana 10:00. ¿Confirmas?
+                    - generic [ref=e263]: 09:17
+                - generic [ref=e265]:
+                  - button "✓ Confirmar" [ref=e266] [cursor=pointer]
+                  - button "✏️ Modificar" [ref=e267] [cursor=pointer]
+              - button "🔄 Reiniciar Simulación C11" [ref=e269] [cursor=pointer]
+            - generic [ref=e271]:
+              - generic [ref=e272] [cursor=pointer]: 😊
+              - textbox "Escribe un mensaje..." [ref=e273]
+              - button [ref=e275]
+        - generic [ref=e285]:
+          - generic [ref=e286]:
+            - generic [ref=e287]: C07 Tracking
+            - heading "Notificaciones utility automáticas a lo largo del día" [level=3] [ref=e288]
+          - generic [ref=e289]:
+            - generic [ref=e294]: 09:00
+            - generic [ref=e304]:
+              - generic [ref=e305]:
+                - button [ref=e306] [cursor=pointer]
+                - generic [ref=e311]:
+                  - heading "Mercados de Sevilla" [level=4] [ref=e312]
+                  - generic [ref=e313]: Utilidades de pedido • En línea
+              - button [ref=e315] [cursor=pointer]
+            - generic [ref=e321]:
+              - generic [ref=e322]:
+                - generic [ref=e323]: "PEDIDO #SGZ-2026-0387"
+                - generic [ref=e325]: — 10:15 —
+                - generic [ref=e327]:
+                  - generic [ref=e328]: Asistente de Mercados
+                  - generic [ref=e329]:
+                    - text: ✅ Fali ha aceptado tu pedido *#SGZ-2026-0387*. Empieza a prepararlo.
+                    - generic [ref=e330]: 10:15
+                - generic [ref=e332]: — 11:40 —
+                - generic [ref=e334]:
+                  - generic [ref=e335]: Asistente de Mercados
+                  - generic [ref=e336]:
+                    - text: 📦 Tu pedido está listo. Puedes recogerlo en Pescadería Fali, Mercado San Gonzalo. Abierto hasta las 14:00.
+                    - generic [ref=e337]: 11:40
+                - generic [ref=e339]:
+                  - button "Cómo llegar" [ref=e340] [cursor=pointer]
+                  - button "Avisar a Fali" [ref=e341] [cursor=pointer]
+                - generic [ref=e342]: — 12:30 —
+                - generic [ref=e344]:
+                  - generic [ref=e345]: Asistente de Mercados
+                  - generic [ref=e346]:
+                    - text: 🎉 Gracias por tu compra, Carmen. ¿Repetimos la semana que viene?
+                    - generic [ref=e347]: 12:30
+                - generic [ref=e349]:
+                  - button "Repetir" [ref=e350] [cursor=pointer]
+                  - button "Valorar a Fali" [ref=e351] [cursor=pointer]
+              - button "🔄 Reiniciar Simulación C07" [ref=e353] [cursor=pointer]
+            - generic [ref=e355]:
+              - generic [ref=e356] [cursor=pointer]: 😊
+              - textbox "Escribe un mensaje..." [ref=e357]
+              - button [ref=e359]
+      - generic [ref=e371]:
+        - generic [ref=e372]:
+          - generic [ref=e373]: C03 Pedido Broadcast
+          - heading "Flujo de pedido desde vídeo diario (Referencia)" [level=3] [ref=e374]
+        - generic [ref=e375]:
+          - generic [ref=e380]: 09:00
+          - generic [ref=e390]:
+            - generic [ref=e391]:
+              - button [ref=e392] [cursor=pointer]
+              - generic [ref=e397]:
+                - heading "Pescadería Fali" [level=4] [ref=e398]
+                - generic [ref=e399]: Asistente oficial • En línea
+            - button [ref=e401] [cursor=pointer]
+          - generic [ref=e407]:
+            - generic [ref=e408]:
+              - generic [ref=e409]: 9:02 AM - BROADCAST
+              - generic [ref=e411]:
+                - generic [ref=e412]: Pescadería Fali
+                - generic [ref=e413]:
+                  - generic [ref=e414]:
+                    - generic [ref=e420]: 0:38
+                    - generic [ref=e421]:
+                      - generic [ref=e422]: ●
+                      - generic [ref=e423]: VÍDEO DE HOY
+                  - generic [ref=e424]:
+                    - paragraph [ref=e425]: ¡Buenos días, Carmen! 👋
+                    - paragraph [ref=e426]: "Hoy en el mostrador: acedías fresquísimas de Sanlúcar, boquerones de primera y gamba blanca de Huelva."
+                    - paragraph [ref=e427]: 🛒 Pide hoy antes de las 12:30 para reparto o recogida.
+                  - generic [ref=e428]: 09:02
+              - generic [ref=e429]:
+                - button "🛒 Pedir" [ref=e430] [cursor=pointer]
+                - button "Lo de siempre" [ref=e431] [cursor=pointer]
+                - button "Ver el vídeo" [ref=e432] [cursor=pointer]
+            - button "🔄 Reiniciar Simulación C03" [ref=e434] [cursor=pointer]
+          - generic [ref=e436]:
+            - generic [ref=e437] [cursor=pointer]: 😊
+            - textbox "Escribe un mensaje..." [ref=e438]
+            - button [ref=e440]
+    - generic [ref=e449]:
+      - heading "📋 Verificación de Coherencia Visual & Accesibilidad" [level=3] [ref=e450]:
+        - generic [ref=e451]: 📋
+        - generic [ref=e452]: Verificación de Coherencia Visual & Accesibilidad
+      - generic [ref=e453]:
+        - generic [ref=e454]:
+          - heading "Paleta de Colores Oficiales" [level=4] [ref=e455]
+          - list [ref=e456]:
+            - listitem [ref=e457]:
+              - generic [ref=e459]:
+                - text: Verde Mercado (
+                - code [ref=e460]: "#2D6A4F"
+                - text: ) - Headers / Autoridad
+            - listitem [ref=e461]:
+              - generic [ref=e463]:
+                - text: Verde WhatsApp (
+                - code [ref=e464]: "#25D366"
+                - text: ) - CTAs / Burbuja Usuario
+            - listitem [ref=e465]:
+              - generic [ref=e467]:
+                - text: Azulejo Sevilla (
+                - code [ref=e468]: "#1B4F8A"
+                - text: ) - Links / Sistema Handover
+            - listitem [ref=e469]:
+              - generic [ref=e471]:
+                - text: Fondo Chat (
+                - code [ref=e472]: "#EBE5DC"
+                - text: ) - SVG azulejo opacidad 0.04
+        - generic [ref=e473]:
+          - heading "Reglas Tipográficas Aplicadas" [level=4] [ref=e474]
+          - list [ref=e475]:
+            - listitem [ref=e476]:
+              - strong [ref=e477]: "Display:"
+              - text: Playfair Display para encabezados y nombres de puestos.
+            - listitem [ref=e478]:
+              - strong [ref=e479]: "Cuerpo de Chat:"
+              - text: Inter font con espaciados correctos.
+            - listitem [ref=e480]:
+              - strong [ref=e481]: "Monospace:"
+              - text: DM Mono para pesos, precios y códigos.
+            - listitem [ref=e482]:
+              - strong [ref=e483]: "Tamaño de toque:"
+              - text: Botones y chips interactivos superan siempre los 44px de área de pulsado.
+        - generic [ref=e484]:
+          - heading "Verificaciones de Seguridad" [level=4] [ref=e485]
+          - list [ref=e486]:
+            - listitem [ref=e487]:
+              - text: ✓
+              - strong [ref=e488]: "Voz y Tono:"
+              - text: Sin emojis de adorno prohibidos (como 🔥, 🚀, 💯).
+            - listitem [ref=e489]:
+              - text: ✓
+              - strong [ref=e490]: "No Mock Data:"
+              - text: Se simulan datos que corresponden a mercados reales de Sevilla.
+            - listitem [ref=e491]:
+              - text: ✓
+              - strong [ref=e492]: "Diseño Responsivo:"
+              - text: Grid adaptativa que pasa de columna vertical a cuadricula de 4 según tamaño de pantalla.
+            - listitem [ref=e493]:
+              - text: ✓
+              - strong [ref=e494]: "Accesibilidad contrastes:"
+              - text: Textos sobre fondos con ratios que superan el estándar AA de legibilidad.
+  - contentinfo [ref=e495]:
+    - generic [ref=e496]:
+      - paragraph [ref=e497]: © 2026 Mercados Municipales de Sevilla · Capa Conversacional WhatsApp Business
+      - paragraph [ref=e498]: Simulador V2.0 • Diseñado conforme a directrices de Meta Business Manager

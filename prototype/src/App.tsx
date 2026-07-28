@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { C01OnboardingScreen } from './components/C01OnboardingScreen';
-import { C02RecurrenteScreen } from './components/C02RecurrenteScreen';
+import { FlowScreen } from './engine/FlowScreen';
+import type { FlowScript } from './engine/types';
+import c02Script from './flows/c02.json';
 import { C11EscaladoScreen } from './components/C11EscaladoScreen';
 import { C07TrackingScreen } from './components/C07TrackingScreen';
 import { C03BroadcastScreen } from './components/C03BroadcastScreen';
@@ -211,9 +213,9 @@ export default function App() {
               <C01OnboardingScreen />
             </div>
 
-            {/* Screen 2: Recurrente C02 */}
+            {/* Screen 2: Recurrente C02 (JSON script + FlowPlayer engine) */}
             <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <C02RecurrenteScreen />
+              <FlowScreen script={c02Script as FlowScript} />
             </div>
 
             {/* Screen 3: Escalado C11 */}
