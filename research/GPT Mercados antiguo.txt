@@ -1,0 +1,416 @@
+
+
+
+No me sale la opción de upload file. Cuando lo pego no se me activa y ya he probado todo lo anterior. Me sale este mensaje: qué puedo hacer?
+
+Imagen generada: Diagrama de flujo de automatización
+
+
+Editar
+
+Aquí tienes el esquema visual del flujo:
+
+👉 Descargar imagen
+
+Dime si quieres que añadamos ahora el paso para elegir mercado favorito, mostrar vídeos del día o simular un carrito.
+
+
+Me sale esto: 
+
+No me sale eso de when a message comes in en sandbox ni laopcion de estudio flow. Me sale esto: 
+
+Tendré que poner algo aquí? 
+
+entonces aquí qué tengo que poner en el campo que viene debajo de equal to? 
+
+97f500ef-c442-480a-a02d-a759e455a177.png
+9b9dac19-0ff9-4f66-b926-b90f6c651244.png
+50d4b64b-bfa9-4ec5-afcc-c5fc27fc0cd1.png
+31d4c1ee-7872-4554-b4f2-20cc272d3427.png
+2ffed4f1-e33a-452e-950b-30a0ccde59ad.png
+
+Creo que hay un error de configuración porque de base me sale esto: 
+
+Imagen generada: Conversación en Mercado Conectado
+
+
+Editar
+
+
+No, me aparecen varias opciones pero esa no: 
+
+no me ha respondido tu pregunta. estoy en el bloque question y tengo esto. donde pongo "else"?
+
+Cómo implementar la comprobación de mercado_fav en Landbot
+(no necesitas otro “Start”; solo añadiremos un bloque condicional justo después del inicio).
+
+1. Estructura que vas a montar
+Start
+  ↓
+Check Mercado (Conditional)   ← aquí se evalúa si existe mercado_fav
+   ├─ 1) mercado_fav NO vacío → Bloque “Confirmar mercado” (Message + Buttons)
+   │         • Botón “Usar @mercado_fav”   → salta al sub-flujo Pedido
+   │         • Botón “Cambiar mercado”     → bloque Elegir Mercado
+   └─ 2) mercado_fav vacío   → bloque Elegir Mercado (lista de mercados)
+2. Paso a paso en el builder de Landbot
+2.1 Coloca el bloque condicional justo tras el Start
+Haz clic en el círculo gris del Start y arrastra hasta Logic → Conditional logic.
+
+Renombra el bloque a “Check mercado_fav” (doble clic en el título).
+
+2.2 Configura la condición
+En el panel derecho selecciona:
+
+IF: elige la variable mercado_fav
+
+Operator: is NOT
+
+Value type: empty
+(Landbot mostrará algo como “is not empty”)
+
+Con esto estás diciendo: “Si mercado_fav existe y no está vacío…”.
+
+Pulsa Save.
+
+2.3 Crea los dos caminos
+Conector verde (la condición que acabas de crear) → arrástralo a un nuevo bloque Message, llámalo “Confirmar mercado”.
+
+Conector gris “Else” (no-condition) → arrástralo al bloque Elegir Mercado donde el usuario selecciona por primera vez.
+
+2.4 Bloque Confirmar mercado
+Tipo: Message con botones.
+
+Texto:
+
+Tu mercado favorito es **@mercado_fav**.
+¿Quieres comprar allí hoy?
+Añade dos botones:
+
+Usar este mercado
+
+Conecta a Sub-flujo Pedido (o directamente al bloque Categoría).
+
+Cambiar mercado
+
+Conecta de nuevo al bloque Elegir Mercado.
+
+Nota: en el texto puedes mostrar la variable usando @mercado_fav.
+
+2.5 Bloque Elegir Mercado
+Ya lo tienes de antes (botones Triana, Cerro, etc.). Al final de ese bloque continúas al sub-flujo de pedido.
+
+3. ¿De dónde sale mercado_fav la primera vez?
+En tu bloque Elegir Mercado (cuando el usuario selecciona por primera vez), asegúrate de Guardar la respuesta en:
+
+mercado_fav
+Landbot guarda esa variable en la conversación; en sesiones siguientes la recordará, por eso “Check mercado_fav” podrá detectarla.
+
+4. Comprobación rápida
+Primer test: nuevo chat (sin variable):
+
+Bot debería llevarte al bloque Elegir Mercado.
+
+Segundo test: mismo chat, segunda vuelta:
+
+Bot debe saltar al mensaje “Tu mercado favorito es…” y ofrecer los dos botones.
+
+Resumen de bloques (nombres sugeridos)
+Orden	Bloque	Tipo	Variable / Acción
+1	Start	—	—
+2	Check mercado_fav	Conditional	mercado_fav is not empty
+3a	Confirmar mercado	Message + Buttons	muestra @mercado_fav
+3b	Elegir Mercado	Question → Buttons	guarda en mercado_fav
+4	(Sub-flujo Pedido)	—	categorías, productos, etc.
+Con esto tu “else” está implementado: el conector gris del bloque condicional. Solo asegúrate de conectar cada rama al bloque correcto y de guardar la variable mercado_fav la primera vez.
+
+¡Inténtalo y me cuentas si todo encaja!
+
+
+5a50845b-08c2-4d19-aa28-b7059f6cf564.png
+antes de pasar al 2.3, me aparece esto. Cual es? 
+
+¡Perfecto! En la lista desplegable que me enseñas, la opción que debes elegir para comprobar si la variable mercado_fav ya existe es:
+
+✅ IS SET
+¿Por qué?
+IS SET verifica si la variable mercado_fav ya tiene un valor asignado, es decir, si el usuario ya ha elegido un mercado en alguna conversación anterior.
+
+No necesitas comprobar si está “igual a” algo, solo saber si existe y tiene algún valor.
+
+Luego:
+El camino del “YES” te lleva al mensaje con botones de “¿Quieres seguir comprando en @mercado_fav?”
+
+El camino del “ELSE” te lleva al bloque de Elegir Mercado (primera vez).
+
+¿Seguimos con el paso 2.3?
+
+
+y como pongo el camino else?
+
+¡Buena pregunta! En Landbot, el camino “Else” (o "si no se cumple la condición") se configura automáticamente como una de las ramas de tu bloque Conditional. Aquí te explico paso a paso cómo hacerlo:
+
+✅ CÓMO CONFIGURAR EL ELSE (cuando la condición no se cumple):
+Añade el bloque “Conditional” si no lo has hecho ya.
+
+En el bloque Conditional:
+
+Variable: @mercado_fav
+
+Condición: IS SET
+(esto cubre el caso de que ya haya elegido mercado antes)
+
+Ahora verás dos caminos:
+
+Uno que dice YES (cuando la condición sí se cumple → el mercado ya está guardado)
+
+Otro que dice NO (cuando no está guardado aún)
+
+Conecta el bloque del camino NO (Else) a tu bloque Elegir Mercado.
+
+🎯 Ejemplo visual de lógica
+Start
+ ↓
+[Conditional: @mercado_fav IS SET]
+   ├── YES → [Mensaje: "Compras en @mercado_fav?"]
+   │           ├── Botón "Sí" → subflujo Pedido
+   │           └── Botón "Cambiar mercado" → Elegir Mercado
+   └── NO → [Elegir Mercado]
+Con eso ya tienes el flujo que diferencia entre usuario nuevo y repetidor.
+
+¿Te muestro ahora cómo guardar ese mercado elegido para futuras sesiones?
+
+
+cd9fafbc-6b4f-4943-8804-c04b6dd62ed9.png
+me sale esto 
+
+Got it — if Twilio and Landbot are no longer options due to limitations, don’t worry. There are other tools you can use to prototype or even build a working WhatsApp flow, depending on what you need now:
+
+✅ 1. If your goal is to show how the bot would work (clickable prototype):
+➤ Use Figma
+You can build a clickable mockup of a WhatsApp conversation:
+
+Use mobile phone frame mockups.
+
+Stack message bubbles like in WhatsApp (you can use plugins or templates).
+
+Link responses as buttons or tap areas (like "Menu", "Ofertas", etc.).
+
+Simulate flow navigation with Figma's prototype interactions.
+
+✅ Ideal for: user testing, case studies, recording videos.
+
+✅ 2. If you want a working demo bot (no-code, free or cheap):
+🔸 Tiledesk (https://www.tiledesk.com)
+Free plan available.
+
+Lets you create WhatsApp-like bots or embed them on a site.
+
+Drag & drop flow builder (similar to Landbot).
+
+Has WhatsApp integrations (can skip if just using Web bot).
+
+🔸 Manychat (Web Only or Telegram)
+WhatsApp requires a paid tier, BUT:
+
+You can test the same logic with a Telegram bot (free) or web widget.
+
+Visual builder, user attributes, and conditional logic included.
+
+🔸 Botpress (https://botpress.com/)
+Free for personal use.
+
+More advanced, but supports:
+
+Visual flows
+
+Memory/variables
+
+WhatsApp channel if needed (but requires Twilio or Vonage).
+
+✅ 3. If you want something ultra-light to show how it would behave:
+🔸 Use Google Slides
+Each slide is a screenshot of the conversation.
+
+Add arrows or clickable hotspots.
+
+You can simulate decision trees (like “click here to choose 'Menu'”).
+
+What do you want right now?
+🖼 A Figma prototype (I can send you the full file with screens).
+
+💬 A working bot in another tool (I can guide you step by step).
+
+🎥 A mockup video walkthrough for your case study?
+
+Let me know and I’ll help you move fast with what works for you without paying extra.
+
+
+Perdona que te lo haya dicho en inglés, pero me lo puedes repetir.
+
+¡Claro! 😊 Aquí tienes las opciones para seguir sin usar Twilio ni Landbot:
+
+✅ 1. Si solo quieres mostrar cómo funcionaría el bot (prototipo sin código):
+➤ Usa Figma
+Puedes crear un prototipo visual que simule una conversación de WhatsApp:
+
+Usa un marco de móvil.
+
+Crea los mensajes como burbujas (con plugins o diseñándolos tú).
+
+Añade botones como “MENU”, “OFERTAS”, etc.
+
+Conecta las pantallas con las interacciones de Figma (Prototype).
+
+✅ Ideal para mostrar en tu portfolio, hacer tests o grabar un walkthrough en vídeo.
+
+✅ 2. Si quieres un bot funcional gratis (o casi):
+🔸 Tiledesk (https://www.tiledesk.com)
+Tiene plan gratuito.
+
+Puedes crear bots tipo chat web o incluso para WhatsApp (si lo necesitas luego).
+
+Interfaz visual muy parecida a Landbot.
+
+🔸 Manychat
+WhatsApp solo en plan de pago, pero puedes usar Telegram o Webchat gratis.
+
+Muy fácil de usar, permite lógica condicional y variables.
+
+🔸 Botpress (https://botpress.com)
+Gratuito para uso personal.
+
+Es más técnico, pero permite flujos complejos, guardar variables y exportar.
+
+También puedes conectarlo a WhatsApp si algún día usas Vonage o Twilio.
+
+✅ 3. Si solo quieres mostrar la lógica de la conversación de forma rápida:
+🔸 Usa Google Slides o Canva
+Haz capturas simuladas del chat.
+
+Cada slide representa una pantalla o paso del flujo.
+
+Añades botones o flechas para navegar entre opciones.
+
+Entonces… ¿qué prefieres hacer ahora?
+🎨 ¿Un prototipo interactivo en Figma?
+
+🤖 ¿Un bot funcional usando Tiledesk o Manychat?
+
+📽 ¿Un walkthrough en vídeo usando mockups?
+
+Dime lo que más te conviene y te ayudo paso a paso 🧭
+
+
+Vamos a por Figma. Guíame!
+
+Guia Prototipo Figma
+
+Guía rápida para crear un prototipo de bot en WhatsApp usando Figma
+
+🔊 1. Define el flujo de la conversación
+Antes de diseñar, dibuja o escribe en una hoja los pasos clave del bot:
+
+Primera vez:
+
+Bienvenida
+
+Selección de mercado (Triana, Cerro, San Gonzalo...)
+
+Selección de categoría (Carne, Pescado, Fruta...)
+
+Selección de puesto
+
+Visualización de producto/vídeo
+
+Elección de cantidad
+
+Elección de recogida (puesto, taquilla, domicilio)
+
+Pago
+
+Confirmación
+
+Si ya ha comprado:
+
+Detectar mercado favorito
+
+Preguntar si quiere seguir en ese mercado
+
+Si no: cambiar mercado
+
+Seguir mismo flujo
+
+📱 2. Prepara los componentes visuales en Figma
+Crea un frame del tamaño de pantalla de móvil: 390x844 px (iPhone 14)
+
+Usa un fondo gris claro o una imagen de WhatsApp (opcional)
+
+Diseña burbujas de chat:
+
+Verdes a la derecha (usuario)
+
+Blancas a la izquierda (bot)
+
+Puedes duplicarlas para mantener consistencia
+
+Crea botones tipo "tap here" con esquinas redondeadas.
+
+Texto claro: "Ver menú", "Ofertas", "Mercado Triana", etc.
+
+Usa auto layout para mantenerlos ordenados.
+
+⚖️ 3. Organiza por pantallas (una por paso)
+Ejemplo de pantallas:
+
+Pantalla 1: Bienvenida + botones de mercados
+
+Pantalla 2: Elección de categoría
+
+Pantalla 3: Selección de puesto
+
+Pantalla 4: Vídeo del mostrador (imagen simulada)
+
+Pantalla 5: Selección de cantidad
+
+Pantalla 6: Tipo de entrega + horario
+
+Pantalla 7: Resumen + pago
+
+Pantalla 8: Confirmación final
+
+🔗 4. Conecta interacciones (modo Prototype)
+Ve a la pestaña "Prototype"
+
+Selecciona un botón y arrastra la flecha azul hasta la pantalla destino
+
+Usa la interacción "On Tap" + "Navigate to"
+
+Puedes crear transiciones tipo "Instant" o "Smart animate"
+
+📲 5. Bonus: usa plugins si quieres mejorar el realismo
+Chat UI o WhatsApp UI Kit: para copiar estilos de burbujas
+
+Icons8 o Feather Icons: para añadir iconos de enviar, adjuntar, etc.
+
+📗 6. Publica tu prototipo
+Haz clic en "Present"
+
+Copia la URL
+
+Compártelo o graba un walkthrough en Loom
+
+🚀 Cuando lo tengas, dime y te ayudo a iterar o mejorarlo. Si quieres, puedo diseñarte las primeras pantallas base para que arranques más rápido. ¡Tú mandas!
+
+¡Perfecto! Ya tienes la guía paso a paso para montar tu prototipo de bot en WhatsApp usando Figma.
+
+¿Quieres que te diseñe yo misma las primeras pantallas base en Figma para arrancar más rápido? Puedo preparártelas con:
+
+Burbujas de bot y usuario
+
+Botones
+
+El primer flujo: Bienvenida → Selección de mercado → Selección de categoría
+
+Solo dime si quieres eso o si prefieres montar tú misma las pantallas y que luego las revisemos juntas.
+
+
