@@ -14,6 +14,7 @@ import c10Script from './flows/c10.json';
 import c11Script from './flows/c11.json';
 import s01Script from './flows/s01.json';
 import s03Script from './flows/s03.json';
+import { PlaceroPanel } from './panel/PlaceroPanel';
 import { WHATSAPP_CONSTRAINTS } from './data/mockData';
 import { Info, BookOpen, CheckSquare } from 'lucide-react';
 
@@ -232,6 +233,20 @@ export default function App() {
                 <FlowScreen script={script} />
               </div>
             ))}
+          </div>
+
+          {/* Placero panel — P02 + P03. Not WhatsApp: a web panel, no Meta constraints */}
+          <div className="pt-10 border-t border-slate-800 space-y-4">
+            <div className="text-left">
+              <span className="inline-block px-2.5 py-1 text-xs font-bold tracking-wide uppercase rounded bg-azafran/10 text-azafran border border-azafran/20 mb-1.5">
+                P02 + P03 · Panel del placero
+              </span>
+              <h3 className="text-sm font-semibold text-slate-100">
+                Vista de Antonio: vídeo diario y gestión de pedidos. Fuera de WhatsApp — cada acción
+                dispara el mensaje que ve el cliente.
+              </h3>
+            </div>
+            <PlaceroPanel />
           </div>
         </div>
 
