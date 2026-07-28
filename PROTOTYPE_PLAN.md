@@ -149,9 +149,11 @@ Ramas: `main` = desplegado estable; trabajo en ramas por flujo si se quiere prev
 - [ ] Generalizar componentes existentes (ChatBubbles, ReplyButtons, ListMessage, WhatsAppFlowModal) para que los alimente el engine
 - [ ] Migrar C02 (el más corto) a JSON como prueba end-to-end
 
-### Fase 2 — Vista Carmen (auditar lo construido)
-- [ ] Migrar C01, C03, C07, C11 a JSON, **auditando el copy contra DESIGN.md §7** (el export de AI Studio es anterior al split DESIGN/PORTFOLIO — revisar botones, longitudes, léxico)
-- [ ] C03: verificar audio → confirmación en texto (sin card) → fulfillment → recibo
+### Fase 2 — Flujos de chat ✅ (2026-07-28)
+- [x] Migrados a JSON con copy auditado contra DESIGN.md §7: C01 (WA Flow), C02, C03, C07, C11
+- [x] Nuevos: C04, C05, C06, C08, C09, C10, S01, S03 — **13 flujos de chat, cada uno con sus unhappy paths** como ramas seleccionables
+- [x] Cero componentes de flujo hardcodeados: todo son datos + engine
+- [ ] S02 (cliente no recoge) vive dentro de C07 como rama; valorar si merece pantalla propia
 
 ### Fase 3 — Vista Antonio (panel)
 - [ ] Panel Organism 03: resumen día, lista pedidos, filtros
