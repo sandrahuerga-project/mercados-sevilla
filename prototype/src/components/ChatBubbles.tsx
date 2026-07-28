@@ -196,6 +196,57 @@ export const ReplyButtons: React.FC<ReplyButtonsProps> = ({
   );
 };
 
+// Video broadcast bubble: media header + caption, like a WA marketing template message
+interface VideoBubbleProps {
+  puestoName: string;
+  timestamp: string;
+  caption: React.ReactNode;
+  footer?: string;
+  duration: string;
+  imageUrl?: string;
+}
+
+export const VideoBubble: React.FC<VideoBubbleProps> = ({
+  puestoName,
+  timestamp,
+  caption,
+  footer,
+  duration,
+  imageUrl,
+}) => {
+  return (
+    <div className="flex flex-col items-start my-1.5 px-3 animate-fade-in">
+      <span className="text-[11px] font-semibold text-mercado-green mb-0.5 ml-2">{puestoName}</span>
+      <div className="relative max-w-[82%] bg-white rounded-2xl rounded-tl-none bubble-tail-bot shadow-bubble overflow-hidden border border-zinc-200">
+        <div className="relative aspect-video w-full bg-slate-800 flex items-center justify-center text-white overflow-hidden">
+          {imageUrl && (
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-65"
+              style={{ backgroundImage: `url('${imageUrl}')` }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-mercado-green shadow-lg z-10 cursor-pointer">
+            <Play size={18} className="fill-current ml-0.5" />
+          </div>
+          <span className="absolute bottom-1.5 right-2 px-1.5 py-0.5 bg-black/60 rounded text-[9px] font-mono text-white select-none">
+            {duration}
+          </span>
+        </div>
+        <div className="p-3 text-[13px] text-zinc-700 leading-relaxed text-left border-t border-zinc-100 whitespace-pre-wrap">
+          {caption}
+        </div>
+        {footer && (
+          <div className="px-3 pb-1 text-[10.5px] text-zinc-400">{footer}</div>
+        )}
+        <div className="text-right px-3 pb-2 select-none">
+          <span className="text-[9.5px] text-zinc-400 font-mono">{timestamp}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // WhatsApp Flow CTA Button (Triggers full screen Flow modal)
 export const FlowCTAButton: React.FC<{ label: string; onClick: () => void }> = ({ label, onClick }) => {
   return (

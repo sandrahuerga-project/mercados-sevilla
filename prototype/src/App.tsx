@@ -3,9 +3,9 @@ import { C01OnboardingScreen } from './components/C01OnboardingScreen';
 import { FlowScreen } from './engine/FlowScreen';
 import type { FlowScript } from './engine/types';
 import c02Script from './flows/c02.json';
+import c03Script from './flows/c03.json';
 import { C11EscaladoScreen } from './components/C11EscaladoScreen';
 import { C07TrackingScreen } from './components/C07TrackingScreen';
-import { C03BroadcastScreen } from './components/C03BroadcastScreen';
 import { WHATSAPP_CONSTRAINTS } from './data/mockData';
 import { Info, HelpCircle, AlertTriangle, BookOpen, Layers, CheckSquare } from 'lucide-react';
 
@@ -235,7 +235,7 @@ export default function App() {
             <div className="pt-10 border-t border-slate-850 animate-fade-in">
               <div className="max-w-md mx-auto">
                 <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-                  <C03BroadcastScreen />
+                  <FlowScreen script={c03Script as FlowScript} />
                 </div>
               </div>
             </div>

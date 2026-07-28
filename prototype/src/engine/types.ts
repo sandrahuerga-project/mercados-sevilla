@@ -33,6 +33,16 @@ export type FlowStep =
       next: string | null;
     }
   | { kind: 'buttons'; timestamp?: string; buttons: { label: string; next: string }[] }
+  | {
+      kind: 'video';
+      puesto: string;
+      timestamp: string;
+      caption: string;
+      footer?: string;
+      duration: string;
+      imageUrl?: string;
+      next: string | null;
+    }
   | { kind: 'end'; note?: string };
 
 export interface FlowScript {
