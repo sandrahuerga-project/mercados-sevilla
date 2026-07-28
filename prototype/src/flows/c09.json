@@ -1,0 +1,92 @@
+{
+  "id": "C09",
+  "label": "C09 Modificación",
+  "description": "Editar pedido pre-aceptado + unhappy (post-aceptado escala a humano) — PRD §10.5",
+  "phone": {
+    "title": "Pescadería Fali",
+    "subtitle": "Mercado San Gonzalo • En línea",
+    "avatarIcon": "ph ph-fish",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY", "next": "contexto" },
+    "contexto": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "09:05",
+      "text": "He entendido este pedido:\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*",
+      "next": "confirmacion-botones"
+    },
+    "confirmacion-botones": {
+      "kind": "buttons",
+      "timestamp": "09:05",
+      "buttons": [
+        { "label": "Confirmar", "next": "post-contexto" },
+        { "label": "Modificar", "next": "modificar" }
+      ]
+    },
+    "modificar": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "09:06",
+      "text": "¿Qué cantidad de boquerones quieres?",
+      "next": "cantidad-botones"
+    },
+    "cantidad-botones": {
+      "kind": "buttons",
+      "timestamp": "09:06",
+      "buttons": [
+        { "label": "¼ kg", "next": "ajustado" },
+        { "label": "1 kg", "next": "ajustado" },
+        { "label": "Quitar producto", "next": "ajustado" }
+      ]
+    },
+    "ajustado": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "09:07",
+      "text": "Actualizado:\n\n• 1 kg boquerones frescos — *3,50 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,90 €*\n\n¿Confirmas?",
+      "next": "ajustado-botones"
+    },
+    "ajustado-botones": {
+      "kind": "buttons",
+      "timestamp": "09:07",
+      "buttons": [{ "label": "Confirmar", "next": "pre-fin" }]
+    },
+    "pre-fin": { "kind": "end", "note": "Happy path: modificación libre ANTES de que el placero acepte (PRD §10.5)" },
+    "post-contexto": {
+      "kind": "system",
+      "tone": "default",
+      "text": "— 20 min después: Fali ya ha ACEPTADO el pedido y está preparándolo —",
+      "next": "post-intento"
+    },
+    "post-intento": {
+      "kind": "user",
+      "timestamp": "09:30",
+      "text": "Perdona, mejor ponme un kilo de boquerones",
+      "next": "post-respuesta"
+    },
+    "post-respuesta": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "09:30",
+      "text": "Fali ya está preparando tu pedido.\nPara cambiarlo ahora tiene que decidirlo él.\nTe paso con Fali directamente.",
+      "next": "post-pill"
+    },
+    "post-pill": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Te paso con Fali. Habitualmente responde en menos de 10 min.",
+      "next": "post-fali"
+    },
+    "post-fali": {
+      "kind": "human",
+      "name": "Fali",
+      "timestamp": "09:33",
+      "text": "Sin problema Carmen, aún no lo había pesado. Un kilo entonces.",
+      "next": "post-fin"
+    },
+    "post-fin": { "kind": "end", "note": "Unhappy path: modificación post-aceptado escala a C11 — el placero manda, no el bot" }
+  }
+}

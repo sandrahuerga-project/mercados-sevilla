@@ -277,9 +277,8 @@ export const FlowCTAButton: React.FC<{ label: string; onClick: () => void }> = (
     <div className="flex justify-center px-4 my-2">
       <button 
         onClick={onClick}
-        className="w-full max-w-[260px] py-2.5 bg-whatsapp-green hover:bg-whatsapp-green/95 text-white text-[13px] font-bold rounded-full shadow-md flex items-center justify-center space-x-1.5 cursor-pointer transform hover:scale-[1.01] transition-transform select-none"
+        className="w-full max-w-[260px] py-2.5 bg-whatsapp-green hover:bg-whatsapp-green/95 text-white text-[13px] font-bold rounded-full shadow-md flex items-center justify-center cursor-pointer transform hover:scale-[1.01] transition-transform select-none"
       >
-        <span>⚡</span>
         <span>{label}</span>
       </button>
     </div>

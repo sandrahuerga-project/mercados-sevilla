@@ -1,0 +1,38 @@
+{
+  "id": "S03",
+  "label": "S03 Lista negra",
+  "description": "Cliente bloqueado (2 incidencias) — mensaje único, sin flujo — PRD §13",
+  "phone": {
+    "title": "Pescadería Fali",
+    "subtitle": "Mercado San Gonzalo",
+    "avatarIcon": "ph ph-fish",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY", "next": "contexto" },
+    "contexto": {
+      "kind": "system",
+      "tone": "yellow",
+      "text": "Cliente con 2 incidencias previas no resueltas (pedidos no recogidos sin avisar)",
+      "next": "intento"
+    },
+    "intento": {
+      "kind": "user",
+      "timestamp": "10:00",
+      "text": "Quiero medio kilo de gambas",
+      "next": "bloqueo"
+    },
+    "bloqueo": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "10:00",
+      "text": "Para pedir en Fali tienes que contactar directamente con el puesto.",
+      "next": "fin"
+    },
+    "fin": {
+      "kind": "end",
+      "note": "Mensaje único, sin botones, sin entrar al flujo. El placero decide si readmite — el bot no juzga, solo protege la operación"
+    }
+  }
+}

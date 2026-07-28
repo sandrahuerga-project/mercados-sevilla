@@ -1,0 +1,118 @@
+{
+  "id": "C05",
+  "label": "C05 Multi-puesto",
+  "description": "Vista David: añadir un segundo puesto al mismo pedido + unhappy (un placero rechaza)",
+  "phone": {
+    "title": "Mercado San Gonzalo",
+    "subtitle": "Asistente oficial • En línea",
+    "avatarIcon": "ph ph-storefront",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 21:40", "next": "recibo-previo" },
+    "recibo-previo": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "21:40",
+      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €*\n\nReparto mañana 19:00-21:00.",
+      "next": "anadir-botones"
+    },
+    "anadir-botones": {
+      "kind": "buttons",
+      "timestamp": "21:40",
+      "buttons": [
+        { "label": "Añadir puesto", "next": "lista-puestos" },
+        { "label": "Finalizar", "next": "fin-single" }
+      ]
+    },
+    "fin-single": { "kind": "end", "note": "Pedido de un solo puesto — sigue en C07 Tracking" },
+    "lista-puestos": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "21:41",
+      "text": "¿De qué puesto quieres añadir?",
+      "next": "puestos-botones"
+    },
+    "puestos-botones": {
+      "kind": "buttons",
+      "timestamp": "21:41",
+      "buttons": [
+        { "label": "Frutería Manolo", "next": "pedido-fruta" },
+        { "label": "Carnicería Lola", "next": "pedido-fruta" }
+      ]
+    },
+    "pedido-fruta": {
+      "kind": "user",
+      "timestamp": "21:42",
+      "text": "2 kg de naranjas de zumo y un manojo de tagarninas",
+      "next": "confirmacion-fruta"
+    },
+    "confirmacion-fruta": {
+      "kind": "bot",
+      "puesto": "Frutería Manolo",
+      "timestamp": "21:42",
+      "text": "He entendido este pedido:\n\n• 2 kg naranjas de zumo — *3,60 €*\n• 1 manojo tagarninas — *2,80 €*\n\n*Total estimado: 6,40 €*",
+      "next": "confirmar-fruta"
+    },
+    "confirmar-fruta": {
+      "kind": "buttons",
+      "timestamp": "21:42",
+      "buttons": [{ "label": "Confirmar", "next": "recibo-total" }]
+    },
+    "recibo-total": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "21:43",
+      "text": "✅ Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA FALI — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nTodo llega junto mañana 19:00-21:00.\nCada placero acepta su parte por separado — te aviso.",
+      "next": "espera"
+    },
+    "espera": {
+      "kind": "system",
+      "tone": "default",
+      "text": "— Mañana 9:20 —",
+      "next": "fali-acepta"
+    },
+    "fali-acepta": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:20",
+      "text": "✓ Fali ha aceptado tu parte del pedido.",
+      "next": "manolo-rechaza"
+    },
+    "manolo-rechaza": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:35",
+      "text": "⚠️ Manolo no tiene tagarninas hoy.\n¿Qué hacemos con su parte?",
+      "warning": true,
+      "next": "rechazo-botones"
+    },
+    "rechazo-botones": {
+      "kind": "buttons",
+      "timestamp": "09:35",
+      "buttons": [
+        { "label": "Solo las naranjas", "next": "parcial" },
+        { "label": "Quitar su parte", "next": "quitar" },
+        { "label": "Hablar c/Manolo", "next": "escalado" }
+      ]
+    },
+    "parcial": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:36",
+      "text": "Hecho. Tu pedido queda:\n\nPESCADERÍA FALI — *18,00 €*\nFRUTERÍA MANOLO (solo naranjas) — *3,60 €*\n\n*Total estimado: 21,60 €* + 2,50 € de reparto",
+      "next": "parcial-fin"
+    },
+    "parcial-fin": { "kind": "end", "note": "Unhappy path: pedido parcial. Cada SubPedido es independiente (flows-index C05)" },
+    "quitar": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "09:36",
+      "text": "Quitada la parte de Manolo. Queda solo Pescadería Fali: *18,00 €* + 2,50 € de reparto.",
+      "next": "quitar-fin"
+    },
+    "quitar-fin": { "kind": "end", "note": "Unhappy path: sub-pedido eliminado, el resto sigue su curso" },
+    "escalado": { "kind": "end", "note": "Continúa en C11 — Escalado humano con Manolo" }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "C08",
+  "label": "C08 Sustitución",
+  "description": "Placero marca agotado desde su panel → el cliente decide — DESIGN.md §11.4",
+  "phone": {
+    "title": "Pescadería Fali",
+    "subtitle": "Mercado San Gonzalo • En línea",
+    "avatarIcon": "ph ph-fish",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0387 · PREPARANDO", "next": "panel-pill" },
+    "panel-pill": {
+      "kind": "system",
+      "tone": "default",
+      "text": "Antonio marca «Agotado: acedías» en su panel (P03) — esto dispara la alerta",
+      "next": "alerta"
+    },
+    "alerta": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "10:40",
+      "text": "⚠️ Las acedías se han agotado.\n¿Quieres que Fali las sustituya por lenguado pequeño al mismo precio?",
+      "warning": true,
+      "next": "alerta-botones"
+    },
+    "alerta-botones": {
+      "kind": "buttons",
+      "timestamp": "10:40",
+      "buttons": [
+        { "label": "Aceptar", "next": "aceptada" },
+        { "label": "Quitar", "next": "quitar" },
+        { "label": "Cancelar todo", "next": "cancelar" }
+      ]
+    },
+    "aceptada": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "10:41",
+      "text": "Hecho: lenguado pequeño en lugar de acedías, mismo precio.\nFali sigue preparando tu pedido.",
+      "next": "aceptada-fin"
+    },
+    "aceptada-fin": { "kind": "end", "note": "La alternativa la propone el placero; el bot solo la transmite. Sin sustituir nada sin consentimiento (RGPD + principio rector)" },
+    "quitar": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "10:41",
+      "text": "De acuerdo. Tu pedido queda:\n\n• ½ kg boquerones frescos — *1,75 €*\n\n¿Confirmas así?",
+      "next": "quitar-botones"
+    },
+    "quitar-botones": {
+      "kind": "buttons",
+      "timestamp": "10:41",
+      "buttons": [
+        { "label": "Sí", "next": "quitar-fin" },
+        { "label": "Cancelar pedido", "next": "cancelar" }
+      ]
+    },
+    "quitar-fin": { "kind": "end", "note": "Pedido ajustado — sigue en C07 Tracking con el nuevo total" },
+    "cancelar": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "10:42",
+      "text": "Pedido cancelado.\nCuando quieras pedir de nuevo, escríbeme aquí.",
+      "next": "cancelar-fin"
+    },
+    "cancelar-fin": { "kind": "end", "note": "Unhappy path → C10 Cancelación (libre: aún no salió del puesto)" }
+  }
+}

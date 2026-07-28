@@ -44,6 +44,7 @@ export type FlowStep =
       imageUrl?: string;
       next: string | null;
     }
+  | { kind: 'waflow'; ctaLabel: string; next: string }
   | { kind: 'end'; note?: string };
 
 export interface FlowScript {

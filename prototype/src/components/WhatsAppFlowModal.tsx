@@ -14,8 +14,6 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
   onClose,
   onSubmit
 }) => {
-  if (!isOpen) return null;
-
   const [currentScreen, setCurrentScreen] = useState<1 | 2 | 3>(1);
   const [nombre, setNombre] = useState('Carmen');
   const [cp, setCp] = useState('41010'); // Triana postal code
@@ -25,6 +23,8 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
 
   // Error messages
   const [errors, setErrors] = useState<{ nombre?: string; cp?: string }>({});
+
+  if (!isOpen) return null;
 
   const handleNextFromP1 = () => {
     const newErrors: { nombre?: string; cp?: string } = {};

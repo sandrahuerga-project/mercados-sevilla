@@ -1,0 +1,74 @@
+{
+  "id": "C04",
+  "label": "C04 Pedido espontáneo",
+  "description": "El usuario escribe sin venir del broadcast — enrutamiento + pedido",
+  "phone": {
+    "title": "Mercado San Gonzalo",
+    "subtitle": "Asistente oficial • En línea",
+    "avatarIcon": "ph ph-storefront",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY", "next": "hola" },
+    "hola": {
+      "kind": "user",
+      "timestamp": "11:20",
+      "text": "Hola, quería encargar algo de pescado para mañana",
+      "next": "enruta"
+    },
+    "enruta": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "11:20",
+      "text": "Buenos días Carmen. Tu mercado es San Gonzalo.\n¿A qué puesto quieres pedir?",
+      "next": "puestos"
+    },
+    "puestos": {
+      "kind": "buttons",
+      "timestamp": "11:20",
+      "buttons": [
+        { "label": "Pescadería Fali", "next": "que-quieres" },
+        { "label": "Ver todos", "next": "lista" }
+      ]
+    },
+    "lista": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "List Message: Pescadería Fali · Frutería Manolo · Carnicería Lola · Ibéricos Sánchez · Verduras El Huerto (máx 10 filas)",
+      "next": "que-quieres"
+    },
+    "que-quieres": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "11:21",
+      "text": "¿Qué quieres pedir? Puedes escribirlo en lenguaje normal o mandarme un audio.",
+      "next": "pedido"
+    },
+    "pedido": {
+      "kind": "user",
+      "timestamp": "11:22",
+      "text": "Un cuarto de gambas y cazón en adobo para dos",
+      "next": "confirmacion"
+    },
+    "confirmacion": {
+      "kind": "bot",
+      "puesto": "Pescadería Fali",
+      "timestamp": "11:22",
+      "text": "He entendido este pedido:\n\n• ¼ kg gambas blancas — *4,50 €*\n• Cazón en adobo (2 raciones) — *5,20 €*\n\n*Total estimado: 9,70 €*",
+      "next": "confirmacion-botones"
+    },
+    "confirmacion-botones": {
+      "kind": "buttons",
+      "timestamp": "11:22",
+      "buttons": [
+        { "label": "Confirmar", "next": "fin-ok" },
+        { "label": "Modificar", "next": "fin-mod" },
+        { "label": "Hablar c/Fali", "next": "fin-escalado" }
+      ]
+    },
+    "fin-ok": { "kind": "end", "note": "Sigue como C03: fulfillment → recibo. El NLU respeta el léxico sevillano («un cuarto», «cazón en adobo»)" },
+    "fin-mod": { "kind": "end", "note": "Edición de cantidades — patrón DESIGN.md §9.5" },
+    "fin-escalado": { "kind": "end", "note": "Continúa en C11 — Escalado humano" }
+  }
+}

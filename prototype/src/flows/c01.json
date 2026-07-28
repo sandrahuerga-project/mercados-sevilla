@@ -1,0 +1,44 @@
+{
+  "id": "C01",
+  "label": "C01 Onboarding",
+  "description": "Alta con WA Flow de 3 pantallas + consentimiento RGPD — DESIGN.md §3",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Asistente oficial • En línea",
+    "avatarIcon": "ph ph-storefront",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY", "next": "bienvenida" },
+    "bienvenida": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:00",
+      "text": "¡Bienvenida a los Mercados de Sevilla! 👋\nSoy tu asistente para pedir fresco desde casa.",
+      "next": "cta-flow"
+    },
+    "cta-flow": {
+      "kind": "waflow",
+      "ctaLabel": "Empezar",
+      "next": "alta-ok"
+    },
+    "alta-ok": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:01",
+      "text": "Listo, Carmen. Ya estás dada de alta en San Gonzalo.\nMañana a las 9:00 te enseño lo que Fali tenga en el mostrador.",
+      "next": "alta-botones"
+    },
+    "alta-botones": {
+      "kind": "buttons",
+      "timestamp": "09:01",
+      "buttons": [
+        { "label": "Pedir ahora", "next": "pedir-fin" },
+        { "label": "Esperar al vídeo", "next": "esperar-fin" }
+      ]
+    },
+    "pedir-fin": { "kind": "end", "note": "Continúa en C03 — Pedido desde el vídeo del día" },
+    "esperar-fin": { "kind": "end", "note": "El broadcast diario llega mañana 9:00 (plantilla marketing con opt-in ya concedido)" }
+  }
+}

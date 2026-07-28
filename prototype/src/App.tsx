@@ -1,16 +1,39 @@
 import { useState } from 'react';
-import { C01OnboardingScreen } from './components/C01OnboardingScreen';
 import { FlowScreen } from './engine/FlowScreen';
 import type { FlowScript } from './engine/types';
+import c01Script from './flows/c01.json';
 import c02Script from './flows/c02.json';
 import c03Script from './flows/c03.json';
+import c04Script from './flows/c04.json';
+import c05Script from './flows/c05.json';
+import c06Script from './flows/c06.json';
 import c07Script from './flows/c07.json';
+import c08Script from './flows/c08.json';
+import c09Script from './flows/c09.json';
+import c10Script from './flows/c10.json';
 import c11Script from './flows/c11.json';
+import s01Script from './flows/s01.json';
+import s03Script from './flows/s03.json';
 import { WHATSAPP_CONSTRAINTS } from './data/mockData';
-import { Info, HelpCircle, AlertTriangle, BookOpen, Layers, CheckSquare } from 'lucide-react';
+import { Info, BookOpen, CheckSquare } from 'lucide-react';
+
+const FLOW_SCRIPTS = [
+  c01Script,
+  c02Script,
+  c03Script,
+  c04Script,
+  c05Script,
+  c06Script,
+  c07Script,
+  c08Script,
+  c09Script,
+  c10Script,
+  c11Script,
+  s01Script,
+  s03Script,
+] as FlowScript[];
 
 export default function App() {
-  const [showC03, setShowC03] = useState(true);
   const [activeTab, setActiveTab] = useState<'info' | 'constraints' | 'glossary'>('info');
   const [scale, setScale] = useState<number>(0.85);
 
@@ -40,16 +63,9 @@ export default function App() {
           </div>
 
           <div className="flex items-center space-x-3 self-start md:self-center shrink-0">
-            <button 
-              onClick={() => setShowC03(!showC03)}
-              className={`px-4 py-2 text-xs font-bold rounded-lg border transition-all cursor-pointer flex items-center space-x-1.5 select-none ${
-                showC03 
-                  ? 'bg-mercado-green text-white border-mercado-green shadow-md' 
-                  : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-750'
-              }`}
-            >
-              <span>{showC03 ? '✓ Ver C03 Referencia' : '+ Mostrar C03 Referencia'}</span>
-            </button>
+            <span className="px-4 py-2 text-xs font-bold rounded-lg border bg-slate-800 text-slate-300 border-slate-700 select-none">
+              {FLOW_SCRIPTS.length} flujos simulados
+            </span>
           </div>
         </div>
       </header>
@@ -205,41 +221,18 @@ export default function App() {
             </div>
           </div>
 
-          {/* Grid layout containing the mobile devices */}
+          {/* Grid layout: one interactive phone per flow script */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 justify-center items-start">
-            
-            {/* Screen 1: Onboarding C01 */}
-            <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <C01OnboardingScreen />
-            </div>
-
-            {/* Screen 2: Recurrente C02 (JSON script + FlowPlayer engine) */}
-            <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <FlowScreen script={c02Script as FlowScript} />
-            </div>
-
-            {/* Screen 3: Escalado C11 (JSON script) */}
-            <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <FlowScreen script={c11Script as FlowScript} />
-            </div>
-
-            {/* Screen 4: Tracking C07 (JSON script) */}
-            <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <FlowScreen script={c07Script as FlowScript} />
-            </div>
-
-          </div>
-
-          {/* Optional Reference C03 Flow Screen - animated entry */}
-          {showC03 && (
-            <div className="pt-10 border-t border-slate-850 animate-fade-in">
-              <div className="max-w-md mx-auto">
-                <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-                  <FlowScreen script={c03Script as FlowScript} />
-                </div>
+            {FLOW_SCRIPTS.map((script) => (
+              <div
+                key={script.id}
+                style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${880 * scale}px` }}
+                className="transition-all duration-300 flex justify-center"
+              >
+                <FlowScreen script={script} />
               </div>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
 
         {/* Technical verification logs & System guidelines conform to instructions */}

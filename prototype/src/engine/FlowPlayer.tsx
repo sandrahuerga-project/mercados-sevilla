@@ -10,7 +10,9 @@ import {
   AudioBubble,
   VideoBubble,
   HumanBubble,
+  FlowCTAButton,
 } from '../components/ChatBubbles';
+import { WhatsAppFlowModal } from '../components/WhatsAppFlowModal';
 
 // Renders WhatsApp *bold* formatting (the only rich text WA supports besides _italic_ and ~strike~)
 const formatWa = (text: string): React.ReactNode => {
@@ -42,6 +44,10 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
   const [entries, setEntries] = useState<Entry[]>([]);
   const [currentId, setCurrentId] = useState<string | null>(script.start);
   const [typing, setTyping] = useState(false);
+  const [flowModal, setFlowModal] = useState<{ open: boolean; next: string | null }>({
+    open: false,
+    next: null,
+  });
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +61,7 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
     clearTimers();
     setEntries([]);
     setTyping(false);
+    setFlowModal({ open: false, next: null });
     setCurrentId(script.start);
     return clearTimers;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,7 +86,7 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
           commit(step.next);
         }, TYPING_DELAY)
       );
-    } else if (step.kind === 'buttons') {
+    } else if (step.kind === 'buttons' || step.kind === 'waflow') {
       // Render and wait for user input
       setEntries((prev) => [...prev, { type: 'step', id: currentId, step }]);
       setCurrentId(null);
@@ -176,6 +183,14 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
                 }}
               />
             );
+          case 'waflow':
+            return (
+              <FlowCTAButton
+                key={entry.id}
+                label={step.ctaLabel}
+                onClick={() => setFlowModal({ open: true, next: step.next })}
+              />
+            );
           case 'end':
             return step.note ? <SystemPill key={entry.id} text={step.note} type="blue" /> : null;
           default:
@@ -184,6 +199,19 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
       })}
       {typing && <TypingBubble />}
       <div ref={scrollRef} />
+      <WhatsAppFlowModal
+        isOpen={flowModal.open}
+        onClose={() => setFlowModal({ open: false, next: null })}
+        onSubmit={() => {
+          const next = flowModal.next;
+          setFlowModal({ open: false, next: null });
+          // Remove the CTA (the Flow was completed) and continue the script
+          setEntries((prev) =>
+            prev.filter((e) => !(e.type === 'step' && e.step.kind === 'waflow'))
+          );
+          setCurrentId(next);
+        }}
+      />
     </div>
   );
 };
