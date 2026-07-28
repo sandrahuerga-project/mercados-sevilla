@@ -19,6 +19,7 @@ export type FlowStep =
       next: string | null;
     }
   | { kind: 'user'; text: string; timestamp: string; next: string | null }
+  | { kind: 'human'; name: string; text: string; timestamp: string; next: string | null }
   | {
       kind: 'system';
       text: string;

@@ -115,7 +115,7 @@ prototype/                      ← el export, migrado y limpio
 | 9 | P03 Gestión de pedido | Antonio | **Máxima** | Aceptar / Listo (+total final) / cobrado |
 | 10 | C08 Sustitución (desde panel) | Antonio→Carmen | Media | El puente placero↔cliente |
 
-El resto (C04, C09, C10, S01-S03, P01, P04) se **mencionan** en el case study pero no se construyen.
+**Alcance ampliado (decisión 2026-07-28):** se construyen **todos los flujos**, cada uno con su happy path y sus unhappy paths (ramas de DESIGN.md §11-12: agotado, no recoge, fuera de horario, NLU falla, pedido sin confirmar...). Los 10 de la tabla marcan solo el orden de prioridad. Excepciones: P01 (alta de puesto) y P04 (liquidación) son admin/panel, se mencionan en el case study sin simulación conversacional; P02/P03 se construyen como vista panel de Antonio (Fase 3), no como chat.
 
 ---
 

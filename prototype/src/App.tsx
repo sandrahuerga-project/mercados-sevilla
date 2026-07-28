@@ -4,8 +4,8 @@ import { FlowScreen } from './engine/FlowScreen';
 import type { FlowScript } from './engine/types';
 import c02Script from './flows/c02.json';
 import c03Script from './flows/c03.json';
-import { C11EscaladoScreen } from './components/C11EscaladoScreen';
-import { C07TrackingScreen } from './components/C07TrackingScreen';
+import c07Script from './flows/c07.json';
+import c11Script from './flows/c11.json';
 import { WHATSAPP_CONSTRAINTS } from './data/mockData';
 import { Info, HelpCircle, AlertTriangle, BookOpen, Layers, CheckSquare } from 'lucide-react';
 
@@ -218,14 +218,14 @@ export default function App() {
               <FlowScreen script={c02Script as FlowScript} />
             </div>
 
-            {/* Screen 3: Escalado C11 */}
+            {/* Screen 3: Escalado C11 (JSON script) */}
             <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <C11EscaladoScreen />
+              <FlowScreen script={c11Script as FlowScript} />
             </div>
 
-            {/* Screen 4: Tracking C07 */}
+            {/* Screen 4: Tracking C07 (JSON script) */}
             <div style={{ transform: `scale(${scale})`, transformOrigin: 'top center', height: `${840 * scale}px` }} className="transition-all duration-300 flex justify-center">
-              <C07TrackingScreen />
+              <FlowScreen script={c07Script as FlowScript} />
             </div>
 
           </div>

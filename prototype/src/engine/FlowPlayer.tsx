@@ -9,6 +9,7 @@ import {
   UserBubble,
   AudioBubble,
   VideoBubble,
+  HumanBubble,
 } from '../components/ChatBubbles';
 
 // Renders WhatsApp *bold* formatting (the only rich text WA supports besides _italic_ and ~strike~)
@@ -135,6 +136,12 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
             );
           case 'user':
             return <UserBubble key={entry.id} timestamp={step.timestamp} text={step.text} />;
+          case 'human':
+            return (
+              <HumanBubble key={entry.id} name={step.name} timestamp={step.timestamp}>
+                {formatWa(step.text)}
+              </HumanBubble>
+            );
           case 'system':
             return <SystemPill key={entry.id} text={step.text} type={step.tone} />;
           case 'audio':

@@ -196,6 +196,30 @@ export const ReplyButtons: React.FC<ReplyButtonsProps> = ({
   );
 };
 
+// Human (placero) bubble: same side as bot but visually distinct — real person, not assistant
+export const HumanBubble: React.FC<{ name: string; timestamp: string; children: React.ReactNode }> = ({
+  name,
+  timestamp,
+  children,
+}) => {
+  return (
+    <div className="flex flex-col items-start my-1.5 px-3 relative animate-fade-in">
+      <div className="flex items-center space-x-1.5 mb-0.5 ml-2">
+        <span className="text-[11px] font-bold text-sevilla-tile">{name}</span>
+        <span className="text-[9px] bg-sevilla-tile/10 text-sevilla-tile border border-sevilla-tile/20 px-1 py-0.5 rounded font-semibold">
+          PLACERO REAL
+        </span>
+      </div>
+      <div className="relative max-w-[82%] px-3 py-2 bg-white text-zinc-800 text-[13.5px] leading-relaxed shadow-bubble rounded-2xl rounded-tl-none border-l-4 border-sevilla-tile bubble-tail-bot">
+        <div className="whitespace-pre-wrap">{children}</div>
+        <div className="text-right mt-1 select-none">
+          <span className="text-[9.5px] text-zinc-400 font-mono">{timestamp}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Video broadcast bubble: media header + caption, like a WA marketing template message
 interface VideoBubbleProps {
   puestoName: string;
