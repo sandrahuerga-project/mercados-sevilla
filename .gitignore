@@ -12,3 +12,4 @@ Video Fali pescadero.mp4
 
 .vercel
 .env*
+.playwright-mcp/
