@@ -276,6 +276,15 @@ números de `oklab()` como si fueran RGB da resultados sin sentido.
 
 ## 11. Pendiente
 
+### Decisión abierta: los rótulos de sección
+
+Van por la segunda versión y siguen sin convencer. La primera (versalitas con regla
+encima) se descartó por genérica. La actual (regla que el rótulo corta) está a la
+espera de que Sandra traiga referencias visuales. **No proponer una tercera versión
+a ciegas.**
+
+### Tareas
+
 - [ ] Ilustraciones de Carmen, David y Antonio (Sandra)
 - [ ] Vídeo del mostrador generado con IA, alojado en Cloudinary
 - [ ] Fotos o ilustraciones de los puestos para el vídeo del día
