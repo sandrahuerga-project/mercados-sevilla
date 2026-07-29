@@ -1,4 +1,5 @@
 import { CustomCursor } from './shell/CustomCursor';
+import { StickyNav } from './shell/StickyNav';
 import { Hero } from './shell/Hero';
 import { Problem, Solution } from './shell/ProblemSolution';
 import { Evidence } from './shell/Evidence';
@@ -9,6 +10,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-cream text-ink">
       <CustomCursor />
+      <StickyNav />
       <Hero />
       <main>
         <Problem />

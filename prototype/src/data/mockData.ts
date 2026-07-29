@@ -16,19 +16,19 @@ export const PUESTOS_SAN_GONZALO = [
 
 export const WHATSAPP_CONSTRAINTS = [
   {
-    rule: "Botones de Respuesta (Reply Buttons)",
+    rule: "Botones de respuesta",
     limit: "Máximo 3 botones por mensaje",
     spec: "Máximo 20 caracteres por botón, sin emojis personalizados.",
     validation: "✓ Cumplido en todos los flujos."
   },
   {
-    rule: "Listas de Mensajes (List Messages)",
+    rule: "Listas de mensajes",
     limit: "Máximo 10 filas en total",
     spec: "Secciones con título. No se permiten listas vacías.",
     validation: "✓ Usado en C05 Multi-puesto y selector de puestos."
   },
   {
-    rule: "Sin cards nativas estructuradas",
+    rule: "Sin tarjetas nativas",
     limit: "WhatsApp no tiene HTML/CSS en burbujas",
     spec: "Simular con texto plano, saltos de línea, *negritas* y _cursivas_.",
     validation: "✓ Implementado con precisión visual de burbujas en el simulador."
@@ -40,7 +40,7 @@ export const WHATSAPP_CONSTRAINTS = [
     validation: "✓ Simulador interactivo en C01 con 3 pantallas animadas."
   },
   {
-    rule: "Plantillas de Utilidad",
+    rule: "Plantillas de utilidad",
     limit: "Mensajes salientes fuera de 24h",
     spec: "Deben ser pre-aprobadas por Meta (por ejemplo, notificaciones de envío, recogida o taquilla).",
     validation: "✓ Utilizado en C07 para el tracking de estados."

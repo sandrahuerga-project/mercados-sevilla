@@ -110,7 +110,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
 
               {/* Input Name */}
               <div className="space-y-1">
-                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Tu Nombre</label>
+                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Tu nombre</label>
                 <input 
                   type="text" 
                   value={nombre}
@@ -123,7 +123,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
 
               {/* Input Postal Code */}
               <div className="space-y-1">
-                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Código Postal (Sevilla)</label>
+                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Código postal (Sevilla)</label>
                 <input 
                   type="text" 
                   maxLength={5}
@@ -150,7 +150,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
 
               {/* Dropdown Mercado */}
               <div className="space-y-1">
-                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Mercado Favorito</label>
+                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Mercado favorito</label>
                 <select 
                   value={mercadoFav}
                   onChange={(e) => setMercadoFav(e.target.value)}
@@ -203,7 +203,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
           {currentScreen === 3 && (
             <div className="space-y-6 animate-fade-in">
               <div>
-                <h3 className="text-xl font-serif font-bold text-zinc-900 leading-tight">Difusión y Privacidad</h3>
+                <h3 className="text-xl font-serif font-bold text-zinc-900 leading-tight">Difusión y privacidad</h3>
                 <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
                   ¿Cómo te gustaría recibir la información diaria y novedades frescas?
                 </p>

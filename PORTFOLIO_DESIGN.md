@@ -25,7 +25,7 @@
 Sobrio, claro y con espacio. Editorial más que corporativo: la estructura la marcan
 **líneas de 1 px y espacio en blanco**, no cajas con sombra ni tarjetas redondeadas.
 La referencia de partida fue fitosauna.com, de la que se toman el fondo crema, los
-titulares grandes de tracking negativo, las etiquetas pequeñas sobre una regla fina
+titulares grandes de tracking negativo, la estructura por reglas finas
 y el par de botones (rectángulo + círculo con flecha). A eso se le añade más blanco
 y el verde de mercado como color propio.
 
@@ -63,7 +63,7 @@ ACENTOS
 ```
 
 **Regla de accesibilidad:** todo texto cumple **WCAG AA** (4,5:1 normal, 3:1 grande).
-Verificado sobre los 111 elementos de texto de la página; 0 fallos.
+Verificado sobre los 115 elementos de texto de la página; 0 fallos.
 El chat simulado queda fuera de la auditoría: replica los colores de WhatsApp,
 que no son decisión nuestra.
 
@@ -91,17 +91,22 @@ CUERPO
   Entradilla    19-22 px
   Secundario    15 px
 
-ETIQUETAS  (clase .eyebrow)
-  Archivo Narrow 600 · 13 px · MAYÚSCULAS · tracking 0,14em
-  Con .eyebrow-rule añade una regla de 7,5 rem encima, del color del texto.
+RÓTULOS Y ETIQUETAS
+  Archivo Narrow 400 · 17-19 px · minúscula normal.
+  Nada de versalitas con tracking amplio: resultaban genéricas.
+
+RÓTULO DE SECCIÓN  (componente SectionLabel)
+  Una regla de 1 px cruza la columna y el nombre de la sección se apoya
+  encima recortándola, con el fondo de la sección como máscara.
+  Verde mercado sobre claro, crema sobre verde profundo.
 
 CHAT SIMULADO
   Fuente del sistema, 13-15 px. No se toca: WhatsApp no permite tipografía propia.
 ```
 
-**Aviso de implementación:** `.eyebrow` no fija color. Si lo hiciera, ganaría por
-orden de cascada a las utilidades `text-*` de Tailwind y dejaría texto oscuro sobre
-fondo oscuro. El color lo pone siempre quien usa la clase.
+**Aviso de implementación:** ninguna clase propia debe fijar `color`. Si lo hace,
+gana por orden de cascada a las utilidades `text-*` de Tailwind y puede dejar texto
+oscuro sobre fondo oscuro. Ya ocurrió con la clase `.eyebrow`, hoy retirada.
 
 **Mayúsculas:** solo la primera palabra de cada frase, salvo nombres propios.
 Nunca "Título Con Todas Las Palabras En Alta".
@@ -112,7 +117,7 @@ Nunca "Título Con Todas Las Palabras En Alta".
 
 1. **Barra superior** — nombre y descriptor, separada por una línea.
 2. **Portada** — etiqueta, titular grande, entradilla, botones y ficha del proyecto en filas separadas por líneas.
-3. **El problema** — titular fijo a la izquierda mientras a la derecha pasan tres apartados numerados.
+3. **El problema** — titular fijo a la izquierda mientras a la derecha pasan tres apartados, separados por reglas y sin numerar.
 4. **De la investigación** — dos citas reales a dos columnas, cada una con su ilustración y su conclusión de diseño.
 5. **La propuesta** — sobre verde bruma; cuatro pilares en columnas separadas por reglas.
 6. **El prototipo** — sobre verde profundo. Ver §5.
@@ -133,14 +138,38 @@ móviles de golpe:
 3. **De qué tipo** — pills que agrupan los flujos por momento (empezar, comprar, después de pedir…).
 
 En "flujo a flujo" los flujos son una lista tipo acordeón: cada fila muestra el nombre
-en cristiano, el código discreto y, si procede, la etiqueta "con caminos que fallan".
+en cristiano, el código discreto y, si procede, la etiqueta "unhappy paths".
 Solo se abre uno cada vez.
+
+Encima de todo, el botón **ver el mapa de flujos** despliega un diagrama SVG con los
+trece flujos, sus enlaces y una leyenda por momento del recorrido. Existe para que los
+códigos (C03, C11, S01…) dejen de ser jerga sin contexto. En móvil se desplaza en
+horizontal.
 
 Antonio no tiene chat: al elegirlo aparece directamente su panel.
 
 ---
 
-## 6. Ilustraciones
+## 6. Navegación
+
+Una barra fija aparece al superar los 520 px de scroll: el nombre del proyecto vuelve
+al inicio y, en pantallas medianas o mayores, hay enlaces a cada sección. En móvil solo
+queda el botón "arriba", que era el problema real: llegar al pie sin forma de volver.
+
+Las secciones llevan `scroll-mt-14` para que la barra no tape sus titulares.
+
+---
+
+## 7. Motivos e ilustraciones
+
+Dibujos de línea de pescado, naranja, gamba y pimiento (`Motifs.tsx`), en trazo de 1,5
+y sin relleno, a juego con las reglas de la página. Son míos y provisionales: están para
+que la página no quede desnuda y para que Sandra los sustituya por los suyos.
+
+Van siempre en tono suave (25-40% de opacidad) y solo en pantallas anchas, para que
+acompañen sin competir con el texto.
+
+### Ilustraciones de personaje
 
 Dibujos propios de los tres personajes. Sirven en dos sitios y por eso hacen falta
 en dos formatos:
@@ -164,7 +193,7 @@ sobre color plano. Nunca se ve un icono roto.
 
 ---
 
-## 7. Movimiento
+## 8. Movimiento
 
 ```
 APARICIÓN AL SCROLL  (clase .reveal)
@@ -192,7 +221,7 @@ la memoria sin ganar nada.
 
 ---
 
-## 8. Componentes
+## 9. Componentes
 
 ```
 BOTÓN PRINCIPAL
@@ -218,7 +247,7 @@ TARJETA (solo en el panel del placero)
 
 ---
 
-## 9. Tokens
+## 10. Tokens
 
 Definidos en `prototype/src/index.css` dentro de `@theme`. Tailwind v4 genera las
 utilidades a partir de ahí, así que **el nombre del token es el nombre de la clase**:
@@ -245,7 +274,7 @@ números de `oklab()` como si fueran RGB da resultados sin sentido.
 
 ---
 
-## 10. Pendiente
+## 11. Pendiente
 
 - [ ] Ilustraciones de Carmen, David y Antonio (Sandra)
 - [ ] Vídeo del mostrador generado con IA, alojado en Cloudinary
@@ -255,5 +284,6 @@ números de `oklab()` como si fueran RGB da resultados sin sentido.
 
 ---
 
-*v2.0 — Rediseño completo tras la primera revisión. Sustituye al sistema anterior
+*v2.1 — Segunda revisión: fuera versalitas y numeración, mapa de flujos, motivos de mercado y navegación fija.
+v2.0 — Rediseño completo tras la primera revisión. Sustituye al sistema anterior
 (Playfair Display, fondo oscuro, rejilla de trece móviles).*

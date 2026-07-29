@@ -95,7 +95,7 @@ export const FLOWS_SECTION = {
   eyebrow: 'El prototipo',
   headline: 'Trece conversaciones y un panel',
   lead: 'Cada pantalla es interactiva: se pulsa dentro y la conversación avanza. Elige de quién quieres ver la experiencia.',
-  hint: 'Los caminos que no salen bien también están: producto agotado, cliente que no recoge, pedido fuera de horario.',
+  hint: 'Los unhappy paths también están: producto agotado, cliente que no recoge, pedido fuera de horario.',
 };
 
 export const AUDIENCES = {

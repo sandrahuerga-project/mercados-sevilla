@@ -17,8 +17,9 @@ const INITIAL: Record<PersonaId, string> = {
   mercado: 'M',
 };
 
+// Tonos oscuros a propósito: la inicial va en blanco y tiene que pasar AA.
 const TINT: Record<PersonaId, string> = {
-  carmen: 'bg-azafran',
+  carmen: 'bg-[#8A5A12]',
   david: 'bg-sevilla-tile',
   antonio: 'bg-mercado-green',
   mercado: 'bg-green-deep',

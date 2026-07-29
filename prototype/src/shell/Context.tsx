@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CONTEXT, FOOTER } from '../content/texts';
 import { WHATSAPP_CONSTRAINTS } from '../data/mockData';
 import { Reveal } from './Reveal';
+import { SectionLabel } from './SectionLabel';
 
 type Tab = 'producto' | 'restricciones';
 
@@ -9,10 +10,10 @@ export const Context: React.FC = () => {
   const [tab, setTab] = useState<Tab>('producto');
 
   return (
-    <section id="como-esta-hecho" className="border-b border-line">
+    <section id="como-esta-hecho" className="border-b border-line scroll-mt-14">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
         <Reveal>
-          <p className="eyebrow eyebrow-rule text-ink-soft">{CONTEXT.eyebrow}</p>
+          <SectionLabel>{CONTEXT.eyebrow}</SectionLabel>
         </Reveal>
 
         <Reveal delay={80}>
@@ -27,7 +28,7 @@ export const Context: React.FC = () => {
                 key={key}
                 onClick={() => setTab(key)}
                 aria-pressed={tab === key}
-                className={`px-5 py-2.5 rounded-full font-narrow text-eyebrow uppercase tracking-[0.14em] font-semibold border transition-colors ${
+                className={`px-5 py-2.5 rounded-full font-narrow text-base font-semibold border transition-colors ${
                   tab === key
                     ? 'bg-ink text-cream border-ink'
                     : 'border-line text-ink-soft hover:border-ink hover:text-ink'
@@ -66,7 +67,7 @@ export const Context: React.FC = () => {
                       <span className="block">{c.limit}</span>
                       <span className="block text-sm text-ink-faint mt-1">{c.spec}</span>
                     </dd>
-                    <dd className="font-narrow text-eyebrow uppercase tracking-[0.12em] text-mercado-green md:text-right md:pt-1.5">
+                    <dd className="font-narrow text-base text-mercado-green md:text-right md:pt-1.5">
                       {c.validation.replace('✓', '').trim()}
                     </dd>
                   </div>
@@ -82,7 +83,7 @@ export const Context: React.FC = () => {
 
 export const Footer: React.FC = () => (
   <footer className="mx-auto max-w-[1400px] px-6 md:px-10 py-14">
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 font-narrow text-eyebrow uppercase tracking-[0.14em] text-ink-faint">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 font-narrow text-base text-ink-faint">
       <span>{FOOTER.note}</span>
       <span>{FOOTER.credit}</span>
     </div>

@@ -1,14 +1,16 @@
 import React from 'react';
 import { EVIDENCE } from '../content/texts';
 import { Reveal } from './Reveal';
+import { SectionLabel } from './SectionLabel';
 import { PersonaImage, type PersonaId } from './PersonaImage';
 
 export const Evidence: React.FC = () => (
-  <section id="investigacion" className="border-b border-line">
+  <section id="investigacion" className="border-b border-line scroll-mt-14">
     <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
+      <SectionLabel>{EVIDENCE.eyebrow}</SectionLabel>
+
       <Reveal>
-        <p className="eyebrow eyebrow-rule text-ink-soft">{EVIDENCE.eyebrow}</p>
-        <h2 className="display text-3xl md:text-5xl mt-8 max-w-[16ch]">
+        <h2 className="display text-3xl md:text-5xl mt-12 max-w-[16ch]">
           {EVIDENCE.headline}
         </h2>
       </Reveal>
@@ -26,7 +28,7 @@ export const Evidence: React.FC = () => (
                 <figcaption>
                   <span className="text-lg font-medium">{q.person}</span>
                   <span className="text-ink-faint">, {q.age}</span>
-                  <span className="block font-narrow text-eyebrow uppercase tracking-[0.14em] text-ink-faint mt-0.5">
+                  <span className="block font-narrow text-base text-ink-faint mt-0.5">
                     {q.role}
                   </span>
                 </figcaption>
@@ -39,7 +41,7 @@ export const Evidence: React.FC = () => (
               </blockquote>
 
               <div className="mt-8 pt-6 border-t border-line flex gap-4">
-                <span className="font-narrow text-eyebrow uppercase tracking-[0.14em] text-mercado-green shrink-0 pt-0.5">
+                <span className="font-narrow text-base text-mercado-green shrink-0 pt-0.5">
                   Qué cambia
                 </span>
                 <p className="text-ink-soft leading-relaxed">{q.insight}</p>
@@ -50,7 +52,7 @@ export const Evidence: React.FC = () => (
       </div>
 
       <Reveal delay={200}>
-        <p className="mt-14 font-narrow text-eyebrow uppercase tracking-[0.14em] text-ink-faint">
+        <p className="mt-14 font-narrow text-base text-ink-faint">
           {EVIDENCE.note}
         </p>
       </Reveal>

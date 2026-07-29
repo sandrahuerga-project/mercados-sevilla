@@ -23,7 +23,6 @@
 | Entradilla | Los mercados de abastos de Sevilla tienen una plataforma municipal completa y poco usada. Mientras tanto, un pescadero vende cada día por WhatsApp sin plataforma ninguna. Este proyecto diseña lo segundo a escala de lo primero. |
 | Botón principal | Ver los flujos |
 | Enlace secundario | Cómo está hecho |
-| Indicador de scroll | Sigue bajando |
 
 **Ficha del proyecto**
 
@@ -40,13 +39,13 @@
 **Etiqueta:** El problema
 **Titular:** La tecnología no era el problema. El canal sí.
 
-**01 · Una plataforma que casi nadie usa**
+**Una plataforma que casi nadie usa**
 El Ayuntamiento tiene web, app, taquillas refrigeradas y reparto para once mercados. La infraestructura está construida y financiada, pero el uso es bajo: pide registro, aprendizaje y una app nueva en el móvil.
 
-**02 · Un WhatsApp que funciona solo**
+**Un WhatsApp que funciona solo**
 Un pescadero de San Gonzalo graba cada mañana un vídeo de su mostrador, lo manda por difusión y recibe los pedidos en lenguaje natural. Cobra al entregar. Sin plataforma, sin comisiones y con clientela que repite.
 
-**03 · Lo que separa a uno del otro**
+**Lo que separa a uno del otro**
 El canal ya está en el móvil del cliente, la compra ocurre dentro de una conversación y la relación con el placero se mantiene. Ninguna de las tres cosas depende de tener mejor tecnología.
 
 ---
@@ -91,7 +90,7 @@ El canal ya está en el móvil del cliente, la compra ocurre dentro de una conve
 **Etiqueta:** El prototipo
 **Titular:** Trece conversaciones y un panel
 **Entradilla:** Cada pantalla es interactiva: se pulsa dentro y la conversación avanza. Elige de quién quieres ver la experiencia.
-**Nota final:** Los caminos que no salen bien también están: producto agotado, cliente que no recoge, pedido fuera de horario.
+**Nota final:** Los unhappy paths también están: producto agotado, cliente que no recoge, pedido fuera de horario.
 
 ### Selector de personas
 
@@ -126,7 +125,11 @@ El canal ya está en el móvil del cliente, la compra ocurre dentro de una conve
 | S01 | Pedir con el puesto cerrado | El bot atiende siempre, aunque el mercado no. |
 | S03 | Cliente bloqueado | Dos incidencias sin resolver y el pedido deja de entrar por el bot. |
 
-Etiqueta en flujos con ramas que fallan: **Con caminos que fallan**
+Etiqueta en flujos con ramas que fallan: **Unhappy paths**
+
+Botón del diagrama: **Ver el mapa de flujos** / **Ocultar el mapa de flujos**
+
+Pie del diagrama: Los códigos vienen del inventario de flujos del proyecto. Cada uno es una conversación completa; las flechas indican por dónde continúa.
 
 ### Panel del placero
 
@@ -170,4 +173,7 @@ Por decisión de la revisión del 2026-07-29, ya no aparecen:
 
 - **Diccionario NLU andaluz** — no aportaba al relato del case study.
 - **Verificación de coherencia visual y accesibilidad** — auditar el propio diseño dentro de la página resultaba redundante.
-- Todos los títulos en mayúscula inicial por palabra.
+- Todos los títulos en mayúscula inicial por palabra. Corregidos también dentro del formulario de alta ("Tu nombre", "Código postal", "Mercado favorito", "Difusión y privacidad") y en la tabla de restricciones.
+- **Overlines en versalitas** (ETIQUETA EN MAYÚSCULAS con una regla encima). Sustituidos por un rótulo en minúscula que corta la línea de sección.
+- **Numeración 01, 02, 03** en "El problema". La regla ya separa los apartados.
+- **"Sigue bajando"** y otras muletillas de guía.

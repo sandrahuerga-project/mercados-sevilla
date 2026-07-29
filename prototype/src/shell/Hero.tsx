@@ -1,32 +1,33 @@
 import React from 'react';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { HERO, SITE } from '../content/texts';
 import { Reveal } from './Reveal';
+import { Pez, Naranja } from './Motifs';
 
 const scrollTo = (id: string) => () =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 export const Hero: React.FC = () => (
   <header className="border-b border-line">
-    {/* Barra superior fina, siempre presente */}
     <div className="border-b border-line">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between">
-        <span className="font-narrow text-eyebrow uppercase tracking-[0.18em] font-semibold">
-          {SITE.title}
-        </span>
-        <span className="font-narrow text-eyebrow uppercase tracking-[0.18em] text-ink-soft hidden sm:block">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-10 h-16 flex items-center justify-between gap-4">
+        <span className="font-narrow text-lg">{SITE.title}</span>
+        <span className="font-narrow text-lg text-ink-soft hidden sm:block">
           {SITE.subtitle}
         </span>
       </div>
     </div>
 
-    <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
+    <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative">
+      {/* Motivo de mercado, discreto y solo en pantallas anchas */}
+      <Pez className="hidden lg:block absolute right-6 top-10 w-52 text-mercado-green/25" />
+
       <Reveal>
-        <p className="eyebrow eyebrow-rule text-ink-soft">{HERO.eyebrow}</p>
+        <p className="font-narrow text-lg text-mercado-green">{HERO.eyebrow}</p>
       </Reveal>
 
       <Reveal delay={80}>
-        <h1 className="display text-4xl sm:text-5xl md:text-6xl max-w-[16ch] mt-8">
+        <h1 className="display text-4xl sm:text-5xl md:text-6xl max-w-[16ch] mt-6">
           {HERO.headline}
         </h1>
       </Reveal>
@@ -40,50 +41,41 @@ export const Hero: React.FC = () => (
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <button
               onClick={scrollTo('flujos')}
-              className="group inline-flex items-center gap-4 border border-ink px-7 py-4 font-narrow text-eyebrow uppercase tracking-[0.14em] font-semibold hover:bg-ink hover:text-cream transition-colors"
+              className="inline-flex items-center gap-4 border border-ink px-7 py-4 font-narrow text-lg hover:bg-ink hover:text-cream transition-colors whitespace-nowrap"
             >
               {HERO.ctaPrimary}
             </button>
             <button
               onClick={scrollTo('flujos')}
               aria-label={HERO.ctaPrimary}
-              className="w-14 h-14 rounded-full border border-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors"
+              className="w-14 h-14 rounded-full border border-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors shrink-0"
             >
               <ArrowRight size={20} strokeWidth={1.5} />
             </button>
             <button
               onClick={scrollTo('como-esta-hecho')}
-              className="ml-2 font-narrow text-eyebrow uppercase tracking-[0.14em] font-semibold text-ink-soft underline underline-offset-8 decoration-line hover:text-ink hover:decoration-ink transition-colors"
+              className="ml-1 font-narrow text-lg text-ink-soft underline underline-offset-8 decoration-line hover:text-ink hover:decoration-ink transition-colors whitespace-nowrap"
             >
               {HERO.ctaSecondary}
             </button>
           </div>
         </Reveal>
 
-        {/* Ficha del proyecto, en filas separadas por línea fina */}
         <Reveal delay={240}>
-          <dl className="border-t border-line">
+          <dl className="border-t border-line relative">
+            <Naranja className="hidden lg:block absolute -top-24 right-0 w-16 text-azafran/40" />
             {HERO.meta.map((m) => (
               <div
                 key={m.label}
-                className="grid grid-cols-[8rem_1fr] gap-4 py-5 border-b border-line"
+                className="grid grid-cols-[7rem_1fr] gap-4 py-5 border-b border-line"
               >
-                <dt className="font-narrow text-eyebrow uppercase tracking-[0.14em] text-ink-faint">
-                  {m.label}
-                </dt>
+                <dt className="font-narrow text-lg text-ink-faint">{m.label}</dt>
                 <dd className="text-base">{m.value}</dd>
               </div>
             ))}
           </dl>
         </Reveal>
       </div>
-    </div>
-
-    <div className="mx-auto max-w-[1400px] px-6 md:px-10 pb-8 flex items-center gap-3 text-ink-faint">
-      <ArrowDown size={15} strokeWidth={1.5} className="animate-pulse" />
-      <span className="font-narrow text-eyebrow uppercase tracking-[0.18em]">
-        Sigue bajando
-      </span>
     </div>
   </header>
 );

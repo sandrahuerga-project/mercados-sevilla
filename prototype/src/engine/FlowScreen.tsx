@@ -29,7 +29,7 @@ export const FlowScreen: React.FC<FlowScreenProps> = ({ script, label, descripti
       </PhoneFrame>
       <button
         onClick={() => setResetKey((k) => k + 1)}
-        className="mt-4 font-narrow text-eyebrow uppercase tracking-[0.14em] font-semibold text-cream/70 hover:text-cream border border-cream/25 hover:border-cream/60 px-4 py-2 rounded-full transition-colors cursor-pointer"
+        className="mt-4 font-narrow text-base font-semibold text-cream/70 hover:text-cream border border-cream/25 hover:border-cream/60 px-4 py-2 rounded-full transition-colors cursor-pointer"
       >
         Reiniciar
       </button>
