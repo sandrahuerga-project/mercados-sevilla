@@ -3,8 +3,15 @@ import { PhoneFrame } from '../components/PhoneFrame';
 import { FlowPlayer } from './FlowPlayer';
 import type { FlowScript } from './types';
 
-// Generic screen: PhoneFrame + FlowPlayer driven by a flow script (JSON).
-export const FlowScreen: React.FC<{ script: FlowScript }> = ({ script }) => {
+interface FlowScreenProps {
+  script: FlowScript;
+  /** Título y descripción visibles sobre el móvil. Por defecto, los del script. */
+  label?: string;
+  description?: string;
+}
+
+// Pantalla genérica: PhoneFrame + FlowPlayer alimentados por un script JSON.
+export const FlowScreen: React.FC<FlowScreenProps> = ({ script, label, description }) => {
   const [resetKey, setResetKey] = useState(0);
 
   return (
@@ -13,18 +20,18 @@ export const FlowScreen: React.FC<{ script: FlowScript }> = ({ script }) => {
         id={`phone-${script.id.toLowerCase()}`}
         title={script.phone.title}
         subtitle={script.phone.subtitle}
-        avatarIcon={script.phone.avatarIcon}
+        persona={script.phone.persona}
         avatarBg={script.phone.avatarBg}
-        flowLabel={script.label}
-        flowDescription={script.description}
+        flowLabel={label ?? script.label}
+        flowDescription={description ?? script.description}
       >
         <FlowPlayer script={script} resetKey={resetKey} />
       </PhoneFrame>
       <button
         onClick={() => setResetKey((k) => k + 1)}
-        className="mt-3 text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-md font-semibold transition-all cursor-pointer"
+        className="mt-4 font-narrow text-eyebrow uppercase tracking-[0.14em] font-semibold text-cream/70 hover:text-cream border border-cream/25 hover:border-cream/60 px-4 py-2 rounded-full transition-colors cursor-pointer"
       >
-        Reiniciar {script.id}
+        Reiniciar
       </button>
     </div>
   );

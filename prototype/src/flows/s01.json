@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • Cerrado",
-    "avatarIcon": "ph ph-fish",
+    "persona": "antonio",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",

@@ -67,9 +67,9 @@ export const PlaceroPanel: React.FC = () => {
   return (
     <div className="w-full max-w-3xl mx-auto text-left rounded-2xl overflow-hidden shadow-2xl border border-zinc-300 bg-white text-zinc-900">
       {/* Header */}
-      <div className="bg-trust-dark text-white px-5 py-4 flex items-center justify-between">
+      <div className="bg-green-deep text-white px-5 py-4 flex items-center justify-between">
         <div>
-          <h3 className="font-serif font-bold text-lg leading-tight">Pescadería Antonio</h3>
+          <h3 className="font-bold text-lg leading-tight">Pescadería Antonio</h3>
           <span className="text-[12px] text-white/70">Mercado San Gonzalo · Cierra 14:00</span>
         </div>
         <span className="text-[12px] bg-confirm/20 text-confirm border border-confirm/30 px-2.5 py-1 rounded-full font-semibold">
@@ -98,7 +98,7 @@ export const PlaceroPanel: React.FC = () => {
       </div>
 
       {/* P02 — daily video upload */}
-      <div className="px-5 py-3 border-b border-zinc-200 bg-marmol flex items-center justify-between gap-3">
+      <div className="px-5 py-3 border-b border-zinc-200 bg-cream flex items-center justify-between gap-3">
         <div>
           <div className="text-[13px] font-bold">Vídeo del día</div>
           <div className="text-[12px] text-zinc-500">
@@ -258,7 +258,7 @@ export const PlaceroPanel: React.FC = () => {
 
             {/* Final total prompt — the placero types the weighed total */}
             {totalPrompt?.id === o.id && (
-              <div className="mt-2 p-3 bg-marmol border border-zinc-200 rounded-lg space-y-2">
+              <div className="mt-2 p-3 bg-cream border border-zinc-200 rounded-lg space-y-2">
                 <label className="block text-[12px] font-bold text-zinc-700">
                   Total final tras pesar (obligatorio)
                 </label>

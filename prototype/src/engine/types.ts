@@ -1,10 +1,13 @@
 // Flow scripts: each flow is data (JSON), the FlowPlayer renders it turn by turn.
 // Copy source of truth: DESIGN.md §7 (catálogo de mensajes).
 
+import type { PersonaId } from '../shell/PersonaImage';
+
 export interface PhoneMeta {
   title: string;
   subtitle?: string;
-  avatarIcon?: string;
+  /** Ilustración que hace de foto de perfil del negocio en la cabecera. */
+  persona?: PersonaId;
   avatarBg?: string;
 }
 

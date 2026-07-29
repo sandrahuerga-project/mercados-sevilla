@@ -5,7 +5,7 @@
   "phone": {
     "title": "Mercado San Gonzalo",
     "subtitle": "Asistente oficial • En línea",
-    "avatarIcon": "ph ph-storefront",
+    "persona": "mercado",
     "avatarBg": "bg-mercado-green"
   },
   "start": "date",

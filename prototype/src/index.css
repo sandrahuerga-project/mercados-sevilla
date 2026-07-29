@@ -1,46 +1,180 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-mono: "DM Mono", "Courier New", monospace;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  /* Tipografía — Archivo para todo, Archivo Narrow para etiquetas */
+  --font-sans: "Archivo", system-ui, -apple-system, sans-serif;
+  --font-narrow: "Archivo Narrow", "Archivo", system-ui, sans-serif;
+  /* El chat simulado usa fuente de sistema: WhatsApp no permite tipografía propia */
+  --font-chat: -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  --color-mercado-green: #2D6A4F;
-  --color-whatsapp-green: #25D366;
-  --color-sevilla-tile: #1B4F8A;
-  --color-azafran: #F4A533;
-  --color-marmol: #F7F5F0;
-  --color-confirm: #52B788;
-  --color-cancel: #E63946;
-  --color-warning: #FF9F1C;
-  --bubble-bot: #FFFFFF;
-  --bubble-user: #DCF8C6;
-  --bubble-system: #E8F4FD;
-  --chat-bg: #EBE5DC;
-  
-  --text-xs: 11px;
-  --text-sm: 12px;
-  --text-base: 14px;
-  --text-md: 15px;
-  --text-lg: 16px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  
-  --shadow-bubble: 0 1px 1px rgba(0,0,0,0.13);
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.15);
-  --shadow-modal: 0 8px 24px rgba(0,0,0,0.20);
+  /* Superficies claras */
+  --color-cream: #fcf6ec;
+  --color-cream-deep: #f4ebdd;
+  --color-paper: #ffffff;
+
+  /* Tinta — todos los valores verificados AA sobre crema (mín. 4,5:1) */
+  --color-ink: #1a1a18; /* 15,9:1 */
+  --color-ink-soft: #57544e; /* 7,0:1 */
+  --color-ink-faint: #6e6a61; /* 5,0:1 — antes #8a857c daba 3,4:1 */
+  --color-line: #e3d9c9;
+
+  /* Verde */
+  --color-mercado-green: #2d6a4f;
+  --color-green-deep: #143026;
+  --color-green-mist: #eaf1ec;
+  --color-whatsapp-green: #25d366;
+
+  /* Acentos y sistema */
+  --color-azafran: #b8791d; /* sobre crema */
+  --color-azafran-light: #e0a63f; /* sobre verde oscuro: 6,6:1 */
+  --color-sevilla-tile: #1b4f8a;
+  --color-confirm: #2f7d55;
+  --color-cancel: #c0392f;
+  --color-warning: #b8791d;
+
+  /* Chat (fiel a WhatsApp) */
+  --color-bubble-bot: #ffffff;
+  --color-bubble-user: #dcf8c6;
+  --color-bubble-system: #e8f4fd;
+  --color-chat-bg: #ebe5dc;
+
+  /* Escala tipográfica — base 17px, muy por encima de los 10-13px anteriores */
+  --text-eyebrow: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4rem;
+  --text-6xl: 5.25rem;
+
+  --shadow-bubble: 0 1px 1px rgba(0, 0, 0, 0.13);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-lift: 0 18px 50px -20px rgba(20, 48, 38, 0.35);
 }
 
-/* Custom styles and utilities */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-cream);
+}
 
-/* Seville tile background pattern at 0.04 opacity over WhatsApp background */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Tipografía de titulares: grande, apretada, tracking negativo ---- */
+.display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+/* ---- Etiqueta con regla fina encima (patrón de la referencia) ---- */
+/* Sin color propio: lo decide la utilidad de Tailwind de quien la use.
+   Si esta clase fijara el color, ganaría a text-* por orden de cascada. */
+.eyebrow {
+  font-family: var(--font-narrow);
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* La regla hereda el color del texto: sirve igual sobre crema y sobre verde. */
+.eyebrow-rule::before {
+  content: "";
+  display: block;
+  width: 7.5rem;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.55;
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Reveal al hacer scroll ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Una vez visible se retira la transformación: deja de ser capa compuesta
+   y evita artefactos de repintado en secciones largas. */
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Cursor personalizado (solo puntero fino, nunca en táctil) ---- */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-on,
+  .custom-cursor-on * {
+    cursor: none;
+  }
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background-color: var(--color-mercado-green);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(-100px, -100px, 0);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-mercado-green);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate3d(-100px, -100px, 0);
+  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.cursor-ring.is-active {
+  width: 62px;
+  height: 62px;
+  background-color: rgba(45, 106, 79, 0.1);
+}
+
+/* ---- Chat: fondo de WhatsApp con azulejo muy sutil ---- */
 .chat-container-bg {
-  background-color: #EBE5DC;
+  background-color: var(--color-chat-bg);
   background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l20 20M50 0L30 20M100 0L80 20M0 50l20-20M50 50L30 30L50 10M100 50L80 30M0 100l20-20M50 100L30 80M100 100L80 80' stroke='%231B4F8A' stroke-opacity='0.04' stroke-width='1' fill='none'/%3E%3C/svg%3E");
   background-size: 100px 100px;
+  font-family: var(--font-chat);
 }
 
-/* Custom styling for standard scrollbars within simulated phone displays */
 .whatsapp-scrollbar::-webkit-scrollbar {
   width: 5px;
 }
@@ -51,13 +185,11 @@
   background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
-.whatsapp-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
-}
 
-/* Animations */
+/* ---- Animaciones del chat ---- */
 @keyframes typing-bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -68,38 +200,45 @@
 .animate-typing-dot {
   animation: typing-bounce 1.2s infinite ease-in-out;
 }
-
 .animate-typing-dot-1 {
   animation-delay: 0s;
 }
-
 .animate-typing-dot-2 {
   animation-delay: 0.15s;
 }
-
 .animate-typing-dot-3 {
   animation-delay: 0.3s;
 }
 
-/* Smooth active focus border animations */
-.pulsing-border {
-  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
-  animation: pulse-border 2s infinite;
-}
-
-@keyframes pulse-border {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
-  70% {
-    box-shadow: 0 0 0 6px rgba(37, 211, 102, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
-/* Custom tail decoration for bubbles */
+.animate-fade-in {
+  animation: fade-in 0.28s ease-out both;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---- Colas de burbuja ---- */
 .bubble-tail-bot::before {
   content: "";
   position: absolute;
@@ -107,7 +246,7 @@
   left: -8px;
   width: 12px;
   height: 12px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   clip-path: polygon(100% 0, 0 0, 100% 100%);
 }
 
@@ -118,6 +257,6 @@
   right: -8px;
   width: 12px;
   height: 12px;
-  background-color: #DCF8C6;
+  background-color: #dcf8c6;
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }

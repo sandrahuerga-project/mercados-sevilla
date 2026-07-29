@@ -1,11 +1,13 @@
 import React from 'react';
 import { Camera, Mic, MoreVertical, ChevronLeft, Send } from 'lucide-react';
+import { PersonaImage, type PersonaId } from '../shell/PersonaImage';
 
 interface PhoneFrameProps {
   id: string;
   title: string;
   subtitle?: string;
-  avatarIcon?: string; // e.g. "🏪" or a Phosphor CSS class
+  /** Personaje cuya ilustración hace de foto de perfil del negocio. */
+  persona?: PersonaId;
   avatarBg?: string; // Tailwind class
   children: React.ReactNode;
   flowLabel: string;
@@ -21,7 +23,7 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
   id,
   title,
   subtitle = "En línea",
-  avatarIcon = "🏪",
+  persona = "mercado",
   avatarBg = "bg-mercado-green",
   children,
   flowLabel,
@@ -34,12 +36,10 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      {/* Flow Info Header for the desktop layout */}
-      <div className="w-[375px] mb-3 text-left">
-        <span className="inline-block px-2.5 py-1 text-xs font-bold tracking-wide uppercase rounded bg-mercado-green/10 text-mercado-green border border-mercado-green/20 mb-1.5">
-          {flowLabel}
-        </span>
-        <h3 className="text-sm font-semibold text-slate-100">{flowDescription}</h3>
+      {/* Rótulo del flujo, sobre el móvil */}
+      <div className="w-[375px] mb-5 text-left">
+        <h3 className="display text-2xl text-cream">{flowLabel}</h3>
+        <p className="text-sm text-cream/65 mt-1.5 leading-snug">{flowDescription}</p>
       </div>
 
       {/* Simulated Device Frame */}
@@ -80,12 +80,8 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
             <button className="p-0.5 hover:bg-white/10 rounded-full transition-colors cursor-pointer text-white">
               <ChevronLeft size={20} />
             </button>
-            <div className={`w-9 h-9 ${avatarBg} rounded-full flex items-center justify-center text-lg shadow-sm border border-white/20 overflow-hidden relative font-bold`}>
-              {avatarIcon.startsWith('ph ') || avatarIcon.startsWith('ph-') ? (
-                <i className={`${avatarIcon} text-xl text-white`} />
-              ) : (
-                <span>{avatarIcon}</span>
-              )}
+            <div className={`w-9 h-9 ${avatarBg} rounded-full shadow-sm border border-white/20 overflow-hidden relative`}>
+              <PersonaImage id={persona} className="w-full h-full text-lg" />
               {/* Active dot */}
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-confirm rounded-full border border-mercado-green"></span>
             </div>
