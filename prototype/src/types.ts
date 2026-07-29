@@ -8,7 +8,7 @@ export interface OnboardingData {
 
 export interface Message {
   id: string;
-  sender: 'bot' | 'user' | 'system' | 'fali';
+  sender: 'bot' | 'user' | 'system' | 'antonio';
   text?: string;
   timestamp: string;
   type?: 'text' | 'image' | 'video' | 'audio' | 'summary' | 'flow-trigger' | 'status-pill';

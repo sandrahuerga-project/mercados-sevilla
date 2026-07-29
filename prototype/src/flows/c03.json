@@ -3,7 +3,7 @@
   "label": "C03 Pedido desde broadcast",
   "description": "Audio → NLU → confirmación → fulfillment → recibo — copy DESIGN.md §7",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -13,11 +13,11 @@
     "date": { "kind": "date", "text": "HOY", "next": "broadcast" },
     "broadcast": {
       "kind": "video",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:02",
       "duration": "0:38",
       "imageUrl": "https://images.unsplash.com/photo-1534482421-64566f976cfa?auto=format&fit=crop&q=80&w=400",
-      "caption": "Buenos días Carmen 👋\nHoy en Pescadería Fali: boquerones de primera, acedías limpias, gamba blanca de Huelva.\n\nPide hasta las 12:30. Recogida o reparto.",
+      "caption": "Buenos días Carmen 👋\nHoy en Pescadería Antonio: boquerones de primera, acedías limpias, gamba blanca de Huelva.\n\nPide hasta las 12:30. Recogida o reparto.",
       "footer": "Responde BAJA para dejar de recibir.",
       "next": "broadcast-botones"
     },
@@ -32,7 +32,7 @@
     },
     "ver-mas": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:03",
       "text": "Hoy en el mostrador: boquerones de primera, acedías limpias, gamba blanca de Huelva y coquinas.\nPide hasta las 12:30.",
       "next": "ver-mas-botones"
@@ -44,15 +44,15 @@
     },
     "baja": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:03",
-      "text": "Hecho. No recibirás más mensajes de Pescadería Fali.\nSi algún día quieres volver, escribe ALTA.",
+      "text": "Hecho. No recibirás más mensajes de Pescadería Antonio.\nSi algún día quieres volver, escribe ALTA.",
       "next": "baja-fin"
     },
     "baja-fin": { "kind": "end", "note": "Baja RGPD completada — el opt-out es obligatorio en toda plantilla marketing" },
     "que-quieres": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:03",
       "text": "¿Qué quieres pedir hoy? Puedes escribirlo en lenguaje normal o mandarme un audio.",
       "next": "audio-carmen"
@@ -72,7 +72,7 @@
     },
     "confirmacion": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:05",
       "text": "He entendido este pedido:\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*",
       "next": "confirmacion-botones"
@@ -83,12 +83,12 @@
       "buttons": [
         { "label": "Confirmar", "next": "fulfillment" },
         { "label": "Modificar", "next": "modificar" },
-        { "label": "Hablar c/Fali", "next": "escalado" }
+        { "label": "Hablar c/Antonio", "next": "escalado" }
       ]
     },
     "modificar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:05",
       "text": "Dime qué cambio: cantidad, producto o quitar algo del pedido.",
       "next": "modificar-fin"
@@ -97,13 +97,13 @@
     "escalado": {
       "kind": "system",
       "tone": "blue",
-      "text": "Te paso con Fali directamente. Habitualmente responde en menos de 10 min.",
+      "text": "Te paso con Antonio directamente. Habitualmente responde en menos de 10 min.",
       "next": "escalado-fin"
     },
     "escalado-fin": { "kind": "end", "note": "Continúa en el flujo C11 — Escalado humano" },
     "fulfillment": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:06",
       "text": "¿Cómo quieres recibirlo?",
       "next": "fulfillment-botones"
@@ -119,14 +119,14 @@
     },
     "recibo-recogida": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
       "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*\n\nRecogida en puesto, hoy hasta 14:00.\nPago al recoger (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando esté preparado.",
       "next": "recibo-botones"
     },
     "taquilla": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
       "text": "La taquilla refrigerada se paga por adelantado con Bizum.\nTe llega ahora el enlace de pago.",
       "next": "taquilla-fin"
@@ -134,7 +134,7 @@
     "taquilla-fin": { "kind": "end", "note": "Taquilla: CTA URL de Bizum en plantilla utility (wa-constraints §6.2)" },
     "franja": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
       "text": "¿Cuándo te viene bien?",
       "next": "franja-botones"
@@ -149,7 +149,7 @@
     },
     "recibo-reparto": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:08",
       "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\n\nReparto a domicilio en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando salga el repartidor.",
       "next": "recibo-botones"
@@ -163,6 +163,6 @@
       ]
     },
     "multi-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto (vista David)" },
-    "historial-fin": { "kind": "end", "note": "El historial vive en la PWA complementaria. El tracking sigue en C07 — el total FINAL llega cuando Fali marque Listo (post-pesaje)" }
+    "historial-fin": { "kind": "end", "note": "El historial vive en la PWA complementaria. El tracking sigue en C07 — el total FINAL llega cuando Antonio marque Listo (post-pesaje)" }
   }
 }

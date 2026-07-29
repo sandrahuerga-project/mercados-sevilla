@@ -10,7 +10,7 @@
 | Supuesto DESIGN | Realidad WA | Decisión |
 |---|---|---|
 | Chips múltiples bajo cada mensaje (3-4 chips) | Reply buttons: **máx 3**, **20 char cada uno**, sin emojis custom | Reducir chips a 3 máx, copy ≤20 char |
-| "Hablar c/Fali" como tercer chip junto a Confirmar/Modificar | OK, pero entonces no caben más | Es lo correcto, ya estaba bien |
+| "Hablar c/Antonio" como tercer chip junto a Confirmar/Modificar | OK, pero entonces no caben más | Es lo correcto, ya estaba bien |
 | Burbujas tipográficas custom (Playfair, DM Mono, colores) | **Imposible en WA real**: el chrome lo controla Meta | Solo válido para prototipo Lovable / Figma / case study |
 | Vídeo del día embebido con play button verde custom | El vídeo se ve, el chrome de WA lo envuelve | OK, sin custom UI |
 | Audio del usuario con waveform verde | El chrome es de WA. No puedes tematizarlo | Solo prototipo, no producción |
@@ -269,7 +269,7 @@ En WA real funciona así (texto + 3 reply buttons):
 💳 Pago al entregar
 ```
 
-Buttons: `[Confirmar]` `[Modificar]` `[Hablar c/Fali]` (20 char ✓, sin emojis — WA no renderiza emojis custom en reply buttons)
+Buttons: `[Confirmar]` `[Modificar]` `[Hablar c/Antonio]` (20 char ✓, sin emojis — WA no renderiza emojis custom en reply buttons)
 
 ---
 
@@ -284,8 +284,8 @@ Confirmado: pedido por **texto + reply buttons + listas**. Mantener audio como f
 - **Implica**: el flujo de pedido NO incluye pasarela, simplifica mucho.
 
 ### 6.3 Catálogo: list vs vídeo
-- Vídeo del día = catálogo visual (modelo Fali).
-- Si el usuario pide algo no presente → bot devuelve "Lo mando a Fali a ver si tiene".
+- Vídeo del día = catálogo visual (modelo Antonio).
+- Si el usuario pide algo no presente → bot devuelve "Lo mando a Antonio a ver si tiene".
 - Lista interactiva solo para **categorías** (≤10) y **mercados** (≤10), no para productos.
 - Productos disponibles → texto libre del usuario, NLU del lado del bot.
 

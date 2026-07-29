@@ -108,7 +108,7 @@ prototype/                      ← el export, migrado y limpio
 | 2 | C02 Recurrente | Carmen | Alta | Cero fricción del día a día |
 | 3 | C03 Pedido desde broadcast (audio) | Carmen | **Máxima** | El corazón. Audio → NLU → confirmación |
 | 4 | C07 Tracking | Carmen | Media | Notificaciones de estado |
-| 5 | C11 Escalado humano | Carmen | Alta | "Hablar con Fali" — red de seguridad |
+| 5 | C11 Escalado humano | Carmen | Alta | "Hablar con Antonio" — red de seguridad |
 | 6 | C03+C05 Multi-puesto | David | Alta | Escala: pescado + fruta, reparto noche |
 | 7 | C06 Repetir pedido | David | Media | Atajo de recurrencia |
 | 8 | P02 Subida vídeo diario | Antonio | Alta | 30 segundos, cero curro |
@@ -181,7 +181,7 @@ Feedback de Sandra (2026-07-28): fuentes demasiado pequeñas en toda la web y el
 
 - [ ] Congelar copy de los 10 flujos desde DESIGN.md §7 → JSONs (sin emoji en botones, "placero", léxico CONTENT_SYSTEM §3.1)
 - [ ] Dataset falso: 5 puestos San Gonzalo, productos, precios "estimados"
-- [ ] Assets: vídeo de mostrador **generado con IA** (similar al de Fali, sin usar su imagen) alojado en **Cloudinary** (no en el repo), fotos de puestos, avatares
+- [ ] Assets: vídeo de mostrador **generado con IA** (similar al de Antonio, sin usar su imagen) alojado en **Cloudinary** (no en el repo), fotos de puestos, avatares
 - [ ] Ajustar PROMPT_UI.md y PROMPT_UI_flujos_P1.md al split DESIGN/PORTFOLIO (aún referencian cards y chips con emoji del DESIGN antiguo) — o retirarlos si los specs JSON los sustituyen
 
 ---
@@ -190,8 +190,8 @@ Feedback de Sandra (2026-07-28): fuentes demasiado pequeñas en toda la web y el
 
 | Riesgo | Impacto | Mitigación |
 |---|---|---|
-| Vídeo real de mostrador de calidad | Credibilidad | Grabar con Fali o stock digno |
-| Fali presta nombre/imagen | Autenticidad | Pedir permiso; alternativa: puesto ficticio |
+| Vídeo real de mostrador de calidad | Credibilidad | Grabar con Antonio o stock digno |
+| Antonio presta nombre/imagen | Autenticidad | Pedir permiso; alternativa: puesto ficticio |
 | Perfeccionismo en el chrome WA | Tiempo | Fiel ≠ pixel-perfect; DESIGN.md manda en copy y componentes, no en clavar cada sombra |
 | Scope creep (18 flujos) | No acabar | Solo los 10 de §3.4; el resto se menciona |
 

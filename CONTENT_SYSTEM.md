@@ -86,7 +86,7 @@ Prohibidos siempre: 🎉 ❤️ 🤗 😊 🙌 ✨ 🔥 💪 🚀 💯 y cualqui
 
 **Reglas numéricas:** máx **1 emoji por burbuja** (excepción: card de categorías, 1 por categoría). Un emoji = un significado en todo el sistema; 🔔 solo significa "pedido listo", nunca aviso genérico.
 
-**Botones: sin emojis, punto.** Si WhatsApp Business no lo pinta de forma nativa, no va. Los símbolos ✓ ✏️ 💬 🛒 que aparecen en algunos mockups son válidos **solo en PORTFOLIO_DESIGN.md** (shell de demo/portfolio, nunca en el chat simulado). En producción y en el chat del prototipo todo botón es texto plano: `[Confirmar]` `[Modificar]` `[Hablar con Fali]`. Ya propagado a DESIGN.md (§1 + catálogo §7), flows-index.md y wa-constraints.md (§5 y borradores §7). Los mockups ASCII de moléculas en PORTFOLIO_DESIGN.md conservan emoji porque documentan el shell, no el chat.
+**Botones: sin emojis, punto.** Si WhatsApp Business no lo pinta de forma nativa, no va. Los símbolos ✓ ✏️ 💬 🛒 que aparecen en algunos mockups son válidos **solo en PORTFOLIO_DESIGN.md** (shell de demo/portfolio, nunca en el chat simulado). En producción y en el chat del prototipo todo botón es texto plano: `[Confirmar]` `[Modificar]` `[Hablar con Antonio]`. Ya propagado a DESIGN.md (§1 + catálogo §7), flows-index.md y wa-constraints.md (§5 y borradores §7). Los mockups ASCII de moléculas en PORTFOLIO_DESIGN.md conservan emoji porque documentan el shell, no el chat.
 
 ### 3.3 Etiquetas de estado (espejo de DESIGN.md §10 y PRD §9)
 
@@ -107,7 +107,7 @@ Un solo modo verbal por mensaje. Inventario cerrado:
 ```
 Confirmar · Modificar · Cancelar · Pedir · Repetir · Reintentar
 Sí, allí voy · Cambiar de mercado · Ver del día · Avísame
-Hablar con Fali · Voy ahora · Espero · Mañana · Volver
+Hablar con Antonio · Voy ahora · Espero · Mañana · Volver
 ```
 
 CTA nuevo → se añade aquí primero, se verifica contra 20 char, luego se usa.
@@ -137,13 +137,13 @@ Máx 80 char. Variantes aprobadas: primera vez / recurrente / fuera de horario (
 
 ### M-CONF — Confirmación de pedido
 `"He entendido este pedido:" + líneas producto (cantidad · nombre · precio) + "Total estimado" + "¿Confirmas?"`
-Botones: `[Confirmar] [Modificar] [Hablar con Fali]`.
+Botones: `[Confirmar] [Modificar] [Hablar con Antonio]`.
 En WA real: texto plano con `*bold*`, sin card (wa-constraints §5). El adjetivo **"estimado" es obligatorio** — el bot no fija precios (principio 1).
 
 **Variantes por confianza NLU (DESIGN §6):**
 - \>85% → confirmación directa con resumen.
 - 60-85% → *"¿He entendido bien? [resumen]"* `[Sí] [Modificar]`
-- <60% → *"No estoy seguro. ¿Puedes repetirlo o mandarme un audio?"* `[Reintentar] [Hablar con Fali]`
+- <60% → *"No estoy seguro. ¿Puedes repetirlo o mandarme un audio?"* `[Reintentar] [Hablar con Antonio]`
 
 ### M-ALERT — Alerta / sustitución
 `⚠️ + hecho + pregunta con alternativa concreta (precio incluido si lo da el placero)`
@@ -164,7 +164,7 @@ Máx 100 char. Nunca causa técnica ("el NLU...", "error 500"). Variantes aproba
 
 ### M-WAIT — Espera
 `typing indicator + si >5s, texto explícito ("Entendiendo tu pedido...")`
-Escalado humano: siempre con expectativa de tiempo (*"Fali responde habitualmente en menos de 10 min."*).
+Escalado humano: siempre con expectativa de tiempo (*"Antonio responde habitualmente en menos de 10 min."*).
 
 ### M-BYE — Despedida
 `hecho cerrado + puerta abierta`
@@ -186,7 +186,7 @@ Secuencias de molecules que resuelven una intención de principio a fin. Mapeo 1
 
 | Organism | Flujo | Composición de molecules | Prio |
 |---|---|---|---|
-| Alta | C01 | WA Flow (copy en pantallas Flow, §7) + M-BYE de cierre con promesa concreta (*"Mañana a las 9:00 te enseño lo que Fali tenga en el mostrador."*) | P1 |
+| Alta | C01 | WA Flow (copy en pantallas Flow, §7) + M-BYE de cierre con promesa concreta (*"Mañana a las 9:00 te enseño lo que Antonio tenga en el mostrador."*) | P1 |
 | Saludo recurrente | C02 | M-SAL recurrente | P1 |
 | Pedido desde vídeo | C03 | M-CAST → M-SAL corta → [input libre] → M-WAIT → M-CONF → M-SEL fulfillment → M-NOTIF recibo | P1 |
 | Pedido espontáneo | C04 | C02 + C03 sin M-CAST | P2 |
@@ -209,11 +209,11 @@ Secuencias de molecules que resuelven una intención de principio a fin. Mapeo 1
 
 Único punto donde dos voces conviven. Reglas:
 
-1. El bot nunca finge ser el placero. Firma implícita distinta: bot = "Pescadería Fali" (nombre de puesto), humano = "Fali" (nombre de persona, avatar foto real).
-2. Transición de ida, una sola vez, con expectativa: *"Te paso con Fali directamente. Habitualmente responde en menos de 10 min."*
+1. El bot nunca finge ser el placero. Firma implícita distinta: bot = "Pescadería Antonio" (nombre de puesto), humano = "Antonio" (nombre de persona, avatar foto real).
+2. Transición de ida, una sola vez, con expectativa: *"Te paso con Antonio directamente. Habitualmente responde en menos de 10 min."*
 3. Durante el handover: cero chips, cero mensajes del bot. El bot desaparece de verdad.
-4. Transición de vuelta, neutra: *"Conversación con Fali cerrada. Vuelves al asistente automático."* El bot no resume ni parafrasea lo que dijo el humano; si Fali cerró un acuerdo ("te aparto medio kilo"), el bot lo convierte en M-CONF normal para que quede registrado.
-5. **El copy del humano no se escribe.** Es la voz real del placero — es el activo del producto (evidencia Fali, PRD §1.2). Lo único normado: etiquetas de transición y promesa de tiempo.
+4. Transición de vuelta, neutra: *"Conversación con Antonio cerrada. Vuelves al asistente automático."* El bot no resume ni parafrasea lo que dijo el humano; si Antonio cerró un acuerdo ("te aparto medio kilo"), el bot lo convierte en M-CONF normal para que quede registrado.
+5. **El copy del humano no se escribe.** Es la voz real del placero — es el activo del producto (evidencia Antonio, PRD §1.2). Lo único normado: etiquetas de transición y promesa de tiempo.
 
 Disparadores del escalado (DESIGN §8.4): chip manual, 3 fallos NLU seguidos, palabras clave ("persona", "humano", "alguien real").
 
@@ -264,7 +264,7 @@ Un organism que sale de la ventana 24h se congela como plantilla aprobable. Regi
 
 Organism + variables de un usuario concreto (`{{nombre}}`, `{{puesto}}`, `{{hora}}`, `{{id_pedido}}`). Test de integridad del sistema: **toda conversación de producción debe poder reconstruirse solo con atoms → molecules → organisms.** Si aparece copy que no traza a este documento o a DESIGN §7, es deuda: se sistematiza o se elimina.
 
-Excepciones únicas: la voz humana en C11 (§6.5) y el vídeo diario del placero (contenido vivo, no se guioniza — es la evidencia Fali).
+Excepciones únicas: la voz humana en C11 (§6.5) y el vídeo diario del placero (contenido vivo, no se guioniza — es la evidencia Antonio).
 
 Validación de referencia: el happy path completo de DESIGN §13 (Carmen, 6 toques + 1 audio, ≤4 min).
 

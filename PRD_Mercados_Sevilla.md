@@ -17,13 +17,15 @@ Tres perfiles con motivaciones distintas pero convergentes en la necesidad de un
 
 ### 1.2 Dos evidencias contrapuestas en el mismo territorio
 
-**Evidencia A — Pescadería Fali (Mercado San Gonzalo):** lleva años funcionando con éxito vía WhatsApp. Vídeo diario del mostrador a lista de difusión, pedidos por chat en lenguaje natural, pago al entregar (efectivo/tarjeta/Bizum), recogida o domicilio. Cero plataforma, cero comisión, alta recurrencia. **El modelo conversacional ya está validado por el mercado real.**
+> **Nota de investigación:** «Antonio» es un seudónimo. Corresponde a un placero real del Mercado de San Gonzalo cuya operación se observó de primera mano. Se anonimiza porque no ha dado permiso para aparecer con su nombre en materiales públicos. El hallazgo es real; el nombre, no.
+
+**Evidencia A — Pescadería Antonio (Mercado San Gonzalo):** lleva años funcionando con éxito vía WhatsApp. Vídeo diario del mostrador a lista de difusión, pedidos por chat en lenguaje natural, pago al entregar (efectivo/tarjeta/Bizum), recogida o domicilio. Cero plataforma, cero comisión, alta recurrencia. **El modelo conversacional ya está validado por el mercado real.**
 
 **Evidencia B — mercadosdesevilla.es:** plataforma institucional (Ayuntamiento + Hermeneus World) operando en 11 mercados, con app, web, taquillas y reparto. Infrautilizada. **El modelo e-commerce clásico no ha resuelto el problema** pese a tener infraestructura, presupuesto público y respaldo institucional.
 
 ### 1.3 Diagnóstico sin sesgo
 
-El éxito de Fali no demuestra que WhatsApp sea la única respuesta. Demuestra que el modelo ganador combina:
+El éxito de Antonio no demuestra que WhatsApp sea la única respuesta. Demuestra que el modelo ganador combina:
 
 - Canal cotidiano del usuario (no exige aprender nada nuevo).
 - Contenido vivo y diario (vídeo del mostrador = catálogo + stock + confianza).
@@ -33,7 +35,7 @@ El éxito de Fali no demuestra que WhatsApp sea la única respuesta. Demuestra q
 
 mercadosdesevilla falla porque rompe los cinco puntos a la vez. Cualquier nuevo producto debe respetarlos.
 
-### 1.4 Qué falta a Fali para escalar
+### 1.4 Qué falta a Antonio para escalar
 
 - No escala más allá de su lista de difusión (límite técnico 256 y operativo del placista).
 - No agrega pedidos de varios puestos del mismo mercado.
@@ -41,7 +43,7 @@ mercadosdesevilla falla porque rompe los cinco puntos a la vez. Cualquier nuevo 
 - No genera datos para placista ni institución.
 - Depende 100% de la disponibilidad y atención del placista.
 
-**La oportunidad es industrializar Fali sin romperlo, y resolver lo que mercadosdesevilla intentó (multi-puesto, logística, taquillas) pero por la vía conversacional.**
+**La oportunidad es industrializar Antonio sin romperlo, y resolver lo que mercadosdesevilla intentó (multi-puesto, logística, taquillas) pero por la vía conversacional.**
 
 ---
 
@@ -49,7 +51,7 @@ mercadosdesevilla falla porque rompe los cinco puntos a la vez. Cualquier nuevo 
 
 Capa conversacional multi-canal sobre los mercados de abastos de Sevilla que:
 
-1. Replica el modelo Fali como unidad mínima funcional.
+1. Replica el modelo Antonio como unidad mínima funcional.
 2. Añade agregación multi-puesto, logística unificada y datos.
 3. Convive (o se integra) con mercadosdesevilla en lugar de competir.
 4. Es agnóstica de canal: WhatsApp primero, pero arquitectura preparada para Telegram, PWA, voz e integración con la app municipal.
@@ -58,7 +60,7 @@ Capa conversacional multi-canal sobre los mercados de abastos de Sevilla que:
 
 ## 3. Objetivos del MVP
 
-1. Replicar Fali con 5 puestos en 1 mercado piloto (San Gonzalo) sin que sus clientas actuales noten degradación.
+1. Replicar Antonio con 5 puestos en 1 mercado piloto (San Gonzalo) sin que sus clientas actuales noten degradación.
 2. Validar agregación multi-puesto y logística unificada.
 3. Validar que un mayor completa un pedido sin asistencia.
 4. Validar que un placista gestiona ≥10 pedidos/día sin frenar la venta presencial.
@@ -82,7 +84,7 @@ Capa conversacional multi-canal sobre los mercados de abastos de Sevilla que:
 
 | Canal | Pro | Contra | Rol en MVP |
 |---|---|---|---|
-| **WhatsApp Business API** | Penetración total. Caso Fali validado. Audio, vídeo, listas. | Coste por conversación. Plantillas con aprobación Meta. Restricciones de difusión. | **Canal primario** |
+| **WhatsApp Business API** | Penetración total. Caso Antonio validado. Audio, vídeo, listas. | Coste por conversación. Plantillas con aprobación Meta. Restricciones de difusión. | **Canal primario** |
 | **Telegram Bot API** | Gratis. Sin restricciones de difusión. Bots potentes. Canales sin límite. | Baja adopción en mayores y placistas. | Fase 2 — espejo para jóvenes |
 | **PWA ligera** | Sin instalación. Pago online integrado. Historial. Cumple requisitos institucionales. | Requiere abrir navegador. Rompe el hábito chat. | **Complemento opcional** desde WhatsApp |
 | **SMS** | Universal, sin app. | Sin multimedia. Coste alto. | Solo notificaciones críticas de entrega |
@@ -125,23 +127,23 @@ Capa conversacional multi-canal sobre los mercados de abastos de Sevilla que:
 - `IF @mercado_fav IS SET` → *"Tu mercado es San Gonzalo. ¿Compras allí hoy?"* [Sí] [Cambiar mercado].
 - `ELSE` → Lista de mercados disponibles.
 
-### 6.3 Difusión diaria (núcleo Fali, industrializado)
+### 6.3 Difusión diaria (núcleo Antonio, industrializado)
 
 - Cada placista activo manda 1 vídeo de mostrador al bot administrador entre 7-9h.
 - Bot distribuye automáticamente a su lista de suscriptores opt-in del puesto.
-- Plantilla: *"Buenos días. Hoy en Pescadería Fali: boquerones, acedías, gambas blancas. Pide hasta las 12:30 — recogida o reparto."*
+- Plantilla: *"Buenos días. Hoy en Pescadería Antonio: boquerones, acedías, gambas blancas. Pide hasta las 12:30 — recogida o reparto."*
 - Cumplimiento Meta: opt-in explícito, frecuencia controlada, plantillas aprobadas, listas <256.
 
 ### 6.4 Embudo de compra (flujo conversacional)
 
 1. **Selección de mercado** (o confirmación del favorito).
 2. **Selección de puesto** o entrada directa desde vídeo del día.
-3. **Pedido en lenguaje natural** (texto o audio). Bot interpreta vía NLU + LLM y devuelve confirmación estructurada: *"He entendido ½ kg boquerones, 2 acedías limpias. ¿Confirmas?"* [Sí] [Modificar] [Hablar con Fali].
+3. **Pedido en lenguaje natural** (texto o audio). Bot interpreta vía NLU + LLM y devuelve confirmación estructurada: *"He entendido ½ kg boquerones, 2 acedías limpias. ¿Confirmas?"* [Sí] [Modificar] [Hablar con Antonio].
 4. **Multi-puesto:** *"¿Añadir productos de otro puesto del mercado?"* [Ver puestos] [Finalizar].
 5. **Sustituciones:** opt-in por producto. Default = NO sustituir.
 6. **Fulfillment:** [Recogida en puesto] / [Taquilla refrigerada si disponible] / [Reparto a domicilio + franja].
 7. **Pago:**
-   - Default *"al entregar"* (efectivo/tarjeta/Bizum) — respetando modelo Fali.
+   - Default *"al entregar"* (efectivo/tarjeta/Bizum) — respetando modelo Antonio.
    - Opción *"pago ahora"* → link Bizum o Stripe/Redsys (obligatorio solo si reparto a domicilio operado por tercero).
 8. **Confirmación** con ticket digital, hora y desglose por puesto.
 
@@ -198,11 +200,11 @@ Visita comercial + alta en 10 min. Datos: nombre puesto, mercado, móvil, horari
 
 ## 8. Capa logística unificada
 
-El salto cualitativo respecto a Fali aislado: agregar pedidos de N puestos del mismo mercado en una sola operación logística.
+El salto cualitativo respecto a Antonio aislado: agregar pedidos de N puestos del mismo mercado en una sola operación logística.
 
 ### 8.1 Modalidades
 
-- **Recogida en puesto** (modelo Fali, gratis): cliente pasa por cada puesto.
+- **Recogida en puesto** (modelo Antonio, gratis): cliente pasa por cada puesto.
 - **Click & Collect en mercado:** punto único de recogida 24/7 o taquilla refrigerada donde el mercado disponga (mercadosdesevilla ya tiene taquillas en algunos).
 - **Reparto a domicilio:** repartidor del mercado (no Glovo/Uber), franjas 13:30-15:00 y 19:00-21:00.
 
@@ -244,7 +246,7 @@ El salto cualitativo respecto a Fali aislado: agregar pedidos de N puestos del m
 3. **Sin mínimo para recogida.** Mínimo 15€ para domicilio.
 4. **Sustituciones:** opt-in producto a producto. Default NO.
 5. **Cancelación libre** hasta que el puesto marca "aceptado".
-6. **Comisión placista:** 5-8% en MVP (rango bajo, hay que competir contra "cero comisión Fali").
+6. **Comisión placista:** 5-8% en MVP (rango bajo, hay que competir contra "cero comisión Antonio").
 7. **Cuota institucional:** a negociar con Ayuntamiento como servicio complementario.
 8. **Cumplimiento WhatsApp/Meta:** opt-in explícito, plantillas aprobadas, frecuencia ≤1 mensaje promocional/día por puesto.
 9. **RGPD:** consentimiento de datos en onboarding, baja en 1 mensaje.
@@ -273,8 +275,8 @@ El salto cualitativo respecto a Fali aislado: agregar pedidos de N puestos del m
 
 | Fase | Plazo | Hitos |
 |---|---|---|
-| **Fase 0 — Validación** | Semanas 1-3 | Entrevistas Fali + 10 clientas + 5 mayores + 5 jóvenes + 3 placistas. Prototipo Figma. Test usabilidad mayores. |
-| **Fase 1 — Réplica Fali** | Semanas 4-7 | Bot funcional con 1 puesto. Listas de difusión, pedido por NLU, panel placista. Clientas actuales sin degradación. |
+| **Fase 0 — Validación** | Semanas 1-3 | Entrevistas Antonio + 10 clientas + 5 mayores + 5 jóvenes + 3 placistas. Prototipo Figma. Test usabilidad mayores. |
+| **Fase 1 — Réplica Antonio** | Semanas 4-7 | Bot funcional con 1 puesto. Listas de difusión, pedido por NLU, panel placista. Clientas actuales sin degradación. |
 | **Fase 2 — Multi-puesto San Gonzalo** | Semanas 8-14 | 4 puestos adicionales. Agregación de pedidos. Logística unificada. PWA complementaria. |
 | **Fase 3 — Pitch institucional** | Semana 15 | Dossier con métricas reales vs mercadosdesevilla. Reunión Ayuntamiento + Hermeneus World. |
 | **Fase 4 — Escalado** | Mes 5+ | 2º mercado (Triana o Feria). Telegram como canal espejo. Integración API con mercadosdesevilla si hay acuerdo. |
@@ -285,10 +287,10 @@ El salto cualitativo respecto a Fali aislado: agregar pedidos de N puestos del m
 
 | Riesgo | Mitigación |
 |---|---|
-| Fali rechaza intermediación | Herramienta gratuita en fase 1, sin comisión hasta multi-puesto. Su marca y voz se mantienen intactas. |
-| Clientas de Fali notan cambio | El bot mantiene el nombre del puesto, el vídeo del propio placista, la voz en audios. Cero rebranding. |
+| Antonio rechaza intermediación | Herramienta gratuita en fase 1, sin comisión hasta multi-puesto. Su marca y voz se mantienen intactas. |
+| Clientas de Antonio notan cambio | El bot mantiene el nombre del puesto, el vídeo del propio placista, la voz en audios. Cero rebranding. |
 | Placista no actualiza nada | El modelo NO depende de catálogo manual. Solo del vídeo diario, que ya graba. |
-| Comisión percibida abusiva (vs cero de Fali) | Comisión baja + valor añadido demostrable: más clientes, logística, datos. |
+| Comisión percibida abusiva (vs cero de Antonio) | Comisión baja + valor añadido demostrable: más clientes, logística, datos. |
 | Logística rompe cadena de frío en verano | Cajas isotérmicas obligatorias, cierre 15:00, restricciones por producto. |
 | Ayuntamiento ve competencia | Pitch como capa complementaria. Ofrecer integración API con mercadosdesevilla. Convivencia win-win. |
 | Hermeneus World bloquea integración | Mantener autonomía técnica. No depender de su API para operar. |
@@ -302,7 +304,7 @@ El salto cualitativo respecto a Fali aislado: agregar pedidos de N puestos del m
 ## 14. Argumentario para Ayuntamiento e instituciones
 
 1. **Diagnóstico honesto:** mercadosdesevilla.es es una buena infraestructura con baja adopción. El problema no es de tecnología, es de canal y modelo.
-2. **Evidencia local:** Pescadería Fali, sin presupuesto público, mueve más pedidos digitales recurrentes que la plataforma municipal en su mercado.
+2. **Evidencia local:** Pescadería Antonio, sin presupuesto público, mueve más pedidos digitales recurrentes que la plataforma municipal en su mercado.
 3. **Propuesta:** capa conversacional sobre canal nativo (WhatsApp) que activa a placistas reacios y a clientes mayores excluidos por la app.
 4. **Métricas piloto** (San Gonzalo, 3 meses): pedidos, recurrencia, ticket medio, NPS placista, NPS cliente mayor, comparativa vs mercadosdesevilla.
 5. **Plan de integración:**

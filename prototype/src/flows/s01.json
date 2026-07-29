@@ -3,7 +3,7 @@
   "label": "S01 Fuera de horario",
   "description": "Pedido fuera de la ventana del puesto — DESIGN.md §11.2",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • Cerrado",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -19,9 +19,9 @@
     },
     "cerrado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "15:40",
-      "text": "Los pedidos de Fali están cerrados hasta mañana 9:00.\n¿Quieres que te avise cuando abra?",
+      "text": "Los pedidos de Antonio están cerrados hasta mañana 9:00.\n¿Quieres que te avise cuando abra?",
       "next": "cerrado-botones"
     },
     "cerrado-botones": {
@@ -35,9 +35,9 @@
     },
     "aviso-ok": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "15:41",
-      "text": "Hecho. Mañana a las 9:00 te aviso con el vídeo del día de Fali.",
+      "text": "Hecho. Mañana a las 9:00 te aviso con el vídeo del día de Antonio.",
       "next": "aviso-fin"
     },
     "aviso-fin": { "kind": "end", "note": "El aviso llega como plantilla utility (fuera de ventana 24h)" },
@@ -59,7 +59,7 @@
     "otros-fin": { "kind": "end", "note": "Continúa en C04 — pedido espontáneo con Frutería Manolo" },
     "nada": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "15:42",
       "text": "De acuerdo. Cuando quieras pedir, escríbeme aquí.",
       "next": "nada-fin"

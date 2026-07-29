@@ -11,7 +11,7 @@
 MVP en 3 fases (~15 semanas) sobre 1 mercado piloto (San Gonzalo).
 Stack no-code/low-code: Meta Cloud API + n8n + Airtable + Softr/Glide + Claude API + Cloudinary.
 Cuello de botella real no es técnico: es **aprobación de plantillas Meta** (24-72h por plantilla) y **verificación de WhatsApp Business** (días-semanas). Empezar por ahí.
-Riesgo mayor: que Fali (placero ancla) perciba el producto como intermediación. Mitigación: fase 1 gratis, sin comisión, sin rebranding.
+Riesgo mayor: que Antonio (placero ancla) perciba el producto como intermediación. Mitigación: fase 1 gratis, sin comisión, sin rebranding.
 
 ---
 
@@ -82,13 +82,13 @@ Todo lo que limita el diseño de la solución, agrupado por origen. Cada constra
 
 | ID | Constraint | Fuente | Impacto |
 |---|---|---|---|
-| BIZ-01 | Comisión 5-8% (compite contra "cero comisión" de Fali) | PRD §10.6,§13 | Fase 1 sin comisión. Comisión solo cuando haya valor (multi-puesto, logística) |
+| BIZ-01 | Comisión 5-8% (compite contra "cero comisión" de Antonio) | PRD §10.6,§13 | Fase 1 sin comisión. Comisión solo cuando haya valor (multi-puesto, logística) |
 | BIZ-02 | Ventana de pedidos: desde vídeo hasta 90 min antes del cierre | PRD §10.1 | Lógica temporal por puesto. Fuera de ventana → S01 |
 | BIZ-03 | Sin mínimo recogida; mínimo 15€ domicilio | PRD §10.3 | Validación en fulfillment (C03) |
 | BIZ-04 | Sustituciones opt-in producto a producto, default NO | PRD §10.4, CONTENT_SYSTEM M-ALERT | C08 nunca sustituye sin confirmación |
 | BIZ-05 | Cancelación libre solo hasta estado "aceptado" | PRD §10.5 | C10 bifurca pre/post-aceptado |
 | BIZ-06 | Operador logístico subcontratado (cooperativa local), no Glovo/Uber | PRD §8.3 | Dependencia externa. Franjas 13:30-15:00 / 19:00-21:00 |
-| BIZ-07 | No degradar experiencia actual de clientas de Fali | PRD §3.1,§13 | Fase 1 debe ser ≥ que el WhatsApp manual actual de Fali |
+| BIZ-07 | No degradar experiencia actual de clientas de Antonio | PRD §3.1,§13 | Fase 1 debe ser ≥ que el WhatsApp manual actual de Antonio |
 | BIZ-08 | Convivencia con mercadosdesevilla.es (no competir de frente) | PRD §2,§14 | Arquitectura agnóstica, preparada para integración API futura |
 
 ---
@@ -167,16 +167,16 @@ Ruta crítica (empezar día 1, tardan solas):
 - [ ] Enviar a aprobación las 7 plantillas base (broadcast + 6 utility de tracking) `WA-04` → ver §5
 
 En paralelo (no bloqueante):
-- [ ] Entrevistas: Fali + 10 clientas + 5 mayores + 5 jóvenes + 3 placeros (PRD §12 Fase 0)
+- [ ] Entrevistas: Antonio + 10 clientas + 5 mayores + 5 jóvenes + 3 placeros (PRD §12 Fase 0)
 - [ ] Prototipo Figma navegable + test usabilidad con mayores `US-03,US-09`
 - [ ] Alta manual de datos base en Airtable (San Gonzalo + 5 puestos + productos_base)
 - [ ] Cerrar decisiones pendientes de flows-index §5 (ver §8 de este plan)
 
 **Salida de fase:** WABA verificada, plantillas en revisión, prototipo validado con Carmen-tipo.
 
-### Fase 1 — Réplica Fali, 1 puesto (semanas 4-7)
+### Fase 1 — Réplica Antonio, 1 puesto (semanas 4-7)
 
-**Objetivo:** Pescadería Fali funcionando en el bot sin que sus clientas noten degradación (`BIZ-07`).
+**Objetivo:** Pescadería Antonio funcionando en el bot sin que sus clientas noten degradación (`BIZ-07`).
 
 - [ ] n8n: webhook handler Cloud API + verificación `TEC-09,WA-*`
 - [ ] Pipeline vídeo: recepción → Cloudinary → URL `TEC-06,WA-11`
@@ -192,7 +192,7 @@ En paralelo (no bloqueante):
 - [ ] Panel placero Softr (P03): aceptar / agotado / preparado / listo `US-07`
 - [ ] Handler BAJA + borrado RGPD `LEG-02,WA-06`
 
-**Salida de fase:** Fali cierra ≥10 pedidos/día por el bot. Clientas actuales migradas sin fricción.
+**Salida de fase:** Antonio cierra ≥10 pedidos/día por el bot. Clientas actuales migradas sin fricción.
 
 ### Fase 2 — Multi-puesto San Gonzalo (semanas 8-14)
 
@@ -245,7 +245,7 @@ Checklist de contenido pre-envío: CONTENT_SYSTEM §8 (léxico "placero", sin em
 |---|---|---|---|
 | Verificación Meta Business | Todo el canal | Alto (tiempos impredecibles) | Iniciar día 1 fase 0 |
 | Aprobación plantillas | Broadcast + tracking | Alto | Enviar temprano, copy pulido |
-| Fali acepta participar | Fase 1 entera (es el ancla) | Alto | Gratis, sin comisión, sin rebranding `BIZ-07,PRD §13` |
+| Antonio acepta participar | Fase 1 entera (es el ancla) | Alto | Gratis, sin comisión, sin rebranding `BIZ-07,PRD §13` |
 | Operador logístico (cooperativa) | Reparto fase 2 | Medio | MVP puede arrancar solo con recogida |
 | Taquilla refrigerada en San Gonzalo | Fulfillment taquilla | Medio | Decisión pendiente (§8). Recogida no depende de esto |
 | Coste Claude API por pedido | Margen unitario | Bajo | Medir en fase 1, cachear diccionario, fallback botones |
@@ -305,8 +305,8 @@ El MVP se valida contra estos umbrales a 3 meses, 1 mercado:
 
 1. Crear Meta Business + WABA, iniciar verificación de negocio `WA-07`.
 2. Redactar y enviar a revisión las 7 plantillas (§5) con checklist CONTENT_SYSTEM §8 `WA-04`.
-3. Montar base Airtable con las 7 entidades (PRD §9) + datos de San Gonzalo/Fali.
-4. Cerrar las 5 decisiones pendientes (§8) con Fali y el mercado.
+3. Montar base Airtable con las 7 entidades (PRD §9) + datos de San Gonzalo/Antonio.
+4. Cerrar las 5 decisiones pendientes (§8) con Antonio y el mercado.
 5. Levantar n8n con webhook Cloud API verificado `TEC-09`.
 
 ---

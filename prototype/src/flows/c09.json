@@ -3,7 +3,7 @@
   "label": "C09 Modificación",
   "description": "Editar pedido pre-aceptado + unhappy (post-aceptado escala a humano) — PRD §10.5",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -13,7 +13,7 @@
     "date": { "kind": "date", "text": "HOY", "next": "contexto" },
     "contexto": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:05",
       "text": "He entendido este pedido:\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*",
       "next": "confirmacion-botones"
@@ -28,7 +28,7 @@
     },
     "modificar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:06",
       "text": "¿Qué cantidad de boquerones quieres?",
       "next": "cantidad-botones"
@@ -44,7 +44,7 @@
     },
     "ajustado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
       "text": "Actualizado:\n\n• 1 kg boquerones frescos — *3,50 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,90 €*\n\n¿Confirmas?",
       "next": "ajustado-botones"
@@ -58,7 +58,7 @@
     "post-contexto": {
       "kind": "system",
       "tone": "default",
-      "text": "— 20 min después: Fali ya ha ACEPTADO el pedido y está preparándolo —",
+      "text": "— 20 min después: Antonio ya ha ACEPTADO el pedido y está preparándolo —",
       "next": "post-intento"
     },
     "post-intento": {
@@ -69,20 +69,20 @@
     },
     "post-respuesta": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:30",
-      "text": "Fali ya está preparando tu pedido.\nPara cambiarlo ahora tiene que decidirlo él.\nTe paso con Fali directamente.",
+      "text": "Antonio ya está preparando tu pedido.\nPara cambiarlo ahora tiene que decidirlo él.\nTe paso con Antonio directamente.",
       "next": "post-pill"
     },
     "post-pill": {
       "kind": "system",
       "tone": "blue",
-      "text": "Te paso con Fali. Habitualmente responde en menos de 10 min.",
-      "next": "post-fali"
+      "text": "Te paso con Antonio. Habitualmente responde en menos de 10 min.",
+      "next": "post-antonio"
     },
-    "post-fali": {
+    "post-antonio": {
       "kind": "human",
-      "name": "Fali",
+      "name": "Antonio",
       "timestamp": "09:33",
       "text": "Sin problema Carmen, aún no lo había pesado. Un kilo entonces.",
       "next": "post-fin"

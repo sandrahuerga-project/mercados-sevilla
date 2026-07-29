@@ -48,9 +48,9 @@ Pill gris central: "HOY, 24 ENERO"
 
 **3. Broadcast diario (Molecule 05) — entrante**
 
-- Avatar pequeño "Pescadería Fali" a la izquierda.
+- Avatar pequeño "Pescadería Antonio" a la izquierda.
 - Burbuja blanca con tail superior izquierda redondeado distinto.
-- Encima de la burbuja: "Pescadería Fali" en `#2D6A4F`, 12px, bold.
+- Encima de la burbuja: "Pescadería Antonio" en `#2D6A4F`, 12px, bold.
 - Thumbnail de vídeo 16:9, border-radius 8px, con play button blanco circular 44px y triángulo verde centrado. Pon una imagen de un mostrador de pescadería de fondo (puede ser un degradado azul si no hay imagen).
 - Texto: "Buenos días Carmen 👋 Hoy en el puesto: boquerones de primera, acedías limpias y gambas blancas de Huelva. Pide hasta las 12:30. Recogida o reparto a domicilio."
 - Timestamp "9:02" abajo derecha.
@@ -89,7 +89,7 @@ Dos chips en fila bajo el broadcast:
 Tres chips en fila:
 - `[✓ Confirmar]` — chip primario relleno, bg `#2D6A4F`, texto blanco.
 - `[✏️ Modificar]` — chip outline.
-- `[💬 Hablar c/Fali]` — chip outline.
+- `[💬 Hablar c/Antonio]` — chip outline.
 
 **9. Input bar fijo inferior**
 

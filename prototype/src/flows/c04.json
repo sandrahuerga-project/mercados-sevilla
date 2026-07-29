@@ -28,19 +28,19 @@
       "kind": "buttons",
       "timestamp": "11:20",
       "buttons": [
-        { "label": "Pescadería Fali", "next": "que-quieres" },
+        { "label": "Pescadería Antonio", "next": "que-quieres" },
         { "label": "Ver todos", "next": "lista" }
       ]
     },
     "lista": {
       "kind": "system",
       "tone": "blue",
-      "text": "List Message: Pescadería Fali · Frutería Manolo · Carnicería Lola · Ibéricos Sánchez · Verduras El Huerto (máx 10 filas)",
+      "text": "List Message: Pescadería Antonio · Frutería Manolo · Carnicería Lola · Ibéricos Sánchez · Verduras El Huerto (máx 10 filas)",
       "next": "que-quieres"
     },
     "que-quieres": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "11:21",
       "text": "¿Qué quieres pedir? Puedes escribirlo en lenguaje normal o mandarme un audio.",
       "next": "pedido"
@@ -53,7 +53,7 @@
     },
     "confirmacion": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "11:22",
       "text": "He entendido este pedido:\n\n• ¼ kg gambas blancas — *4,50 €*\n• Cazón en adobo (2 raciones) — *5,20 €*\n\n*Total estimado: 9,70 €*",
       "next": "confirmacion-botones"
@@ -64,7 +64,7 @@
       "buttons": [
         { "label": "Confirmar", "next": "fin-ok" },
         { "label": "Modificar", "next": "fin-mod" },
-        { "label": "Hablar c/Fali", "next": "fin-escalado" }
+        { "label": "Hablar c/Antonio", "next": "fin-escalado" }
       ]
     },
     "fin-ok": { "kind": "end", "note": "Sigue como C03: fulfillment → recibo. El NLU respeta el léxico sevillano («un cuarto», «cazón en adobo»)" },

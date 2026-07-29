@@ -3,7 +3,7 @@
   "label": "C07 Tracking",
   "description": "Notificaciones utility de estado + unhappy path S02 (no recoge)",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -13,14 +13,14 @@
     "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0387", "next": "aceptado" },
     "aceptado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:15",
-      "text": "✓ Fali ha aceptado tu pedido #SGZ-2026-0387.\nTe aviso cuando esté listo.",
+      "text": "✓ Antonio ha aceptado tu pedido #SGZ-2026-0387.\nTe aviso cuando esté listo.",
       "next": "listo"
     },
     "listo": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "11:40",
       "text": "🔔 Tu pedido está listo.\n\n*Total: 4,15 €*\nPaga en efectivo, Bizum o tarjeta al recoger.\n\nPasa antes de las 14:00.",
       "next": "listo-botones"
@@ -36,9 +36,9 @@
     },
     "voy": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "11:41",
-      "text": "Avisado. Fali te lo tiene preparado en el mostrador.",
+      "text": "Avisado. Antonio te lo tiene preparado en el mostrador.",
       "next": "entregado"
     },
     "mapa": {
@@ -49,7 +49,7 @@
     },
     "entregado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "12:30",
       "text": "📦 Pedido entregado. ¡Que aproveche!\n¿Volvemos la próxima semana?",
       "next": "entregado-botones"
@@ -64,24 +64,24 @@
     },
     "repetir-si": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "12:31",
       "text": "Hecho. Te aviso la próxima semana con el vídeo del día.",
       "next": "fin-ok"
     },
     "repetir-no": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "12:31",
       "text": "De acuerdo. Cuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "fin-ok"
     },
-    "fin-ok": { "kind": "end", "note": "El total (4,15 €) lo tecleó Fali al marcar Listo tras pesar — el bot solo lo repite" },
+    "fin-ok": { "kind": "end", "note": "El total (4,15 €) lo tecleó Antonio al marcar Listo tras pesar — el bot solo lo repite" },
     "s02-aviso2": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "13:45",
-      "text": "⏰ Fali cierra en 15 min. Pasa o se guarda para mañana (puede afectar al pescado).",
+      "text": "⏰ Antonio cierra en 15 min. Pasa o se guarda para mañana (puede afectar al pescado).",
       "warning": true,
       "next": "s02-botones"
     },
@@ -96,15 +96,15 @@
     },
     "s02-manana": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "13:46",
-      "text": "De acuerdo. Fali lo guarda para mañana.\nTe aviso a las 9:00 cuando abra el puesto.",
+      "text": "De acuerdo. Antonio lo guarda para mañana.\nTe aviso a las 9:00 cuando abra el puesto.",
       "next": "s02-manana-fin"
     },
     "s02-manana-fin": { "kind": "end", "note": "Unhappy path S02 — cliente no recoge, pedido aplazado" },
     "s02-cancelar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "13:46",
       "text": "Pedido cancelado.\nCuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "s02-cancelar-fin"

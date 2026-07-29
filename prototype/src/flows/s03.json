@@ -3,7 +3,7 @@
   "label": "S03 Lista negra",
   "description": "Cliente bloqueado (2 incidencias) — mensaje único, sin flujo — PRD §13",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -25,9 +25,9 @@
     },
     "bloqueo": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:00",
-      "text": "Para pedir en Fali tienes que contactar directamente con el puesto.",
+      "text": "Para pedir en Antonio tienes que contactar directamente con el puesto.",
       "next": "fin"
     },
     "fin": {

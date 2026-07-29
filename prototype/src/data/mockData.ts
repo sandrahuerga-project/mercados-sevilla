@@ -7,7 +7,7 @@ export const MERCADOS = [
 ];
 
 export const PUESTOS_SAN_GONZALO = [
-  { id: 'fali', name: 'Pescadería Fali', category: 'Pescadería', icon: '🐟', active: true, tag: 'Fali' },
+  { id: 'antonio', name: 'Pescadería Antonio', category: 'Pescadería', icon: '🐟', active: true, tag: 'Antonio' },
   { id: 'manolo', name: 'Frutería Manolo', category: 'Frutería', icon: '🍅', active: true, tag: 'Manolo' },
   { id: 'lola', name: 'Carnicería Lola', category: 'Carnicería', icon: '🥩', active: true, tag: 'Lola' },
   { id: 'sanchez', name: 'Ibéricos Sánchez', category: 'Charcutería', icon: '🥖', active: true, tag: 'Sánchez' },

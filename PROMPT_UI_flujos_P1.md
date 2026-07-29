@@ -59,9 +59,9 @@ Conversación + WhatsApp Flow embebido.
 2. Bot CTA: *"Cuéntame quién eres en 30 segundos."* + botón único `[Empezar]` (CTA URL que abre Flow).
 3. Renderiza el **Flow fullscreen** como overlay/modal sobre el chat, con 3 pantallas:
    - P1: TextInput "Nombre" + TextInput "Código postal".
-   - P2: Dropdown "Mercado favorito" (San Gonzalo, Triana, Feria) + CheckboxGroup "Puestos que te interesan" (Pescadería Fali, Frutería Manolo, Carnicería Lola).
+   - P2: Dropdown "Mercado favorito" (San Gonzalo, Triana, Feria) + CheckboxGroup "Puestos que te interesan" (Pescadería Antonio, Frutería Manolo, Carnicería Lola).
    - P3: OptIn "Quiero recibir el vídeo diario de mis puestos" + Footer `[Empezar a comprar]`.
-4. Tras cerrar el Flow: bot confirma *"Listo Carmen. Mañana a las 9:00 te enseño lo que Fali tenga en el mostrador."* + chip `[Ver mercado ahora]`.
+4. Tras cerrar el Flow: bot confirma *"Listo Carmen. Mañana a las 9:00 te enseño lo que Antonio tenga en el mostrador."* + chip `[Ver mercado ahora]`.
 
 ### Pantalla 2 — C02 Recurrente
 
@@ -75,30 +75,30 @@ Conversación corta, 2 burbujas.
 Conversación con handover visible.
 
 1. Burbuja usuario: *"¿Las acedías de hoy son de Sanlúcar?"*
-2. Bot: *"Te paso con Fali directamente. Suele responder en 5-10 min."* (burbuja `#E8F4FD` sistema).
-3. Indicador sistema centrado tipo pill: *"— Fali se ha unido a la conversación —"*.
-4. Burbuja entrante con avatar y nombre "Fali" (no "Pescadería Fali bot"): *"Hola Carmen, sí, llegaron esta mañana de la lonja de Sanlúcar. ¿Te aparto medio kilo?"*
+2. Bot: *"Te paso con Antonio directamente. Suele responder en 5-10 min."* (burbuja `#E8F4FD` sistema).
+3. Indicador sistema centrado tipo pill: *"— Antonio se ha unido a la conversación —"*.
+4. Burbuja entrante con avatar y nombre "Antonio" (no "Pescadería Antonio bot"): *"Hola Carmen, sí, llegaron esta mañana de la lonja de Sanlúcar. ¿Te aparto medio kilo?"*
 5. Burbuja usuario: *"Sí porfa, para mañana."*
-6. Pill sistema: *"— Fali ha pasado el chat al asistente —"*.
+6. Pill sistema: *"— Antonio ha pasado el chat al asistente —"*.
 7. Bot retomando: *"Apuntado. ½ kg acedías de Sanlúcar para recogida mañana 10:00. ¿Confirmas?"* + `[✓ Confirmar]` `[✏️ Modificar]`.
 
-Importante: visualmente diferenciar mensajes de Fali humano vs bot (mismo avatar puesto pero etiqueta sutil "Fali" sin "bot", o color tail ligeramente distinto).
+Importante: visualmente diferenciar mensajes de Antonio humano vs bot (mismo avatar puesto pero etiqueta sutil "Antonio" sin "bot", o color tail ligeramente distinto).
 
 ### Pantalla 4 — C07 Tracking
 
 Conversación con 4 notificaciones utility a lo largo del día (separadores de hora).
 
 1. Pill hora: "10:15".
-2. Bot plantilla `pedido_aceptado_v1`: *"✅ Fali ha aceptado tu pedido #SGZ-2024-0387. Empieza a prepararlo."*
+2. Bot plantilla `pedido_aceptado_v1`: *"✅ Antonio ha aceptado tu pedido #SGZ-2024-0387. Empieza a prepararlo."*
 3. Pill hora: "11:40".
-4. Bot plantilla `pedido_listo_v1`: *"📦 Tu pedido está listo. Puedes recogerlo en Pescadería Fali, Mercado San Gonzalo. Abierto hasta 14:00."* + `[Cómo llegar]` (CTA URL Google Maps) + `[Avisar a Fali]`.
+4. Bot plantilla `pedido_listo_v1`: *"📦 Tu pedido está listo. Puedes recogerlo en Pescadería Antonio, Mercado San Gonzalo. Abierto hasta 14:00."* + `[Cómo llegar]` (CTA URL Google Maps) + `[Avisar a Antonio]`.
 5. Pill hora: "12:30".
-6. Bot plantilla `pedido_entregado_v1`: *"🎉 Gracias por tu compra, Carmen. ¿Repetimos mañana?"* + `[Repetir]` `[Valorar a Fali]`.
+6. Bot plantilla `pedido_entregado_v1`: *"🎉 Gracias por tu compra, Carmen. ¿Repetimos mañana?"* + `[Repetir]` `[Valorar a Antonio]`.
 
 ## Disclaimer obligatorio (decisión cerrada)
 
 En **C03** (no hay que regenerarlo, solo referencia): antes de `[✓ Confirmar]`, burbuja sistema gris pequeña:
-> *"Al confirmar, Fali empieza a prepararlo. No se puede cancelar después."*
+> *"Al confirmar, Antonio empieza a prepararlo. No se puede cancelar después."*
 
 Si renderizas C03 como pantalla extra, inclúyelo. Si no, ignóralo.
 

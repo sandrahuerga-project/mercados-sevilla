@@ -18,7 +18,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
   const [nombre, setNombre] = useState('Carmen');
   const [cp, setCp] = useState('41010'); // Triana postal code
   const [mercadoFav, setMercadoFav] = useState('san-gonzalo');
-  const [puestosInteres, setPuestosInteres] = useState<string[]>(['fali', 'manolo']);
+  const [puestosInteres, setPuestosInteres] = useState<string[]>(['antonio', 'manolo']);
   const [recibirVideo, setRecibirVideo] = useState(true);
 
   // Error messages
@@ -220,7 +220,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
                   <div className="flex-1 flex flex-col text-left">
                     <span className="text-[13px] font-bold text-zinc-800 leading-snug">Quiero recibir el vídeo diario de mis puestos</span>
                     <span className="text-[10.5px] text-zinc-500 leading-relaxed mt-0.5">
-                      Fali y los demás placeros suben a las 9:00 AM el mostrador del día. Recibirás un breve mensaje en WhatsApp con lo que hay fresco.
+                      Antonio y los demás placeros suben a las 9:00 AM el mostrador del día. Recibirás un breve mensaje en WhatsApp con lo que hay fresco.
                     </span>
                   </div>
                 </div>

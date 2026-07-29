@@ -3,7 +3,7 @@
   "label": "C06 Repetir pedido",
   "description": "Vista David: «lo de siempre» en un toque + unhappy (producto ya no disponible)",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -19,7 +19,7 @@
     },
     "propuesta": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:05",
       "text": "¿Lo de siempre?\n\n• 1 kg gambas blancas — *18,00 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 22,80 €*\n\nReparto hoy 19:00-21:00.",
       "next": "propuesta-botones"
@@ -30,21 +30,21 @@
       "buttons": [
         { "label": "Sí", "next": "confirmado" },
         { "label": "Cambiar", "next": "cambiar" },
-        { "label": "Hablar c/Fali", "next": "escalado" }
+        { "label": "Hablar c/Antonio", "next": "escalado" }
       ]
     },
     "confirmado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:06",
       "text": "✅ ¡Pedido confirmado! #SGZ-2026-0429\nTe avisamos cuando esté preparado.",
       "next": "coquinas-agotadas"
     },
     "coquinas-agotadas": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:12",
-      "text": "⚠️ Las coquinas se han agotado hoy.\n¿Quieres que Fali las sustituya por almejas al mismo precio?",
+      "text": "⚠️ Las coquinas se han agotado hoy.\n¿Quieres que Antonio las sustituya por almejas al mismo precio?",
       "warning": true,
       "next": "sust-botones"
     },
@@ -59,7 +59,7 @@
     },
     "sust-ok": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:13",
       "text": "Hecho: almejas en lugar de coquinas, mismo precio.\nTu total estimado no cambia: *22,80 €*.",
       "next": "sust-ok-fin"
@@ -67,7 +67,7 @@
     "sust-ok-fin": { "kind": "end", "note": "Unhappy path resuelto — la sustitución la propone el placero, la decide el cliente (C08)" },
     "sust-quitar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:13",
       "text": "De acuerdo. Tu pedido queda:\n\n• 1 kg gambas blancas — *18,00 €*\n\n¿Confirmas así?",
       "next": "quitar-botones"
@@ -83,7 +83,7 @@
     "quitar-fin": { "kind": "end", "note": "Pedido ajustado — sigue en C07 Tracking" },
     "cancelar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:14",
       "text": "Pedido cancelado.\nCuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "cancelar-fin"

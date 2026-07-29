@@ -430,7 +430,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 │                                                             │
 │   [Avatar]  ┌─────────────────────────────────────────┐    │
 │   puesto    │ Buenos días Carmen. Hoy en Pescadería   │    │
-│   48×48px   │ Fali: boquerones frescos, acedías       │    │
+│   48×48px   │ Antonio: boquerones frescos, acedías       │    │
 │             │ limpias, gambas blancas de Huelva.       │    │
 │             │                               9:03  │    │
 │             └─────────────────────────────────────────┘    │
@@ -444,7 +444,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 │  margin-left: 60px (espacio para avatar)                    │
 │                                                             │
 │  Nombre del puesto sobre la burbuja:                        │
-│  "Pescadería Fali"  font-size: 12px  color: #2D6A4F         │
+│  "Pescadería Antonio"  font-size: 12px  color: #2D6A4F         │
 │  font-weight: 600                                           │
 │                                                             │
 │  BURBUJA SISTEMA (sin avatar):                              │
@@ -492,7 +492,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│  [Avatar Fali]  Pescadería Fali                             │
+│  [Avatar Antonio]  Pescadería Antonio                             │
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │  📋  He entendido este pedido:                      │   │
@@ -508,7 +508,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 │  └─────────────────────────────────────────────────────┘   │
 │                                                             │
 │  ┌─────────────┐  ┌──────────────┐  ┌──────────────────┐   │
-│  │  Confirmar  │  │   Modificar  │  │   Hablar c/Fali  │   │
+│  │  Confirmar  │  │   Modificar  │  │   Hablar c/Antonio  │   │
 │  └─────────────┘  └──────────────┘  └──────────────────┘   │
 │                                                             │
 │  ANATOMÍA DE LA CARD DE RESUMEN (solo demo, no existe        │
@@ -538,7 +538,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │  ┌──────┐  Pescadería Fali               🟢 Abierto │   │
+│  │  ┌──────┐  Pescadería Antonio               🟢 Abierto │   │
 │  │  │ foto │  Mercado San Gonzalo                      │   │
 │  │  │ 56px │  🐟 Pescadería                            │   │
 │  │  └──────┘                                           │   │
@@ -578,7 +578,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│  [Avatar Fali]  Pescadería Fali                             │
+│  [Avatar Antonio]  Pescadería Antonio                             │
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │  ┌─────────────────────────────────────────────┐   │   │
@@ -661,12 +661,12 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
-│  [Avatar Fali]  Pescadería Fali                             │
+│  [Avatar Antonio]  Pescadería Antonio                             │
 │                                                             │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │                                                     │   │
 │  │  ⚠️  Las acedías se han agotado.                   │   │
-│  │      ¿Quieres que Fali las sustituya               │   │
+│  │      ¿Quieres que Antonio las sustituya               │   │
 │  │      por lenguado pequeño al mismo precio?         │   │
 │  │                                           9:11   │   │
 │  └─────────────────────────────────────────────────────┘   │
@@ -699,7 +699,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 │  │                                                     │   │
 │  │  Número de pedido:  #SGZ-2024-0387                  │   │
 │  │                                                     │   │
-│  │  PESCADERÍA FALI                                    │   │
+│  │  PESCADERÍA ANTONIO                                    │   │
 │  │  ½ kg Boquerones frescos          1,75 €           │   │
 │  │  2 ud Acedías limpias             2,40 €           │   │
 │  │                                                     │   │
@@ -740,7 +740,7 @@ Moléculas del shell de presentación / demo. Para el texto y estructura reales 
 │                                                             │
 │  ACEPTADO:                                                  │
 │  bg: #F0F7F4  border-left: 3px #52B788                      │
-│  "✓ Fali ha aceptado tu pedido y está preparándolo"        │
+│  "✓ Antonio ha aceptado tu pedido y está preparándolo"        │
 │                                                             │
 │  LISTO (con total final, sin card en WA real — DESIGN.md §7):│
 │  bg: #F0F7F4  border-left: 3px #2D6A4F                      │
@@ -904,7 +904,7 @@ Este organismo es 100% libre de constraints de WhatsApp: es un panel web aparte.
 │                                                             │
 │  HEADER                                                     │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │  🐟 Pescadería Fali          Jueves 24 Enero        │   │
+│  │  🐟 Pescadería Antonio          Jueves 24 Enero        │   │
 │  │  [● Activo hoy]             Cierra: 14:00           │   │
 │  └─────────────────────────────────────────────────────┘   │
 │  bg: #1A3A2A  color: #fff                                   │
@@ -988,7 +988,7 @@ Este organismo es 100% libre de constraints de WhatsApp: es un panel web aparte.
 │  ← scroll horizontal →                                      │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
 │  │ [foto/icon] │ │ [foto/icon] │ │ [foto/icon] │        │
-│  │ Pesc. Fali  │ │ Carn. López │ │ Verduras M. │        │
+│  │ Pesc. Antonio  │ │ Carn. López │ │ Verduras M. │        │
 │  │ 🟢 Abierto  │ │ 🟢 Abierto  │ │ 🟠 Cierra!  │        │
 │  │  [Pedir]    │ │  [Pedir]    │ │  [Pedir]    │        │
 │  └──────────────┘ └──────────────┘ └──────────────┘        │
@@ -1019,7 +1019,7 @@ Este organismo es 100% libre de constraints de WhatsApp: es un panel web aparte.
 │  PEDIDO RECIENTE (destacado):                               │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │  ✅ Entregado · Hoy 13:40                           │   │
-│  │  Pescadería Fali · Mercado San Gonzalo             │   │
+│  │  Pescadería Antonio · Mercado San Gonzalo             │   │
 │  │                                                     │   │
 │  │  ½ kg Boquerones      1,75 €                       │   │
 │  │  2 ud Acedías         2,40 €                       │   │
@@ -1032,7 +1032,7 @@ Este organismo es 100% libre de constraints de WhatsApp: es un panel web aparte.
 │                                                             │
 │  PEDIDOS ANTERIORES (lista compacta):                       │
 │  ┌─────────────────────────────────────────────────────┐   │
-│  │  Lun 22 Ene · Pesc. Fali · 8,30 €    [Repetir]  ›  │   │
+│  │  Lun 22 Ene · Pesc. Antonio · 8,30 €    [Repetir]  ›  │   │
 │  └─────────────────────────────────────────────────────┘   │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │  Vie 19 Ene · Carn. López · 12,50 €  [Repetir]  ›  │   │

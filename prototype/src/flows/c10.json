@@ -3,7 +3,7 @@
   "label": "C10 Cancelación",
   "description": "Cancelar pre-aceptado (libre) vs post-aceptado (con confirmación) — PRD §10.5",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -32,7 +32,7 @@
     },
     "pre-ok": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:10",
       "text": "Pedido cancelado.\nCuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "pre-fin"
@@ -41,7 +41,7 @@
     "post-contexto": {
       "kind": "system",
       "tone": "default",
-      "text": "— Fali ya ha aceptado el pedido y está preparándolo —",
+      "text": "— Antonio ya ha aceptado el pedido y está preparándolo —",
       "next": "post-pide"
     },
     "post-pide": {
@@ -52,9 +52,9 @@
     },
     "post-confirma": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:20",
-      "text": "Fali ya está preparándolo.\n¿Confirmas que quieres cancelar?",
+      "text": "Antonio ya está preparándolo.\n¿Confirmas que quieres cancelar?",
       "warning": true,
       "next": "post-botones"
     },
@@ -68,15 +68,15 @@
     },
     "post-cancelado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:21",
-      "text": "Pedido cancelado. Aviso a Fali.\nCuando quieras pedir de nuevo, escríbeme aquí.",
+      "text": "Pedido cancelado. Aviso a Antonio.\nCuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "post-cancelado-fin"
     },
     "post-cancelado-fin": { "kind": "end", "note": "2 cancelaciones post-aceptado sin recoger → lista negra (S03, PRD §13)" },
     "post-mantiene": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:21",
       "text": "Perfecto, tu pedido sigue en marcha.\nTe aviso cuando esté listo.",
       "next": "post-mantiene-fin"

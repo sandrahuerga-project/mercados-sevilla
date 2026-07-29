@@ -92,7 +92,7 @@
 │ │     · San Gonzalo / Triana / Feria               │ │
 │ │                                                  │ │
 │ │  Puestos que te interesan      ← CheckboxGroup   │ │
-│ │  [x] Pescadería Fali                             │ │
+│ │  [x] Pescadería Antonio                             │ │
 │ │  [ ] Frutería Manolo                             │ │
 │ │  [ ] Carnicería Lola                             │ │
 │ │                                                  │ │
@@ -156,7 +156,7 @@
 │  Mercados de Sevilla                                 │
 │ (🏪) ┌─────────────────────────────────┐             │
 │      │ Listo Carmen. Mañana a las      │             │
-│      │ 9:00 te enseño lo que Fali      │             │
+│      │ 9:00 te enseño lo que Antonio      │             │
 │      │ tenga en el mostrador.    9:01  │             │
 │      └─────────────────────────────────┘             │
 │                                                      │

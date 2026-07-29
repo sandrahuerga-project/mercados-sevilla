@@ -1,6 +1,6 @@
 import type { PanelOrder } from './types';
 
-// Fake dataset for the demo: a normal morning at Pescadería Fali.
+// Fake dataset for the demo: a normal morning at Pescadería Antonio.
 export const INITIAL_ORDERS: PanelOrder[] = [
   {
     id: 'SGZ-2026-0387',

@@ -69,7 +69,7 @@ export const PlaceroPanel: React.FC = () => {
       {/* Header */}
       <div className="bg-trust-dark text-white px-5 py-4 flex items-center justify-between">
         <div>
-          <h3 className="font-serif font-bold text-lg leading-tight">Pescadería Fali</h3>
+          <h3 className="font-serif font-bold text-lg leading-tight">Pescadería Antonio</h3>
           <span className="text-[12px] text-white/70">Mercado San Gonzalo · Cierra 14:00</span>
         </div>
         <span className="text-[12px] bg-confirm/20 text-confirm border border-confirm/30 px-2.5 py-1 rounded-full font-semibold">
@@ -188,7 +188,7 @@ export const PlaceroPanel: React.FC = () => {
                   <button
                     onClick={() => {
                       update(o.id, { state: 'preparando' });
-                      pushLog(`Bot → ${o.customer}: «Fali ha aceptado tu pedido y está preparándolo.»`);
+                      pushLog(`Bot → ${o.customer}: «Antonio ha aceptado tu pedido y está preparándolo.»`);
                     }}
                     className="px-3.5 py-1.5 rounded-full bg-confirm text-white text-[13px] font-semibold cursor-pointer hover:opacity-90"
                   >
@@ -197,7 +197,7 @@ export const PlaceroPanel: React.FC = () => {
                   <button
                     onClick={() => {
                       update(o.id, { state: 'incidencia' });
-                      pushLog(`Bot → ${o.customer}: «Fali necesita hablar contigo.» → escalado humano (C11)`);
+                      pushLog(`Bot → ${o.customer}: «Antonio necesita hablar contigo.» → escalado humano (C11)`);
                     }}
                     className="px-3.5 py-1.5 rounded-full border border-cancel text-cancel text-[13px] font-semibold cursor-pointer hover:bg-cancel/5"
                   >

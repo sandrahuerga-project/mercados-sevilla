@@ -1,9 +1,9 @@
 {
   "id": "C11",
   "label": "C11 Escalado humano",
-  "description": "Handover bot → Fali real → vuelta al bot — DESIGN.md §8.4",
+  "description": "Handover bot → Antonio real → vuelta al bot — DESIGN.md §8.4",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -19,20 +19,20 @@
     },
     "handover": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:12",
-      "text": "Te paso con Fali directamente.\nHabitualmente responde en menos de 10 min.",
+      "text": "Te paso con Antonio directamente.\nHabitualmente responde en menos de 10 min.",
       "next": "pill-entra"
     },
     "pill-entra": {
       "kind": "system",
       "tone": "blue",
-      "text": "Fali se ha unido a la conversación",
-      "next": "fali-responde"
+      "text": "Antonio se ha unido a la conversación",
+      "next": "antonio-responde"
     },
-    "fali-responde": {
+    "antonio-responde": {
       "kind": "human",
-      "name": "Fali",
+      "name": "Antonio",
       "timestamp": "09:15",
       "text": "Hola Carmen, sí, llegaron esta mañana de la lonja de Sanlúcar. Son de categoría. ¿Te aparto medio kilo?",
       "next": "carmen-si"
@@ -46,12 +46,12 @@
     "pill-sale": {
       "kind": "system",
       "tone": "blue",
-      "text": "Conversación con Fali cerrada. Vuelves al asistente automático.",
+      "text": "Conversación con Antonio cerrada. Vuelves al asistente automático.",
       "next": "bot-estructura"
     },
     "bot-estructura": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:17",
       "text": "Apuntado:\n\n• ½ kg acedías de Sanlúcar — *2,40 €*\n\n*Total estimado: 2,40 €*\n\nRecogida mañana 10:00. ¿Confirmas?",
       "next": "confirmar-botones"
@@ -66,18 +66,18 @@
     },
     "confirmado": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:18",
       "text": "✅ ¡Pedido confirmado! #SGZ-2026-0388\nTe avisamos cuando esté preparado.",
       "next": "confirmado-fin"
     },
     "confirmado-fin": {
       "kind": "end",
-      "note": "El acuerdo con el humano queda registrado como pedido normal — el bot no parafrasea a Fali, lo estructura"
+      "note": "El acuerdo con el humano queda registrado como pedido normal — el bot no parafrasea a Antonio, lo estructura"
     },
     "modificar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "09:18",
       "text": "Dime qué cambio: cantidad, producto o el día de recogida.",
       "next": "modificar-fin"

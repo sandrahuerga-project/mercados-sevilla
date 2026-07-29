@@ -118,10 +118,10 @@ export default function App() {
               <div className="space-y-2 border-r border-slate-800/60 pr-4">
                 <div className="flex items-center space-x-2 text-mercado-green font-serif font-bold text-base">
                   <span className="text-xl">🐟</span>
-                  <span>El Modelo Pescadería Fali</span>
+                  <span>El Modelo Pescadería Antonio</span>
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Fali (Mercado San Gonzalo, Triana) demostró que el canal conversacional gana al ecommerce tradicional: sube un vídeo del mostrador a las 9 AM, recibe audios desestructurados y entrega a domicilio o recogida cobrando en mano. Una tasa de conversión alta por cercanía y confianza.
+                  Antonio (Mercado San Gonzalo, Triana) demostró que el canal conversacional gana al ecommerce tradicional: sube un vídeo del mostrador a las 9 AM, recibe audios desestructurados y entrega a domicilio o recogida cobrando en mano. Una tasa de conversión alta por cercanía y confianza.
                 </p>
               </div>
 

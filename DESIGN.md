@@ -220,7 +220,7 @@ llegó antes de dejar el pedido en taquilla.
   ✗  "Lamentablemente, el producto seleccionado no está
       disponible en este momento."
 
-  ✓  "¡Listo! Fali lo tiene preparado."
+  ✓  "¡Listo! Antonio lo tiene preparado."
   ✗  "Tu pedido ha sido procesado exitosamente."
 
 ──────────────────────────────────────────────────────────────
@@ -365,7 +365,7 @@ CONFIRMACIÓN DE PEDIDO  (texto libre con *bold*, sin card)
 
 📍 Recogida en puesto, mañana 10:00-14:00
 💳 Pago al entregar"
-[Confirmar]  [Modificar]  [Hablar c/Fali]
+[Confirmar]  [Modificar]  [Hablar c/Antonio]
 
 CONFIRMACIÓN FINAL  (texto libre)
 ─────────────────────────────────────────────────────
@@ -383,11 +383,11 @@ ERROR NLU BAJO  (texto libre, sin emoji)
 ─────────────────────────────────────
 "No he entendido bien.
  ¿Puedes escribirlo de otra forma o mandarme un audio?"
-[Reintentar]  [Hablar con Fali]
+[Reintentar]  [Hablar con Antonio]
 
 ERROR PRODUCTO NO EXISTE  (texto libre)
 ─────────────────────────────────────
-"En Pescadería Fali no veo [producto].
+"En Pescadería Antonio no veo [producto].
  ¿Quieres ver lo que sí tiene hoy?"
 [Ver del día]  [Cambiar puesto]
 
@@ -398,7 +398,7 @@ Sin botones. Reintenta automáticamente a los 10s.
 
 ERROR FUERA DE VENTANA DE PEDIDOS
 ─────────────────────────────────────
-"Los pedidos en Fali cerraron a las 12:30.
+"Los pedidos en Antonio cerraron a las 12:30.
  Mañana a las 9:00 abrimos otra vez."
 [Avísame mañana]  [Otro puesto abierto]
 ```
@@ -420,7 +420,7 @@ ESPERA EXPLÍCITA (>5s, refuerzo opcional)
 
 ESPERA RESPUESTA HUMANO  (texto libre, sistema)
 ─────────────────────────────────────
-"Fali responde habitualmente en menos de 10 min.
+"Antonio responde habitualmente en menos de 10 min.
  Te aviso cuando conteste."
 ```
 
@@ -509,11 +509,11 @@ BOT acusa recibo:
 ### 8.4 Hablar con una Persona (Escalado humano)
 
 ```
-DISPARO 1 (manual): Usuario toca "Hablar con Fali"
+DISPARO 1 (manual): Usuario toca "Hablar con Antonio"
 DISPARO 2 (automático): NLU baja confianza 3 veces seguidas
 DISPARO 3 (palabra clave): "persona", "humano", "alguien real"
 
-"Te paso con Fali directamente.
+"Te paso con Antonio directamente.
  Habitualmente responde en menos de 10 min."
 
 Las siguientes respuestas llegan desde el mismo número de
@@ -523,8 +523,8 @@ teléfono conectado a la cuenta). Sin Reply Buttons automáticos
 mientras dura el handover.
 
 RETORNO AL BOT:
-Cuando Fali resuelve:
-"Conversación con Fali cerrada.
+Cuando Antonio resuelve:
+"Conversación con Antonio cerrada.
  Vuelves al asistente automático."
 ```
 
@@ -630,7 +630,7 @@ Resumen de los estados definidos en el PRD §9 y su mensaje real.
 
   nuevo          — (visible solo para placero, panel §4)
 
-  aceptado       "✓ Fali ha aceptado tu pedido y está
+  aceptado       "✓ Antonio ha aceptado tu pedido y está
                   preparándolo."
 
   preparando     — (cambio interno, sin mensaje al cliente)
@@ -655,7 +655,7 @@ Resumen de los estados definidos en el PRD §9 y su mensaje real.
 
   cancelado      "Pedido cancelado."
 
-  incidencia     "Fali necesita hablar contigo."
+  incidencia     "Antonio necesita hablar contigo."
                  → escalado humano (§8.4)
 
 ──────────────────────────────────────────────────────────────
@@ -698,12 +698,12 @@ HORARIO PEDIDOS: definido por puesto (típico 9:00-12:30)
 HORARIO ESCALADO HUMANO: solo dentro del horario del puesto
 
 MENSAJE FUERA DE HORARIO DE PEDIDOS:
-"Los pedidos de Fali están cerrados hasta mañana 9:00.
+"Los pedidos de Antonio están cerrados hasta mañana 9:00.
  ¿Quieres que te avise cuando abra?"
 [Avísame]  [Otro puesto abierto]  [Cancelar]
 
 MENSAJE FUERA DE HORARIO ESCALADO:
-"Fali no está atendiendo ahora.
+"Antonio no está atendiendo ahora.
  ¿Te dejo un aviso para que te conteste mañana?"
 [Sí, mañana]  [Vuelvo más tarde]
 ```
@@ -716,7 +716,7 @@ MENSAJE FUERA DE HORARIO ESCALADO:
 DISPARO: >50 conversaciones concurrentes en un puesto.
 
 MENSAJE:
-"Hoy hay mucha demanda en Fali.
+"Hoy hay mucha demanda en Antonio.
  Tu pedido sigue activo, pero la confirmación
  puede tardar 10-15 min más de lo normal.
  ¿Esperas o lo dejamos para mañana?"
@@ -748,11 +748,11 @@ Si "Quitar":
 DISPARO: estado "listo" + 60 min sin recoger.
 
 AVISO 1 (60 min):
-"Tu pedido sigue esperándote en Fali.
+"Tu pedido sigue esperándote en Antonio.
  El puesto cierra a las 14:00."
 
 AVISO 2 (cierre - 15 min):
-"⏰ Fali cierra en 15 min. Pasa o se guarda
+"⏰ Antonio cierra en 15 min. Pasa o se guarda
  para mañana (puede afectar al pescado)."
 [Voy ahora]  [No puedo, mañana]  [Cancelar]
 ```
@@ -794,18 +794,18 @@ Casos límite que el flujo principal no cubre. Cada uno con su respuesta predefi
                                     [Confirmar]  [Descartar]
 
   Pedido duplicado (mismo usuario,  "Veo que ya pediste hoy
-   mismo puesto, <1 hora)            en Fali.
+   mismo puesto, <1 hora)            en Antonio.
                                      ¿Es otro pedido distinto
                                      o el mismo de antes?"
 
   Cliente en lista negra            [Bot no responde.
    (2 incidencias previas)           Mensaje único:]
-                                    "Para pedir en Fali tienes
+                                    "Para pedir en Antonio tienes
                                      que contactar directamente
                                      con el puesto."
 
   Mercado cerrado por fiesta        Override manual del placero.
-                                    Mensaje: "Hoy Fali está
+                                    Mensaje: "Hoy Antonio está
                                      cerrado por [motivo].
                                      Volvemos [fecha]."
 
@@ -820,7 +820,7 @@ Flujo ideal sin desvíos, para validación rápida con el equipo. Etiquetas entr
 
 ```
 1. Carmen recibe broadcast 9:02                 [plantilla marketing]
-   → ve vídeo de Fali + texto
+   → ve vídeo de Antonio + texto
 
 2. Toca [Pedir]                                 [Reply Button]
 
@@ -833,7 +833,7 @@ Flujo ideal sin desvíos, para validación rápida con el equipo. Etiquetas entr
                                                   no controlable]
 
 6. Bot devuelve resumen en texto + *bold*       [texto libre]
-   + [Confirmar] [Modificar] [Hablar Fali]      [Reply Buttons]
+   + [Confirmar] [Modificar] [Hablar Antonio]      [Reply Buttons]
 
 7. Carmen toca [Confirmar]
 
@@ -850,7 +850,7 @@ Flujo ideal sin desvíos, para validación rápida con el equipo. Etiquetas entr
     → toca [Aceptar]
 
 12. Bot envía a Carmen:                         [texto libre]
-    "✓ Fali ha aceptado tu pedido"
+    "✓ Antonio ha aceptado tu pedido"
 
 13. Placero marca [Listo] → teclea total final  [panel web, §4]
     (post-pesaje)

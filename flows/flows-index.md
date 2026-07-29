@@ -70,7 +70,7 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 ```
 
 **Leyenda prioridad**:
-- P1 = MVP curso Lovable + base Fali. Imprescindible.
+- P1 = MVP curso Lovable + base Antonio. Imprescindible.
 - P2 = MVP producción. Sin esto el bot no es viable.
 - P3 = Fase 2. Mejoras operativas y de escala.
 
@@ -98,14 +98,14 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 - **Componente WA**: texto + Reply Buttons (3 máx, aquí 2).
 - **Edge cases**: mercado fav cerrado hoy, usuario quiere otro mercado.
 
-### C03 — Pedido desde broadcast diario *(núcleo Fali)*
+### C03 — Pedido desde broadcast diario *(núcleo Antonio)*
 
 - **Trigger**: usuario recibe broadcast 9:00, toca `[Pedir]`.
 - **Objetivo**: cerrar pedido en ≤4 min.
 - **Pasos**:
   1. Bot: *"¿Qué quieres hoy?"*
   2. Usuario escribe en lenguaje natural (texto. Audio opcional).
-  3. Bot procesa NLU → devuelve resumen estructurado + `[Confirmar]` `[Modificar]` `[Hablar c/Fali]`.
+  3. Bot procesa NLU → devuelve resumen estructurado + `[Confirmar]` `[Modificar]` `[Hablar c/Antonio]`.
   4. Usuario confirma → bot ofrece fulfillment (List message con ≤3 opciones).
   5. Si recogida/domicilio → pago al entregar (sin pasarela).
   6. Si taquilla → CTA URL Bizum.
@@ -146,7 +146,7 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 
 - **Trigger**: placero marca producto agotado durante preparación.
 - **Objetivo**: pregunta al cliente qué hacer.
-- **Mensaje**: *"⚠️ Fali no tiene gambas blancas hoy. ¿Te valen langostinos cocidos (8€/kg)?"* `[Sí, cambio]` `[No, quítalo]` `[Cancelar]`
+- **Mensaje**: *"⚠️ Antonio no tiene gambas blancas hoy. ¿Te valen langostinos cocidos (8€/kg)?"* `[Sí, cambio]` `[No, quítalo]` `[Cancelar]`
 - **Componente**: texto + Reply Buttons.
 - **Default RGPD**: NO sustituir sin consentimiento explícito.
 
@@ -162,13 +162,13 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 - **Trigger**: cliente toca `[Cancelar]` desde tracking o desde confirmación.
 - **Objetivo**: cancelar sin fricción si pre-aceptado; pedir confirmación si post-aceptado.
 - **Mensaje pre-aceptado**: *"Pedido cancelado. ¿Algo más?"*
-- **Mensaje post-aceptado**: *"Fali ya está preparándolo. ¿Confirmas cancelar?"* `[Sí, cancelar]` `[No, lo recojo]`
+- **Mensaje post-aceptado**: *"Antonio ya está preparándolo. ¿Confirmas cancelar?"* `[Sí, cancelar]` `[No, lo recojo]`
 
 ### C11 — Hablar con persona (escalado)
 
-- **Trigger**: cliente toca `[Hablar c/Fali]` en cualquier punto.
+- **Trigger**: cliente toca `[Hablar c/Antonio]` en cualquier punto.
 - **Objetivo**: bidireccional. El bot se aparta, el placero responde desde panel Glide/Softr.
-- **Componente**: handoff vía API a panel humano. Mensaje al cliente: *"Te paso con Fali. Suele responder en 5-10 min."*
+- **Componente**: handoff vía API a panel humano. Mensaje al cliente: *"Te paso con Antonio. Suele responder en 5-10 min."*
 - **Horario**: solo dentro de horario del puesto. Fuera → S01.
 - **Riesgo MVP**: el placero debe tener panel abierto. Si no, cae a "te llama después".
 
@@ -203,21 +203,21 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 ### S01 — Fuera de horario
 
 - **Trigger**: usuario intenta pedir fuera del horario del puesto.
-- **Mensaje**: *"Los pedidos de Fali están cerrados hasta mañana 9:00. ¿Te aviso cuando abra?"* `[Avísame]` `[Otro puesto abierto]` `[Cancelar]`
+- **Mensaje**: *"Los pedidos de Antonio están cerrados hasta mañana 9:00. ¿Te aviso cuando abra?"* `[Avísame]` `[Otro puesto abierto]` `[Cancelar]`
 - **Componente**: texto + Reply Buttons.
 
 ### S02 — Cliente no recoge
 
 - **Trigger**: estado "listo" + 60 min sin recoger (cron).
 - **Objetivo**: 2 avisos progresivos antes del cierre del puesto.
-- **Aviso 1 (60 min listo)**: *"Tu pedido sigue esperándote. Fali cierra a las 14:00."*
-- **Aviso 2 (cierre -15 min)**: *"⏰ Fali cierra en 15 min."* `[Voy ahora]` `[No puedo, mañana]` `[Cancelar]`
+- **Aviso 1 (60 min listo)**: *"Tu pedido sigue esperándote. Antonio cierra a las 14:00."*
+- **Aviso 2 (cierre -15 min)**: *"⏰ Antonio cierra en 15 min."* `[Voy ahora]` `[No puedo, mañana]` `[Cancelar]`
 - **Componente**: plantillas utility (fuera ventana 24h).
 
 ### S03 — Cliente en lista negra
 
 - **Trigger**: 2 incidencias previas no resueltas (PRD §13).
-- **Mensaje único**: *"Para pedir en Fali tienes que contactar directamente con el puesto."*
+- **Mensaje único**: *"Para pedir en Antonio tienes que contactar directamente con el puesto."*
 - **Componente**: respuesta automática única, sin entrar al flujo normal.
 
 ---
@@ -310,7 +310,7 @@ USUARIO                        BOT                          SISTEMA
 **Body**:  
 > Hola {{nombre}} 👋 ¿En qué te ayudo?
 
-**Buttons**: `[Pedir]` `[Repetir]` `[Hablar c/Fali]`
+**Buttons**: `[Pedir]` `[Repetir]` `[Hablar c/Antonio]`
 
 ### Turno 2 — Bot (si usuario toca [Pedir])
 ...

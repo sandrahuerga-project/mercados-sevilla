@@ -3,7 +3,7 @@
   "label": "C08 Sustitución",
   "description": "Placero marca agotado desde su panel → el cliente decide — DESIGN.md §11.4",
   "phone": {
-    "title": "Pescadería Fali",
+    "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
     "avatarIcon": "ph ph-fish",
     "avatarBg": "bg-sevilla-tile"
@@ -19,9 +19,9 @@
     },
     "alerta": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:40",
-      "text": "⚠️ Las acedías se han agotado.\n¿Quieres que Fali las sustituya por lenguado pequeño al mismo precio?",
+      "text": "⚠️ Las acedías se han agotado.\n¿Quieres que Antonio las sustituya por lenguado pequeño al mismo precio?",
       "warning": true,
       "next": "alerta-botones"
     },
@@ -36,15 +36,15 @@
     },
     "aceptada": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:41",
-      "text": "Hecho: lenguado pequeño en lugar de acedías, mismo precio.\nFali sigue preparando tu pedido.",
+      "text": "Hecho: lenguado pequeño en lugar de acedías, mismo precio.\nAntonio sigue preparando tu pedido.",
       "next": "aceptada-fin"
     },
     "aceptada-fin": { "kind": "end", "note": "La alternativa la propone el placero; el bot solo la transmite. Sin sustituir nada sin consentimiento (RGPD + principio rector)" },
     "quitar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:41",
       "text": "De acuerdo. Tu pedido queda:\n\n• ½ kg boquerones frescos — *1,75 €*\n\n¿Confirmas así?",
       "next": "quitar-botones"
@@ -60,7 +60,7 @@
     "quitar-fin": { "kind": "end", "note": "Pedido ajustado — sigue en C07 Tracking con el nuevo total" },
     "cancelar": {
       "kind": "bot",
-      "puesto": "Pescadería Fali",
+      "puesto": "Pescadería Antonio",
       "timestamp": "10:42",
       "text": "Pedido cancelado.\nCuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "cancelar-fin"
