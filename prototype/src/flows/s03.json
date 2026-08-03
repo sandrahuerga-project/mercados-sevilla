@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -27,12 +27,23 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "10:00",
-      "text": "Para pedir en Antonio tienes que contactar directamente con el puesto.",
+      "text": "Para pedir en Pescadería Antonio tienes que hablar directamente con el puesto.",
+      "next": "bloqueo-botones"
+    },
+    "bloqueo-botones": {
+      "kind": "buttons",
+      "timestamp": "10:00",
+      "buttons": [{ "label": "Hablar con Antonio", "next": "escalado" }]
+    },
+    "escalado": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Te paso con Antonio. Es él quien decide si vuelve a aceptarte pedidos por aquí.",
       "next": "fin"
     },
     "fin": {
       "kind": "end",
-      "note": "Mensaje único, sin botones, sin entrar al flujo. El placero decide si readmite — el bot no juzga, solo protege la operación"
+      "note": "Sin flujo de pedido: la única salida es hablar con el placero. El bot no juzga ni readmite, solo protege la operación y abre la puerta a arreglarlo (C11)"
     }
   }
 }

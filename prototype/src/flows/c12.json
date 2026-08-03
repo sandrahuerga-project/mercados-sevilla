@@ -1,0 +1,76 @@
+{
+  "id": "C12",
+  "label": "C12 Cancelar con el pedido en marcha",
+  "description": "Una vez que el placero lo está preparando ya no se cancela: se ofrece recogerlo mañana o dejarlo en taquilla — PRD §10.5",
+  "phone": {
+    "title": "Pescadería Antonio",
+    "subtitle": "Mercado San Gonzalo • En línea",
+    "persona": "pescaderia",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0387 · PREPARANDO", "next": "contexto" },
+    "contexto": {
+      "kind": "system",
+      "tone": "default",
+      "text": "Antonio ya ha aceptado el pedido y lo está preparando",
+      "next": "pide"
+    },
+    "pide": {
+      "kind": "user",
+      "timestamp": "10:20",
+      "text": "Me ha surgido algo, cancela el pedido",
+      "next": "no-se-puede"
+    },
+    "no-se-puede": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:20",
+      "text": "Antonio ya lo está preparando, así que este pedido ya no se puede cancelar.\n\nPero no hace falta que vengas hoy:",
+      "warning": true,
+      "next": "opciones"
+    },
+    "opciones": {
+      "kind": "buttons",
+      "timestamp": "10:20",
+      "buttons": [
+        { "label": "Recojo mañana", "next": "manana" },
+        { "label": "Déjalo en taquilla", "next": "taquilla" },
+        { "label": "Hablar con Antonio", "next": "escalado" }
+      ]
+    },
+    "manana": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:21",
+      "text": "Antonio te lo guarda hasta mañana a las 14:00.\nEs pescado fresco y estará en el frigorífico.",
+      "next": "manana-fin"
+    },
+    "manana-fin": {
+      "kind": "end",
+      "note": "No cuenta como incidencia: hay acuerdo por las dos partes. Si mañana tampoco se recoge, se entra en S02"
+    },
+    "taquilla": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:21",
+      "text": "Te mando el enlace de Bizum. En cuanto lo pagues, Antonio lo deja en la taquilla refrigerada.\n\nLo recoges hoy hasta las 20:00, aunque el puesto haya cerrado.",
+      "next": "taquilla-fin"
+    },
+    "taquilla-fin": {
+      "kind": "end",
+      "note": "La taquilla se paga por adelantado (CTA URL de Bizum, wa-constraints §6.2). Es la salida cuando el cliente no puede pasar en horario"
+    },
+    "escalado": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Te paso con Antonio directamente. Habitualmente responde en menos de 10 min.",
+      "next": "escalado-fin"
+    },
+    "escalado-fin": {
+      "kind": "end",
+      "note": "Quien decide si se anula un pedido ya preparado es el placero, no el bot. Continúa en C11"
+    }
+  }
+}

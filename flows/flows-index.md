@@ -7,12 +7,30 @@
 
 ## 0. Resumen ejecutivo
 
-**Total flujos identificados: 18**
+**Total flujos identificados: 23**
 
 - 6 flujos de cliente (compra)
-- 5 flujos de cliente (postventa / soporte)
+- 6 flujos de cliente (postventa / soporte)
 - 4 flujos de placero (operación)
-- 3 flujos de sistema / institucional
+- 7 flujos de sistema / institucional
+
+**Horarios (única fuente de verdad para todo el copy)**
+
+| Qué | Cuándo |
+| --- | --- |
+| Pedidos y recogida en el puesto | hasta las 14:00 |
+| Reparto a domicilio | de 10:00 a 14:00 |
+| Taquilla refrigerada | hasta las 20:00 |
+
+> v1.1 — S04 a S07 salieron de los edge cases que estaban sueltos dentro de C01,
+> C03 y P02. Al prototiparlos se vio que no eran ramas menores: tienen decisión
+> propia y consecuencias distintas, así que pasan a flujo con su propia ficha.
+> Los 23 están implementados en `prototype/src/flows/`.
+>
+> v1.2 — C10 se parte en dos: C10 cancela lo que aún no ha tocado nadie y C12
+> aparece cuando el placero ya está preparando el pedido y cancelar dejaría
+> género tirado. Eran dos reglas de negocio distintas metidas en un selector de
+> escenario.
 
 **Para MVP curso Lovable (prototipo navegable)**: 5 flujos prioritarios (P1).  
 **Para bot real producción**: los 18.
@@ -43,8 +61,9 @@ C06   Repetir pedido anterior              P2     Baja
 C07   Tracking de pedido (estados)         P1     Baja
 C08   Sustitución de producto agotado      P2     Media
 C09   Modificación de pedido               P3     Media
-C10   Cancelación                          P2     Baja
+C10   Cancelar antes de aceptar            P2     Baja
 C11   Hablar con persona (escalado)        P1     Alta
+C12   Cancelar con el pedido en marcha     P2     Media
 ─────────────────────────────────────────────────────────────────
 ```
 
@@ -66,6 +85,10 @@ P04   Cierre del día / liquidación         P3     Baja
 S01   Fuera de horario                     P2     Baja
 S02   Cliente no recoge / no responde      P2     Media
 S03   Lista negra / cliente bloqueado      P3     Baja
+S04   NLU no entiende el pedido            P1     Media
+S05   Alta abandonada a mitad              P2     Baja
+S06   Código postal fuera de zona          P2     Baja
+S07   El placero no sube el vídeo          P1     Media
 ─────────────────────────────────────────────────────────────────
 ```
 
@@ -94,7 +117,7 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 
 - **Trigger**: usuario con `mercado_fav` ya guardado escribe al bot.
 - **Objetivo**: 1 mensaje, 2 reply buttons. Cero fricción.
-- **Mensaje**: *"Hola Carmen 👋 ¿Compras hoy en San Gonzalo?"* `[Sí, ver hoy]` `[Cambiar mercado]`
+- **Mensaje**: *"Hola Carmen 👋 ¿Quieres ver lo que hay hoy en San Gonzalo?"* `[Sí, ver hoy]` `[Cambiar mercado]`
 - **Componente WA**: texto + Reply Buttons (3 máx, aquí 2).
 - **Edge cases**: mercado fav cerrado hoy, usuario quiere otro mercado.
 
@@ -105,7 +128,7 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 - **Pasos**:
   1. Bot: *"¿Qué quieres hoy?"*
   2. Usuario escribe en lenguaje natural (texto. Audio opcional).
-  3. Bot procesa NLU → devuelve resumen estructurado + `[Confirmar]` `[Modificar]` `[Hablar c/Antonio]`.
+  3. Bot procesa NLU → devuelve resumen estructurado + `[Confirmar]` `[Modificar]` `[Hablar con alguien]`.
   4. Usuario confirma → bot ofrece fulfillment (List message con ≤3 opciones).
   5. Si recogida/domicilio → pago al entregar (sin pasarela).
   6. Si taquilla → CTA URL Bizum.
@@ -146,7 +169,7 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 
 - **Trigger**: placero marca producto agotado durante preparación.
 - **Objetivo**: pregunta al cliente qué hacer.
-- **Mensaje**: *"⚠️ Antonio no tiene gambas blancas hoy. ¿Te valen langostinos cocidos (8€/kg)?"* `[Sí, cambio]` `[No, quítalo]` `[Cancelar]`
+- **Mensaje**: *"⚠️ Antonio no tiene gambas blancas hoy. ¿Te valen langostinos cocidos (8€/kg)?"* `[Aceptar]` `[Quitar del pedido]` `[Cancelar pedido]`
 - **Componente**: texto + Reply Buttons.
 - **Default RGPD**: NO sustituir sin consentimiento explícito.
 
@@ -157,16 +180,24 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 - **Componente**: texto libre + Reply Buttons. Si el pedido ya está "aceptado" por placero, escala a C11.
 - **Regla negocio (PRD §10.5)**: cancelación/modificación libre solo hasta estado "aceptado".
 
-### C10 — Cancelación
+### C10 — Cancelar antes de aceptar
 
-- **Trigger**: cliente toca `[Cancelar]` desde tracking o desde confirmación.
-- **Objetivo**: cancelar sin fricción si pre-aceptado; pedir confirmación si post-aceptado.
-- **Mensaje pre-aceptado**: *"Pedido cancelado. ¿Algo más?"*
-- **Mensaje post-aceptado**: *"Antonio ya está preparándolo. ¿Confirmas cancelar?"* `[Sí, cancelar]` `[No, lo recojo]`
+- **Trigger**: cliente pide cancelar mientras el pedido sigue en estado "pendiente".
+- **Objetivo**: anular sin coste, pero nunca de un solo toque: siempre media una confirmación.
+- **Mensaje**: *"Antonio todavía no ha visto tu pedido, así que puedo anularlo sin más. ¿Cancelo el #SGZ-2026-0387?"* `[Sí, cancélalo]` `[No, sigo con él]`
+- **Sin incidencia**: nadie ha trabajado todavía en ese pedido.
+
+### C12 — Cancelar con el pedido en marcha
+
+- **Trigger**: cliente pide cancelar cuando el placero ya aceptó y está preparando.
+- **Objetivo**: el pedido ya no se cancela. Se ofrecen las dos salidas que no tiran género.
+- **Mensaje**: *"Antonio ya lo está preparando, así que este pedido ya no se puede cancelar."* `[Recojo mañana]` `[Déjalo en taquilla]` `[Hablar con Antonio]`
+- **Regla**: quien puede anular un pedido ya preparado es el placero, no el bot. Por eso la tercera salida es C11.
+- **Si mañana tampoco se recoge** → S02, con su incidencia.
 
 ### C11 — Hablar con persona (escalado)
 
-- **Trigger**: cliente toca `[Hablar c/Antonio]` en cualquier punto.
+- **Trigger**: cliente toca `[Hablar con {nombre}]` en cualquier punto. El botón se compone con el nombre del placero que hay en la ficha del puesto (`Hablar con Antonio`); si el nombre no cabe en los 20 caracteres de WhatsApp, cae a `Hablar con el puesto`.
 - **Objetivo**: bidireccional. El bot se aparta, el placero responde desde panel Glide/Softr.
 - **Componente**: handoff vía API a panel humano. Mensaje al cliente: *"Te paso con Antonio. Suele responder en 5-10 min."*
 - **Horario**: solo dentro de horario del puesto. Fuera → S01.
@@ -180,10 +211,10 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 
 ### P02 — Subida de vídeo diario
 
-- **Trigger**: placero a las 8:00 AM, manda vídeo del mostrador al bot administrador.
+- **Trigger**: placero a las 8:30 AM, manda vídeo del mostrador al bot administrador.
 - **Objetivo**: bot recibe vídeo, lo asocia a puesto, dispara broadcast a suscriptores.
 - **Componente**: mensaje media entrante + (opcional) Reply Buttons para confirmar productos del día.
-- **Edge cases**: vídeo >16MB (comprimir o pedir reenvío), placero olvida (recordatorio 8:30), placero envía pero el broadcast falla (logging).
+- **Edge cases**: vídeo >16MB (comprimir o pedir reenvío), placero olvida (recordatorio 8:40), placero envía pero el broadcast falla (logging).
 
 ### P03 — Gestión de pedido entrante
 
@@ -203,7 +234,10 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 ### S01 — Fuera de horario
 
 - **Trigger**: usuario intenta pedir fuera del horario del puesto.
-- **Mensaje**: *"Los pedidos de Antonio están cerrados hasta mañana 9:00. ¿Te aviso cuando abra?"* `[Avísame]` `[Otro puesto abierto]` `[Cancelar]`
+- **Objetivo**: el pedido se coge igual, pero queda pendiente de que el placero lo acepte al abrir.
+- **Mensaje**: *"Antonio ya ha cerrado por hoy. Puedo apuntarte el pedido y él lo confirma mañana a las 9:00, cuando abra."* `[Apúntamelo]` `[Otro puesto abierto]` `[Ahora no]`
+- **Regla**: el bot apunta, no compromete. Nada de dar por cerrado un pedido que el placero no ha visto (principio rector). La confirmación sale por P03 y llega como plantilla utility.
+- **Nada de `[Cancelar]`**: aquí no hay ningún pedido que cancelar, solo una intención.
 - **Componente**: texto + Reply Buttons.
 
 ### S02 — Cliente no recoge
@@ -211,14 +245,46 @@ S03   Lista negra / cliente bloqueado      P3     Baja
 - **Trigger**: estado "listo" + 60 min sin recoger (cron).
 - **Objetivo**: 2 avisos progresivos antes del cierre del puesto.
 - **Aviso 1 (60 min listo)**: *"Tu pedido sigue esperándote. Antonio cierra a las 14:00."*
-- **Aviso 2 (cierre -15 min)**: *"⏰ Antonio cierra en 15 min."* `[Voy ahora]` `[No puedo, mañana]` `[Cancelar]`
+- **Llamada del placero (cierre -15 min)**: antes del último aviso, Antonio llama por teléfono y anota lo que pase en su panel (P04). El bot no sustituye esa llamada.
+- **Aviso 2 (cierre -15 min)**: *"⏰ Antonio cierra en 15 min."* `[Voy ahora]` `[Guárdalo para mañana]` `[Cancélalo]`
+- **Redacción única**: la misma situación se llama igual en C07, S02 y P04 — «guardar para mañana», nunca «no puedo, mañana».
 - **Componente**: plantillas utility (fuera ventana 24h).
 
 ### S03 — Cliente en lista negra
 
 - **Trigger**: 2 incidencias previas no resueltas (PRD §13).
-- **Mensaje único**: *"Para pedir en Antonio tienes que contactar directamente con el puesto."*
+- **Mensaje único**: *"Para pedir en Pescadería Antonio tienes que contactar directamente con el puesto."*
 - **Componente**: respuesta automática única, sin entrar al flujo normal.
+
+### S04 — El bot no entiende el pedido
+
+- **Trigger**: el audio o el texto no permiten extraer producto y cantidad con confianza suficiente.
+- **Objetivo**: no apuntar nunca un pedido inventado. Reintentar una vez y, si sigue sin entenderse, dar salida.
+- **Regla**: se pide lo que falta, no todo otra vez. Si se entendió el producto pero no la cantidad, solo se pregunta la cantidad.
+- **Salidas**: `[Te lo escribo]` `[Hablar con alguien]` `[Lo de siempre]`.
+- **Detalle**: al escalar a C11 el audio original viaja con el traspaso. El cliente no repite nada.
+
+### S05 — Alta abandonada a mitad
+
+- **Trigger**: el usuario cierra el WhatsApp Flow de C01 sin llegar al final.
+- **Objetivo**: conservar lo ya introducido y retomar en la pantalla donde se salió, no desde cero.
+- **Frecuencia de recordatorio**: **uno solo**, al día siguiente. Insistir es lo que hace que la gente bloquee el número.
+- **RGPD**: un alta a medias también son datos personales. `[Borrar mis datos]` está en el mismo mensaje.
+
+### S06 — Código postal fuera de zona
+
+- **Trigger**: el CP introducido en C01 no está en zona de reparto.
+- **Objetivo**: que quedarse fuera del reparto no signifique quedarse fuera de la plataforma.
+- **Salidas**: los dos o tres mercados que sí tiene cerca, para darse de alta y recoger. Sin taquilla ni promesa de avisar cuando el reparto llegue a su zona: no se promete lo que no hay fecha de dar.
+- **Producto**: los CP que quedan fuera se guardan. Es el dato que dice dónde abrir reparto después.
+
+### S07 — El placero no sube el vídeo
+
+- **Trigger**: son las 9:00 y no ha llegado vídeo del puesto (cron, tras recordatorio a las 8:40).
+- **Objetivo**: no mandar difusión sin género verificado.
+- **Regla dura**: no se reutiliza el vídeo de ayer. El vídeo vale porque es de hoy.
+- **Estado del puesto**: *abierto, sin novedades del día*. Se puede pedir, pero no hay difusión.
+- **Escalado**: tres días seguidos sin vídeo, aviso al gestor del mercado.
 
 ---
 
@@ -233,7 +299,14 @@ P03 → C07         (acciones placero disparan notificaciones cliente)
 P03 → C08         (placero marca agotado → cliente decide)
 C03 ↔ C11         (escalado humano puede salir en cualquier punto)
 C07 → C10/S02     (tracking puede llevar a cancelación o no-recogida)
+C10 → C12         (si el placero ya aceptó, la cancelación deja de ser libre)
 P02 → C03         (vídeo diario abre la ventana de pedidos)
+C01 → S05/S06     (el alta se puede abandonar o caer fuera de zona)
+C03 → S04         (si no se entiende el pedido, se pregunta o se escala)
+S04 → C11/C06     (salidas del malentendido: persona o «lo de siempre»)
+P02 → S07         (sin vídeo no hay difusión)
+S07 → S01         (si además no abre, los clientes caen en fuera de horario)
+S02 → S03         (segunda incidencia sin resolver y el cliente queda bloqueado)
 ```
 
 ---
@@ -249,7 +322,7 @@ Detallar en `/docs/flows/`:
 5. `05-escalado-humano.md` (C11)
 
 ### Sprint 3 — Flujos P2 (8 flujos)
-C04, C05, C06, C08, C10, P02, P03, S01
+C04, C05, C06, C08, C10, C12, P02, P03, S01
 
 ### Sprint 4 — Flujos P3 (5 flujos)
 C09, P01, P04, S02, S03
@@ -260,12 +333,12 @@ C09, P01, P04, S02, S03
 
 | Tema | Decisión necesaria antes de | Tu input |
 |---|---|---|
-| Reparto a domicilio en MVP curso: ¿incluir o solo recogida? | C03 | ? |
-| Taquilla refrigerada: ¿hay en San Gonzalo? | C03 | ? |
+| Reparto a domicilio en MVP curso: ¿incluir o solo recogida? | C03 | Incluir reparto |
+| Taquilla refrigerada: ¿hay en San Gonzalo? | C03 | Sí, hay |
 | Idioma único castellano o multi | C01 | castellano |
-| NLU LLM en MVP curso o solo botones | C03 | ? |
-| Mínimo 15€ domicilio: ¿incluir en prototipo? | C03 | ? |
-| Onboarding asistido por familiar para mayores: ¿flujo aparte? | C01 | ? |
+| NLU LLM en MVP curso o solo botones | C03 | Todo lo que se pueda hacer con botones mejor |
+| Mínimo 15€ domicilio: ¿incluir en prototipo? | C03 | Sí |
+| Onboarding asistido por familiar para mayores: ¿flujo aparte? | C01 | No |
 
 ---
 
@@ -310,7 +383,7 @@ USUARIO                        BOT                          SISTEMA
 **Body**:  
 > Hola {{nombre}} 👋 ¿En qué te ayudo?
 
-**Buttons**: `[Pedir]` `[Repetir]` `[Hablar c/Antonio]`
+**Buttons**: `[Pedir]` `[Repetir]` `[Hablar con Antonio]`
 
 ### Turno 2 — Bot (si usuario toca [Pedir])
 ...

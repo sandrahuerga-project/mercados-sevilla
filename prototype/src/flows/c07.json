@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -38,7 +38,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "11:41",
-      "text": "Avisado. Antonio te lo tiene preparado en el mostrador.",
+      "text": "Avisado. Antonio te lo tiene preparado en el frigorífico.",
       "next": "entregado"
     },
     "mapa": {
@@ -51,14 +51,14 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "12:30",
-      "text": "📦 Pedido entregado. ¡Que aproveche!\n¿Volvemos la próxima semana?",
+      "text": "📦 Pedido entregado. ¡Que aproveche!\n¿Te lo guardo como «lo de siempre»? Así lo repites en un toque.",
       "next": "entregado-botones"
     },
     "entregado-botones": {
       "kind": "buttons",
       "timestamp": "12:30",
       "buttons": [
-        { "label": "Sí, avísame", "next": "repetir-si" },
+        { "label": "Sí, guárdalo", "next": "repetir-si" },
         { "label": "No, gracias", "next": "repetir-no" }
       ]
     },
@@ -66,7 +66,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "12:31",
-      "text": "Hecho. Te aviso la próxima semana con el vídeo del día.",
+      "text": "Guardado. La próxima vez escríbeme «lo de siempre» y te lo preparo igual.",
       "next": "fin-ok"
     },
     "repetir-no": {
@@ -90,8 +90,8 @@
       "timestamp": "13:45",
       "buttons": [
         { "label": "Voy ahora", "next": "voy" },
-        { "label": "No puedo, mañana", "next": "s02-manana" },
-        { "label": "Cancelar", "next": "s02-cancelar" }
+        { "label": "Guárdalo para mañana", "next": "s02-manana" },
+        { "label": "Cancelar pedido", "next": "s02-cancelar" }
       ]
     },
     "s02-manana": {

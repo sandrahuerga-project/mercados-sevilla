@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -30,23 +30,43 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:06",
-      "text": "¿Qué cantidad de boquerones quieres?",
+      "text": "¿Qué cantidad de boquerones quieres? Si es otra, escríbemela.",
       "next": "cantidad-botones"
     },
     "cantidad-botones": {
       "kind": "buttons",
       "timestamp": "09:06",
       "buttons": [
-        { "label": "¼ kg", "next": "ajustado" },
         { "label": "1 kg", "next": "ajustado" },
-        { "label": "Quitar producto", "next": "ajustado" }
+        { "label": "Otra cantidad", "next": "manual-pide" },
+        { "label": "Quitar del pedido", "next": "ajustado" }
       ]
+    },
+    "manual-pide": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "Dímela como quieras: en kilos, en gramos o por piezas.",
+      "next": "manual-texto"
+    },
+    "manual-texto": {
+      "kind": "user",
+      "timestamp": "09:07",
+      "text": "750 gramos",
+      "next": "manual-ajustado"
+    },
+    "manual-ajustado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Actualizado:\n\n• 750 g boquerones frescos — *2,63 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,03 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "ajustado-botones"
     },
     "ajustado": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "Actualizado:\n\n• 1 kg boquerones frescos — *3,50 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,90 €*\n\n¿Confirmas?",
+      "text": "Actualizado:\n\n• 1 kg boquerones frescos — *3,50 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,90 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
       "next": "ajustado-botones"
     },
     "ajustado-botones": {

@@ -5,54 +5,54 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • Cerrado",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
   "steps": {
-    "date": { "kind": "date", "text": "HOY · 15:40", "next": "intento" },
+    "date": { "kind": "date", "text": "HOY · 14:40", "next": "intento" },
     "intento": {
       "kind": "user",
-      "timestamp": "15:40",
+      "timestamp": "14:40",
       "text": "Ponme medio kilo de boquerones para hoy",
       "next": "cerrado"
     },
     "cerrado": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
-      "timestamp": "15:40",
-      "text": "Los pedidos de Antonio están cerrados hasta mañana 9:00.\n¿Quieres que te avise cuando abra?",
+      "timestamp": "14:40",
+      "text": "Antonio ya ha cerrado por hoy.\n\nPuedo apuntarte el pedido y él lo confirma mañana a las 9:00, cuando abra. ¿Te lo apunto?",
       "next": "cerrado-botones"
     },
     "cerrado-botones": {
       "kind": "buttons",
-      "timestamp": "15:40",
+      "timestamp": "14:40",
       "buttons": [
-        { "label": "Avísame", "next": "aviso-ok" },
+        { "label": "Apúntamelo", "next": "aviso-ok" },
         { "label": "Otro puesto abierto", "next": "otros" },
-        { "label": "Cancelar", "next": "nada" }
+        { "label": "Ahora no", "next": "nada" }
       ]
     },
     "aviso-ok": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
-      "timestamp": "15:41",
-      "text": "Hecho. Mañana a las 9:00 te aviso con el vídeo del día de Antonio.",
+      "timestamp": "14:41",
+      "text": "Apuntado para mañana:\n\n• ½ kg boquerones — *1,75 €*\n\n*Total estimado: 1,75 €*\nEl definitivo lo pone Antonio al pesar.\n\nMañana a las 9:00 te digo si te lo prepara. Hasta que él lo confirme, el pedido no está cerrado.",
       "next": "aviso-fin"
     },
-    "aviso-fin": { "kind": "end", "note": "El aviso llega como plantilla utility (fuera de ventana 24h)" },
+    "aviso-fin": { "kind": "end", "note": "Fuera de horario el bot apunta, no compromete: el pedido queda pendiente de que el placero lo acepte al abrir (P03). La confirmación llega como plantilla utility, fuera de la ventana de 24 h" },
     "otros": {
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
-      "timestamp": "15:41",
-      "text": "Ahora mismo está abierto:\n\n• Frutería Manolo (hasta 17:00)\n\n¿Quieres pedirle a Manolo?",
+      "timestamp": "14:41",
+      "text": "Ahora mismo está abierto:\n\n• Frutería Manolo (hasta 15:00)\n\n¿Quieres pedirle a Manolo?",
       "next": "otros-botones"
     },
     "otros-botones": {
       "kind": "buttons",
-      "timestamp": "15:41",
+      "timestamp": "14:41",
       "buttons": [
-        { "label": "Sí, ir", "next": "otros-fin" },
+        { "label": "Sí", "next": "otros-fin" },
         { "label": "No, gracias", "next": "nada" }
       ]
     },
@@ -60,7 +60,7 @@
     "nada": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
-      "timestamp": "15:42",
+      "timestamp": "14:42",
       "text": "De acuerdo. Cuando quieras pedir, escríbeme aquí.",
       "next": "nada-fin"
     },

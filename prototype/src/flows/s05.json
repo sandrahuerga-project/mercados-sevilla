@@ -1,0 +1,93 @@
+{
+  "id": "S05",
+  "label": "S05 Se sale a mitad del alta",
+  "description": "El alta queda a medias y se recupera sin volver a empezar — edge case de C01",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Mercados municipales",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "AYER · 18:40", "next": "bienvenida" },
+    "bienvenida": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "18:40",
+      "text": "Hola 👋 Para empezar a comprar necesito tres datos. Se tarda un minuto.",
+      "next": "cta"
+    },
+    "cta": {
+      "kind": "waflow",
+      "ctaLabel": "Empezar",
+      "next": "abandono"
+    },
+    "abandono": {
+      "kind": "system",
+      "text": "Cierra el formulario en la segunda pantalla",
+      "next": "espera"
+    },
+    "espera": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "18:43",
+      "text": "Se ha quedado a medias. No pasa nada: tengo guardado tu nombre y tu código postal.\n\nCuando quieras seguimos por donde lo dejaste.",
+      "next": "dia-siguiente"
+    },
+    "dia-siguiente": {
+      "kind": "date",
+      "text": "HOY · 9:00",
+      "next": "retoma"
+    },
+    "retoma": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:00",
+      "text": "Buenos días, Marta.\nTe faltaba elegir mercado para terminar el alta. ¿Seguimos?",
+      "next": "retoma-botones"
+    },
+    "retoma-botones": {
+      "kind": "buttons",
+      "timestamp": "09:00",
+      "buttons": [
+        { "label": "Sí, terminar", "next": "termina" },
+        { "label": "Ahora no", "next": "luego" },
+        { "label": "Borrar mis datos", "next": "borrar" }
+      ]
+    },
+    "termina": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:01",
+      "text": "Perfecto. Solo queda el mercado, lo demás ya lo tengo.",
+      "next": "termina-fin"
+    },
+    "termina-fin": {
+      "kind": "end",
+      "note": "Se retoma en la pantalla donde lo dejó, no desde el principio"
+    },
+    "luego": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:01",
+      "text": "Sin problema. No te insisto más: escríbeme tú cuando quieras.",
+      "next": "luego-fin"
+    },
+    "luego-fin": {
+      "kind": "end",
+      "note": "Un único recordatorio y se acabó. Insistir es lo que hace que la gente bloquee el número"
+    },
+    "borrar": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:01",
+      "text": "Borrados tus datos: nombre y código postal.\nNo queda nada guardado.",
+      "next": "borrar-fin"
+    },
+    "borrar-fin": {
+      "kind": "end",
+      "note": "El alta a medias también son datos personales: se pueden borrar en un toque"
+    }
+  }
+}

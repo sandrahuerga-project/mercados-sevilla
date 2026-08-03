@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -16,8 +16,9 @@
       "puesto": "Pescadería Antonio",
       "timestamp": "09:02",
       "duration": "0:38",
-      "imageUrl": "https://images.unsplash.com/photo-1534482421-64566f976cfa?auto=format&fit=crop&q=80&w=400",
-      "caption": "Buenos días Carmen 👋\nHoy en Pescadería Antonio: boquerones de primera, acedías limpias, gamba blanca de Huelva.\n\nPide hasta las 12:30. Recogida o reparto.",
+      "imageUrl": "https://res.cloudinary.com/aukfnzkn/video/upload/so_2/v1785482482/V%C3%ADdeo_pescader%C3%ADa_pxwa33.jpg",
+      "videoUrl": "https://res.cloudinary.com/aukfnzkn/video/upload/v1785482482/V%C3%ADdeo_pescader%C3%ADa_pxwa33.mp4",
+      "caption": "Buenos días Carmen 👋\nHoy en Pescadería Antonio: boquerones de Málaga, acedías limpias, gamba blanca de Huelva.\n\nPide hasta las 12:30. Recogida o reparto.",
       "footer": "Responde BAJA para dejar de recibir.",
       "next": "broadcast-botones"
     },
@@ -34,7 +35,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:03",
-      "text": "Hoy en el mostrador: boquerones de primera, acedías limpias, gamba blanca de Huelva y coquinas.\nPide hasta las 12:30.",
+      "text": "Hoy en el mostrador: boquerones de Málaga, acedías limpias, gamba blanca de Huelva y coquinas.\nPide hasta las 12:30.",
       "next": "ver-mas-botones"
     },
     "ver-mas-botones": {
@@ -74,7 +75,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:05",
-      "text": "He entendido este pedido:\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*",
+      "text": "He entendido este pedido:\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*\n\nEl total definitivo lo pone Antonio cuando pese el pescado.",
       "next": "confirmacion-botones"
     },
     "confirmacion-botones": {
@@ -83,7 +84,7 @@
       "buttons": [
         { "label": "Confirmar", "next": "fulfillment" },
         { "label": "Modificar", "next": "modificar" },
-        { "label": "Hablar c/Antonio", "next": "escalado" }
+        { "label": "Hablar con Antonio", "next": "escalado" }
       ]
     },
     "modificar": {
@@ -121,14 +122,14 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*\n\nRecogida en puesto, hoy hasta 14:00.\nPago al recoger (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando esté preparado.",
+      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*\nEl definitivo lo pone Antonio al pesar.\n\nRecogida en puesto, hoy hasta 14:00.\nPago al recoger (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando esté preparado.",
       "next": "recibo-botones"
     },
     "taquilla": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "La taquilla refrigerada se paga por adelantado con Bizum.\nTe llega ahora el enlace de pago.",
+      "text": "La taquilla refrigerada se paga por adelantado con Bizum.\nTe llega ahora el enlace de pago.\n\nPuedes recogerlo hasta las 20:00, aunque Antonio haya cerrado.",
       "next": "taquilla-fin"
     },
     "taquilla-fin": { "kind": "end", "note": "Taquilla: CTA URL de Bizum en plantilla utility (wa-constraints §6.2)" },
@@ -136,22 +137,22 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "¿Cuándo te viene bien?",
+      "text": "El reparto es de 10:00 a 14:00. ¿Qué franja te viene mejor?",
       "next": "franja-botones"
     },
     "franja-botones": {
       "kind": "buttons",
       "timestamp": "09:07",
       "buttons": [
-        { "label": "Hoy 13:30-15:00", "next": "recibo-reparto" },
-        { "label": "Hoy 19:00-21:00", "next": "recibo-reparto" }
+        { "label": "Hoy 10:00-12:00", "next": "recibo-reparto" },
+        { "label": "Hoy 12:00-14:00", "next": "recibo-reparto" }
       ]
     },
     "recibo-reparto": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:08",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\n\nReparto a domicilio en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando salga el repartidor.",
+      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto a domicilio en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando salga el repartidor.",
       "next": "recibo-botones"
     },
     "recibo-botones": {

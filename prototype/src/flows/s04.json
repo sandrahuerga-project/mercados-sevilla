@@ -1,0 +1,99 @@
+{
+  "id": "S04",
+  "label": "S04 El bot no entiende el pedido",
+  "description": "Qué pasa cuando el audio no se entiende: nunca se inventa el pedido — edge case de C03",
+  "phone": {
+    "title": "Pescadería Antonio",
+    "subtitle": "Mercado San Gonzalo",
+    "persona": "pescaderia",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 9:12", "next": "pregunta" },
+    "pregunta": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:12",
+      "text": "¿Qué te pongo hoy, Carmen?",
+      "next": "audio1"
+    },
+    "audio1": {
+      "kind": "audio",
+      "sender": "user",
+      "duration": "0:09",
+      "timestamp": "09:13",
+      "next": "no-entiendo"
+    },
+    "no-entiendo": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:13",
+      "text": "Perdona Carmen, no te he entendido bien.\n\nHe entendido *acedías*, pero no la cantidad. ¿Me lo repites?",
+      "next": "audio2"
+    },
+    "audio2": {
+      "kind": "audio",
+      "sender": "user",
+      "duration": "0:06",
+      "timestamp": "09:14",
+      "next": "sigo-sin"
+    },
+    "sigo-sin": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:14",
+      "text": "Sigo sin entenderte y prefiero no apuntarte algo que no has pedido.\n\n¿Cómo lo hacemos?",
+      "warning": true,
+      "next": "sigo-sin-botones"
+    },
+    "sigo-sin-botones": {
+      "kind": "buttons",
+      "timestamp": "09:14",
+      "buttons": [
+        { "label": "Te lo escribo", "next": "escribe" },
+        { "label": "Hablar con Antonio", "next": "humano" },
+        { "label": "Lo de siempre", "next": "siempre" }
+      ]
+    },
+    "escribe": {
+      "kind": "user",
+      "timestamp": "09:15",
+      "text": "4 acedías y medio kilo de boquerones",
+      "next": "escribe-ok"
+    },
+    "escribe-ok": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:15",
+      "text": "Ahora sí:\n\n• 4 acedías\n• ½ kg boquerones\n\n¿Lo confirmo?",
+      "next": "escribe-fin"
+    },
+    "escribe-fin": {
+      "kind": "end",
+      "note": "Vuelve a C03 por el camino normal, en el punto de confirmar"
+    },
+    "humano": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:15",
+      "text": "Te paso con Antonio y le mando tus dos audios para que los oiga él.\nSuele responder en 5-10 minutos.",
+      "next": "humano-fin"
+    },
+    "humano-fin": {
+      "kind": "end",
+      "note": "Continúa en C11. El audio original viaja con el traspaso: no hay que repetirlo"
+    },
+    "siempre": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:15",
+      "text": "Lo de siempre es *½ kg boquerones y 2 acedías*.\n¿Te lo apunto así?",
+      "next": "siempre-fin"
+    },
+    "siempre-fin": {
+      "kind": "end",
+      "note": "Salida por C06 — repetir el pedido de siempre"
+    }
+  }
+}

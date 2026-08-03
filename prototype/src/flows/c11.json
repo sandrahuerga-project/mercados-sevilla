@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -14,7 +14,7 @@
     "pregunta": {
       "kind": "user",
       "timestamp": "09:12",
-      "text": "¿Las acedías de hoy son de Sanlúcar?",
+      "text": "¿Las acedías de hoy son congeladas?",
       "next": "handover"
     },
     "handover": {
@@ -34,13 +34,13 @@
       "kind": "human",
       "name": "Antonio",
       "timestamp": "09:15",
-      "text": "Hola Carmen, sí, llegaron esta mañana de la lonja de Sanlúcar. Son de categoría. ¿Te aparto medio kilo?",
+      "text": "Hola Carmen, no, llegaron esta mañana de la lonja de Sanlúcar. Son de categoría. ¿Te aparto medio kilo?",
       "next": "carmen-si"
     },
     "carmen-si": {
       "kind": "user",
       "timestamp": "09:16",
-      "text": "Sí porfa, para mañana.",
+      "text": "Sí, para mañana.",
       "next": "pill-sale"
     },
     "pill-sale": {
@@ -53,15 +53,31 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:17",
-      "text": "Apuntado:\n\n• ½ kg acedías de Sanlúcar — *2,40 €*\n\n*Total estimado: 2,40 €*\n\nRecogida mañana 10:00. ¿Confirmas?",
+      "text": "Apuntado para mañana:\n\n• ½ kg acedías de Sanlúcar — *2,40 €*\n\n*Total estimado: 2,40 €*\nEl definitivo lo pone Antonio al pesar.",
       "next": "confirmar-botones"
     },
     "confirmar-botones": {
       "kind": "buttons",
       "timestamp": "09:17",
       "buttons": [
-        { "label": "Confirmar", "next": "confirmado" },
+        { "label": "Confirmar", "next": "entrega" },
         { "label": "Modificar", "next": "modificar" }
+      ]
+    },
+    "entrega": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:17",
+      "text": "¿Cómo quieres recibirlo mañana?",
+      "next": "entrega-botones"
+    },
+    "entrega-botones": {
+      "kind": "buttons",
+      "timestamp": "09:17",
+      "buttons": [
+        { "label": "Recogida en puesto", "next": "confirmado" },
+        { "label": "Taquilla", "next": "confirmado-taquilla" },
+        { "label": "Reparto 10:00-14:00", "next": "confirmado" }
       ]
     },
     "confirmado": {
@@ -69,6 +85,13 @@
       "puesto": "Pescadería Antonio",
       "timestamp": "09:18",
       "text": "✅ ¡Pedido confirmado! #SGZ-2026-0388\nTe avisamos cuando esté preparado.",
+      "next": "confirmado-fin"
+    },
+    "confirmado-taquilla": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:18",
+      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0388\n\nLa taquilla se paga por adelantado: te llega el enlace de Bizum.\nLa recoges mañana hasta las 20:00.",
       "next": "confirmado-fin"
     },
     "confirmado-fin": {

@@ -15,7 +15,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "21:40",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €*\n\nReparto mañana 19:00-21:00.",
+      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €*\n\nReparto mañana de 10:00 a 14:00.",
       "next": "anadir-botones"
     },
     "anadir-botones": {
@@ -64,7 +64,7 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "21:43",
-      "text": "✅ Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nTodo llega junto mañana 19:00-21:00.\nCada placero acepta su parte por separado — te aviso.",
+      "text": "✅ Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nTodo llega junto mañana de 10:00 a 14:00.\nCada placero acepta su parte por separado — te aviso.",
       "next": "espera"
     },
     "espera": {
@@ -94,7 +94,7 @@
       "buttons": [
         { "label": "Solo las naranjas", "next": "parcial" },
         { "label": "Quitar su parte", "next": "quitar" },
-        { "label": "Hablar c/Manolo", "next": "escalado" }
+        { "label": "Hablar con Manolo", "next": "escalado" }
       ]
     },
     "parcial": {

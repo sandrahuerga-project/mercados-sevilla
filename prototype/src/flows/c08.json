@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -21,7 +21,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "10:40",
-      "text": "⚠️ Las acedías se han agotado.\n¿Quieres que Antonio las sustituya por lenguado pequeño al mismo precio?",
+      "text": "⚠️ Las acedías se han agotado.\nAntonio propone 2 lenguados pequeños en su lugar, pero cuestan más: *3,20 €* en vez de *2,40 €*.\n\n¿Los acepto?",
       "warning": true,
       "next": "alerta-botones"
     },
@@ -30,18 +30,18 @@
       "timestamp": "10:40",
       "buttons": [
         { "label": "Aceptar", "next": "aceptada" },
-        { "label": "Quitar", "next": "quitar" },
-        { "label": "Cancelar todo", "next": "cancelar" }
+        { "label": "Quitar del pedido", "next": "quitar" },
+        { "label": "Cancelar pedido", "next": "cancelar" }
       ]
     },
     "aceptada": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "10:41",
-      "text": "Hecho: lenguado pequeño en lugar de acedías, mismo precio.\nAntonio sigue preparando tu pedido.",
+      "text": "Hecho: 2 lenguados pequeños en lugar de las acedías.\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 lenguados pequeños — *3,20 €*\n\n*Total estimado: 4,95 €* (antes 4,15 €)\nEl definitivo lo pone Antonio al pesar.",
       "next": "aceptada-fin"
     },
-    "aceptada-fin": { "kind": "end", "note": "La alternativa la propone el placero; el bot solo la transmite. Sin sustituir nada sin consentimiento (RGPD + principio rector)" },
+    "aceptada-fin": { "kind": "end", "note": "El precio de la alternativa lo pone el placero, no el bot: aquí sube 0,80 € y se dice antes de aceptar. Nada se sustituye sin consentimiento" },
     "quitar": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",

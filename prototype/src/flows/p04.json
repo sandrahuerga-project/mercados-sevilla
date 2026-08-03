@@ -1,0 +1,91 @@
+{
+  "id": "P04",
+  "label": "P04 Cierre del día",
+  "description": "Resumen al cerrar el mercado y liquidación mensual — flows-index.md P04",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Asistente del placero",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 14:30", "next": "resumen" },
+    "resumen": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:30",
+      "text": "Cierre del día, Antonio.\n\n*11 pedidos · 148,60 €*\n\n• 9 entregados\n• 1 sin recoger (Marta L.)\n• 1 cancelado antes de que lo aceptaras\n\nEfectivo 84,20 € · Bizum 51,90 € · Tarjeta 12,50 €",
+      "next": "resumen-botones"
+    },
+    "resumen-botones": {
+      "kind": "buttons",
+      "timestamp": "14:30",
+      "buttons": [
+        { "label": "Ver el detalle", "next": "detalle" },
+        { "label": "Está todo bien", "next": "cuadra" }
+      ]
+    },
+    "detalle": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:31",
+      "text": "Lo tienes en el panel, en *Cierre del día*.\nDesde ahí puedes descargarlo en PDF.",
+      "next": "pendiente"
+    },
+    "cuadra": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:31",
+      "text": "Anotado. Queda una cosa suelta del día de hoy.",
+      "next": "pendiente"
+    },
+    "pendiente": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:31",
+      "text": "El pedido de Marta L. sigue sin recoger (8,90 €).\n¿Qué hago con él?",
+      "warning": true,
+      "next": "pendiente-botones"
+    },
+    "pendiente-botones": {
+      "kind": "buttons",
+      "timestamp": "14:32",
+      "buttons": [
+        { "label": "Guardar para mañana", "next": "guardado" },
+        { "label": "Anotar incidencia", "next": "incidencia" }
+      ]
+    },
+    "guardado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:32",
+      "text": "Aviso a Marta de que lo tienes guardado hasta mañana a las 14:00.\nNo le cuenta como incidencia.",
+      "next": "mensual"
+    },
+    "incidencia": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:32",
+      "text": "Anotada la primera incidencia de Marta.\nA la segunda sin resolver, deja de poder pedirte por el bot.",
+      "next": "mensual"
+    },
+    "mensual": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Último día del mes",
+      "next": "liquidacion"
+    },
+    "liquidacion": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "14:35",
+      "text": "*Liquidación de julio*\n\n214 pedidos · 2.940,80 €\nTicket medio 13,74 €\n68 clientes, 41 repiten\n\nTienes el desglose y la factura en el panel.",
+      "next": "fin"
+    },
+    "fin": {
+      "kind": "end",
+      "note": "El cierre diario y la liquidación se ven enteros en el panel. WhatsApp solo trae el titular"
+    }
+  }
+}

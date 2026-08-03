@@ -1,0 +1,97 @@
+{
+  "id": "P02",
+  "label": "P02 Subida del vídeo diario",
+  "description": "El placero manda el vídeo del mostrador y eso abre la ventana de pedidos — flows-index.md P02",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Asistente del placero",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 8:00", "next": "recordatorio" },
+    "recordatorio": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "08:00",
+      "text": "Buenos días, Antonio.\n¿Grabas el vídeo del mostrador? Lo mando a tus *214 suscriptores* a las 9:00.",
+      "next": "recordatorio-botones"
+    },
+    "recordatorio-botones": {
+      "kind": "buttons",
+      "timestamp": "08:00",
+      "buttons": [
+        { "label": "Ahora lo mando", "next": "video" },
+        { "label": "Hoy no abro", "next": "cerrado" }
+      ]
+    },
+    "video": {
+      "kind": "video",
+      "sender": "user",
+      "puesto": "Antonio",
+      "timestamp": "08:14",
+      "duration": "0:38",
+      "imageUrl": "https://res.cloudinary.com/aukfnzkn/video/upload/so_2/v1785482482/V%C3%ADdeo_pescader%C3%ADa_pxwa33.jpg",
+      "videoUrl": "https://res.cloudinary.com/aukfnzkn/video/upload/v1785482482/V%C3%ADdeo_pescader%C3%ADa_pxwa33.mp4",
+      "caption": "Boquerones de Málaga, acedías limpias y gamba blanca de Huelva",
+      "next": "leido"
+    },
+    "leido": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "08:14",
+      "text": "Recibido. He sacado del audio del vídeo lo que has nombrado:\n\n• Boquerones\n• Acedías\n• Gamba blanca de Huelva\n\n¿Lo mando así a las 9:00?",
+      "next": "leido-botones"
+    },
+    "leido-botones": {
+      "kind": "buttons",
+      "timestamp": "08:15",
+      "buttons": [
+        { "label": "Sí, mándalo", "next": "programado" },
+        { "label": "Corregir la lista", "next": "corregir" }
+      ]
+    },
+    "corregir": {
+      "kind": "user",
+      "timestamp": "08:16",
+      "text": "Quita la gamba que se me ha acabado ya. Y pon que hay sepia",
+      "next": "corregido"
+    },
+    "corregido": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "08:16",
+      "text": "Corregido:\n\n• Boquerones\n• Acedías\n• Sepia\n\nSale a las 9:00.",
+      "next": "programado"
+    },
+    "programado": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "9:00 — difusión enviada a 214 suscriptores",
+      "next": "resultado"
+    },
+    "resultado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:31",
+      "text": "Vídeo enviado a las 9:00.\nEn media hora llevas *9 pedidos*. Los tienes en el panel.",
+      "next": "fin"
+    },
+    "fin": {
+      "kind": "end",
+      "note": "El vídeo abre la ventana de pedidos del día. Sin vídeo no hay difusión: eso es S07"
+    },
+    "cerrado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "08:01",
+      "text": "Apuntado. Hoy no mando difusión y el puesto sale como cerrado.\nA quien intente pedirte le aviso de que vuelves mañana.",
+      "next": "cerrado-fin"
+    },
+    "cerrado-fin": {
+      "kind": "end",
+      "note": "Los clientes que escriban hoy caen en S01 — puesto cerrado"
+    }
+  }
+}

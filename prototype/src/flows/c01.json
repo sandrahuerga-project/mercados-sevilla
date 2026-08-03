@@ -27,7 +27,7 @@
       "kind": "bot",
       "puesto": "Mercados de Sevilla",
       "timestamp": "09:01",
-      "text": "Listo, Carmen. Ya estás dada de alta en San Gonzalo.\nMañana a las 9:00 te enseño lo que Antonio tenga en el mostrador.",
+      "text": "Listo, Carmen. Ya estás dada de alta en San Gonzalo.\nMañana a las 9:00 te enseño en vídeo las novedades del mercado.",
       "next": "alta-botones"
     },
     "alta-botones": {

@@ -10,8 +10,18 @@ import c08 from '../flows/c08.json';
 import c09 from '../flows/c09.json';
 import c10 from '../flows/c10.json';
 import c11 from '../flows/c11.json';
+import c12 from '../flows/c12.json';
+import p01 from '../flows/p01.json';
+import p02 from '../flows/p02.json';
+import p03 from '../flows/p03.json';
+import p04 from '../flows/p04.json';
 import s01 from '../flows/s01.json';
+import s02 from '../flows/s02.json';
 import s03 from '../flows/s03.json';
+import s04 from '../flows/s04.json';
+import s05 from '../flows/s05.json';
+import s06 from '../flows/s06.json';
+import s07 from '../flows/s07.json';
 
 export type AudienceKey = 'carmen' | 'david' | 'antonio' | 'limite';
 
@@ -42,7 +52,7 @@ export const FLOWS: FlowEntry[] = [
   {
     code: 'C02',
     name: 'El saludo de cada mañana',
-    about: 'Un mensaje, dos botones. La rutina diaria sin fricción.',
+    about: 'Un mensaje y dos botones. La rutina diaria sin complicaciones.',
     audience: 'carmen',
     group: 'Empezar',
     script: c02 as FlowScript,
@@ -85,7 +95,7 @@ export const FLOWS: FlowEntry[] = [
   {
     code: 'C06',
     name: 'Repetir el pedido de siempre',
-    about: '«Lo de siempre» resuelto en un toque.',
+    about: '«Lo de siempre» resuelto en un toque, eligiendo cómo lo quiere recibir.',
     audience: 'david',
     group: 'Comprar rápido',
     hasUnhappy: true,
@@ -102,7 +112,7 @@ export const FLOWS: FlowEntry[] = [
   {
     code: 'C05',
     name: 'Comprar en dos puestos a la vez',
-    about: 'Un pedido, dos placeros, una entrega. Y qué pasa si uno no puede.',
+    about: 'Un pedido, dos placeros y una entrega. Y qué pasa si uno no puede.',
     audience: 'david',
     group: 'Pedido grande',
     hasUnhappy: true,
@@ -119,27 +129,113 @@ export const FLOWS: FlowEntry[] = [
   },
   {
     code: 'C10',
-    name: 'Cancelar un pedido',
-    about: 'Sin fricción si nadie ha empezado; con confirmación si ya está en marcha.',
+    name: 'Cancelar antes de que lo acepten',
+    about: 'Se anula sin coste, pero nunca sin preguntar dos veces.',
+    audience: 'david',
+    group: 'Cambios de última hora',
+    script: c10 as FlowScript,
+  },
+  {
+    code: 'C12',
+    name: 'Cancelar con el pedido en marcha',
+    about: 'Ya está preparado: en vez de anularlo, se guarda para mañana o va a la taquilla.',
     audience: 'david',
     group: 'Cambios de última hora',
     hasUnhappy: true,
-    script: c10 as FlowScript,
+    script: c12 as FlowScript,
+  },
+  {
+    code: 'P01',
+    name: 'Dar de alta el puesto',
+    about: 'Horario, formas de recogida y el acceso al panel. Una vez y ya está.',
+    audience: 'antonio',
+    group: 'Empezar',
+    script: p01 as FlowScript,
+  },
+  {
+    code: 'P02',
+    name: 'Mandar el vídeo del día',
+    about: 'El vídeo del mostrador es lo que abre los pedidos. Sin él no sale la difusión.',
+    audience: 'antonio',
+    group: 'Cada mañana',
+    hasUnhappy: true,
+    script: p02 as FlowScript,
+  },
+  {
+    code: 'P03',
+    name: 'Resolver un pedido',
+    about: 'Aceptar, pesar y teclear el total. Cada toque avisa al cliente.',
+    audience: 'antonio',
+    group: 'Durante el día',
+    hasUnhappy: true,
+    script: p03 as FlowScript,
+  },
+  {
+    code: 'P04',
+    name: 'Cerrar el día',
+    about: 'Cuánto ha entrado, qué queda suelto y la liquidación del mes.',
+    audience: 'antonio',
+    group: 'Al cerrar',
+    hasUnhappy: true,
+    script: p04 as FlowScript,
   },
   {
     code: 'S01',
     name: 'Pedir con el puesto cerrado',
     about: 'El bot atiende siempre, aunque el mercado no.',
     audience: 'limite',
-    group: 'Fuera de lo normal',
+    group: 'Horario y sitio',
     script: s01 as FlowScript,
+  },
+  {
+    code: 'S06',
+    name: 'Vive fuera de la zona de reparto',
+    about: 'No llega el reparto: se le ofrecen los mercados que sí tiene cerca.',
+    audience: 'limite',
+    group: 'Horario y sitio',
+    script: s06 as FlowScript,
+  },
+  {
+    code: 'S04',
+    name: 'El bot no entiende el pedido',
+    about: 'Nunca se inventa lo que no ha oído: pregunta, o pasa con Antonio.',
+    audience: 'limite',
+    group: 'Cuando algo falla',
+    hasUnhappy: true,
+    script: s04 as FlowScript,
+  },
+  {
+    code: 'S05',
+    name: 'Se sale a mitad del alta',
+    about: 'Se retoma donde lo dejó, y se pueden borrar los datos a medias.',
+    audience: 'limite',
+    group: 'Cuando algo falla',
+    script: s05 as FlowScript,
+  },
+  {
+    code: 'S07',
+    name: 'El placero no manda el vídeo',
+    about: 'Sin vídeo no hay difusión. No se enseña el mostrador de ayer como si fuera hoy.',
+    audience: 'limite',
+    group: 'Cuando algo falla',
+    hasUnhappy: true,
+    script: s07 as FlowScript,
+  },
+  {
+    code: 'S02',
+    name: 'El cliente no recoge',
+    about: 'Dos avisos antes del cierre y la incidencia se anuncia antes de ponerla.',
+    audience: 'limite',
+    group: 'Cuando se rompe la confianza',
+    hasUnhappy: true,
+    script: s02 as FlowScript,
   },
   {
     code: 'S03',
     name: 'Cliente bloqueado',
     about: 'Dos incidencias sin resolver y el pedido deja de entrar por el bot.',
     audience: 'limite',
-    group: 'Fuera de lo normal',
+    group: 'Cuando se rompe la confianza',
     script: s03 as FlowScript,
   },
 ];

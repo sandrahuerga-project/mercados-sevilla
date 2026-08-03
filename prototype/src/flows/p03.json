@@ -1,0 +1,124 @@
+{
+  "id": "P03",
+  "label": "P03 Gestión del pedido entrante",
+  "description": "Aviso en WhatsApp y resolución en el panel: aceptar, pesar y cobrar — flows-index.md P03",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Asistente del placero",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 9:41", "next": "entra" },
+    "entra": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:41",
+      "text": "*Pedido nuevo · SGZ-0387*\nCarmen R.\n\n• ½ kg boquerones\n• 2 acedías\n\nRecogida hoy 13:00-14:00.",
+      "next": "entra-botones"
+    },
+    "entra-botones": {
+      "kind": "buttons",
+      "timestamp": "09:41",
+      "buttons": [
+        { "label": "Aceptar", "next": "aceptado" },
+        { "label": "Producto agotado", "next": "falta" },
+        { "label": "No puedo hoy", "next": "rechazo" }
+      ]
+    },
+    "aceptado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:42",
+      "text": "Aceptado. Carmen ya lo sabe.\nCuando lo tengas pesado, dime el total y se lo paso.",
+      "next": "pesa"
+    },
+    "pesa": {
+      "kind": "user",
+      "timestamp": "12:20",
+      "text": "12,40",
+      "next": "total"
+    },
+    "total": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "12:20",
+      "text": "*12,40 €* enviados a Carmen con el aviso de que está listo.\nPasa a *Por cobrar* en el panel.",
+      "next": "total-botones"
+    },
+    "total-botones": {
+      "kind": "buttons",
+      "timestamp": "13:52",
+      "buttons": [
+        { "label": "Cobrado y entregado", "next": "cerrado" },
+        { "label": "No ha venido", "next": "no-viene" }
+      ]
+    },
+    "cerrado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "13:52",
+      "text": "Pedido cerrado. Llevas *9 de 11* entregados hoy.",
+      "next": "fin"
+    },
+    "fin": {
+      "kind": "end",
+      "note": "Cada acción de aquí dispara un aviso al cliente (C07). «Cobrado» no: es registro interno del placero"
+    },
+    "no-viene": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "13:52",
+      "text": "Le mando aviso de que cierras a las 14:00. Si no viene, te lo dejo apuntado como incidencia.",
+      "next": "no-viene-fin"
+    },
+    "no-viene-fin": {
+      "kind": "end",
+      "note": "Continúa en S02 — el cliente no recoge"
+    },
+    "falta": {
+      "kind": "user",
+      "timestamp": "09:43",
+      "text": "No me quedan acedías",
+      "next": "sustituir"
+    },
+    "sustituir": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:43",
+      "text": "Le pregunto a Carmen qué prefiere. No cambio nada sin que ella lo diga.\n¿Le ofrezco algo a cambio?",
+      "next": "sustituir-botones"
+    },
+    "sustituir-botones": {
+      "kind": "buttons",
+      "timestamp": "09:43",
+      "buttons": [
+        { "label": "Ofrecer pescadilla", "next": "ofrecido" },
+        { "label": "Quitar del pedido", "next": "ofrecido" }
+      ]
+    },
+    "ofrecido": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:44",
+      "text": "Preguntado. Te aviso en cuanto conteste.",
+      "next": "falta-fin"
+    },
+    "falta-fin": {
+      "kind": "end",
+      "note": "Del lado de Carmen esto es C08 — producto agotado"
+    },
+    "rechazo": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:42",
+      "text": "Aviso a Carmen de que hoy no puedes y le ofrezco otro puesto del mercado.\nNo te cuenta como incidencia.",
+      "next": "rechazo-fin"
+    },
+    "rechazo-fin": {
+      "kind": "end",
+      "note": "El cliente nunca se queda sin respuesta, aunque el placero no pueda"
+    }
+  }
+}

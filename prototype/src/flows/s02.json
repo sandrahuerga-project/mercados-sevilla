@@ -1,0 +1,96 @@
+{
+  "id": "S02",
+  "label": "S02 Cliente que no recoge",
+  "description": "Dos avisos progresivos antes de que cierre el puesto — flows-index.md S02",
+  "phone": {
+    "title": "Pescadería Antonio",
+    "subtitle": "Mercado San Gonzalo",
+    "persona": "pescaderia",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 11:05", "next": "listo" },
+    "listo": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:05",
+      "text": "Tu pedido está listo, Marta.\n*8,90 €* · Recogida en el puesto hasta las 14:00.",
+      "next": "silencio"
+    },
+    "silencio": {
+      "kind": "system",
+      "text": "Pasan sesenta minutos sin respuesta",
+      "next": "aviso1"
+    },
+    "aviso1": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "12:05",
+      "text": "Tu pedido sigue esperándote.\nAntonio cierra a las 14:00.",
+      "next": "silencio2"
+    },
+    "silencio2": {
+      "kind": "system",
+      "text": "Quedan quince minutos para el cierre",
+      "next": "llamada"
+    },
+    "llamada": {
+      "kind": "system",
+      "tone": "yellow",
+      "text": "Antonio llama por teléfono a Marta antes de cerrar. No contesta, y lo anota en su panel (P04)",
+      "next": "aviso2"
+    },
+    "aviso2": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "13:45",
+      "text": "⏰ Antonio cierra en 15 minutos.\n¿Qué hago con tu pedido?",
+      "warning": true,
+      "next": "aviso2-botones"
+    },
+    "aviso2-botones": {
+      "kind": "buttons",
+      "timestamp": "13:45",
+      "buttons": [
+        { "label": "Voy ahora", "next": "voy" },
+        { "label": "Guárdalo para mañana", "next": "manana" },
+        { "label": "Cancélalo", "next": "anula" }
+      ]
+    },
+    "voy": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "13:46",
+      "text": "Se lo digo a Antonio. Te espera.",
+      "next": "voy-fin"
+    },
+    "voy-fin": {
+      "kind": "end",
+      "note": "Sin incidencia: el pedido se cierra normal"
+    },
+    "manana": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "13:46",
+      "text": "Antonio te lo guarda hasta mañana a las 14:00.\nEs pescado fresco y estará en el frigorífico.",
+      "next": "manana-fin"
+    },
+    "manana-fin": {
+      "kind": "end",
+      "note": "Tampoco cuenta como incidencia: hay acuerdo por las dos partes"
+    },
+    "anula": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "13:46",
+      "text": "Anulado. Antonio ya lo había preparado, así que te queda una incidencia apuntada.\n\nCon dos sin resolver dejarías de poder pedirle por aquí.",
+      "warning": true,
+      "next": "anula-fin"
+    },
+    "anula-fin": {
+      "kind": "end",
+      "note": "Se avisa del efecto antes de que ocurra. A la segunda incidencia, S03"
+    }
+  }
+}

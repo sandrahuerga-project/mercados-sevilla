@@ -1,0 +1,66 @@
+{
+  "id": "S06",
+  "label": "S06 Fuera de la zona de reparto",
+  "description": "El código postal no entra en reparto: se ofrecen los mercados que sí tiene cerca — edge case de C01",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Mercados municipales",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 10:20", "next": "cp" },
+    "cp": {
+      "kind": "user",
+      "timestamp": "10:20",
+      "text": "41960",
+      "next": "fuera"
+    },
+    "fuera": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "10:20",
+      "text": "Ese código postal es de Gines y allí todavía no llega el reparto.\n\nPero sí puedes pedir y pasar a recogerlo. Estos son los mercados que te pillan más cerca:",
+      "next": "fuera-botones"
+    },
+    "fuera-botones": {
+      "kind": "buttons",
+      "timestamp": "10:21",
+      "buttons": [
+        { "label": "San Gonzalo (12 min)", "next": "san-gonzalo" },
+        { "label": "Triana (18 min)", "next": "triana" },
+        { "label": "Ahora no", "next": "nada" }
+      ]
+    },
+    "san-gonzalo": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "10:21",
+      "text": "Hecho. Te doy de alta en el Mercado de San Gonzalo.\n\nPides por aquí y pasas a recogerlo hasta las 14:00. Pagas al recoger.",
+      "next": "alta-fin"
+    },
+    "triana": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "10:21",
+      "text": "Hecho. Te doy de alta en el Mercado de Triana.\n\nPides por aquí y pasas a recogerlo hasta las 14:00. Pagas al recoger.",
+      "next": "alta-fin"
+    },
+    "alta-fin": {
+      "kind": "end",
+      "note": "Se sigue por C01. La zona limita el reparto, no el alta: nadie se queda fuera del servicio por vivir lejos"
+    },
+    "nada": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "10:21",
+      "text": "De acuerdo. Cuando quieras darte de alta, escríbeme aquí.",
+      "next": "nada-fin"
+    },
+    "nada-fin": {
+      "kind": "end",
+      "note": "Sin promesas de futuro: no se ofrece avisar cuando el reparto llegue a su zona"
+    }
+  }
+}

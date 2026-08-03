@@ -64,7 +64,7 @@
       "buttons": [
         { "label": "Confirmar", "next": "fin-ok" },
         { "label": "Modificar", "next": "fin-mod" },
-        { "label": "Hablar c/Antonio", "next": "fin-escalado" }
+        { "label": "Hablar con Antonio", "next": "fin-escalado" }
       ]
     },
     "fin-ok": { "kind": "end", "note": "Sigue como C03: fulfillment → recibo. El NLU respeta el léxico sevillano («un cuarto», «cazón en adobo»)" },

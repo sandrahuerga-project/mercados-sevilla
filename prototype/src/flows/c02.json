@@ -15,14 +15,14 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "09:00",
-      "text": "Buenos días Carmen. Tu mercado es San Gonzalo.\n¿Compras allí hoy?",
+      "text": "Buenos días Carmen. Tu mercado es San Gonzalo.\n¿Quieres ver qué tenemos hoy en el mercado?",
       "next": "opciones"
     },
     "opciones": {
       "kind": "buttons",
       "timestamp": "09:00",
       "buttons": [
-        { "label": "Sí, allí voy", "next": "si-video" },
+        { "label": "Sí", "next": "si-video" },
         { "label": "Cambiar de mercado", "next": "cambiar" }
       ]
     },

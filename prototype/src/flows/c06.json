@@ -5,7 +5,7 @@
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
-    "persona": "antonio",
+    "persona": "pescaderia",
     "avatarBg": "bg-sevilla-tile"
   },
   "start": "date",
@@ -21,16 +21,32 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "10:05",
-      "text": "¿Lo de siempre?\n\n• 1 kg gambas blancas — *18,00 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 22,80 €*\n\nReparto hoy 19:00-21:00.",
+      "text": "¿Lo de siempre en Pescadería Antonio?\n\n• 1 kg gambas blancas — *18,00 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 22,80 €*\nEl definitivo lo pone Antonio al pesar.",
       "next": "propuesta-botones"
     },
     "propuesta-botones": {
       "kind": "buttons",
       "timestamp": "10:05",
       "buttons": [
-        { "label": "Sí", "next": "confirmado" },
-        { "label": "Cambiar", "next": "cambiar" },
-        { "label": "Hablar c/Antonio", "next": "escalado" }
+        { "label": "Sí", "next": "entrega" },
+        { "label": "Modificar", "next": "cambiar" },
+        { "label": "Hablar con Antonio", "next": "escalado" }
+      ]
+    },
+    "entrega": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:06",
+      "text": "¿Cómo quieres recibirlo? Como siempre era reparto.",
+      "next": "entrega-botones"
+    },
+    "entrega-botones": {
+      "kind": "buttons",
+      "timestamp": "10:06",
+      "buttons": [
+        { "label": "Reparto 10:00-14:00", "next": "confirmado" },
+        { "label": "Recogida en puesto", "next": "confirmado" },
+        { "label": "Taquilla", "next": "confirmado" }
       ]
     },
     "confirmado": {
@@ -38,8 +54,17 @@
       "puesto": "Pescadería Antonio",
       "timestamp": "10:06",
       "text": "✅ ¡Pedido confirmado! #SGZ-2026-0429\nTe avisamos cuando esté preparado.",
-      "next": "coquinas-agotadas"
+      "next": "confirmado-botones"
     },
+    "confirmado-botones": {
+      "kind": "buttons",
+      "timestamp": "10:07",
+      "buttons": [
+        { "label": "Añadir puesto", "next": "anadir-fin" },
+        { "label": "Así está bien", "next": "coquinas-agotadas" }
+      ]
+    },
+    "anadir-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto" },
     "coquinas-agotadas": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
@@ -53,8 +78,8 @@
       "timestamp": "10:12",
       "buttons": [
         { "label": "Aceptar", "next": "sust-ok" },
-        { "label": "Quitar", "next": "sust-quitar" },
-        { "label": "Cancelar todo", "next": "cancelar" }
+        { "label": "Quitar del pedido", "next": "sust-quitar" },
+        { "label": "Cancelar pedido", "next": "cancelar" }
       ]
     },
     "sust-ok": {

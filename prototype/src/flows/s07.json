@@ -1,0 +1,89 @@
+{
+  "id": "S07",
+  "label": "S07 El placero no sube el vídeo",
+  "description": "Sin vídeo no hay difusión: qué se le dice a él y qué a los clientes — edge case de P02",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Asistente del placero",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 8:00", "next": "peticion" },
+    "peticion": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "08:00",
+      "text": "Buenos días, Antonio.\n¿Grabas el vídeo del mostrador?",
+      "next": "silencio"
+    },
+    "silencio": {
+      "kind": "system",
+      "text": "Media hora sin respuesta",
+      "next": "recuerdo"
+    },
+    "recuerdo": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "08:40",
+      "text": "Te lo recuerdo: sin vídeo no sale la difusión de las 9:00, y ahí es donde entran casi todos tus pedidos.",
+      "warning": true,
+      "next": "silencio2"
+    },
+    "silencio2": {
+      "kind": "system",
+      "text": "Son las nueve y sigue sin haber vídeo",
+      "next": "sin-difusion"
+    },
+    "sin-difusion": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:00",
+      "text": "No he mandado nada. No enseño el mostrador de ayer como si fuera el de hoy.\n\nTu puesto sale como *abierto, sin novedades del día*: quien te escriba puede pedirte igual.",
+      "next": "sin-difusion-botones"
+    },
+    "sin-difusion-botones": {
+      "kind": "buttons",
+      "timestamp": "09:40",
+      "buttons": [
+        { "label": "Lo mando ahora", "next": "tarde" },
+        { "label": "Hoy sin difusión", "next": "asumido" },
+        { "label": "Hoy no abro", "next": "cerrado" }
+      ]
+    },
+    "tarde": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:41",
+      "text": "Lo mando en cuanto llegue, pero a esta hora rinde bastante menos: la difusión de las 9:00 se lee mucho más.",
+      "next": "tarde-fin"
+    },
+    "tarde-fin": {
+      "kind": "end",
+      "note": "Se manda igual, pero avisando de lo que cuesta llegar tarde"
+    },
+    "asumido": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:41",
+      "text": "De acuerdo. Hoy sin difusión.\nMañana a las 8:00 te lo vuelvo a pedir.",
+      "next": "asumido-fin"
+    },
+    "asumido-fin": {
+      "kind": "end",
+      "note": "Tres días seguidos sin vídeo y salta un aviso al gestor del mercado"
+    },
+    "cerrado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:41",
+      "text": "Apuntado. Marco el puesto como cerrado hoy.",
+      "next": "cerrado-fin"
+    },
+    "cerrado-fin": {
+      "kind": "end",
+      "note": "Quien intente pedirle hoy cae en S01 — puesto cerrado"
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "id": "P01",
+  "label": "P01 Alta del puesto",
+  "description": "El placero entra en la plataforma: datos, horario y primer vídeo — flows-index.md P01",
+  "phone": {
+    "title": "Mercados de Sevilla",
+    "subtitle": "Asistente del placero",
+    "persona": "mercado",
+    "avatarBg": "bg-mercado-green"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "LUNES · 11:20", "next": "visita" },
+    "visita": {
+      "kind": "system",
+      "text": "Alta comercial en el puesto. El técnico deja el número y Antonio escribe.",
+      "next": "saludo"
+    },
+    "saludo": {
+      "kind": "user",
+      "timestamp": "11:20",
+      "text": "Hola, vengo de la visita del mercado de San Gonzalo. Soy Antonio, el de la «Pescadería Antonio». Quiero dar de alta el puesto.",
+      "next": "bienvenida"
+    },
+    "bienvenida": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "11:20",
+      "text": "Hola Antonio 👋\nVamos a dar de alta *Pescadería Antonio* en el Mercado de San Gonzalo. Son tres datos y dos minutos.\n\nEmpezamos por el horario: ¿a qué hora abres y cierras?",
+      "next": "horario"
+    },
+    "horario": {
+      "kind": "user",
+      "timestamp": "11:22",
+      "text": "De 9 a 14, de martes a sábado",
+      "next": "fulfillment"
+    },
+    "fulfillment": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "11:22",
+      "text": "Apuntado.\n¿Cómo quieres que recojan tus clientes?",
+      "next": "fulfillment-botones"
+    },
+    "fulfillment-botones": {
+      "kind": "buttons",
+      "timestamp": "11:22",
+      "buttons": [
+        { "label": "Solo en el puesto", "next": "resumen" },
+        { "label": "Puesto y taquilla", "next": "resumen" },
+        { "label": "Todo, con reparto", "next": "resumen" }
+      ]
+    },
+    "resumen": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "11:23",
+      "text": "Esto es lo que voy a guardar:\n\n*Pescadería Antonio*\nMercado de San Gonzalo\nMartes a sábado, 9:00-14:00\nRecogida en puesto, taquilla refrigerada y reparto a domicilio\n\n¿Está bien?",
+      "next": "resumen-botones"
+    },
+    "resumen-botones": {
+      "kind": "buttons",
+      "timestamp": "11:23",
+      "buttons": [
+        { "label": "Sí, es correcto", "next": "alta-ok" },
+        { "label": "Corregir un dato", "next": "corregir" }
+      ]
+    },
+    "corregir": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "11:24",
+      "text": "Dime qué cambio y lo dejo listo.",
+      "next": "corregir-user"
+    },
+    "corregir-user": {
+      "kind": "user",
+      "timestamp": "11:24",
+      "text": "Los sábados cierro a las 15",
+      "next": "alta-ok"
+    },
+    "alta-ok": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "11:25",
+      "text": "Puesto dado de alta.\n\nA partir de mañana te escribo cada día a las 8:00 para pedirte el vídeo del mostrador. Ese vídeo es lo que abre tus pedidos.\n\nLos pedidos te llegan al panel, no aquí.",
+      "next": "panel-botones"
+    },
+    "panel-botones": {
+      "kind": "buttons",
+      "timestamp": "11:25",
+      "buttons": [
+        { "label": "Ver el panel", "next": "panel" },
+        { "label": "Luego lo miro", "next": "fin" }
+      ]
+    },
+    "panel": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "11:25",
+      "text": "Te he mandado el acceso por SMS al mismo número.\nSe abre en el navegador, no hay que instalar nada.",
+      "next": "fin"
+    },
+    "fin": {
+      "kind": "end",
+      "note": "El alta la valida un técnico del mercado. Los datos fiscales y la cuenta de cobro no pasan por WhatsApp"
+    }
+  }
+}
