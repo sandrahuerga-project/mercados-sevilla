@@ -88,10 +88,11 @@ export const Hero: React.FC = () => (
           por los lados y sacaría barra horizontal, pero el bodegón sí necesita
           poder salirse por arriba. */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {/* En móvil sube: ahí la columna es una sola y al 28 % la cinta caía
-            sobre la entradilla. Arriba cruza el titular, que la aguanta. */}
-        <div className="absolute inset-x-0 top-[14%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
-          <FoodStrip className="w-[140%] -ml-[20%]" />
+        {/* En móvil no va por detrás de nada: se mete en el aire que se abre
+            entre el titular y el texto, con las piezas más pequeñas para que
+            ese hueco no tenga que ser una zanja. */}
+        <div className="absolute inset-x-0 top-[25.2%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
+          <FoodStrip className="w-[140%] -ml-[20%]" tamano="w-16 md:w-32 lg:w-36" />
         </div>
       </div>
 
@@ -130,7 +131,8 @@ export const Hero: React.FC = () => (
         </h1>
       </Reveal>
 
-      <div className="relative mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
+      {/* El aire de más en móvil es donde vive la cinta. */}
+      <div className="relative mt-48 md:mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
         <Reveal delay={160}>
           <p className="text-lg md:text-xl leading-relaxed max-w-[52ch] text-ink-soft">
             {HERO.lead}

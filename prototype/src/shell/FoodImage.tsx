@@ -72,7 +72,10 @@ export const FoodImage: React.FC<FoodImageProps> = ({
  *
  * Se para al pasar el ratón por encima y con prefers-reduced-motion.
  */
-export const FoodStrip: React.FC<{ className?: string }> = ({ className = '' }) => (
+export const FoodStrip: React.FC<{ className?: string; tamano?: string }> = ({
+  className = '',
+  tamano = 'w-24 md:w-32 lg:w-36',
+}) => (
   <div className={`marquesina-marco overflow-hidden ${className}`} aria-hidden="true">
     <div className="marquesina flex items-center w-max">
       {/* Cada tanda lleva su hueco final dentro (pr-8/pr-12), así las dos mitades
@@ -85,7 +88,7 @@ export const FoodStrip: React.FC<{ className?: string }> = ({ className = '' }) 
               id={id}
               flota
               retraso={i * 0.45}
-              className="w-24 md:w-32 lg:w-36 shrink-0"
+              className={`${tamano} shrink-0`}
             />
           ))}
         </div>
