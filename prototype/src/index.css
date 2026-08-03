@@ -151,8 +151,8 @@ body {
 
 .asienta {
   animation:
-    asentar 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--entrada, 0s) both,
-    flotar 7s ease-in-out infinite calc(var(--entrada, 0s) + 0.9s);
+    asentar 1.5s cubic-bezier(0.16, 1, 0.3, 1) var(--entrada, 0s) both,
+    flotar 7s ease-in-out infinite calc(var(--entrada, 0s) + 1.5s);
   will-change: transform;
 }
 

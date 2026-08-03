@@ -8,6 +8,13 @@ import { Parallax } from './Parallax';
 /** Una ilustración por pilar, en el mismo orden que los textos. */
 const PILAR_ALIMENTO = ['sardina', 'gambas', 'merluza', 'sepia'] as const;
 
+/**
+ * En pantalla estrecha los mejillones no caben —van con la columna que se
+ * queda pegada al hacer scroll, y esa columna en móvil no existe—, así que
+ * cada bloque de texto lleva la suya.
+ */
+const PROBLEMA_MOVIL = ['limon', 'naranja', 'ciruelas'] as const;
+
 export const Problem: React.FC = () => (
   <section id="problema" className="border-b border-line scroll-mt-14">
     <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
@@ -26,6 +33,14 @@ export const Problem: React.FC = () => (
           {PROBLEM.columns.map((c, i) => (
             <Reveal as="li" key={c.title} delay={i * 90}>
               <div className="py-8 border-b border-line">
+                {PROBLEMA_MOVIL[i] && (
+                  <FoodImage
+                    id={PROBLEMA_MOVIL[i]}
+                    flota
+                    retraso={i * 0.7}
+                    className="lg:hidden w-24 mb-5"
+                  />
+                )}
                 <h3 className="text-xl md:text-2xl font-medium tracking-tight">{c.title}</h3>
                 <p className="mt-3 text-ink-soft leading-relaxed max-w-[58ch]">{c.body}</p>
               </div>

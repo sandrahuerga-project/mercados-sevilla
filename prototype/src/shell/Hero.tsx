@@ -12,10 +12,11 @@ const scrollTo = (id: string) => () =>
  * asientan escalonadas y se quedan flotando, como quien coloca el género en el
  * mostrador antes de abrir.
  *
- * `dx`/`dy`/`rot` dicen de dónde viene cada una y `entrada` cuándo sale; los
- * retrasos van de 0,15 s a 0,6 s para que se coloquen una detrás de otra y no
- * todas de golpe. La velocidad de parallax sube con las piezas pequeñas: al
- * moverse más, se leen como si estuvieran delante.
+ * `dx`/`dy`/`rot` dicen de dónde viene cada una y `entrada` cuándo sale. Cada
+ * pieza tarda 1,5 s en asentarse y arrancan de 0,2 s en 0,35 s, así que la
+ * secuencia entera dura unos 2,75 s: lo bastante lenta para que se vea colocar
+ * el género y no un parpadeo. La velocidad de parallax sube con las piezas
+ * pequeñas: al moverse más, se leen como si estuvieran delante.
  */
 const BODEGON = [
   {
@@ -25,7 +26,7 @@ const BODEGON = [
     dx: '130px',
     dy: '-40px',
     rot: '18deg',
-    entrada: '0.15s',
+    entrada: '0.2s',
     parallax: 0.16,
   },
   {
@@ -35,7 +36,7 @@ const BODEGON = [
     dx: '-70px',
     dy: '90px',
     rot: '-14deg',
-    entrada: '0.3s',
+    entrada: '0.55s',
     parallax: 0.24,
   },
   {
@@ -45,7 +46,7 @@ const BODEGON = [
     dx: '50px',
     dy: '100px',
     rot: '26deg',
-    entrada: '0.45s',
+    entrada: '0.9s',
     parallax: 0.3,
   },
   {
@@ -55,7 +56,7 @@ const BODEGON = [
     dx: '-100px',
     dy: '-60px',
     rot: '-22deg',
-    entrada: '0.6s',
+    entrada: '1.25s',
     parallax: 0.12,
   },
 ] as const;
@@ -140,12 +141,7 @@ export const Hero: React.FC = () => (
         </Reveal>
 
         <Reveal delay={240}>
-          <dl className="border-t border-line relative">
-            {/* Mismo tamaño que la merluza y pegado a la izquierda de la columna:
-                los dos bodegones se equilibran en vez de competir. */}
-            <Parallax speed={0.22} className="hidden lg:block absolute -top-[21rem] xl:-top-[23rem] -left-8">
-              <FoodImage id="limon" flota retraso={2.2} className="w-72 xl:w-80" />
-            </Parallax>
+          <dl className="border-t border-line">
             {HERO.meta.map((m) => (
               <div
                 key={m.label}
