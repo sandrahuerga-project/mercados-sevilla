@@ -88,7 +88,9 @@ export const Hero: React.FC = () => (
           por los lados y sacaría barra horizontal, pero el bodegón sí necesita
           poder salirse por arriba. */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute inset-x-0 top-[28%] -rotate-[12deg] opacity-[0.20]">
+        {/* En móvil sube: ahí la columna es una sola y al 28 % la cinta caía
+            sobre la entradilla. Arriba cruza el titular, que la aguanta. */}
+        <div className="absolute inset-x-0 top-[13%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
           <FoodStrip className="w-[140%] -ml-[20%]" />
         </div>
       </div>
