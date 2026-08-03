@@ -21,8 +21,8 @@ const scrollTo = (id: string) => () =>
 const BODEGON = [
   {
     id: 'merluza',
-    ancho: 'w-60 xl:w-72',
-    pos: 'right-0 top-4',
+    ancho: 'w-80 xl:w-[26rem]',
+    pos: 'right-0 top-0',
     dx: '130px',
     dy: '-40px',
     rot: '18deg',
@@ -31,8 +31,8 @@ const BODEGON = [
   },
   {
     id: 'gambas',
-    ancho: 'w-40 xl:w-44',
-    pos: 'right-[13rem] top-[10rem]',
+    ancho: 'w-56 xl:w-64',
+    pos: 'right-[11rem] top-[8rem]',
     dx: '-70px',
     dy: '90px',
     rot: '-14deg',
@@ -41,8 +41,8 @@ const BODEGON = [
   },
   {
     id: 'naranja',
-    ancho: 'w-28 xl:w-32',
-    pos: 'right-[3rem] top-[16rem]',
+    ancho: 'w-40 xl:w-44',
+    pos: 'right-[2rem] top-[13rem]',
     dx: '50px',
     dy: '100px',
     rot: '26deg',
@@ -51,8 +51,8 @@ const BODEGON = [
   },
   {
     id: 'huevos',
-    ancho: 'w-32 xl:w-36',
-    pos: 'right-[20rem] top-[1rem]',
+    ancho: 'w-44 xl:w-52',
+    pos: 'right-[17rem] top-0',
     dx: '-100px',
     dy: '-60px',
     rot: '-22deg',
@@ -61,8 +61,8 @@ const BODEGON = [
   },
   {
     id: 'limon',
-    ancho: 'w-28 xl:w-32',
-    pos: 'right-[24rem] top-[13rem]',
+    ancho: 'w-40 xl:w-44',
+    pos: 'right-[19rem] top-[10rem]',
     dx: '-80px',
     dy: '70px',
     rot: '30deg',
@@ -95,7 +95,7 @@ export const Hero: React.FC = () => (
 
       {/* Bodegón: cuatro piezas que se colocan solas al cargar y luego flotan.
           Cada una entra desde su lado, con su giro y su retraso. */}
-      <div className="hidden lg:block absolute right-0 top-0 w-[32rem] h-[26rem] pointer-events-none">
+      <div className="hidden lg:block absolute right-0 top-0 w-[34rem] h-[28rem] pointer-events-none">
         {BODEGON.map((pieza) => (
           <Parallax key={pieza.id} speed={pieza.parallax} className={`absolute ${pieza.pos}`}>
             <FoodImage
