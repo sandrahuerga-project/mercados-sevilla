@@ -3,8 +3,6 @@ import { EVIDENCE } from '../content/texts';
 import { Reveal } from './Reveal';
 import { SectionLabel } from './SectionLabel';
 import { PersonaImage, type PersonaId } from './PersonaImage';
-import { FoodImage } from './FoodImage';
-import { Parallax } from './Parallax';
 
 export const Evidence: React.FC = () => (
   <section id="investigacion" className="border-b border-line scroll-mt-14">
@@ -54,12 +52,7 @@ export const Evidence: React.FC = () => (
       </div>
 
       <Reveal delay={200}>
-        <div className="mt-14 flex items-end justify-between gap-8">
-          <p className="font-narrow text-base text-ink-faint">{EVIDENCE.note}</p>
-          <Parallax speed={0.12} className="hidden md:block shrink-0">
-            <FoodImage id="huevos" flota retraso={0.8} className="w-32 lg:w-40" />
-          </Parallax>
-        </div>
+        <p className="mt-14 font-narrow text-base text-ink-faint">{EVIDENCE.note}</p>
       </Reveal>
     </div>
   </section>

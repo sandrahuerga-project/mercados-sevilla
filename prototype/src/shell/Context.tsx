@@ -81,7 +81,7 @@ export const Context: React.FC = () => {
 
         {/* Cierre del apartado: el género vuelve a asomar */}
         <Parallax speed={0.12} className="mt-16 flex justify-end">
-          <FoodImage id="pollo" flota retraso={1.1} className="w-32 lg:w-44" />
+          <FoodImage id="pollo" flota retraso={1.1} className="w-56 lg:w-72" />
         </Parallax>
       </div>
     </section>

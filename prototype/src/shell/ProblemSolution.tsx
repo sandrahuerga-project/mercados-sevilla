@@ -31,10 +31,6 @@ export const Problem: React.FC = () => (
               </div>
             </Reveal>
           ))}
-          {/* Cierre del apartado */}
-          <Parallax speed={0.1} className="pt-10 flex justify-end">
-            <FoodImage id="ciruelas" flota retraso={0.5} className="w-28 lg:w-36" />
-          </Parallax>
         </ul>
       </div>
     </div>

@@ -20,8 +20,14 @@ export const Hero: React.FC = () => (
 
     <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative">
       {/* Bodegón de portada: berenjena y limón, solo en pantallas anchas */}
-      <Parallax speed={0.16} className="hidden lg:block absolute right-0 top-2 xl:-top-2">
-        <FoodImage id="berenjena" flota className="w-80 xl:w-[26rem]" />
+      {/* Separada del borde: al girarla, el rectángulo que ocupa crece un 37 %
+          y pegada a la derecha se salía de la página. */}
+      <Parallax speed={0.16} className="hidden lg:block absolute right-16 top-2 xl:-top-2">
+        {/* El giro va en el envoltorio: la flotación anima el transform de la
+            propia imagen y una cosa pisaría a la otra. */}
+        <div className="rotate-[-30deg]">
+          <FoodImage id="berenjena" flota className="w-80 xl:w-[26rem]" />
+        </div>
       </Parallax>
 
       <Reveal>
