@@ -91,8 +91,8 @@ export const Hero: React.FC = () => (
         {/* En móvil no va por detrás de nada: se mete en el aire que se abre
             entre el titular y el texto, con las piezas más pequeñas para que
             ese hueco no tenga que ser una zanja. */}
-        <div className="absolute inset-x-0 top-[25.2%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
-          <FoodStrip className="w-[140%] -ml-[20%]" tamano="w-16 md:w-32 lg:w-36" />
+        <div className="absolute inset-x-0 top-[24.8%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
+          <FoodStrip className="w-[140%] -ml-[20%]" tamano="w-20 md:w-32 lg:w-36" />
         </div>
       </div>
 
@@ -132,7 +132,7 @@ export const Hero: React.FC = () => (
       </Reveal>
 
       {/* El aire de más en móvil es donde vive la cinta. */}
-      <div className="relative mt-48 md:mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
+      <div className="relative mt-52 md:mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
         <Reveal delay={160}>
           <p className="text-lg md:text-xl leading-relaxed max-w-[52ch] text-ink-soft">
             {HERO.lead}
