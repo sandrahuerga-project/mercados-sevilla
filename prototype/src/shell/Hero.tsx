@@ -22,7 +22,7 @@ const BODEGON = [
   {
     id: 'merluza',
     ancho: 'w-80 xl:w-[26rem]',
-    pos: 'right-0 top-0',
+    pos: 'right-0 -top-8',
     dx: '130px',
     dy: '-40px',
     rot: '18deg',
@@ -32,7 +32,7 @@ const BODEGON = [
   {
     id: 'gambas',
     ancho: 'w-56 xl:w-64',
-    pos: 'right-[11rem] top-[8rem]',
+    pos: 'right-[13rem] top-[12rem]',
     dx: '-70px',
     dy: '90px',
     rot: '-14deg',
@@ -42,7 +42,7 @@ const BODEGON = [
   {
     id: 'naranja',
     ancho: 'w-40 xl:w-44',
-    pos: 'right-[2rem] top-[13rem]',
+    pos: 'right-[5rem] top-[16rem]',
     dx: '50px',
     dy: '100px',
     rot: '26deg',
@@ -52,7 +52,7 @@ const BODEGON = [
   {
     id: 'huevos',
     ancho: 'w-44 xl:w-52',
-    pos: 'right-[17rem] top-0',
+    pos: 'right-[22rem] top-[1rem]',
     dx: '-100px',
     dy: '-60px',
     rot: '-22deg',
@@ -62,7 +62,7 @@ const BODEGON = [
   {
     id: 'limon',
     ancho: 'w-40 xl:w-44',
-    pos: 'right-[19rem] top-[10rem]',
+    pos: 'right-[26rem] top-[11rem]',
     dx: '-80px',
     dy: '70px',
     rot: '30deg',
@@ -82,20 +82,20 @@ export const Hero: React.FC = () => (
       </div>
     </div>
 
-    <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative overflow-hidden">
+    <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative">
       {/* Cinta inclinada: el género desfila por detrás del titular, muy tenue.
-          El envoltorio recorta porque una banda girada sobresale por los lados
-          y sacaría barra horizontal. */}
-      <div
-        className="absolute inset-x-0 top-[28%] -rotate-[12deg] opacity-[0.14] pointer-events-none"
-        aria-hidden="true"
-      >
-        <FoodStrip className="w-[140%] -ml-[20%]" />
+          El recorte vive aquí y no en toda la portada: la banda girada sobresale
+          por los lados y sacaría barra horizontal, pero el bodegón sí necesita
+          poder salirse por arriba. */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-x-0 top-[28%] -rotate-[12deg] opacity-[0.14]">
+          <FoodStrip className="w-[140%] -ml-[20%]" />
+        </div>
       </div>
 
       {/* Bodegón: cuatro piezas que se colocan solas al cargar y luego flotan.
           Cada una entra desde su lado, con su giro y su retraso. */}
-      <div className="hidden lg:block absolute right-0 top-0 w-[34rem] h-[28rem] pointer-events-none">
+      <div className="hidden lg:block absolute right-0 top-0 w-[40rem] h-[30rem] pointer-events-none">
         {BODEGON.map((pieza) => (
           <Parallax key={pieza.id} speed={pieza.parallax} className={`absolute ${pieza.pos}`}>
             <FoodImage
