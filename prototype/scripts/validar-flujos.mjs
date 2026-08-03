@@ -66,17 +66,24 @@ for (const archivo of archivos) {
 // Reproduce lo que hace buildJourney() y comprueba que el hilo resultante se
 // recorre entero: sin referencias rotas y sin pasos a los que no se llega.
 
-const catalogo = await readFile('src/content/flowCatalog.ts', 'utf8');
-const entradas = [...catalogo.matchAll(/code: '(\w+)',[\s\S]*?audience: '(\w+)',/g)].map((m) => ({
-  code: m[1],
-  audience: m[2],
-}));
+// Los recorridos se leen de journeys.ts: son a mano, no todos los flujos de la
+// persona. Las situaciones límite no tienen recorrido y por eso no salen aquí.
+const journeys = await readFile('src/content/journeys.ts', 'utf8');
+const bloque = journeys.match(/RECORRIDOS[^=]*=\s*\{([\s\S]*?)\n\};/);
+if (!bloque) fallo('journeys.ts: no se encuentra el mapa RECORRIDOS');
 
-const porAudiencia = new Map();
-for (const e of entradas) {
-  if (!porAudiencia.has(e.audience)) porAudiencia.set(e.audience, []);
-  porAudiencia.get(e.audience).push(e.code);
-}
+const CORTES = new Set(
+  [...journeys.matchAll(/CORTES = new Set\(\[([^\]]*)\]/g)]
+    .flatMap((m) => [...m[1].matchAll(/'([\w:-]+)'/g)])
+    .map((m) => m[1])
+);
+
+const porAudiencia = new Map(
+  [...(bloque?.[1] ?? '').matchAll(/(\w+):\s*\[([^\]]*)\]/g)].map((m) => [
+    m[1],
+    [...m[2].matchAll(/'(\w+)'/g)].map((c) => c[1]),
+  ])
+);
 
 for (const [audiencia, codigos] of porAudiencia) {
   const pasos = {};
@@ -96,7 +103,8 @@ for (const [audiencia, codigos] of porAudiencia) {
       if (paso.kind === 'buttons') {
         pasos[id] = { kind: 'buttons', next: paso.buttons.map((b) => `${code}:${b.next}`) };
       } else if (paso.kind === 'end') {
-        pasos[id] = { kind: 'end', next: inicioSiguiente ? [inicioSiguiente] : [] };
+        const puentea = inicioSiguiente && !CORTES.has(id);
+        pasos[id] = { kind: 'end', next: puentea ? [inicioSiguiente] : [] };
       } else {
         pasos[id] = { kind: paso.kind, next: paso.next ? [`${code}:${paso.next}`] : [] };
       }

@@ -133,7 +133,8 @@ export const FlowExplorer: React.FC = () => {
                   {(
                     [
                       ['uno', 'Flujo a flujo'],
-                      ['recorrido', 'Recorrido completo'],
+                      // Las situaciones límite no forman una historia: no hay recorrido.
+                      ...(journey ? ([['recorrido', 'De principio a fin']] as [Mode, string][]) : []),
                     ] as [Mode, string][]
                   ).map(([m, label]) => (
                     <button
@@ -250,13 +251,13 @@ export const FlowExplorer: React.FC = () => {
                 <Reveal className="mt-12">
                   <div className="flex flex-col items-center">
                     <p className="font-narrow text-lg text-cream/70 mb-8 max-w-[52ch] text-center">
-                      Los {flows.length} flujos encadenados en una sola conversación. Pulsa
-                      dentro y llévala por donde quieras: las ramas que salen mal también
-                      están.
+                      {isPanel
+                        ? 'Una jornada entera de Antonio en una sola conversación: del alta del puesto al cierre del día.'
+                        : `Una compra entera de ${AUDIENCES[audience].name} en una sola conversación. Pulsa dentro y avanza igual que en el móvil.`}
                     </p>
                     <FlowScreen
                       script={journey}
-                      label="Recorrido completo"
+                      label="De principio a fin"
                       description={`${AUDIENCES[audience].name}, de principio a fin`}
                     />
                   </div>
