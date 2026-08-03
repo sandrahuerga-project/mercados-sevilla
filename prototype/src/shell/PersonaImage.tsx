@@ -1,20 +1,37 @@
 import React, { useState } from 'react';
 
-export type PersonaId = 'carmen' | 'david' | 'antonio' | 'mercado';
+export type PersonaId = 'carmen' | 'david' | 'antonio' | 'mercado' | 'pescaderia';
 
 /**
- * Ilustración de personaje. Mientras Sandra las dibuja, cae en un marcador
- * de posición sobrio con la inicial: nunca se ve un icono roto.
+ * Ilustración de personaje. Si el archivo falta, cae en un marcador de posición
+ * sobrio con la inicial: nunca se ve un icono roto.
  *
- * Archivos esperados en /public/ilustraciones/:
- *   carmen.png · david.png · antonio.png   (400×400, recorte circular seguro)
- *   carmen-retrato.png · david-retrato.png · antonio-retrato.png  (~1200px ancho)
+ * Se sirven las versiones WebP de /public/ilustraciones/web/, no los originales:
+ * las dos fotos de perfil pesaban 2,9 y 4,1 MB para acabar en un avatar de
+ * 40 px. Para regenerarlas: node scripts/optimizar-ilustraciones.mjs
+ *
+ * Todo en minúsculas y sin acentos: Vercel corre sobre Linux y distingue
+ * mayúsculas, al contrario que Windows.
+ *
+ * Los tres personajes son ilustraciones; las dos «perfil» son las fotos de
+ * perfil de las cuentas de WhatsApp que salen en la cabecera del chat.
+ *
+ * No hay retratos aparte: la variante grande reutiliza el mismo archivo.
  */
+const FILE: Record<PersonaId, string> = {
+  carmen: 'carmen',
+  david: 'david',
+  antonio: 'antonio',
+  mercado: 'perfil-mercados',
+  pescaderia: 'perfil-pescaderia',
+};
+
 const INITIAL: Record<PersonaId, string> = {
   carmen: 'C',
   david: 'D',
   antonio: 'A',
   mercado: 'M',
+  pescaderia: 'P',
 };
 
 // Tonos oscuros a propósito: la inicial va en blanco y tiene que pasar AA.
@@ -23,27 +40,23 @@ const TINT: Record<PersonaId, string> = {
   david: 'bg-sevilla-tile',
   antonio: 'bg-mercado-green',
   mercado: 'bg-green-deep',
+  pescaderia: 'bg-sevilla-tile',
 };
 
 interface PersonaImageProps {
   id: PersonaId;
-  /** 'avatar' usa el cuadrado 400×400; 'retrato' la versión grande. */
+  /**
+   * Se acepta por compatibilidad con quien ya lo pasa, pero hoy no cambia el
+   * archivo: no hay retratos aparte. El tamaño lo decide `className`.
+   */
   variant?: 'avatar' | 'retrato';
   className?: string;
   alt?: string;
 }
 
-export const PersonaImage: React.FC<PersonaImageProps> = ({
-  id,
-  variant = 'avatar',
-  className = '',
-  alt,
-}) => {
+export const PersonaImage: React.FC<PersonaImageProps> = ({ id, className = '', alt }) => {
   const [failed, setFailed] = useState(false);
-  const src =
-    variant === 'avatar'
-      ? `/ilustraciones/${id}.png`
-      : `/ilustraciones/${id}-retrato.png`;
+  const src = `/ilustraciones/web/${FILE[id]}.webp`;
 
   if (failed) {
     // El tamaño de la inicial lo fija la clase text-* que pasa quien lo usa.

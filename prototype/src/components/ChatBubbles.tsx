@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Play, CheckCheck } from 'lucide-react';
 
 // Date separator
@@ -228,6 +228,14 @@ interface VideoBubbleProps {
   footer?: string;
   duration: string;
   imageUrl?: string;
+  /** Si viene, el vídeo se reproduce de verdad al tocar el play. */
+  videoUrl?: string;
+  /**
+   * Quién manda el vídeo. En los flujos del cliente lo manda el puesto ('bot');
+   * en P02 lo manda el propio placero desde su móvil ('user'), y entonces va
+   * a la derecha, en verde y sin rótulo de puesto.
+   */
+  sender?: 'bot' | 'user';
 }
 
 export const VideoBubble: React.FC<VideoBubbleProps> = ({
@@ -237,11 +245,62 @@ export const VideoBubble: React.FC<VideoBubbleProps> = ({
   footer,
   duration,
   imageUrl,
+  videoUrl,
+  sender = 'bot',
 }) => {
+  const [playing, setPlaying] = useState(false);
+
+  const esPlacero = sender === 'user';
+  const alineado = esPlacero ? 'items-end' : 'items-start';
+  const burbuja = esPlacero
+    ? 'bg-[#DCF8C6] rounded-tr-none bubble-tail-user border-transparent'
+    : 'bg-white rounded-tl-none bubble-tail-bot border-zinc-200';
+
+  const Rotulo = () =>
+    esPlacero ? null : (
+      <span className="text-[11px] font-semibold text-mercado-green mb-0.5 ml-2">
+        {puestoName}
+      </span>
+    );
+
+  const PieHora = () => (
+    <div className="text-right px-3 pb-2 select-none flex items-center justify-end space-x-1">
+      <span className="text-[9.5px] text-zinc-400 font-mono">{timestamp}</span>
+      {esPlacero && <CheckCheck size={13} className="text-[#53BDEB] inline" />}
+    </div>
+  );
+
+  if (videoUrl && playing) {
+    return (
+      <div className={`flex flex-col ${alineado} my-1.5 px-3 animate-fade-in`}>
+        <Rotulo />
+        <div
+          className={`relative max-w-[82%] rounded-2xl shadow-bubble overflow-hidden border ${burbuja}`}
+        >
+          <video
+            src={videoUrl}
+            poster={imageUrl}
+            controls
+            autoPlay
+            playsInline
+            className="w-full aspect-video bg-slate-800 object-cover"
+          />
+          <div className="p-3 text-[13px] text-zinc-700 leading-relaxed text-left border-t border-zinc-100 whitespace-pre-wrap">
+            {caption}
+          </div>
+          {footer && <div className="px-3 pb-1 text-[10.5px] text-zinc-400">{footer}</div>}
+          <PieHora />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-start my-1.5 px-3 animate-fade-in">
-      <span className="text-[11px] font-semibold text-mercado-green mb-0.5 ml-2">{puestoName}</span>
-      <div className="relative max-w-[82%] bg-white rounded-2xl rounded-tl-none bubble-tail-bot shadow-bubble overflow-hidden border border-zinc-200">
+    <div className={`flex flex-col ${alineado} my-1.5 px-3 animate-fade-in`}>
+      <Rotulo />
+      <div
+        className={`relative max-w-[82%] rounded-2xl shadow-bubble overflow-hidden border ${burbuja}`}
+      >
         <div className="relative aspect-video w-full bg-slate-800 flex items-center justify-center text-white overflow-hidden">
           {imageUrl && (
             <div
@@ -250,9 +309,16 @@ export const VideoBubble: React.FC<VideoBubbleProps> = ({
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-mercado-green shadow-lg z-10 cursor-pointer">
+          <button
+            type="button"
+            onClick={() => videoUrl && setPlaying(true)}
+            aria-label={videoUrl ? `Reproducir el vídeo de ${puestoName}` : undefined}
+            aria-hidden={videoUrl ? undefined : true}
+            tabIndex={videoUrl ? undefined : -1}
+            className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-mercado-green shadow-lg z-10 cursor-pointer"
+          >
             <Play size={18} className="fill-current ml-0.5" />
-          </div>
+          </button>
           <span className="absolute bottom-1.5 right-2 px-1.5 py-0.5 bg-black/60 rounded text-[9px] font-mono text-white select-none">
             {duration}
           </span>
@@ -263,9 +329,7 @@ export const VideoBubble: React.FC<VideoBubbleProps> = ({
         {footer && (
           <div className="px-3 pb-1 text-[10.5px] text-zinc-400">{footer}</div>
         )}
-        <div className="text-right px-3 pb-2 select-none">
-          <span className="text-[9.5px] text-zinc-400 font-mono">{timestamp}</span>
-        </div>
+        <PieHora />
       </div>
     </div>
   );

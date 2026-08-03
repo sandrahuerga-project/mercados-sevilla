@@ -170,6 +170,8 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
                 footer={step.footer}
                 duration={step.duration}
                 imageUrl={step.imageUrl}
+                videoUrl={step.videoUrl}
+                sender={step.sender}
               />
             );
           case 'buttons':

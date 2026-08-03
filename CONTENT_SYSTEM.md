@@ -106,7 +106,7 @@ Un solo modo verbal por mensaje. Inventario cerrado:
 
 ```
 Confirmar · Modificar · Cancelar · Pedir · Repetir · Reintentar
-Sí, allí voy · Cambiar de mercado · Ver del día · Avísame
+Sí · Cambiar de mercado · Ver del día · Avísame
 Hablar con Antonio · Voy ahora · Espero · Mañana · Volver
 ```
 

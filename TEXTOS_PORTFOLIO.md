@@ -20,9 +20,9 @@
 | Descriptor (arriba derecha) | Diseño de producto conversacional |
 | Etiqueta | Case study · Diseño de producto |
 | **Titular** | Comprar en el mercado sin salir de WhatsApp |
-| Entradilla | Los mercados de abastos de Sevilla tienen una plataforma municipal completa y poco usada. Mientras tanto, un pescadero vende cada día por WhatsApp sin plataforma ninguna. Este proyecto diseña lo segundo a escala de lo primero. |
+| Entradilla | Para potenciar la compra en los mercados de abastos de Sevilla, no hacía falta una web app como la actual. Hacía falta WhatsApp, que es el canal que utilizan sus usuarios. Este proyecto rediseña la compra en los mercados de Sevilla siguiendo el ejemplo de un exitoso placero.|
 | Botón principal | Ver los flujos |
-| Enlace secundario | Cómo está hecho |
+| Botón secundario | Por qué WhatsApp |
 
 **Ficha del proyecto**
 
@@ -37,69 +37,69 @@
 ## 2. El problema
 
 **Etiqueta:** El problema
-**Titular:** La tecnología no era el problema. El canal sí.
+**Titular:** Los mercados cada vez más vacíos y la gente que no puede comprar en ellos.
 
 **Una plataforma que casi nadie usa**
-El Ayuntamiento tiene web, app, taquillas refrigeradas y reparto para once mercados. La infraestructura está construida y financiada, pero el uso es bajo: pide registro, aprendizaje y una app nueva en el móvil.
+El Ayuntamiento tiene web app, app, taquillas refrigeradas y reparto para once mercados. La infraestructura está construida y financiada, pero el uso es bajo: pide registro exhaustivo, aprendizaje y una app nueva en el móvil. No muestra fotos de productos reales y la interfaz es compleja para usuarios no tecnológicos.
 
 **Un WhatsApp que funciona solo**
-Un pescadero de San Gonzalo graba cada mañana un vídeo de su mostrador, lo manda por difusión y recibe los pedidos en lenguaje natural. Cobra al entregar. Sin plataforma, sin comisiones y con clientela que repite.
+Un pescadero de un mercado de barrio graba cada mañana un vídeo de su mostrador, lo manda por difusión y recibe los pedidos en lenguaje natural. Ahí reside su éxito: entra por los ojos, engancha cada día a gente que mira WhatsApp a primera hora, pedido rápido y cobro al entregar o recoger.
 
-**Lo que separa a uno del otro**
-El canal ya está en el móvil del cliente, la compra ocurre dentro de una conversación y la relación con el placero se mantiene. Ninguna de las tres cosas depende de tener mejor tecnología.
+**Lo que separa a un canal del otro**
+WhatsApp ya está en el móvil del cliente, la compra ocurre dentro de una conversación y la relación con el placero se mantiene. La actual web app requiere aprendizaje, es fría y está llena de fotografías de producto de stock.
 
 ---
 
 ## 3. De la investigación
 
 **Etiqueta:** De la investigación
-**Titular:** Lo dijeron ellos, no yo
-**Nota al pie:** Citas de las entrevistas. Los nombres son de perfil, no reales.
+**Titular:** Qué piensan los clientes
+**Nota al pie:** Citas de las entrevistas. Los nombres no son reales.
 
-### Carmen · 71 años · Compra en el mercado toda la vida
+### Carmen · 71 años · Compra en el mercado de toda la vida
 
-> «Lo único que uso del móvil es el WhatsApp, y la verdad es que al ver los vídeos todas las mañanas me da ideas de comidas y me entran ganas de comprarle.»
+> «Lo único que uso del móvil es el WhatsApp y, la verdad, es que ver los vídeos de la pescadería todas las mañanas me da ideas de comidas y me entran ganas de comprarle.»
 
-**Qué cambia:** el vídeo diario no es un catálogo: es lo que despierta las ganas de comprar. Por eso el flujo empieza en el vídeo y no en una lista de productos.
+**Qué importa:** el vídeo diario no es un catálogo: es lo que despierta las ganas de comprar. Por eso el flujo empieza en el vídeo y no en una lista de productos.
 
-### David · 34 años · Trabaja fuera, compra los sábados
+### David · 34 años · Trabaja de 8 a 17h y le gusta comprar fresco
 
-> «Aunque me encanta comprar a negocios locales, con el trabajo es imposible comprar en el mercado como no sea los sábados, y siempre tengo planes. Me gustaría poder venir a por lo encargado por la tarde cuando salga de trabajar.»
+> «Aunque me encanta comprar en negocios locales, con el trabajo es imposible comprar en el mercado como no sea los sábados. Y siempre tengo planes. Me gustaría poder venir a por lo encargado por la tarde cuando salga de trabajar.»
 
-**Qué cambia:** no es falta de intención, es incompatibilidad de horarios. De aquí salen la taquilla refrigerada y el reparto en franja de tarde.
+**Qué es clave:** no es falta de intención, es incompatibilidad de horarios. De aquí salen la taquilla refrigerada y el reparto en franja de tarde.
 
 ---
 
 ## 4. La propuesta
 
 **Etiqueta:** La propuesta
-**Titular:** Un secretario, no una tienda
-**Entradilla:** El bot toma nota y avisa. No calcula precios, no decide sustituciones y no sustituye al placero: le quita el trabajo administrativo y le deja la relación con el cliente.
+**Titular:** Más que un puesto en el mercado: un asistente que acerca el negocio a los usuarios y les impacta a diario.
+**Entradilla:** El bot habla con los clientes, toma nota y avisa al placero. No calcula precios, no decide sustituciones y no sustituye al vendedor: le quita el trabajo administrativo y le deja la relación con el cliente, potenciando el negocio con un impacto diario en la mente del usuario.
 
 | Pilar | Texto |
 |---|---|
-| El vídeo abre el día | Cada mañana llega el mostrador real del puesto. Lo que se ve es lo que hay, sin inventario que mantener. |
-| Se pide hablando | Audio o texto, en lenguaje de mercado. «Un cuarto de gambas» se entiende como ¼ kg, no como 250 gramos de camarón. |
+| El vídeo abre el día | Cada mañana le llega a los usuarios un vídeo del mostrador real del puesto. Lo que se ve es lo que hay, sin inventario que mantener. |
+| Se pide hablando | Audio o texto, en lenguaje natural. «Un cuarto de gambas» se entiende como ¼ kg. |
 | El placero manda | Él acepta, él pesa y él teclea el total final. El bot solo repite ese número al cliente. |
-| Se paga como siempre | Efectivo, Bizum o tarjeta al recoger o al recibir. Sin pasarela de pago que aprender. |
+| Se paga como siempre | Efectivo, Bizum o tarjeta al recoger o al recibir. Sin pasarela de pago que aprender ni que desarrollar tecnológicamente. |
 
 ---
 
 ## 5. El prototipo
 
 **Etiqueta:** El prototipo
-**Titular:** Trece conversaciones y un panel
-**Entradilla:** Cada pantalla es interactiva: se pulsa dentro y la conversación avanza. Elige de quién quieres ver la experiencia.
+**Titular:** Elige de quién quieres ver la experiencia
+**Entradilla:**  Cada pantalla es interactiva: pulsa dentro y la conversación avanza.
 **Nota final:** Los unhappy paths también están: producto agotado, cliente que no recoge, pedido fuera de horario.
 
 ### Selector de personas
 
 | Persona | Etiqueta | Descripción |
 |---|---|---|
-| Carmen, 71 años | Cliente mayor | Solo usa WhatsApp. Necesita confirmación en cada paso y poder hablar con una persona en cualquier momento. |
-| David, 34 años | Cliente joven | Compra de noche y con atajos. Aporta volumen, pedidos de varios puestos y recogida fuera del horario de mercado. |
-| Antonio, 52 años | Placero | Sin él no hay producto. Su vista no es WhatsApp: es un panel donde cada pedido se resuelve en un toque. |
-| Situaciones límite | Sistema | Lo que pasa cuando el puesto está cerrado o cuando un cliente acumula incidencias sin resolver. |
+| Carmen, 71 años | Clienta no tecnológica y movilidad reducida | Solo usa WhatsApp. Necesita confirmación en cada paso y poder hablar con una persona en cualquier momento. |
+| David, 34 años | Cliente joven con poco tiempo | Compra mientras desayuna en el trabajo. Hace pedidos en varios puestos y recoge fuera del horario de mercado. |
+| Antonio, 52 años | Placero | Si su producto no se ve, no lo vende. Sus pedidos recibidos no están en el chat, sino en panel donde cada uno de ellos se resuelve en un toque. |
+| Situaciones límite | Sistema | Lo que pasa cuando el puesto está cerrado, se ha terminado el producto o cuando un cliente acumula incidencias sin resolver. |
 
 ### Modos de vista
 
@@ -135,26 +135,26 @@ Pie del diagrama: Los códigos vienen del inventario de flujos del proyecto. Cad
 
 **Etiqueta:** La otra mitad
 **Titular:** El panel del placero
-**Entradilla:** Antonio no usa WhatsApp para trabajar: usa un panel web. Al marcar un pedido como listo, teclea el total real tras pesarlo, y ese número es el que le llega al cliente.
+**Entradilla:** Antonio no usa WhatsApp para trabajar: usa un panel web. Recibe el pedido, teclea el total real tras pesarlo, y el total le llega al cliente junto al estado de "en preparación". Tras el pago, Antonio lo marca como cobrado y entregado. 
 
 ---
 
 ## 6. Cómo está hecho
 
-**Etiqueta:** Cómo está hecho
-**Pestañas:** Contexto de producto · Restricciones de WhatsApp
+**Etiqueta:** Contexto y restricciones 
+**Pestañas:** Contexto de producto · Restricciones de WhatsApp Business
 
 ### Contexto de producto
 
 | Bloque | Texto |
 |---|---|
-| El modelo que ya funcionaba | Un pescadero del Mercado de San Gonzalo demostró que el canal conversacional gana al comercio electrónico clásico: vídeo del mostrador por la mañana, pedidos en lenguaje natural y cobro en mano. El proyecto industrializa ese modelo sin romperlo. |
-| Convivir, no competir | La plataforma municipal ya tiene taquillas, reparto y once mercados. La capa conversacional se apoya en esa infraestructura en lugar de duplicarla. |
-| Voz y tono | Andaluz cercano y profesional, sin diminutivos ni condescendencia. Carmen recibe el mismo trato que David: cambia la densidad de la información, nunca el respeto. |
+| El modelo que ya funcionaba | Un pescadero en un mercado de barrio demostró que el canal conversacional gana al comercio electrónico clásico, pese a estar presente en ambos: vídeo del mostrador por la mañana en el chat, pedidos en lenguaje natural y cobro en mano, Bizum o tarjeta. Recoger o a domicilio. Este proyecto lleva ese modelo a WhatsApp Business y engloba más puestos y mercados. |
+| Aprovechar la infraestructura | La plataforma municipal creada para la web app, ya tiene taquillas, reparto (en algunos, pero extensible a todos) en 11 mercados. La capa conversacional se apoya en esa infraestructura y le da un uso que hasta ahora ha sido mínimo. |
+| Voz y tono | Lenguaje cercano y cotidiano, sin diminutivos ni condescendencia. Carmen recibe el mismo trato que David. Cambia la densidad de la información y la posibilidad de acceder a llamadas con el vendedor.
 
-### Restricciones de WhatsApp
+### Restricciones de WhatsApp Business
 
-**Entradilla:** WhatsApp controla el aspecto del chat. Todo el diseño ocurre dentro de estos límites, verificados contra la documentación de Meta.
+**Entradilla:** WhatsApp Business controla el aspecto del chat (la UI). Todo el diseño ocurre dentro de estos límites, verificados contra la documentación de Meta.
 
 La tabla de restricciones sale de `prototype/src/data/mockData.ts` (botones, listas, ausencia de tarjetas, WhatsApp Flows y plantillas de utilidad).
 
@@ -163,7 +163,7 @@ La tabla de restricciones sale de `prototype/src/data/mockData.ts` (botones, lis
 ## 7. Pie
 
 - Prototipo de diseño. No envía mensajes reales ni procesa pagos.
-- Diseño y contenido: Sandra Huerga · Sevilla, 2026
+- Diseño y contenido: Sandra Huerga · 2026
 
 ---
 

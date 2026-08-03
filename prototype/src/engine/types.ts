@@ -44,7 +44,12 @@ export type FlowStep =
       caption: string;
       footer?: string;
       duration: string;
+      /** Fotograma de portada. Con Cloudinary, el mismo vídeo con `so_2` y .jpg. */
       imageUrl?: string;
+      /** Si viene, el play reproduce el vídeo de verdad en vez de quedarse en portada. */
+      videoUrl?: string;
+      /** 'user' cuando lo manda el propio placero (P02). Por defecto lo manda el puesto. */
+      sender?: 'bot' | 'user';
       next: string | null;
     }
   | { kind: 'waflow'; ctaLabel: string; next: string }

@@ -89,7 +89,7 @@ Dos chips en fila bajo el broadcast:
 Tres chips en fila:
 - `[✓ Confirmar]` — chip primario relleno, bg `#2D6A4F`, texto blanco.
 - `[✏️ Modificar]` — chip outline.
-- `[💬 Hablar c/Antonio]` — chip outline.
+- `[💬 Hablar con Antonio]` — chip outline.
 
 **9. Input bar fijo inferior**
 

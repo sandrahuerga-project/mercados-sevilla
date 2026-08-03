@@ -1,8 +1,8 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { HERO, SITE } from '../content/texts';
 import { Reveal } from './Reveal';
-import { Pez, Naranja } from './Motifs';
+import { FoodImage } from './FoodImage';
+import { Parallax } from './Parallax';
 
 const scrollTo = (id: string) => () =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -19,8 +19,10 @@ export const Hero: React.FC = () => (
     </div>
 
     <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative">
-      {/* Motivo de mercado, discreto y solo en pantallas anchas */}
-      <Pez className="hidden lg:block absolute right-6 top-10 w-52 text-mercado-green/25" />
+      {/* Ilustración de mercado, solo en pantallas anchas */}
+      <Parallax speed={0.16} className="hidden lg:block absolute right-0 top-2 xl:-top-2">
+        <FoodImage id="merluza" flota className="w-80 xl:w-[26rem]" />
+      </Parallax>
 
       <Reveal>
         <p className="font-narrow text-lg text-mercado-green">{HERO.eyebrow}</p>
@@ -41,20 +43,13 @@ export const Hero: React.FC = () => (
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <button
               onClick={scrollTo('flujos')}
-              className="inline-flex items-center gap-4 border border-ink px-7 py-4 font-narrow text-lg hover:bg-ink hover:text-cream transition-colors whitespace-nowrap"
+              className="border border-ink bg-ink text-cream px-7 py-4 font-narrow text-lg hover:bg-transparent hover:text-ink transition-colors whitespace-nowrap"
             >
               {HERO.ctaPrimary}
             </button>
             <button
-              onClick={scrollTo('flujos')}
-              aria-label={HERO.ctaPrimary}
-              className="w-14 h-14 rounded-full border border-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors shrink-0"
-            >
-              <ArrowRight size={20} strokeWidth={1.5} />
-            </button>
-            <button
               onClick={scrollTo('como-esta-hecho')}
-              className="ml-1 font-narrow text-lg text-ink-soft underline underline-offset-8 decoration-line hover:text-ink hover:decoration-ink transition-colors whitespace-nowrap"
+              className="border border-line px-7 py-4 font-narrow text-lg text-ink-soft hover:border-ink hover:text-ink transition-colors whitespace-nowrap"
             >
               {HERO.ctaSecondary}
             </button>
@@ -63,7 +58,9 @@ export const Hero: React.FC = () => (
 
         <Reveal delay={240}>
           <dl className="border-t border-line relative">
-            <Naranja className="hidden lg:block absolute -top-24 right-0 w-16 text-azafran/40" />
+            <Parallax speed={0.22} className="hidden lg:block absolute -top-32 right-0">
+              <FoodImage id="limon" flota retraso={2.2} className="w-28" />
+            </Parallax>
             {HERO.meta.map((m) => (
               <div
                 key={m.label}

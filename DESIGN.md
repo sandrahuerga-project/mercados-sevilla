@@ -340,7 +340,7 @@ SALUDO RECURRENTE  (texto libre + Reply Buttons)
 ─────────────────────────────────────
 "Buenos días [Nombre]. Tu mercado es [Mercado].
  ¿Compras allí hoy?"
-[Sí, allí voy]  [Cambiar de mercado]
+[Sí]  [Cambiar de mercado]
 
 SALUDO FUERA DE HORARIO
 ─────────────────────────────────────
@@ -365,7 +365,7 @@ CONFIRMACIÓN DE PEDIDO  (texto libre con *bold*, sin card)
 
 📍 Recogida en puesto, mañana 10:00-14:00
 💳 Pago al entregar"
-[Confirmar]  [Modificar]  [Hablar c/Antonio]
+[Confirmar]  [Modificar]  [Hablar con Antonio]
 
 CONFIRMACIÓN FINAL  (texto libre)
 ─────────────────────────────────────────────────────
@@ -731,9 +731,9 @@ MENSAJE:
 "⚠️ Las acedías se han agotado.
  ¿Las sustituimos por lenguado pequeño
  al mismo precio?"
-[Aceptar]  [Quitar]  [Cancelar todo]
+[Aceptar]  [Quitar del pedido]  [Cancelar pedido]
 
-Si "Quitar":
+Si "Quitar del pedido":
 "De acuerdo. Tu pedido queda:
  ½ kg Boquerones frescos     1,75 €
  ¿Confirmas así?"
@@ -786,7 +786,7 @@ Casos límite que el flujo principal no cubre. Cada uno con su respuesta predefi
   Usuario pide producto de          "Eso lo tiene Carnicería López
   otro puesto                        del mismo mercado.
                                      ¿Quieres pedírselo a ellos?"
-                                    [Sí, ir]  [No, sigo aquí]
+                                    [Sí]  [No, sigo aquí]
 
   Usuario olvida confirmar pedido   Tras 10 min sin respuesta:
                                     "Tu pedido sigue pendiente

@@ -10,7 +10,7 @@
 | Supuesto DESIGN | Realidad WA | Decisión |
 |---|---|---|
 | Chips múltiples bajo cada mensaje (3-4 chips) | Reply buttons: **máx 3**, **20 char cada uno**, sin emojis custom | Reducir chips a 3 máx, copy ≤20 char |
-| "Hablar c/Antonio" como tercer chip junto a Confirmar/Modificar | OK, pero entonces no caben más | Es lo correcto, ya estaba bien |
+| "Hablar con Antonio" como tercer chip junto a Confirmar/Modificar | OK, pero entonces no caben más | Es lo correcto, ya estaba bien |
 | Burbujas tipográficas custom (Playfair, DM Mono, colores) | **Imposible en WA real**: el chrome lo controla Meta | Solo válido para prototipo Lovable / Figma / case study |
 | Vídeo del día embebido con play button verde custom | El vídeo se ve, el chrome de WA lo envuelve | OK, sin custom UI |
 | Audio del usuario con waveform verde | El chrome es de WA. No puedes tematizarlo | Solo prototipo, no producción |
@@ -269,7 +269,7 @@ En WA real funciona así (texto + 3 reply buttons):
 💳 Pago al entregar
 ```
 
-Buttons: `[Confirmar]` `[Modificar]` `[Hablar c/Antonio]` (20 char ✓, sin emojis — WA no renderiza emojis custom en reply buttons)
+Buttons: `[Confirmar]` `[Modificar]` `[Hablar con Antonio]` (18 char ✓, sin emojis — WA no renderiza emojis custom en reply buttons)
 
 ---
 

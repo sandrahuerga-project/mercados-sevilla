@@ -2,7 +2,11 @@ import React from 'react';
 import { PROBLEM, SOLUTION } from '../content/texts';
 import { Reveal } from './Reveal';
 import { SectionLabel } from './SectionLabel';
-import { Gamba, Pimiento } from './Motifs';
+import { FoodImage, FoodStrip } from './FoodImage';
+import { Parallax } from './Parallax';
+
+/** Una ilustración por pilar, en el mismo orden que los textos. */
+const PILAR_ALIMENTO = ['sardina', 'gambas', 'merluza', 'naranja'] as const;
 
 export const Problem: React.FC = () => (
   <section id="problema" className="border-b border-line scroll-mt-14">
@@ -12,7 +16,9 @@ export const Problem: React.FC = () => (
       <div className="mt-12 grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <Reveal className="lg:sticky lg:top-24 lg:self-start">
           <h2 className="display text-3xl md:text-4xl max-w-[14ch]">{PROBLEM.headline}</h2>
-          <Gamba className="hidden lg:block w-32 mt-14 text-sevilla-tile/30" />
+          <Parallax speed={0.14} className="hidden lg:block mt-14">
+            <FoodImage id="mejillones" flota className="w-64" />
+          </Parallax>
         </Reveal>
 
         {/* Sin numeración: la propia regla separa los apartados */}
@@ -44,7 +50,9 @@ export const Solution: React.FC = () => (
               {SOLUTION.lead}
             </p>
           </div>
-          <Pimiento className="hidden lg:block w-16 shrink-0 text-cancel/35" />
+          <Parallax speed={0.18} className="hidden lg:block shrink-0">
+            <FoodImage id="chorizo-queso" flota retraso={1.4} className="w-48" />
+          </Parallax>
         </div>
       </Reveal>
 
@@ -52,6 +60,7 @@ export const Solution: React.FC = () => (
         {SOLUTION.pillars.map((p, i) => (
           <Reveal key={p.title} delay={i * 80}>
             <div className="border-t border-mercado-green/25 pt-6 h-full">
+              <FoodImage id={PILAR_ALIMENTO[i]} flota retraso={i * 0.9} className="w-28 mb-4" />
               <h3 className="text-xl font-medium tracking-tight text-mercado-green">
                 {p.title}
               </h3>
@@ -60,6 +69,9 @@ export const Solution: React.FC = () => (
           </Reveal>
         ))}
       </div>
+
+      {/* Friso de mostrador: cierra la sección con el género a la vista */}
+      <FoodStrip className="mt-20 pt-10 border-t border-mercado-green/20" />
     </div>
   </section>
 );

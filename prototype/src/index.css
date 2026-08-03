@@ -114,6 +114,24 @@ body {
   transform: none;
 }
 
+/* ---- Ilustraciones sueltas: flotación continua ----
+   Va siempre sobre la propia imagen. El desplazamiento de parallax lo pone el
+   envoltorio <Parallax>, para que las dos transformaciones no se pisen. */
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotate(-1.5deg);
+  }
+}
+
+.flota {
+  animation: flotar 7s ease-in-out infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -122,6 +140,9 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .flota {
+    animation: none;
   }
 }
 

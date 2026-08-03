@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { FLOWS_SECTION, AUDIENCES, PANEL_SECTION } from '../content/texts';
 import { AUDIENCE_ORDER, flowsFor, groupsFor, type AudienceKey } from '../content/flowCatalog';
+import { journeyFor } from '../content/journeys';
 import { FlowScreen } from '../engine/FlowScreen';
 import { PlaceroPanel } from '../panel/PlaceroPanel';
 import { PersonaImage, type PersonaId } from './PersonaImage';
@@ -19,6 +20,7 @@ export const FlowExplorer: React.FC = () => {
 
   const flows = useMemo(() => flowsFor(audience), [audience]);
   const groups = useMemo(() => groupsFor(audience), [audience]);
+  const journey = useMemo(() => journeyFor(audience), [audience]);
   const visible = group ? flows.filter((f) => f.group === group) : flows;
   const isPanel = audience === 'antonio';
 
@@ -122,22 +124,7 @@ export const FlowExplorer: React.FC = () => {
           </div>
         </Reveal>
 
-        {isPanel ? (
-          /* Antonio no usa WhatsApp: su vista es el panel */
-          <div className="mt-16">
-            <Reveal>
-              <p className="font-narrow text-lg text-cream/80">{PANEL_SECTION.eyebrow}</p>
-              <h3 className="display text-2xl md:text-4xl mt-4">{PANEL_SECTION.headline}</h3>
-              <p className="mt-5 text-cream/70 leading-relaxed max-w-[60ch]">
-                {PANEL_SECTION.lead}
-              </p>
-            </Reveal>
-            <Reveal delay={120} className="mt-10">
-              <PlaceroPanel />
-            </Reveal>
-          </div>
-        ) : (
-          <>
+        <>
             {/* Paso 2 — recorrido completo o flujo suelto */}
             <Reveal delay={140}>
               <div className="mt-12 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-x-8 gap-y-4 border-b border-cream/15 pb-6">
@@ -218,9 +205,6 @@ export const FlowExplorer: React.FC = () => {
                               <h3 className="text-xl md:text-2xl font-medium tracking-tight">
                                 {f.name}
                               </h3>
-                              <span className="font-narrow text-base text-cream/60">
-                                {f.code}
-                              </span>
                               {f.hasUnhappy && (
                                 <span className="font-narrow text-base text-azafran-light border border-azafran-light/40 rounded-full px-2.5 py-0.5">
                                   Unhappy paths
@@ -260,21 +244,40 @@ export const FlowExplorer: React.FC = () => {
                 })}
               </ul>
             ) : (
-              /* Recorrido completo: los flujos de la persona, en orden */
-              <div className="mt-12 space-y-20">
-                {flows.map((f, i) => (
-                  <Reveal key={f.code} delay={i * 60}>
-                    <div className="flex flex-col items-center">
-                      <span className="font-narrow text-base text-cream/60 mb-4">
-                        Paso {i + 1} de {flows.length}
-                      </span>
-                      <FlowScreen script={f.script} label={f.name} description={f.about} />
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+              /* Recorrido completo: un solo hilo, de principio a fin */
+              journey && (
+                <Reveal className="mt-12">
+                  <div className="flex flex-col items-center">
+                    <p className="font-narrow text-lg text-cream/70 mb-8 max-w-[52ch] text-center">
+                      Los {flows.length} flujos encadenados en una sola conversación. Pulsa
+                      dentro y llévala por donde quieras: las ramas que salen mal también
+                      están.
+                    </p>
+                    <FlowScreen
+                      script={journey}
+                      label="Recorrido completo"
+                      description={`${AUDIENCES[audience].name}, de principio a fin`}
+                    />
+                  </div>
+                </Reveal>
+              )
             )}
-          </>
+        </>
+
+        {/* Antonio tiene además una vista que no es WhatsApp: el panel */}
+        {isPanel && (
+          <div className="mt-20 pt-16 border-t border-cream/15">
+            <Reveal>
+              <p className="font-narrow text-lg text-cream/80">{PANEL_SECTION.eyebrow}</p>
+              <h3 className="display text-2xl md:text-4xl mt-4">{PANEL_SECTION.headline}</h3>
+              <p className="mt-5 text-cream/70 leading-relaxed max-w-[60ch]">
+                {PANEL_SECTION.lead}
+              </p>
+            </Reveal>
+            <Reveal delay={120} className="mt-10">
+              <PlaceroPanel />
+            </Reveal>
+          </div>
         )}
 
         <Reveal delay={160}>
