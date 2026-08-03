@@ -90,7 +90,7 @@ export const Hero: React.FC = () => (
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         {/* En móvil sube: ahí la columna es una sola y al 28 % la cinta caía
             sobre la entradilla. Arriba cruza el titular, que la aguanta. */}
-        <div className="absolute inset-x-0 top-[13%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
+        <div className="absolute inset-x-0 top-[14%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
           <FoodStrip className="w-[140%] -ml-[20%]" />
         </div>
       </div>
