@@ -205,9 +205,10 @@ export const FlowExplorer: React.FC = () => {
                               <h3 className="text-xl md:text-2xl font-medium tracking-tight">
                                 {f.name}
                               </h3>
-                              {f.hasUnhappy && (
+                              {/* En «Situaciones límite» sobra: ahí todos lo son. */}
+                              {f.hasUnhappy && audience !== 'limite' && (
                                 <span className="font-narrow text-base text-azafran-light border border-azafran-light/40 rounded-full px-2.5 py-0.5">
-                                  Unhappy paths
+                                  Con ramas que salen mal
                                 </span>
                               )}
                             </div>
@@ -280,11 +281,6 @@ export const FlowExplorer: React.FC = () => {
           </div>
         )}
 
-        <Reveal delay={160}>
-          <p className="mt-16 pt-8 border-t border-cream/15 font-narrow text-base text-cream/60 max-w-[70ch]">
-            {FLOWS_SECTION.hint}
-          </p>
-        </Reveal>
       </div>
     </section>
   );

@@ -96,7 +96,6 @@ export const FLOWS_SECTION = {
   eyebrow: 'El prototipo',
   headline: 'Elige de quién quieres ver la experiencia',
   lead: 'Cada pantalla es interactiva: pulsa dentro y la conversación avanza.',
-  hint: 'Los unhappy paths también están: producto agotado, cliente que no recoge, pedido fuera de horario.',
 };
 
 export const AUDIENCES = {

@@ -58,8 +58,10 @@ export const Hero: React.FC = () => (
 
         <Reveal delay={240}>
           <dl className="border-t border-line relative">
-            <Parallax speed={0.22} className="hidden lg:block absolute -top-32 right-0">
-              <FoodImage id="limon" flota retraso={2.2} className="w-28" />
+            {/* Mismo tamaño que la merluza y pegado a la izquierda de la columna:
+                los dos bodegones se equilibran en vez de competir. */}
+            <Parallax speed={0.22} className="hidden lg:block absolute -top-[21rem] xl:-top-[23rem] -left-8">
+              <FoodImage id="limon" flota retraso={2.2} className="w-72 xl:w-80" />
             </Parallax>
             {HERO.meta.map((m) => (
               <div
