@@ -156,15 +156,6 @@ body {
   will-change: transform;
 }
 
-/* ---- La cinta de la portada se apaga antes del texto ----
-   Cruza por detrás del titular, que es grande y aguanta la textura, pero moría
-   sobre la entradilla y la lista de datos, que son de cuerpo pequeño. En vez de
-   bajarle la opacidad a toda la banda, se desvanece hacia abajo. */
-.cinta-portada {
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 53%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 53%);
-}
-
 /* ---- Friso de mostrador: desfile continuo ----
    La tira se pinta dos veces seguidas y se desplaza justo la mitad, así el
    final empalma con el principio y no se ve el corte. */

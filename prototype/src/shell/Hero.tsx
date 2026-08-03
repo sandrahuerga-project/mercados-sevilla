@@ -87,10 +87,7 @@ export const Hero: React.FC = () => (
           El recorte vive aquí y no en toda la portada: la banda girada sobresale
           por los lados y sacaría barra horizontal, pero el bodegón sí necesita
           poder salirse por arriba. */}
-      <div
-        className="cinta-portada absolute inset-0 overflow-hidden pointer-events-none"
-        aria-hidden="true"
-      >
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="absolute inset-x-0 top-[28%] -rotate-[12deg] opacity-[0.20]">
           <FoodStrip className="w-[140%] -ml-[20%]" />
         </div>
