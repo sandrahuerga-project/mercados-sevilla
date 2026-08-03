@@ -59,6 +59,16 @@ const BODEGON = [
     entrada: '1.25s',
     parallax: 0.12,
   },
+  {
+    id: 'limon',
+    ancho: 'w-28 xl:w-32',
+    pos: 'right-[24rem] top-[13rem]',
+    dx: '-80px',
+    dy: '70px',
+    rot: '30deg',
+    entrada: '1.6s',
+    parallax: 0.2,
+  },
 ] as const;
 
 export const Hero: React.FC = () => (
