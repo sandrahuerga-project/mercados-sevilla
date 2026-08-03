@@ -19,9 +19,9 @@ export const Hero: React.FC = () => (
     </div>
 
     <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative">
-      {/* Ilustración de mercado, solo en pantallas anchas */}
+      {/* Bodegón de portada: berenjena y limón, solo en pantallas anchas */}
       <Parallax speed={0.16} className="hidden lg:block absolute right-0 top-2 xl:-top-2">
-        <FoodImage id="merluza" flota className="w-80 xl:w-[26rem]" />
+        <FoodImage id="berenjena" flota className="w-80 xl:w-[26rem]" />
       </Parallax>
 
       <Reveal>

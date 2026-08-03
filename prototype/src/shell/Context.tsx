@@ -3,6 +3,8 @@ import { CONTEXT, FOOTER } from '../content/texts';
 import { WHATSAPP_CONSTRAINTS } from '../data/mockData';
 import { Reveal } from './Reveal';
 import { SectionLabel } from './SectionLabel';
+import { FoodImage } from './FoodImage';
+import { Parallax } from './Parallax';
 
 type Tab = 'producto' | 'restricciones';
 
@@ -76,6 +78,11 @@ export const Context: React.FC = () => {
             </dl>
           </div>
         )}
+
+        {/* Cierre del apartado: el género vuelve a asomar */}
+        <Parallax speed={0.12} className="mt-16 flex justify-end">
+          <FoodImage id="pollo" flota retraso={1.1} className="w-32 lg:w-44" />
+        </Parallax>
       </div>
     </section>
   );

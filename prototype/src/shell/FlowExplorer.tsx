@@ -209,7 +209,7 @@ export const FlowExplorer: React.FC = () => {
                               {/* En «Situaciones límite» sobra: ahí todos lo son. */}
                               {f.hasUnhappy && audience !== 'limite' && (
                                 <span className="font-narrow text-base text-azafran-light border border-azafran-light/40 rounded-full px-2.5 py-0.5">
-                                  Con ramas que salen mal
+                                  Unhappy paths
                                 </span>
                               )}
                             </div>

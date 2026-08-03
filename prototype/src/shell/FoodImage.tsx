@@ -62,23 +62,31 @@ export const FoodImage: React.FC<FoodImageProps> = ({
 };
 
 /**
- * Friso de mostrador: las doce ilustraciones en fila, como el género expuesto.
- * Flotan desfasadas media vuelta entre vecinas, así el friso ondula en vez de
- * subir y bajar en bloque.
+ * Friso de mostrador: las doce ilustraciones desfilando en bucle, como el
+ * género pasando por delante. La tira va duplicada porque la animación
+ * desplaza justo la mitad y vuelve a empezar sin costura; la copia lleva
+ * aria-hidden para que nadie la lea dos veces.
+ *
+ * Se para al pasar el ratón por encima y con prefers-reduced-motion.
  */
 export const FoodStrip: React.FC<{ className?: string }> = ({ className = '' }) => (
-  <div
-    className={`flex items-center justify-between gap-2 overflow-hidden ${className}`}
-    aria-hidden="true"
-  >
-    {ALIMENTOS.map((id, i) => (
-      <FoodImage
-        key={id}
-        id={id}
-        flota
-        retraso={i * 0.45}
-        className="w-20 md:w-28 lg:w-32 shrink-0"
-      />
-    ))}
+  <div className={`marquesina-marco overflow-hidden ${className}`} aria-hidden="true">
+    <div className="marquesina flex items-center w-max">
+      {/* Cada tanda lleva su hueco final dentro (pr-8/pr-12), así las dos mitades
+          miden exactamente lo mismo y el salto del -50% cae sin costura. */}
+      {[0, 1].map((vuelta) => (
+        <div key={vuelta} className="flex items-center gap-8 md:gap-12 pr-8 md:pr-12">
+          {ALIMENTOS.map((id, i) => (
+            <FoodImage
+              key={`${vuelta}-${id}`}
+              id={id}
+              flota
+              retraso={i * 0.45}
+              className="w-24 md:w-32 lg:w-36 shrink-0"
+            />
+          ))}
+        </div>
+      ))}
+    </div>
   </div>
 );

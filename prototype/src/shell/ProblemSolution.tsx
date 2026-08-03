@@ -3,11 +3,10 @@ import { PROBLEM, SOLUTION } from '../content/texts';
 import { Reveal } from './Reveal';
 import { SectionLabel } from './SectionLabel';
 import { FoodImage, FoodStrip } from './FoodImage';
-import { PersonaImage } from './PersonaImage';
 import { Parallax } from './Parallax';
 
 /** Una ilustración por pilar, en el mismo orden que los textos. */
-const PILAR_ALIMENTO = ['sardina', 'gambas', 'merluza', 'naranja'] as const;
+const PILAR_ALIMENTO = ['sardina', 'gambas', 'merluza', 'sepia'] as const;
 
 export const Problem: React.FC = () => (
   <section id="problema" className="border-b border-line scroll-mt-14">
@@ -32,6 +31,10 @@ export const Problem: React.FC = () => (
               </div>
             </Reveal>
           ))}
+          {/* Cierre del apartado */}
+          <Parallax speed={0.1} className="pt-10 flex justify-end">
+            <FoodImage id="ciruelas" flota retraso={0.5} className="w-28 lg:w-36" />
+          </Parallax>
         </ul>
       </div>
     </div>
@@ -51,16 +54,8 @@ export const Solution: React.FC = () => (
               {SOLUTION.lead}
             </p>
           </div>
-          {/* Antonio manda aquí: es su cara la que sostiene la propuesta.
-              El chorizo y el queso le acompañan, más pequeños y desfasados. */}
-          <Parallax speed={0.18} className="hidden lg:flex shrink-0 items-end gap-4">
-            <FoodImage id="chorizo-queso" flota retraso={1.4} className="w-36" />
-            <PersonaImage
-              id="antonio"
-              variant="retrato"
-              className="w-64 xl:w-72 rounded-full flota"
-              alt="Antonio, el pescadero del mercado de San Gonzalo"
-            />
+          <Parallax speed={0.18} className="hidden lg:block shrink-0">
+            <FoodImage id="chorizo-queso" flota retraso={1.4} className="w-72 xl:w-80" />
           </Parallax>
         </div>
       </Reveal>

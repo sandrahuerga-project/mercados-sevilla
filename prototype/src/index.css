@@ -132,6 +132,28 @@ body {
   will-change: transform;
 }
 
+/* ---- Friso de mostrador: desfile continuo ----
+   La tira se pinta dos veces seguidas y se desplaza justo la mitad, así el
+   final empalma con el principio y no se ve el corte. */
+@keyframes desfilar {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquesina {
+  animation: desfilar 46s linear infinite;
+  will-change: transform;
+}
+
+/* Al pasar por encima se para: quien quiera mirar una ilustración, puede. */
+.marquesina-marco:hover .marquesina {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -142,6 +164,9 @@ body {
     transition: none;
   }
   .flota {
+    animation: none;
+  }
+  .marquesina {
     animation: none;
   }
 }
