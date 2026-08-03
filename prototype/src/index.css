@@ -132,6 +132,30 @@ body {
   will-change: transform;
 }
 
+/* ---- Bodegón de portada: el género se coloca en el mostrador ----
+   Cada pieza entra desde donde diga --dx/--dy/--rot, se asienta y a partir de
+   ahí sigue flotando. Las dos animaciones van encadenadas en la misma regla:
+   si se pusieran en clases distintas, la segunda pisaría a la primera desde el
+   fotograma cero, porque las dos animan `transform`. */
+@keyframes asentar {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--dx, 0), var(--dy, 0), 0) rotate(var(--rot, 0deg))
+      scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+.asienta {
+  animation:
+    asentar 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--entrada, 0s) both,
+    flotar 7s ease-in-out infinite calc(var(--entrada, 0s) + 0.9s);
+  will-change: transform;
+}
+
 /* ---- Friso de mostrador: desfile continuo ----
    La tira se pinta dos veces seguidas y se desplaza justo la mitad, así el
    final empalma con el principio y no se ve el corte. */
@@ -168,6 +192,11 @@ body {
   }
   .marquesina {
     animation: none;
+  }
+  /* El bodegón aparece ya colocado: sin entrada y sin flotación. */
+  .asienta {
+    animation: none;
+    opacity: 1;
   }
 }
 

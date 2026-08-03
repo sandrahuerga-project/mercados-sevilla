@@ -33,6 +33,8 @@ interface FoodImageProps {
   flota?: boolean;
   /** Desfase de la flotación en segundos, para que no vayan todas a la vez. */
   retraso?: number;
+  /** De dónde entra y cuándo, para el bodegón de portada (clase `asienta`). */
+  style?: React.CSSProperties;
 }
 
 export const FoodImage: React.FC<FoodImageProps> = ({
@@ -41,6 +43,7 @@ export const FoodImage: React.FC<FoodImageProps> = ({
   alt,
   flota = false,
   retraso = 0,
+  style,
 }) => {
   const [failed, setFailed] = useState(false);
   if (failed) return null;
@@ -53,7 +56,7 @@ export const FoodImage: React.FC<FoodImageProps> = ({
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}
-      style={retraso ? { animationDelay: `${retraso}s` } : undefined}
+      style={{ ...(retraso ? { animationDelay: `${retraso}s` } : null), ...style }}
       className={`object-contain select-none pointer-events-none ${
         flota ? 'flota' : ''
       } ${className}`}

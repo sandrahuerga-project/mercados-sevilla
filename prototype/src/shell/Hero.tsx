@@ -1,11 +1,64 @@
 import React from 'react';
 import { HERO, SITE } from '../content/texts';
 import { Reveal } from './Reveal';
-import { FoodImage } from './FoodImage';
+import { FoodImage, FoodStrip } from './FoodImage';
 import { Parallax } from './Parallax';
 
 const scrollTo = (id: string) => () =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+/**
+ * El bodegón de portada: cuatro piezas que entran desde fuera del encuadre, se
+ * asientan escalonadas y se quedan flotando, como quien coloca el género en el
+ * mostrador antes de abrir.
+ *
+ * `dx`/`dy`/`rot` dicen de dónde viene cada una y `entrada` cuándo sale; los
+ * retrasos van de 0,15 s a 0,6 s para que se coloquen una detrás de otra y no
+ * todas de golpe. La velocidad de parallax sube con las piezas pequeñas: al
+ * moverse más, se leen como si estuvieran delante.
+ */
+const BODEGON = [
+  {
+    id: 'merluza',
+    ancho: 'w-60 xl:w-72',
+    pos: 'right-0 top-4',
+    dx: '130px',
+    dy: '-40px',
+    rot: '18deg',
+    entrada: '0.15s',
+    parallax: 0.16,
+  },
+  {
+    id: 'gambas',
+    ancho: 'w-40 xl:w-44',
+    pos: 'right-[13rem] top-[10rem]',
+    dx: '-70px',
+    dy: '90px',
+    rot: '-14deg',
+    entrada: '0.3s',
+    parallax: 0.24,
+  },
+  {
+    id: 'naranja',
+    ancho: 'w-28 xl:w-32',
+    pos: 'right-[3rem] top-[16rem]',
+    dx: '50px',
+    dy: '100px',
+    rot: '26deg',
+    entrada: '0.45s',
+    parallax: 0.3,
+  },
+  {
+    id: 'huevos',
+    ancho: 'w-32 xl:w-36',
+    pos: 'right-[20rem] top-[1rem]',
+    dx: '-100px',
+    dy: '-60px',
+    rot: '-22deg',
+    entrada: '0.6s',
+    parallax: 0.12,
+  },
+] as const;
 
 export const Hero: React.FC = () => (
   <header className="border-b border-line">
@@ -18,29 +71,53 @@ export const Hero: React.FC = () => (
       </div>
     </div>
 
-    <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative">
-      {/* Bodegón de portada: berenjena y limón, solo en pantallas anchas */}
-      {/* Separada del borde: al girarla, el rectángulo que ocupa crece un 37 %
-          y pegada a la derecha se salía de la página. */}
-      <Parallax speed={0.16} className="hidden lg:block absolute right-16 top-2 xl:-top-2">
-        {/* El giro va en el envoltorio: la flotación anima el transform de la
-            propia imagen y una cosa pisaría a la otra. */}
-        <div className="rotate-[-30deg]">
-          <FoodImage id="berenjena" flota className="w-80 xl:w-[26rem]" />
-        </div>
-      </Parallax>
+    <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-16 pb-20 md:pt-24 md:pb-28 relative overflow-hidden">
+      {/* Cinta inclinada: el género desfila por detrás del titular, muy tenue.
+          El envoltorio recorta porque una banda girada sobresale por los lados
+          y sacaría barra horizontal. */}
+      <div
+        className="absolute inset-x-0 top-[28%] -rotate-[12deg] opacity-[0.14] pointer-events-none"
+        aria-hidden="true"
+      >
+        <FoodStrip className="w-[140%] -ml-[20%]" />
+      </div>
 
-      <Reveal>
+      {/* Bodegón: cuatro piezas que se colocan solas al cargar y luego flotan.
+          Cada una entra desde su lado, con su giro y su retraso. */}
+      <div className="hidden lg:block absolute right-0 top-0 w-[32rem] h-[26rem] pointer-events-none">
+        {BODEGON.map((pieza) => (
+          <Parallax key={pieza.id} speed={pieza.parallax} className={`absolute ${pieza.pos}`}>
+            <FoodImage
+              id={pieza.id}
+              /* Sin `retraso`: pondría un animationDelay en línea que pisaría
+                 los dos retrasos que ya lleva la clase `asienta`. */
+              className={`asienta ${pieza.ancho}`}
+              style={
+                {
+                  '--dx': pieza.dx,
+                  '--dy': pieza.dy,
+                  '--rot': pieza.rot,
+                  '--entrada': pieza.entrada,
+                } as React.CSSProperties
+              }
+            />
+          </Parallax>
+        ))}
+      </div>
+
+      <Reveal className="relative">
         <p className="font-narrow text-lg text-mercado-green">{HERO.eyebrow}</p>
       </Reveal>
 
-      <Reveal delay={80}>
+      {/* `relative` en el contenido: la cinta va antes en el marcado, así que
+          todo lo posicionado que venga después se pinta por encima de ella. */}
+      <Reveal delay={80} className="relative">
         <h1 className="display text-4xl sm:text-5xl md:text-6xl max-w-[16ch] mt-6">
           {HERO.headline}
         </h1>
       </Reveal>
 
-      <div className="mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
+      <div className="relative mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
         <Reveal delay={160}>
           <p className="text-lg md:text-xl leading-relaxed max-w-[52ch] text-ink-soft">
             {HERO.lead}
