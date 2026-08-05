@@ -1,6 +1,6 @@
 # Pendiente — Mercados de Sevilla
 
-> Estado al cierre del 2026-08-03. Producción: https://mercados-sevilla.vercel.app
+> Estado al cierre del 2026-08-05. Producción: https://mercados-sevilla.vercel.app
 > **Todo el trabajo de hoy vive en la rama `revision-flujos`, sin mezclar.**
 > Producción sigue con la versión del 29 de julio.
 
@@ -8,8 +8,8 @@
 
 ## Lo siguiente, por orden
 
-1. **Sandra revisa los textos** (4 de agosto). Los guiones en texto plano están en
-   `flows/guiones/*.md`, uno por flujo, generados desde los JSON.
+1. **Sandra mira los textos en el navegador**. Los del portfolio ya están revisados y
+   volcados; falta el juicio visual de cómo cortan las líneas en móvil y en escritorio.
 2. **Desplegar**: mezclar `revision-flujos` en `main`. El push a `main` sale solo a
    producción, no hay nada más que hacer.
 
@@ -21,30 +21,28 @@
 
 ## Lo que queda abierto
 
-4. **Vídeo del mostrador** generado con IA, subido a Cloudinary. Hoy hay una foto de
-   stock de Unsplash. *Parcialmente resuelto*: Sandra subió el vídeo real de la
-   pescadería a Cloudinary y ya sale en C03. Falta decidir si se genera alguno más.
-5. **Fotos o ilustraciones de los puestos** para el vídeo del día. Los que se ven
-   vacíos son Frutería Manolo y Carnicería Lola (salen en C05 y S01 sin foto de
-   perfil) y la sección de mercados de la web.
-6. **PWA de historial** de David (fase 4 del plan). Se menciona en los flujos pero no
-   existe: hoy no se puede abrir desde ningún sitio.
-7. **Entregables de la reunión** (`MAYOR_MEETING.md` §3): vídeo de respaldo de ~2 min
+1. **Entregables de la reunión** (doc de reunión §3, fuera del repo): vídeo de respaldo de ~2 min
    por si falla el wifi, deck de viabilidad de 6-8 slides y one-pager del «ask» para
    dejarle al alcalde. De los cuatro entregables solo existe el prototipo.
+   Aparcado por decisión del 5 de agosto: se retoma más adelante.
+2. **Cómo cortan las líneas**, a falta de verlo en más pantallas. La regla de
+   `prototype/src/content/tipografia.ts` pega las palabras átonas a la siguiente, con
+   dos topes según el ancho de la columna: 20 caracteres en portada, citas y párrafos
+   de sección, y 12 en las tarjetas de flujo. Si algún sitio sigue partiendo mal, o
+   se ajusta su tope o se ancla ese caso.
 
 ---
 
 ## Decisiones que siguen en el aire
 
-- **C05 se pide a las 21:40** y el pedido lo acepta Antonio a la mañana siguiente. Con
-  la regla nueva de S01 (fuera de horario el bot apunta y el placero confirma al abrir)
-  ya no se contradicen, pero el recibo de C05 dice «¡Pedido confirmado!» cuando en
-  realidad está pendiente de aceptar. Copy por afinar.
-- **La naranja del bodegón** de la portada es la pieza que peor encaja: es pequeña y cae
-  en la zona donde la merluza ocupa más. Si sigue viéndose apelmazada, la salida limpia
-  es dejar el bodegón en cuatro piezas.
-- **Velocidad de la marquesina**: 46 s la vuelta completa. Sin criterio de Sandra todavía.
+Ninguna. Las tres que había se cerraron el 5 de agosto:
+
+- **El recibo antes de que el placero acepte** ya no dice «¡Pedido confirmado!». Dice
+  «📝 Pedido recibido» y avisa de que falta que Antonio lo acepte. La confirmación de
+  verdad llega después, cuando él le da a Aceptar en su panel. Cambiado en C03, C05,
+  C06 y C11.
+- **La naranja del bodegón** se queda como está.
+- **La velocidad de la marquesina** se queda en 46 s.
 
 ---
 
@@ -80,6 +78,17 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - **C09** acepta cantidades escritas a mano, no solo botones.
 - **C11** pregunta cómo quiere recibirlo; **C03** y **C06** también.
 - **S03** tiene salida: hablar con el placero, que es quien decide si readmite.
+- **C05 tiene dos ramas de verdad**: el botón de Frutería Manolo lleva a la frutería y
+  el de Carnicería Lola a la carnicería, cada una con su producto, su recibo y su
+  unhappy path. Antes los dos llevaban a la misma.
+- **Fuera el botón «Mi historial»** de C03: prometía una PWA que no existe. Era la
+  única promesa del prototipo sin nada detrás.
+- **C01 avisa de que es un bot** en la primera frase: «un asistente automático, no una
+  persona», y a continuación la salida para hablar con el placero. Lo pide el reglamento
+  europeo de IA, cuyas obligaciones de transparencia pasaron a ser aplicables el 2 de
+  agosto de 2026. Al prototipo hoy no le obliga —no habla con nadie real—, pero el aviso
+  entra como restricción de diseño, igual que los tres botones por mensaje.
+  **Sin verificar por un abogado**: si esto llega a desplegarse, que lo revise uno.
 
 ### Web
 
@@ -89,13 +98,24 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - **Portada con movimiento**: cinco ilustraciones entran desde fuera del encuadre y se
   asientan escalonadas en 3,1 s, y una cinta con el género desfila al 20 % por detrás del
   titular. Sin WebGL y sin librería de animación: 0 kB de JavaScript añadido.
+- **La cinta en móvil tiene su hueco propio** dentro del flujo, no colocada en porcentaje
+  de la altura de la portada. Antes el aire por debajo salía distinto en cada móvil —30 px
+  a 360, 19 a 390 y 69 a 430— porque el titular parte en distinto número de líneas. Ahora
+  son 16 px arriba y 32 abajo en todos. De tablet para arriba no cambia nada: allí sigue
+  por detrás del titular.
 - **Friso en marquesina**: las doce ilustraciones en bucle, 46 s la vuelta, que se para al
   pasar el ratón por encima.
 - Todo el movimiento se detiene con `prefers-reduced-motion`.
 - **Mapa de flujos**: espinazo horizontal, rombos con Sí/No, flechas en ángulo recto y
   ninguna arista que retroceda. Es el único sitio donde se ven los códigos.
 - **Ilustraciones de Sandra** por toda la página, con parallax y flotación. Optimizadas de
-  21,23 MB a 0,74 MB (`scripts/optimizar-ilustraciones.mjs`).
+  27,96 MB a 0,98 MB (`scripts/optimizar-ilustraciones.mjs`).
+- **Cada puesto con su cara**: el rótulo verde de cada burbuja lleva la foto de perfil
+  del puesto que firma. En un pedido a dos puestos el nombre solo no bastaba.
+- **Cortes de línea**: `text-wrap: balance` en titulares y `pretty` en párrafos, y una
+  regla que pega las palabras átonas a la siguiente para que no quede una preposición
+  ni un artículo colgando al final de línea. Sin un solo `<br>` a mano: un salto fijo
+  cuadra a un ancho y descuadra a los otros tres.
 
 ### Infraestructura
 

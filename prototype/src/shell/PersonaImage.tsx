@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 
-export type PersonaId = 'carmen' | 'david' | 'antonio' | 'mercado' | 'pescaderia';
+export type PersonaId =
+  | 'carmen'
+  | 'david'
+  | 'antonio'
+  | 'mercado'
+  | 'pescaderia'
+  | 'fruteria'
+  | 'carniceria';
 
 /**
  * Ilustración de personaje. Si el archivo falta, cae en un marcador de posición
@@ -13,8 +20,9 @@ export type PersonaId = 'carmen' | 'david' | 'antonio' | 'mercado' | 'pescaderia
  * Todo en minúsculas y sin acentos: Vercel corre sobre Linux y distingue
  * mayúsculas, al contrario que Windows.
  *
- * Los tres personajes son ilustraciones; las dos «perfil» son las fotos de
- * perfil de las cuentas de WhatsApp que salen en la cabecera del chat.
+ * Los tres personajes son ilustraciones; las «perfil» son las fotos de perfil
+ * de las cuentas de WhatsApp que salen en la cabecera del chat: la del mercado
+ * y una por puesto (pescadería, frutería, carnicería).
  *
  * No hay retratos aparte: la variante grande reutiliza el mismo archivo.
  */
@@ -24,6 +32,8 @@ const FILE: Record<PersonaId, string> = {
   antonio: 'antonio',
   mercado: 'perfil-mercados',
   pescaderia: 'perfil-pescaderia',
+  fruteria: 'perfil-fruteria',
+  carniceria: 'perfil-carniceria',
 };
 
 const INITIAL: Record<PersonaId, string> = {
@@ -32,6 +42,8 @@ const INITIAL: Record<PersonaId, string> = {
   antonio: 'A',
   mercado: 'M',
   pescaderia: 'P',
+  fruteria: 'F',
+  carniceria: 'L',
 };
 
 // Tonos oscuros a propósito: la inicial va en blanco y tiene que pasar AA.
@@ -41,6 +53,8 @@ const TINT: Record<PersonaId, string> = {
   antonio: 'bg-mercado-green',
   mercado: 'bg-green-deep',
   pescaderia: 'bg-sevilla-tile',
+  fruteria: 'bg-mercado-green',
+  carniceria: 'bg-[#8A5A12]',
 };
 
 interface PersonaImageProps {

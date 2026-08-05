@@ -92,6 +92,16 @@ export const Footer: React.FC = () => (
   <footer className="mx-auto max-w-[1400px] px-6 md:px-10 py-14">
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 font-narrow text-base text-ink-faint">
       <span>{FOOTER.note}</span>
+      {/* El trabajo de producto —PRD, restricciones de Meta, los 23 guiones— no
+          cabe en la página y tampoco le toca: aquí va el enlace y ya. */}
+      <a
+        href={FOOTER.repoUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="underline underline-offset-4 decoration-line hover:text-ink hover:decoration-ink transition-colors"
+      >
+        {FOOTER.repoLabel}
+      </a>
       <span>{FOOTER.credit}</span>
     </div>
   </footer>

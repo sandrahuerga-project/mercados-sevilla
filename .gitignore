@@ -13,3 +13,6 @@ Video Fali pescadero.mp4
 .vercel
 .env*
 .playwright-mcp/
+
+# Documento de negociación: vive fuera del repo (../mercados-sevilla-privado/)
+MAYOR_MEETING.md

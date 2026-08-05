@@ -1,4 +1,5 @@
 import type { FlowScript } from '../engine/types';
+import { pegaAtonas, TOPE } from './tipografia';
 import c01 from '../flows/c01.json';
 import c02 from '../flows/c02.json';
 import c03 from '../flows/c03.json';
@@ -40,7 +41,10 @@ export interface FlowEntry {
   script: FlowScript;
 }
 
-export const FLOWS: FlowEntry[] = [
+// El nombre, la descripción y el grupo se leen en la web, así que pasan por la
+// misma regla de cortes que el resto del portfolio. El guion del chat (`script`)
+// se queda como está: ahí manda WhatsApp, no la tipografía.
+const CATALOGO: FlowEntry[] = [
   {
     code: 'C01',
     name: 'Darse de alta',
@@ -239,6 +243,17 @@ export const FLOWS: FlowEntry[] = [
     script: s03 as FlowScript,
   },
 ];
+
+// Tope estrecho: estas descripciones van en una columna que da para unos 29
+// caracteres, y ahí una cadena larga no cabe detrás de nada.
+//
+// `group` se queda sin tocar: además de rótulo es la clave con la que se
+// filtra, y no conviene meterle caracteres invisibles a una clave.
+export const FLOWS: FlowEntry[] = CATALOGO.map((f) => ({
+  ...f,
+  name: pegaAtonas(f.name, TOPE.estrecho),
+  about: pegaAtonas(f.about, TOPE.estrecho),
+}));
 
 export const AUDIENCE_ORDER: AudienceKey[] = ['carmen', 'david', 'antonio', 'limite'];
 

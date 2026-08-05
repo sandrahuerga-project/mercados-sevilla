@@ -69,6 +69,29 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ---- Cortes de línea ----
+   El navegador reparte mejor que un <br> fijo: un salto escrito a mano cuadra
+   a un ancho y descuadra a los otros tres. `balance` iguala las líneas de los
+   titulares (2-4 líneas, que es donde funciona) y `pretty` evita que un
+   párrafo termine en una palabra suelta.
+
+   Donde el corte NO puede quedar a criterio del navegador —preposición
+   huérfana, sustantivo separado de su adjetivo, cifra separada de su unidad—
+   va un espacio duro ( ) en el propio texto, en texts.ts. */
+h1,
+h2,
+h3,
+.display {
+  text-wrap: balance;
+}
+
+p,
+dd,
+blockquote,
+li {
+  text-wrap: pretty;
+}
+
 /* ---- Tipografía de titulares: grande, apretada, tracking negativo ---- */
 .display {
   font-family: var(--font-sans);

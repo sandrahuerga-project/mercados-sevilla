@@ -333,8 +333,17 @@ Copy aprobado, tal cual se envía. Sin cards: texto con `*bold*` + Reply Buttons
 SALUDO PRIMERA VEZ  (plantilla utility → abre WA Flow, §3)
 ─────────────────────────────────────
 "¡Bienvenida a los Mercados de Sevilla! 👋
- Soy tu asistente para pedir fresco desde casa."
+ Soy un asistente automático, no una persona. Te ayudo a
+ hacer la compra desde casa.
+
+ Si prefieres hablar con tu placero, dímelo y te paso con él."
 [Abrir] → WA Flow onboarding
+
+  El aviso de que no es una persona va aquí, en la primera frase
+  que lee el cliente, porque lo pide el reglamento europeo de IA.
+  Sin tecnicismos a propósito: a Carmen «sistema de IA» no le dice
+  nada, «no soy una persona» sí. Y no se deja solo: el aviso viene
+  con la salida, que es hablar con el placero.
 
 SALUDO RECURRENTE  (texto libre + Reply Buttons)
 ─────────────────────────────────────

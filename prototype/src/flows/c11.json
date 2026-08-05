@@ -84,14 +84,14 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:18",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0388\nTe avisamos cuando esté preparado.",
+      "text": "📝 Pedido recibido #SGZ-2026-0388\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
       "next": "confirmado-fin"
     },
     "confirmado-taquilla": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:18",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0388\n\nLa taquilla se paga por adelantado: te llega el enlace de Bizum.\nLa recoges mañana hasta las 20:00.",
+      "text": "📝 Pedido recibido #SGZ-2026-0388\n\nLa taquilla se paga por adelantado: te llega el enlace de Bizum.\nLa recoges mañana hasta las 20:00.",
       "next": "confirmado-fin"
     },
     "confirmado-fin": {

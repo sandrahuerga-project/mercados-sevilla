@@ -53,7 +53,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "10:06",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0429\nTe avisamos cuando esté preparado.",
+      "text": "📝 Pedido recibido #SGZ-2026-0429\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
       "next": "confirmado-botones"
     },
     "confirmado-botones": {

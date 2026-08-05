@@ -5,9 +5,14 @@ import type { FlowScript } from './types';
 
 interface FlowScreenProps {
   script: FlowScript;
-  /** Título y descripción visibles sobre el móvil. Por defecto, los del script. */
-  label?: string;
-  description?: string;
+  /**
+   * Título y descripción visibles sobre el móvil. Obligatorios y sin valor por
+   * defecto a propósito: antes caían en `script.label`, que es el nombre interno
+   * del JSON («C05 Multi-puesto»), y eso es jerga, no copy de portfolio. Salen
+   * de flowCatalog.ts, igual que la lista y el mapa.
+   */
+  label: string;
+  description: string;
 }
 
 // Pantalla genérica: PhoneFrame + FlowPlayer alimentados por un script JSON.
@@ -22,8 +27,8 @@ export const FlowScreen: React.FC<FlowScreenProps> = ({ script, label, descripti
         subtitle={script.phone.subtitle}
         persona={script.phone.persona}
         avatarBg={script.phone.avatarBg}
-        flowLabel={label ?? script.label}
-        flowDescription={description ?? script.description}
+        flowLabel={label}
+        flowDescription={description}
       >
         <FlowPlayer script={script} resetKey={resetKey} />
       </PhoneFrame>

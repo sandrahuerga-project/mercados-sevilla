@@ -2,7 +2,7 @@
 
 > Prototipo web navegable, enfoque **product design**. Público: portfolio (reclutadores)
 > y cualquiera que visite la URL; también sirve de demo para la reunión institucional
-> (esa parte vive en MAYOR_MEETING.md).
+> (esa parte vive fuera del repo, en `../mercados-sevilla-privado/MAYOR_MEETING.md`).
 > **Stack:** React 19 + Vite + Tailwind 4 → GitHub → deploy automático en Vercel.
 > **Punto de partida: el código exportado de Google AI Studio** (`Idea Google AI Studio/`),
 > que ya trae 5 flujos de Carmen funcionando. A partir de ahí se itera desde Claude Code,
@@ -32,7 +32,7 @@ Dentro del chat: fidelidad máxima a WA real (DESIGN.md — texto plano + *bold*
 | Demostrar inclusión (usuario mayor compra sin ayuda) | Todos | Flujo Carmen C03 completo sin fricción |
 | Demostrar la cara operativa (placero) | Todos | Panel Antonio: 1 toque por acción, total final, cobro |
 | Prototipo explorable en autonomía | Visitantes de la URL | Viewer de flujos: cualquiera lo recorre sin guía |
-| Servir de demo en reunión | Alcalde (MAYOR_MEETING.md) | Modo "recorrido completo" en móvil |
+| Servir de demo en reunión | Alcalde (doc de reunión, fuera del repo) | Modo "recorrido completo" en móvil |
 
 ---
 
@@ -173,7 +173,7 @@ Feedback de Sandra (2026-07-28): fuentes demasiado pequeñas en toda la web y el
 - [ ] Responsive: perfecto en móvil (la demo se hace en móvil)
 - [ ] Página "sobre este prototipo" para portfolio: enlaza el sistema (DESIGN.md, CONTENT_SYSTEM.md como case study)
 - [ ] Assets reales: vídeo IA en Cloudinary, fotos de puestos
-- [ ] Vídeo de respaldo (para MAYOR_MEETING.md)
+- [ ] Vídeo de respaldo (para el doc de reunión, fuera del repo)
 
 ---
 
@@ -223,5 +223,5 @@ Prioridad si hay poco tiempo: C03 Carmen + P03 Antonio + recorrido corto. Con es
 ---
 
 *v2.0 — Plan de prototipo, vertiente product design. Stack propio (React + GitHub + Vercel),
-iterable desde Claude Code. La reunión institucional vive en MAYOR_MEETING.md.
+iterable desde Claude Code. La reunión institucional vive fuera del repo.
 Complementa IMPLEMENTATION_PLAN.md (el producto real en WhatsApp Business).*

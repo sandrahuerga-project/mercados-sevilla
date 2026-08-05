@@ -15,7 +15,7 @@
       "kind": "bot",
       "puesto": "Mercados de Sevilla",
       "timestamp": "09:00",
-      "text": "¡Bienvenida a los Mercados de Sevilla! 👋\nSoy tu asistente para pedir fresco desde casa.",
+      "text": "¡Bienvenida a los Mercados de Sevilla! 👋\nSoy un asistente automático, no una persona. Te ayudo a hacer la compra desde casa.\n\nSi prefieres hablar con tu placero, dímelo y te paso con él.",
       "next": "cta-flow"
     },
     "cta-flow": {

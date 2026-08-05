@@ -1,4 +1,5 @@
 import React from 'react';
+import { FLOWS } from '../content/flowCatalog';
 
 /**
  * Mapa de los veintitrés flujos. Existe para que los códigos (C03, P02, S04…)
@@ -9,6 +10,11 @@ import React from 'react';
  *  1. Toda arista va hacia la derecha o hacia abajo. Nunca retrocede.
  *  2. Nada de curvas Bézier: sólo tramos rectos en ángulo recto.
  *  3. Las decisiones son rombos. El «Sí» sigue por el espinazo, el «No» baja.
+ *
+ * Los nombres NO se escriben aquí: se leen de flowCatalog.ts por el código, que
+ * es la misma fuente que la lista de flujos y los guiones. Antes había una
+ * segunda lista abreviada a mano («Pedir con un audio» frente a «Pedir mandando
+ * un audio») y las dos se fueron separando sin que nadie lo viera.
  */
 
 type Kind = 'entrada' | 'pedido' | 'placero' | 'despues' | 'limite';
@@ -28,8 +34,47 @@ interface Nodo {
 }
 
 const W = 190;
-const H = 56;
+const H = 72;
 const DW = 150;
+
+/** Ancho útil dentro de la caja, descontando los 14 px de margen a cada lado. */
+const ANCHO_TEXTO = W - 28;
+const TAM_NOMBRE = 15;
+/** Archivo a 15 px anda por 0,47 em de avance medio. Sirve para partir líneas. */
+const ANCHO_CARACTER = TAM_NOMBRE * 0.47;
+const MAX_CARACTERES = Math.floor(ANCHO_TEXTO / ANCHO_CARACTER);
+
+/**
+ * Parte el nombre en dos líneas lo más iguales posible. SVG no ajusta texto
+ * solo: sin esto, «Cancelar antes de que lo acepten» se sale de la caja.
+ */
+const parteEnLineas = (nombre: string): string[] => {
+  // El mapa hace su propio salto de línea, así que aquí los espacios duros que
+  // trae el catálogo estorban: se deshacen.
+  const palabras = nombre.replace(/ /g, ' ').split(' ');
+  if (nombre.length <= MAX_CARACTERES) return [palabras.join(' ')];
+
+  let mejor = { corte: 1, desnivel: Infinity };
+  for (let corte = 1; corte < palabras.length; corte++) {
+    const a = palabras.slice(0, corte).join(' ').length;
+    const b = palabras.slice(corte).join(' ').length;
+    const desnivel = Math.abs(a - b) + (Math.max(a, b) > MAX_CARACTERES ? 100 : 0);
+    if (desnivel < mejor.desnivel) mejor = { corte, desnivel };
+  }
+  return [
+    palabras.slice(0, mejor.corte).join(' '),
+    palabras.slice(mejor.corte).join(' '),
+  ];
+};
+
+/** Nombre visible de cada flujo, por código. Única fuente: flowCatalog.ts. */
+const NOMBRE = new Map(FLOWS.map((f) => [f.code, f.name]));
+
+const nombreDe = (code: string): string => {
+  const n = NOMBRE.get(code);
+  if (!n) throw new Error(`FlowMap: el código ${code} no está en flowCatalog.ts`);
+  return n;
+};
 
 // Filas
 const R_PLACERO = 30;
@@ -38,14 +83,17 @@ const R_NO = 340;
 const R_CLIENTE = 490;
 const R_LIMITE = 640;
 
-const caja = (
-  id: string,
-  code: string,
-  name: string,
-  x: number,
-  y: number,
-  kind: Kind
-): Nodo => ({ id, code, name, x, y, w: W, h: H, kind, shape: 'caja' });
+const caja = (code: string, x: number, y: number, kind: Kind): Nodo => ({
+  id: code,
+  code,
+  name: nombreDe(code),
+  x,
+  y,
+  w: W,
+  h: H,
+  kind,
+  shape: 'caja',
+});
 
 const rombo = (id: string, name: string, cx: number, y: number): Nodo => ({
   id,
@@ -66,42 +114,42 @@ const D4 = 1905;
 
 const NODOS: Nodo[] = [
   // Placero, arriba: lo que pasa antes de que el cliente vea nada
-  caja('P01', 'P01', 'Alta del puesto', 40, R_PLACERO, 'placero'),
-  caja('P02', 'P02', 'Vídeo del mostrador', 290, R_PLACERO, 'placero'),
-  caja('S07', 'S07', 'No sube el vídeo', 540, R_PLACERO, 'limite'),
+  caja('P01', 40, R_PLACERO, 'placero'),
+  caja('P02', 290, R_PLACERO, 'placero'),
+  caja('S07', 540, R_PLACERO, 'limite'),
 
   // Espinazo: el camino que sale bien, de izquierda a derecha
-  caja('C01', 'C01', 'Darse de alta', 40, R_ESPINAZO, 'entrada'),
-  caja('C02', 'C02', 'Saludo de cada mañana', 290, R_ESPINAZO, 'entrada'),
+  caja('C01', 40, R_ESPINAZO, 'entrada'),
+  caja('C02', 290, R_ESPINAZO, 'entrada'),
   rombo('D1', '¿Hay vídeo hoy?', D1, R_ESPINAZO),
-  caja('C03', 'C03', 'Pedir con un audio', 720, R_ESPINAZO, 'pedido'),
+  caja('C03', 720, R_ESPINAZO, 'pedido'),
   rombo('D2', '¿El puesto abre?', D2, R_ESPINAZO),
-  caja('P03', 'P03', 'El placero lo acepta', 1150, R_ESPINAZO, 'placero'),
+  caja('P03', 1150, R_ESPINAZO, 'placero'),
   rombo('D3', '¿Tiene el género?', D3, R_ESPINAZO),
-  caja('C07', 'C07', 'Seguir el pedido', 1580, R_ESPINAZO, 'despues'),
+  caja('C07', 1580, R_ESPINAZO, 'despues'),
   rombo('D4', '¿Lo recoge?', D4, R_ESPINAZO),
 
   // Fila «No»: cada rombo cae aquí cuando la respuesta es que no.
   // C06 se apea aquí también: es otra forma de entrar, no una decisión.
-  caja('C06', 'C06', 'Repetir lo de siempre', 290, R_NO, 'pedido'),
-  caja('C04', 'C04', 'Pedir sin vídeo', D1 - W / 2, R_NO, 'pedido'),
-  caja('S01', 'S01', 'Puesto cerrado', D2 - W / 2, R_NO, 'limite'),
-  caja('C08', 'C08', 'Producto agotado', D3 - W / 2, R_NO, 'despues'),
-  caja('S02', 'S02', 'No recoge el pedido', D4 - W / 2, R_NO, 'limite'),
+  caja('C06', 290, R_NO, 'pedido'),
+  caja('C04', D1 - W / 2, R_NO, 'pedido'),
+  caja('S01', D2 - W / 2, R_NO, 'limite'),
+  caja('C08', D3 - W / 2, R_NO, 'despues'),
+  caja('S02', D4 - W / 2, R_NO, 'limite'),
 
   // Resto de flujos del cliente
-  caja('C05', 'C05', 'Dos puestos a la vez', 720, R_CLIENTE, 'pedido'),
-  caja('C09', 'C09', 'Cambiar el pedido', 970, R_CLIENTE, 'despues'),
-  caja('C10', 'C10', 'Cancelar el pedido', 1220, R_CLIENTE, 'despues'),
-  caja('C12', 'C12', 'Ya no se puede anular', 1220, R_LIMITE, 'despues'),
-  caja('C11', 'C11', 'Hablar con el placero', 1580, R_CLIENTE, 'despues'),
+  caja('C05', 720, R_CLIENTE, 'pedido'),
+  caja('C09', 970, R_CLIENTE, 'despues'),
+  caja('C10', 1220, R_CLIENTE, 'despues'),
+  caja('C12', 1220, R_LIMITE, 'despues'),
+  caja('C11', 1580, R_CLIENTE, 'despues'),
 
   // Situaciones límite que cuelgan del alta y del pedido
-  caja('S05', 'S05', 'Se sale a mitad', 40, R_LIMITE, 'limite'),
-  caja('S06', 'S06', 'Fuera de zona', 290, R_LIMITE, 'limite'),
-  caja('S03', 'S03', 'Cliente bloqueado', 540, R_LIMITE, 'limite'),
-  caja('S04', 'S04', 'No se entiende', 790, R_LIMITE, 'limite'),
-  caja('P04', 'P04', 'Cierre del día', 1810, R_LIMITE, 'placero'),
+  caja('S05', 40, R_LIMITE, 'limite'),
+  caja('S06', 290, R_LIMITE, 'limite'),
+  caja('S03', 540, R_LIMITE, 'limite'),
+  caja('S04', 790, R_LIMITE, 'limite'),
+  caja('P04', 1810, R_LIMITE, 'placero'),
 
   // Final del camino bueno
   {
@@ -298,7 +346,7 @@ export const FlowMap: React.FC = () => (
               {n.code && (
                 <text
                   x={n.x + 14}
-                  y={n.y + 22}
+                  y={n.y + 20}
                   fill="rgba(252,246,236,0.55)"
                   fontSize="12"
                   fontFamily="Archivo Narrow, sans-serif"
@@ -307,15 +355,26 @@ export const FlowMap: React.FC = () => (
                   {n.code}
                 </text>
               )}
-              <text
-                x={n.x + 14}
-                y={n.code ? n.y + 42 : n.y + n.h / 2 + 5}
-                fill="#FCF6EC"
-                fontSize="15"
-                fontFamily="Archivo, sans-serif"
-              >
-                {n.name}
-              </text>
+              {(() => {
+                const lineas = parteEnLineas(n.name);
+                // Con una sola línea el bloque se centra; con dos, arranca antes
+                // para que las dos quepan dentro de la caja.
+                const primera = n.code
+                  ? n.y + (lineas.length > 1 ? 39 : 44)
+                  : n.y + n.h / 2 + 5 - (lineas.length - 1) * 9;
+                return lineas.map((linea, i) => (
+                  <text
+                    key={linea}
+                    x={n.x + 14}
+                    y={primera + i * 18}
+                    fill="#FCF6EC"
+                    fontSize={TAM_NOMBRE}
+                    fontFamily="Archivo, sans-serif"
+                  >
+                    {linea}
+                  </text>
+                ));
+              })()}
             </>
           )}
         </g>

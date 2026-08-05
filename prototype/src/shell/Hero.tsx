@@ -86,13 +86,17 @@ export const Hero: React.FC = () => (
       {/* Cinta inclinada: el género desfila por detrás del titular, muy tenue.
           El recorte vive aquí y no en toda la portada: la banda girada sobresale
           por los lados y sacaría barra horizontal, pero el bodegón sí necesita
-          poder salirse por arriba. */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {/* En móvil no va por detrás de nada: se mete en el aire que se abre
-            entre el titular y el texto, con las piezas más pequeñas para que
-            ese hueco no tenga que ser una zanja. */}
-        <div className="absolute inset-x-0 top-[24.8%] md:top-[28%] -rotate-[12deg] opacity-[0.20]">
-          <FoodStrip className="w-[140%] -ml-[20%]" tamano="w-20 md:w-32 lg:w-36" />
+          poder salirse por arriba.
+
+          De tablet para arriba va por detrás del titular, colocada en
+          porcentaje de la portada. En móvil no: allí tiene su propio hueco en
+          el flujo, más abajo. */}
+      <div
+        className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-x-0 top-[28%] -rotate-[12deg] opacity-[0.20]">
+          <FoodStrip className="w-[140%] -ml-[20%]" tamano="w-32 lg:w-36" />
         </div>
       </div>
 
@@ -131,8 +135,22 @@ export const Hero: React.FC = () => (
         </h1>
       </Reveal>
 
-      {/* El aire de más en móvil es donde vive la cinta. */}
-      <div className="relative mt-52 md:mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
+      {/* La cinta en móvil, con su hueco propio dentro del flujo.
+          Antes iba colocada en porcentaje de la altura de la portada y el aire
+          por debajo salía distinto en cada móvil: 30 px a 360, 19 a 390 y 69 a
+          430, porque el titular parte en distinto número de líneas. Metida en
+          una caja de alto fijo, el aire de arriba y el de abajo son los mismos
+          en todos. */}
+      <div
+        className="md:hidden relative mt-4 h-32 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 -rotate-[12deg] opacity-[0.20]">
+          <FoodStrip className="w-[140%] -ml-[20%]" tamano="w-20" />
+        </div>
+      </div>
+
+      <div className="relative mt-8 md:mt-14 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
         <Reveal delay={160}>
           <p className="text-lg md:text-xl leading-relaxed max-w-[52ch] text-ink-soft">
             {HERO.lead}

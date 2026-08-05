@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Play, CheckCheck } from 'lucide-react';
+import { PersonaImage, type PersonaId } from '../shell/PersonaImage';
 
 // Date separator
 export const DateSeparator: React.FC<{ text: string }> = ({ text }) => {
@@ -36,6 +37,8 @@ interface BotBubbleProps {
   timestamp: string;
   avatarIcon?: string;
   puestoName?: string;
+  /** Cara del puesto que firma. Si falta, va solo el rótulo. */
+  puestoPersona?: PersonaId;
   hasTail?: boolean;
   children?: React.ReactNode;
   warning?: boolean;
@@ -45,6 +48,7 @@ export const BotBubble: React.FC<BotBubbleProps> = ({
   text,
   timestamp,
   puestoName,
+  puestoPersona,
   hasTail = true,
   children,
   warning = false
@@ -52,11 +56,17 @@ export const BotBubble: React.FC<BotBubbleProps> = ({
   return (
     <div className="flex flex-col items-start my-1.5 px-3 relative animate-fade-in">
       {puestoName && (
-        <span className="text-[11px] font-semibold text-mercado-green mb-0.5 ml-2">
-          {puestoName}
+        <span className="flex items-center gap-1.5 mb-0.5 ml-2">
+          {puestoPersona && (
+            <PersonaImage
+              id={puestoPersona}
+              className="w-4 h-4 rounded-full shrink-0 text-[8px]"
+            />
+          )}
+          <span className="text-[11px] font-semibold text-mercado-green">{puestoName}</span>
         </span>
       )}
-      
+
       <div className={`relative max-w-[82%] px-3 py-2 bg-white text-zinc-800 text-[13.5px] leading-relaxed shadow-bubble rounded-2xl ${
         hasTail ? 'rounded-tl-none bubble-tail-bot' : ''
       } ${warning ? 'border-l-4 border-azafran bg-[#FFFBF4]' : ''}`}>
@@ -223,6 +233,8 @@ export const HumanBubble: React.FC<{ name: string; timestamp: string; children: 
 // Video broadcast bubble: media header + caption, like a WA marketing template message
 interface VideoBubbleProps {
   puestoName: string;
+  /** Cara del puesto que firma. Si falta, va solo el rótulo. */
+  puestoPersona?: PersonaId;
   timestamp: string;
   caption: React.ReactNode;
   footer?: string;
@@ -240,6 +252,7 @@ interface VideoBubbleProps {
 
 export const VideoBubble: React.FC<VideoBubbleProps> = ({
   puestoName,
+  puestoPersona,
   timestamp,
   caption,
   footer,
@@ -258,8 +271,11 @@ export const VideoBubble: React.FC<VideoBubbleProps> = ({
 
   const Rotulo = () =>
     esPlacero ? null : (
-      <span className="text-[11px] font-semibold text-mercado-green mb-0.5 ml-2">
-        {puestoName}
+      <span className="flex items-center gap-1.5 mb-0.5 ml-2">
+        {puestoPersona && (
+          <PersonaImage id={puestoPersona} className="w-4 h-4 rounded-full shrink-0 text-[8px]" />
+        )}
+        <span className="text-[11px] font-semibold text-mercado-green">{puestoName}</span>
       </span>
     );
 

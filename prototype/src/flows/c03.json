@@ -15,7 +15,7 @@
       "kind": "video",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:02",
-      "duration": "0:38",
+      "duration": "0:10",
       "imageUrl": "https://res.cloudinary.com/aukfnzkn/video/upload/so_2/v1785482482/V%C3%ADdeo_pescader%C3%ADa_pxwa33.jpg",
       "videoUrl": "https://res.cloudinary.com/aukfnzkn/video/upload/v1785482482/V%C3%ADdeo_pescader%C3%ADa_pxwa33.mp4",
       "caption": "Buenos días Carmen 👋\nHoy en Pescadería Antonio: boquerones de Málaga, acedías limpias, gamba blanca de Huelva.\n\nPide hasta las 12:30. Recogida o reparto.",
@@ -122,7 +122,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*\nEl definitivo lo pone Antonio al pesar.\n\nRecogida en puesto, hoy hasta 14:00.\nPago al recoger (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando esté preparado.",
+      "text": "📝 Pedido recibido #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*\nEl definitivo lo pone Antonio al pesar.\n\nRecogida en puesto, hoy hasta 14:00.\nPago al recoger (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
       "next": "recibo-botones"
     },
     "taquilla": {
@@ -152,18 +152,14 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:08",
-      "text": "✅ ¡Pedido confirmado! #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto a domicilio en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nTe avisamos cuando salga el repartidor.",
+      "text": "📝 Pedido recibido #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto a domicilio en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
       "next": "recibo-botones"
     },
     "recibo-botones": {
       "kind": "buttons",
       "timestamp": "09:08",
-      "buttons": [
-        { "label": "Añadir puesto", "next": "multi-fin" },
-        { "label": "Mi historial", "next": "historial-fin" }
-      ]
+      "buttons": [{ "label": "Añadir puesto", "next": "multi-fin" }]
     },
-    "multi-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto (vista David)" },
-    "historial-fin": { "kind": "end", "note": "El historial vive en la PWA complementaria. El tracking sigue en C07 — el total FINAL llega cuando Antonio marque Listo (post-pesaje)" }
+    "multi-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto (vista David)" }
   }
 }

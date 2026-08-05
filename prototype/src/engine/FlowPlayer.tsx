@@ -13,6 +13,7 @@ import {
   FlowCTAButton,
 } from '../components/ChatBubbles';
 import { WhatsAppFlowModal } from '../components/WhatsAppFlowModal';
+import { personaDePuesto } from '../content/puestos';
 
 // Renders WhatsApp *bold* formatting (the only rich text WA supports besides _italic_ and ~strike~)
 const formatWa = (text: string): React.ReactNode => {
@@ -135,6 +136,7 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
               <BotBubble
                 key={entry.id}
                 puestoName={step.puesto}
+                puestoPersona={personaDePuesto(step.puesto)}
                 timestamp={step.timestamp}
                 warning={step.warning}
               >
@@ -165,6 +167,7 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
               <VideoBubble
                 key={entry.id}
                 puestoName={step.puesto}
+                puestoPersona={personaDePuesto(step.puesto)}
                 timestamp={step.timestamp}
                 caption={formatWa(step.caption)}
                 footer={step.footer}
