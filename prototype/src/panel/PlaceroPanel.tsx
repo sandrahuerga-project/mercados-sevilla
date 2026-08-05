@@ -65,9 +65,16 @@ export const PlaceroPanel: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto text-left rounded-2xl overflow-hidden shadow-2xl border border-zinc-300 bg-white text-zinc-900">
-      {/* Header */}
-      <div className="bg-green-deep text-white px-5 py-4 flex items-center justify-between">
+    <div
+      data-fondo="claro"
+      className="w-full max-w-3xl mx-auto text-left rounded-2xl overflow-hidden shadow-2xl border border-zinc-300 bg-white text-zinc-900"
+    >
+      {/* Header. Va marcado como oscuro porque es la única franja verde del
+          panel, que por lo demás es blanco. */}
+      <div
+        data-fondo="oscuro"
+        className="bg-green-deep text-white px-5 py-4 flex items-center justify-between"
+      >
         <div>
           <h3 className="font-bold text-lg leading-tight">Pescadería Antonio</h3>
           <span className="text-[12px] text-white/70">Mercado San Gonzalo · Cierra 14:00</span>

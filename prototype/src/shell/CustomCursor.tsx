@@ -32,11 +32,12 @@ export const CustomCursor: React.FC = () => {
       const interactive = target?.closest('a, button, input, select, [role="button"]');
       ring.current?.classList.toggle('is-active', Boolean(interactive));
 
-      // El verde de marca se queda en 2,22:1 sobre el verde oscuro de la
-      // sección de flujos, que es donde todo se pulsa. Ahí el puntero pasa a
-      // crema. Se mira la sección, no el elemento suelto: dentro del móvil hay
-      // trozos claros y el puntero no debe parpadear al cruzarlos.
-      const oscuro = Boolean(target?.closest('[data-fondo="oscuro"]'));
+      // El puntero se tiñe según el fondo que pisa. Manda la zona marcada más
+      // cercana, no la sección: la pantalla del móvil es una isla clara dentro
+      // de la sección verde oscura, y ahí el puntero tiene que volver a ser
+      // oscuro. Marcar zonas y no elementos sueltos evita el parpadeo.
+      const zona = target?.closest('[data-fondo]');
+      const oscuro = zona?.getAttribute('data-fondo') === 'oscuro';
       document.body.classList.toggle('cursor-sobre-oscuro', oscuro);
     };
 

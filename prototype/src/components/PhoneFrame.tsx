@@ -99,13 +99,22 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
           </div>
         </div>
 
-        {/* Scrollable Chat Area with Seville Azulejo Tile Background */}
-        <div className="flex-1 chat-container-bg flex flex-col relative overflow-y-auto whatsapp-scrollbar">
+        {/* Scrollable Chat Area with Seville Azulejo Tile Background.
+            `data-fondo` para el puntero: la pantalla es clara aunque el móvil
+            esté sobre la sección verde oscura. La cabecera del chat no se
+            marca: esa sí es verde, y ahí el puntero claro va bien. */}
+        <div
+          data-fondo="claro"
+          className="flex-1 chat-container-bg flex flex-col relative overflow-y-auto whatsapp-scrollbar"
+        >
           {children}
         </div>
 
         {/* WhatsApp Fixed Bottom Input Bar (52px) */}
-        <div className="h-[52px] bg-[#F0F2F5] border-t border-zinc-200 px-2.5 flex items-center justify-between space-x-2 z-40">
+        <div
+          data-fondo="claro"
+          className="h-[52px] bg-[#F0F2F5] border-t border-zinc-200 px-2.5 flex items-center justify-between space-x-2 z-40"
+        >
           <div className="flex-1 bg-white h-9 rounded-full px-3 flex items-center border border-zinc-200/80 shadow-sm">
             <span className="text-xl mr-2 cursor-pointer select-none opacity-70 hover:opacity-100">😊</span>
             <input
