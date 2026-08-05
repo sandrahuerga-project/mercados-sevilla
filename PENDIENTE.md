@@ -6,12 +6,9 @@
 
 ---
 
-## Lo siguiente, por orden
+## Lo siguiente
 
-1. **Sandra mira los textos en el navegador**. Los del portfolio ya están revisados y
-   volcados; falta el juicio visual de cómo cortan las líneas en móvil y en escritorio.
-2. **Desplegar**: mezclar `revision-flujos` en `main`. El push a `main` sale solo a
-   producción, no hay nada más que hacer.
+Nada pendiente del prototipo. `main` está desplegado y al día.
 
 > Los guiones se generan: editar el `.md` a mano no sirve, se pierde al regenerar.
 > El copy se cambia en `prototype/src/flows/*.json` y luego
@@ -21,15 +18,16 @@
 
 ## Lo que queda abierto
 
-1. **Entregables de la reunión** (doc de reunión §3, fuera del repo): vídeo de respaldo de ~2 min
-   por si falla el wifi, deck de viabilidad de 6-8 slides y one-pager del «ask» para
-   dejarle al alcalde. De los cuatro entregables solo existe el prototipo.
-   Aparcado por decisión del 5 de agosto: se retoma más adelante.
-2. **Cómo cortan las líneas**, a falta de verlo en más pantallas. La regla de
-   `prototype/src/content/tipografia.ts` pega las palabras átonas a la siguiente, con
-   dos topes según el ancho de la columna: 20 caracteres en portada, citas y párrafos
-   de sección, y 12 en las tarjetas de flujo. Si algún sitio sigue partiendo mal, o
-   se ajusta su tope o se ancla ese caso.
+**Solo una cosa, y está aparcada a propósito.**
+
+1. **Entregables de la reunión** (doc de reunión §3, fuera del repo): vídeo de respaldo de
+   ~2 min por si falla el wifi, deck de viabilidad de 6-8 slides y one-pager del «ask»
+   para dejarle al alcalde. De los cuatro entregables solo existe el prototipo.
+   Aparcado por decisión del 5 de agosto: se retoma cuando haya fecha de reunión.
+   Se trabajan desde `../mercados-sevilla-privado/`, no desde este repo.
+
+Si algún corte de línea concreto sigue sin gustar, el número a tocar es uno de los dos
+topes de `prototype/src/content/tipografia.ts`. No es un pendiente: es dónde se ajusta.
 
 ---
 
@@ -121,6 +119,14 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 
 - **Dos scripts de verificación**: `validar-flujos.mjs` (límites de WhatsApp y coherencia
   de guiones y recorridos) y el chequeo geométrico del mapa.
+- **README que abre el repo**: qué mirar y por dónde, el mapa de los documentos y las
+  decisiones con enlace a dónde está el razonamiento. Enlazado desde el pie de la web.
+- **El documento de la reunión, fuera del repo.** Es la posición negociadora con el
+  ayuntamiento y el repositorio es público. Sigue en el historial de commits: se decidió
+  el 5 de agosto no reescribirlo, porque es estrategia y no credenciales.
+- **Favicon** con la naranja del bodegón (`scripts/generar-favicon.mjs`), más
+  apple-touch-icon y tarjeta al compartir el enlace. La foto del mercado se descartó: a
+  32 px no se lee y tiene caras reconocibles.
 - Los flujos son datos (`prototype/src/flows/*.json`), no código: corregir copy es editar
   un JSON y regenerar los guiones.
 - Sistema visual: crema #FCF6EC, Archivo + Archivo Narrow, base 17 px.
