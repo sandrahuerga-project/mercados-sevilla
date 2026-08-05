@@ -72,6 +72,7 @@ El prototipo es la parte visible. Debajo está el trabajo de producto que lo sos
 | [`PORTFOLIO_DESIGN.md`](PORTFOLIO_DESIGN.md) | El sistema visual de la web |
 | [`TEXTOS_PORTFOLIO.md`](TEXTOS_PORTFOLIO.md) | Todo el texto de la web, para revisarlo sin tocar código |
 | [`PENDIENTE.md`](PENDIENTE.md) | Estado real: lo cerrado, lo abierto y lo que sigue en el aire |
+| [`POSTMORTEM.md`](POSTMORTEM.md) | Qué se rompió por el camino, por qué, y qué se cambió para que no se repita |
 
 ---
 
