@@ -16,3 +16,7 @@ Video Fali pescadero.mp4
 
 # Documento de negociación: vive fuera del repo (../mercados-sevilla-privado/)
 MAYOR_MEETING.md
+
+# Notas de trabajo y duplicados: viven fuera del repo (../mercados-sevilla-privado/)
+NOTAS_VERCEL_V.1.txt
+*.docx

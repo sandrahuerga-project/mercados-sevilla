@@ -50,8 +50,10 @@ El prototipo es la parte visible. Debajo está el trabajo de producto que lo sos
 | Documento | Qué es |
 |---|---|
 | [`PRD_Mercados_Sevilla.md`](PRD_Mercados_Sevilla.md) | El producto: usuarios, alcance, modelo de datos, reglas de negocio |
-| [`flows/flows-index.md`](flows/flows-index.md) | Inventario de los 23 flujos, con la plantilla canónica para escribir uno nuevo |
+| [`flows/`](flows/) | Los 23 flujos: el inventario y los guiones en texto plano |
 | [`DESIGN.md`](DESIGN.md) | El sistema de diseño conversacional y el catálogo de mensajes aprobados |
+| [`research/`](research/) | De dónde salió todo: la investigación de partida, tal cual |
+| [`wireframes/`](wireframes/) | El primer flujo dibujado a mano, antes de que hubiera pantallas |
 
 **Cómo se construiría de verdad**
 
@@ -65,10 +67,10 @@ El prototipo es la parte visible. Debajo está el trabajo de producto que lo sos
 
 | Documento | Qué es |
 |---|---|
+| [`prototype/`](prototype/) | El código: cómo arrancarlo, los scripts y por dónde anda cada cosa |
 | [`PROTOTYPE_PLAN.md`](PROTOTYPE_PLAN.md) | Por qué el prototipo es como es |
 | [`PORTFOLIO_DESIGN.md`](PORTFOLIO_DESIGN.md) | El sistema visual de la web |
 | [`TEXTOS_PORTFOLIO.md`](TEXTOS_PORTFOLIO.md) | Todo el texto de la web, para revisarlo sin tocar código |
-| [`flows/guiones/`](flows/guiones/) | Los 23 flujos en texto plano, uno por archivo. **Generados**: el copy se toca en los JSON |
 | [`PENDIENTE.md`](PENDIENTE.md) | Estado real: lo cerrado, lo abierto y lo que sigue en el aire |
 
 ---
