@@ -4,6 +4,7 @@ import { Hero } from './shell/Hero';
 import { Problem, Solution } from './shell/ProblemSolution';
 import { Evidence } from './shell/Evidence';
 import { FlowExplorer } from './shell/FlowExplorer';
+import { Metrics } from './shell/Metrics';
 import { Context, Footer } from './shell/Context';
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
         <Evidence />
         <Solution />
         <FlowExplorer />
+        <Metrics />
         <Context />
       </main>
       <Footer />

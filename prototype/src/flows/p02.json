@@ -15,7 +15,7 @@
       "kind": "bot",
       "puesto": "Mercados de Sevilla",
       "timestamp": "08:00",
-      "text": "Buenos días, Antonio.\n¿Grabas el vídeo del mostrador? Lo mando a tus *214 suscriptores* a las 9:00.",
+      "text": "Buenos días, Antonio.\n¿Grabas el vídeo del mostrador? Lo mando a tus *340 suscriptores* a las 9:00.",
       "next": "recordatorio-botones"
     },
     "recordatorio-botones": {
@@ -68,7 +68,7 @@
     "programado": {
       "kind": "system",
       "tone": "blue",
-      "text": "9:00 — difusión enviada a 214 suscriptores",
+      "text": "9:00 — difusión enviada a 340 suscriptores",
       "next": "resultado"
     },
     "resultado": {

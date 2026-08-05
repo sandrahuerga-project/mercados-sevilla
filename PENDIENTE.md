@@ -120,7 +120,24 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
   entra como restricción de diseño, igual que los tres botones por mensaje.
   **Sin verificar por un abogado**: si esto llega a desplegarse, que lo revise uno.
 
+- **S08 — pides algo que hoy no hay**: el flujo 25. Los tres sitios donde ya se trataba
+  el producto agotado (C08, C06, C05) los dispara el placero *después* de aceptar; el
+  momento de pedir estaba descubierto. La regla: que el placero no haya nombrado algo no
+  prueba que no lo tenga, así que se apunta avisando; que haya dicho que se le acabó sí
+  lo prueba, y entonces no se apunta.
+- **El mapa de flujos ya no se inventa flechas**: fuera C08 → C11, que dibujaba una
+  salida que ese flujo no ofrece, y dentro C04 → C05 y C06 → C05, que son reales. El
+  validador contrasta cada arista contra lo que los propios flujos dicen de sí mismos.
+
 ### Web
+
+- **Cómo sabríamos que funciona**: cuatro objetivos —pedido en menos de 4 minutos, 8 de
+  cada 10 altas terminadas, menos de 1 incidencia por cada 20 pedidos y la mitad de los
+  clientes repitiendo al mes— y, aparte, el único dato medido de verdad: Antonio recibe
+  entre 15 y 40 pedidos al día por WhatsApp, apuntados a mano. Escrito como objetivos,
+  nunca como resultados: el bot no está desplegado y no hay datos de uso.
+- **El post mortem se enlaza desde la web**, como nota al pie de «Contexto y
+  restricciones». Antes solo se veía entrando en el repo.
 
 - **«De principio a fin»**: un recorrido elegido a mano por persona (la compra de Carmen,
   la de David, la jornada de Antonio), sin las excepciones por medio y sin costuras entre

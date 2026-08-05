@@ -5,6 +5,7 @@ const LINKS = [
   { id: 'problema', label: 'Problema' },
   { id: 'investigacion', label: 'Investigación' },
   { id: 'flujos', label: 'Prototipo' },
+  { id: 'metricas', label: 'Métricas' },
   // El rótulo de esa sección es «Contexto y restricciones»: el enlace lo repite
   // en corto en vez de inventarse otro nombre.
   { id: 'como-esta-hecho', label: 'Contexto' },
