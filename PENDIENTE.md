@@ -1,8 +1,8 @@
 # Pendiente — Mercados de Sevilla
 
 > Estado al cierre del 2026-08-05. Producción: https://mercados-sevilla.vercel.app
-> **Todo el trabajo de hoy vive en la rama `revision-flujos`, sin mezclar.**
-> Producción sigue con la versión del 29 de julio.
+> **Todo está mezclado en `main` y desplegado.** No queda trabajo sin publicar,
+> y `revision-flujos` ya no existe: se fusionó y se borró de local y del remoto.
 
 ---
 
@@ -114,6 +114,15 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
   regla que pega las palabras átonas a la siguiente para que no quede una preposición
   ni un artículo colgando al final de línea. Sin un solo `<br>` a mano: un salto fijo
   cuadra a un ancho y descuadra a los otros tres.
+- **El nombre del flujo ya no sale dos veces**: estaba en la tarjeta y otra vez encima
+  del móvil. Se conserva como nombre accesible del marco, que es donde hace falta.
+- **Contexto de producto, en cuatro columnas**, para que el cuarto bloque no baje solo
+  a una segunda fila.
+- **El enlace del menú dice «Contexto»** y no «Cómo», que no decía nada.
+- **El puntero se tiñe según la zona que pisa**: verde hondo sobre claro, crema sobre
+  el verde oscuro, 13,19:1 en los dos sentidos. Manda la zona marcada más cercana y no
+  la sección, porque la pantalla del móvil es una isla clara dentro de la sección
+  oscura. Por zonas y no por elemento, para que no parpadee al cruzar cada burbuja.
 
 ### Infraestructura
 
@@ -133,3 +142,8 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - Accesibilidad AA verificada: 115 elementos de texto, 0 fallos.
 - Seudonimización del placero real (Antonio) en todo el repo.
 - Despliegue automático: cada push a `main` sale a producción.
+- **Historial reescrito** el 5 de agosto: mensajes de commit cortos y en castellano, y
+  el documento de la reunión eliminado de todos los commits. Los objetos huérfanos
+  siguen accesibles en GitHub por identificador hasta que purguen; se puede pedir a
+  soporte que lo hagan ya. Copia completa del historial anterior en
+  `../mercados-sevilla-privado/respaldo-repo-20260805.bundle`.
