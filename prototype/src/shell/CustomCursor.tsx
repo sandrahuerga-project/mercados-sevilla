@@ -25,7 +25,8 @@ export const CustomCursor: React.FC = () => {
       x = e.clientX;
       y = e.clientY;
       if (dot.current) {
-        dot.current.style.transform = `translate3d(${x - 4.5}px, ${y - 4.5}px, 0)`;
+        // La mitad del punto, para que el centro caiga donde está el ratón.
+        dot.current.style.transform = `translate3d(${x - 5}px, ${y - 5}px, 0)`;
       }
       const target = e.target as HTMLElement | null;
       const interactive = target?.closest('a, button, input, select, [role="button"]');

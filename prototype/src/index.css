@@ -231,28 +231,28 @@ li {
   }
 }
 
-/* El color lo pone la sección que hay debajo: el verde de marca se queda en
-   2,22:1 sobre el verde oscuro de los flujos, que es justo donde todo es
-   pulsable. Sobre crema sigue siendo verde (5,94:1) y sobre el verde oscuro
-   pasa a crema (13,19:1). */
+/* El color lo pone la sección que hay debajo, y va al verde hondo, no al de
+   marca: un anillo de hoja y un punto de 10 px no se leen como se lee el
+   texto, así que 5,94:1 del verde de marca sobre crema se quedaba corto.
+   El par crema / verde hondo da 13,19:1 en los dos sentidos. */
 .cursor-dot,
 .cursor-ring {
-  --cursor-color: var(--color-mercado-green);
-  --cursor-halo: rgba(45, 106, 79, 0.1);
+  --cursor-color: var(--color-green-deep);
+  --cursor-halo: rgba(20, 48, 38, 0.12);
 }
 
 .cursor-sobre-oscuro .cursor-dot,
 .cursor-sobre-oscuro .cursor-ring {
   --cursor-color: var(--color-cream);
-  --cursor-halo: rgba(252, 246, 236, 0.12);
+  --cursor-halo: rgba(252, 246, 236, 0.14);
 }
 
 .cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   border-radius: 9999px;
   background-color: var(--cursor-color);
   pointer-events: none;
@@ -268,7 +268,9 @@ li {
   width: 38px;
   height: 38px;
   border-radius: 9999px;
-  border: 1px solid var(--cursor-color);
+  /* 1 px se perdía sobre el crema, y 1,5 el navegador lo ajusta a la rejilla
+     de píxeles y queda en menos. 2 se ve y sigue siendo una línea fina. */
+  border: 2px solid var(--cursor-color);
   pointer-events: none;
   z-index: 9998;
   transform: translate3d(-100px, -100px, 0);
