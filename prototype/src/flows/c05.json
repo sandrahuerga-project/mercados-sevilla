@@ -132,8 +132,19 @@
       "buttons": [
         { "label": "Confirmar", "next": "recibo-fruta" },
         { "label": "Modificar", "next": "mod-fruta" },
-        { "label": "Hablar con Manolo", "next": "escalado-fruta" }
+        { "label": "Mensaje a Manolo", "next": "escalado-fruta" }
       ]
+    },
+    "escalado-fruta": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "21:42",
+      "text": "Manolo ya ha cerrado por hoy, así que ahora mismo no te puede contestar.\n\nLe dejo tu mensaje y te responde mañana a las 9:00, cuando abra. Tu pedido queda apuntado igual.",
+      "next": "escalado-fruta-fin"
+    },
+    "escalado-fruta-fin": {
+      "kind": "end",
+      "note": "Fuera del horario del puesto el escalado no es inmediato: el bot recoge el recado y lo entrega al abrir. No se promete una respuesta que el placero no puede dar (C11 + S01)"
     },
     "mod-fruta": {
       "kind": "bot",
@@ -168,7 +179,7 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "21:43",
-      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nTodo llega junto mañana de 10:00 a 14:00.\nCada placero acepta su parte por separado — te aviso.",
+      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nLos dos puestos han cerrado ya, así que cada uno acepta su parte mañana al abrir. Te aviso.\n\nTodo llega junto mañana de 10:00 a 14:00.",
       "next": "espera-fruta"
     },
     "espera-fruta": {
@@ -195,11 +206,6 @@
       "kind": "end",
       "note": "Los dos placeros aceptan y el pedido sale entero. Es el camino bueno del multi-puesto: dos placeros, una sola entrega"
     },
-    "escalado-fruta": {
-      "kind": "end",
-      "note": "Continúa en C11 — Escalado humano con Manolo"
-    },
-
     "pedido-carne": {
       "kind": "user",
       "timestamp": "21:42",
@@ -219,8 +225,19 @@
       "buttons": [
         { "label": "Confirmar", "next": "recibo-carne" },
         { "label": "Modificar", "next": "mod-carne" },
-        { "label": "Hablar con Lola", "next": "escalado-carne" }
+        { "label": "Mensaje a Lola", "next": "escalado-noche-carne" }
       ]
+    },
+    "escalado-noche-carne": {
+      "kind": "bot",
+      "puesto": "Mercado San Gonzalo",
+      "timestamp": "21:42",
+      "text": "Lola ya ha cerrado por hoy, así que ahora mismo no te puede contestar.\n\nLe dejo tu mensaje y te responde mañana a las 9:00, cuando abra. Tu pedido queda apuntado igual.",
+      "next": "escalado-noche-fin"
+    },
+    "escalado-noche-fin": {
+      "kind": "end",
+      "note": "Fuera del horario del puesto el escalado no es inmediato: el bot recoge el recado y lo entrega al abrir (C11 + S01)"
     },
     "mod-carne": {
       "kind": "bot",
@@ -255,7 +272,7 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "21:43",
-      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nCARNICERÍA LOLA — *11,30 €*\n\n*Total estimado: 29,30 €* + 2,50 € de reparto\n\nTodo llega junto mañana de 10:00 a 14:00.\nCada placero acepta su parte por separado — te aviso.",
+      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nCARNICERÍA LOLA — *11,30 €*\n\n*Total estimado: 29,30 €* + 2,50 € de reparto\n\nLos dos puestos han cerrado ya, así que cada uno acepta su parte mañana al abrir. Te aviso.\n\nTodo llega junto mañana de 10:00 a 14:00.",
       "next": "espera-carne"
     },
     "espera-carne": {

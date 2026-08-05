@@ -102,7 +102,10 @@ for (const archivo of archivos) {
   // (añadir puesto, cancelar y cerrar).
   const CONFIRMA = /^(confirmar|confírmalo|sí|si|vale|apúntalo)/i;
   const RECTIFICA = /modific|cambiar/i;
-  const SALIDA = /hablar|cancel|dejar|quitar/i;
+  // La salida puede ser irse (cancelar, quitar) o buscar a una persona. Fuera
+  // del horario del puesto esa persona no está, y entonces la salida es dejarle
+  // recado — por eso «mensaje» y «recado» cuentan igual que «hablar».
+  const SALIDA = /hablar|mensaje|recado|cancel|quitar/i;
 
   // Varios mensajes pueden desembocar en el mismo grupo de botones, y el aviso
   // interesa una vez por grupo, no una por camino que llega a él.
@@ -120,12 +123,48 @@ for (const archivo of archivos) {
     const falta = [];
     if (!etiquetas.some((l) => CONFIRMA.test(l))) falta.push('confirmar');
     if (!etiquetas.some((l) => RECTIFICA.test(l))) falta.push('volver a modificar');
-    if (!etiquetas.some((l) => SALIDA.test(l))) falta.push('una salida (hablar, cancelar o dejarlo)');
+    if (!etiquetas.some((l) => SALIDA.test(l)))
+      falta.push('una salida (hablar con el placero, dejarle recado o cancelar)');
     if (falta.length)
       fallo(
         `${id}/${paso.next}: propone un pedido y no ofrece ${falta.join(' ni ')}. ` +
           `Tiene [${etiquetas.join('] [')}]`
       );
+  }
+
+  // ---- Hablar con el placero, solo cuando está el placero -------------------
+  // flows-index.md (C11) lo dice desde el principio: el escalado humano existe
+  // solo dentro del horario del puesto, y fuera de él manda S01. Se coló igual:
+  // C05 ofrecía «Hablar con Manolo» a las 21:42, con el mercado cerrado desde
+  // hacía siete horas. Un botón no puede prometer algo que no va a pasar; si es
+  // de noche, lo honrado es decir que se le deja recado.
+  const ABRE = 9;
+  const CIERRA = 14;
+
+  // De qué paso viene cada uno, para heredar la hora cuando el grupo no la trae
+  const vieneDe = {};
+  for (const [nombre, paso] of Object.entries(steps)) {
+    if (paso.kind === 'buttons') paso.buttons.forEach((b) => (vieneDe[b.next] ??= nombre));
+    else if (paso.kind === 'list')
+      paso.sections.forEach((s) => s.rows.forEach((r) => (vieneDe[r.next] ??= nombre)));
+    else if (paso.next) vieneDe[paso.next] ??= nombre;
+  }
+
+  for (const [nombre, paso] of Object.entries(steps)) {
+    if (paso.kind !== 'buttons') continue;
+    const escalados = paso.buttons.filter((b) => /hablar con/i.test(b.label));
+    if (!escalados.length) continue;
+
+    const hora = paso.timestamp ?? steps[vieneDe[nombre]]?.timestamp;
+    if (!hora) continue;
+    const h = parseInt(hora.split(':')[0], 10);
+    if (h >= ABRE && h < CIERRA) continue;
+
+    fallo(
+      `${id}/${nombre}: ofrece «${escalados[0].label}» a las ${hora}, con el puesto ` +
+        `cerrado (abre de ${ABRE}:00 a ${CIERRA}:00). Fuera de horario no se habla con ` +
+        `el placero: se le deja recado y contesta al abrir`
+    );
   }
 
   // ---- Preguntas sin manera de contestar -----------------------------------

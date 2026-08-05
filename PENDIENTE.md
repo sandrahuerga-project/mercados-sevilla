@@ -88,10 +88,17 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - **Ningún botón sin salida**: mirar el vídeo sin pedir (C03), cerrar el pedido sin añadir
   otro puesto (C03, C05), corregir lo que trae «lo de siempre» (C06) y modificar la parte
   de cada puesto en un pedido a dos (C05).
+- **Los botones dicen lo que hacen**: «Cancelar pedido», no «dejarlo estar». La distinción
+  entre anular un borrador y anular un pedido enviado sigue existiendo —el borrador no deja
+  incidencia ni le consta al placero— pero se explica en el mensaje siguiente, no se esconde
+  en una etiqueta suave.
+- **El escalado respeta el horario del puesto**: de noche no se ofrece «Hablar con Manolo»,
+  se ofrece dejarle un mensaje y el bot dice que contesta al abrir. Lo comprueba el
+  validador, que falla si un «hablar con» cae fuera de las 9:00-14:00.
 - **Las tres plazas de botones están decididas y las comprueba el validador**: proponer un
   pedido es `Confirmar · Modificar · Hablar con X`; el pedido ya modificado lleva las
   mismas tres y no solo «Confirmar»; el recibo lleva `Añadir puesto · Cancelar · Así está
-  bien`; y todo submenú tiene su «déjalo como está». Antes, cada vez que hacían falta
+  bien`; y todo submenú tiene su «No cambiar nada». Antes, cada vez que hacían falta
   cuatro opciones en un sitio de tres, se caía la marcha atrás.
 - **Lista desplegable de verdad** (List Message, hasta 10 filas): elegir puesto en C04 y
   C05 enseña los cinco del mercado con su categoría, y desde ahí se cambia de mercado.

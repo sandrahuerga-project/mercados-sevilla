@@ -354,9 +354,43 @@ pedido queda parcial. El caso difícil sigue estando; ya no es el único.
 
 ---
 
+### 1.17 Botones que decían lo que no era
+
+Dos correcciones de Sandra sobre los botones recién puestos, y las dos van al
+mismo sitio: **un botón es una promesa, y las dos promesas eran falsas.**
+
+**«Dejarlo estar» en vez de «Cancelar pedido».** Al separar el borrador del
+pedido ya enviado se buscó una palabra más suave para el primero, con el
+argumento de que antes de confirmar no hay nada que cancelar. El argumento es
+correcto y la etiqueta no: quien la lee no sabe qué va a pasar si la pulsa.
+Sandra: *«no uses frases ambiguas porque suenen más cercanas»*. La distinción
+sigue existiendo —cancelar un borrador no deja incidencia ni le consta al
+placero—, pero eso se explica **después**, en el mensaje que confirma. El botón
+dice lo que hace.
+
+**«Hablar con Manolo» a las 21:42.** El pedido a dos puestos ocurre por la noche,
+y ahí el botón ofrecía hablar con un placero que cerró a las 15:00. La regla
+estaba escrita desde el primer inventario —`flows-index.md`, C11: «solo dentro
+de horario del puesto; fuera → S01»— y aun así se coló, porque el botón se copió
+del flujo de la mañana sin mirar la hora que tenía encima.
+
+Ahora, de noche, la salida es **«Mensaje a Manolo»** y el bot contesta la verdad:
+que ha cerrado, que le deja el recado y que responde al abrir. Los recibos
+también lo dicen: los dos puestos han cerrado, cada uno acepta su parte mañana.
+
+**Qué se cambió en el sistema.** El validador comprueba la hora: si un botón
+ofrece «hablar con» alguien y el paso ocurre fuera de 9:00-14:00, falla. Se
+verificó devolviendo el fallo a propósito.
+
+**Lección.** Un botón no vive en el vacío: hereda la hora, el estado del pedido
+y si hay alguien al otro lado. Copiar un botón de una pantalla a otra se lleva la
+etiqueta pero no el contexto, y la etiqueta sola miente sin que se note.
+
+---
+
 ## 2. Los patrones
 
-Los dieciséis fallos se reducen a seis formas:
+Los diecisiete fallos se reducen a seis formas:
 
 | Patrón | Dónde apareció |
 |---|---|
@@ -366,6 +400,7 @@ Los dieciséis fallos se reducen a seis formas:
 | **El principio escrito que no se comprueba** | 1.6 recibos · 1.13 el total que el bot no debe decidir |
 | **La rama de muestra tomada por rama completa** | 1.7 botón de C05 · 1.12 la edición de C09 · 1.16 el multi-puesto que siempre fallaba |
 | **La restricción absorbida improvisando** | 1.15 tres botones y cuatro opciones |
+| **La etiqueta que viaja sin su contexto** | 1.17 «dejarlo estar» y el escalado de noche |
 
 Ninguno era un fallo de programación. Todos eran de **organización de la
 información**.

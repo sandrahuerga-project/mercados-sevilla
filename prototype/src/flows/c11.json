@@ -62,7 +62,7 @@
       "buttons": [
         { "label": "Confirmar", "next": "entrega" },
         { "label": "Modificar", "next": "modificar" },
-        { "label": "Dejarlo estar", "next": "modificar-fin" }
+        { "label": "Cancelar pedido", "next": "modificar-fin" }
       ]
     },
     "entrega": {
@@ -125,7 +125,7 @@
       "buttons": [
         { "label": "Confirmar", "next": "entrega" },
         { "label": "Cambiar otra cosa", "next": "modificar" },
-        { "label": "Dejarlo estar", "next": "modificar-fin" }
+        { "label": "Cancelar pedido", "next": "modificar-fin" }
       ]
     },
     "modificar-fin": {
