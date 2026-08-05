@@ -60,7 +60,7 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 
 ### Flujos
 
-- **Veintitrés flujos** de chat con sus unhappy paths, más el panel del placero. Hay un
+- **Veinticuatro flujos** de chat con sus unhappy paths, más el panel del placero. Hay un
   guion más, `c07-david.json`, que es la variante de reparto del seguimiento y solo se
   usa dentro del recorrido de David: no es un flujo del catálogo.
 - **Horarios unificados** y escritos una sola vez en `flows/flows-index.md §0`: pedidos
@@ -120,7 +120,7 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
   entra como restricción de diseño, igual que los tres botones por mensaje.
   **Sin verificar por un abogado**: si esto llega a desplegarse, que lo revise uno.
 
-- **S08 — pides algo que hoy no hay**: el flujo 25. Los tres sitios donde ya se trataba
+- **S08 — pides algo que hoy no hay**: el vigesimocuarto del catálogo. Los tres sitios donde ya se trataba
   el producto agotado (C08, C06, C05) los dispara el placero *después* de aceptar; el
   momento de pedir estaba descubierto. La regla: que el placero no haya nombrado algo no
   prueba que no lo tenga, así que se apunta avisando; que haya dicho que se le acabó sí
