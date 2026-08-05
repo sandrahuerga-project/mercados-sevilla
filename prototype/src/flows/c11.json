@@ -61,7 +61,8 @@
       "timestamp": "09:17",
       "buttons": [
         { "label": "Confirmar", "next": "entrega" },
-        { "label": "Modificar", "next": "modificar" }
+        { "label": "Modificar", "next": "modificar" },
+        { "label": "Dejarlo estar", "next": "modificar-fin" }
       ]
     },
     "entrega": {
@@ -103,8 +104,33 @@
       "puesto": "Pescadería Antonio",
       "timestamp": "09:18",
       "text": "Dime qué cambio: cantidad, producto o el día de recogida.",
-      "next": "modificar-fin"
+      "next": "modificar-user"
     },
-    "modificar-fin": { "kind": "end", "note": "La edición sigue el patrón de captura DESIGN.md §9.5" }
+    "modificar-user": {
+      "kind": "user",
+      "timestamp": "09:18",
+      "text": "Que sean tres cuartos de kilo",
+      "next": "modificar-ok"
+    },
+    "modificar-ok": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:19",
+      "text": "Actualizado para mañana:\n\n• 750 g acedías de Sanlúcar — *3,60 €*\n\n*Total estimado: 3,60 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "modificar-botones"
+    },
+    "modificar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:19",
+      "buttons": [
+        { "label": "Confirmar", "next": "entrega" },
+        { "label": "Cambiar otra cosa", "next": "modificar" },
+        { "label": "Dejarlo estar", "next": "modificar-fin" }
+      ]
+    },
+    "modificar-fin": {
+      "kind": "end",
+      "note": "Lo hablado con Antonio queda sin apuntar. El acuerdo con la persona no se convierte en pedido hasta que el cliente lo confirma"
+    }
   }
 }

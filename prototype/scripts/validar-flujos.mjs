@@ -13,6 +13,11 @@ import { join } from 'node:path';
 const DIR = 'src/flows';
 const MAX_BOTONES = 3;
 const MAX_CARACTERES = 20;
+// List Message (wa-constraints.md §5): 10 filas en total contando todas las
+// secciones, no 10 por sección.
+const MAX_FILAS = 10;
+const MAX_TITULO_FILA = 24;
+const MAX_DESC_FILA = 72;
 
 let fallos = 0;
 const fallo = (msg) => {
@@ -48,6 +53,31 @@ for (const archivo of archivos) {
           );
         apunta(boton.next);
       }
+    } else if (paso.kind === 'list') {
+      if ([...paso.buttonLabel].length > MAX_CARACTERES)
+        fallo(
+          `${id}/${nombre}: el botón «${paso.buttonLabel}» tiene ` +
+            `${[...paso.buttonLabel].length} caracteres, el máximo son ${MAX_CARACTERES}`
+        );
+      const filas = paso.sections.flatMap((s) => s.rows);
+      if (filas.length > MAX_FILAS)
+        fallo(
+          `${id}/${nombre}: ${filas.length} filas en la lista, WhatsApp admite ${MAX_FILAS} ` +
+            `contando todas las secciones`
+        );
+      for (const fila of filas) {
+        if ([...fila.label].length > MAX_TITULO_FILA)
+          fallo(
+            `${id}/${nombre}: la fila «${fila.label}» tiene ${[...fila.label].length} ` +
+              `caracteres, el máximo son ${MAX_TITULO_FILA}`
+          );
+        if (fila.description && [...fila.description].length > MAX_DESC_FILA)
+          fallo(
+            `${id}/${nombre}: la descripción de «${fila.label}» tiene ` +
+              `${[...fila.description].length} caracteres, el máximo son ${MAX_DESC_FILA}`
+          );
+        apunta(fila.next);
+      }
     } else {
       apunta(paso.next);
     }
@@ -60,6 +90,55 @@ for (const archivo of archivos) {
   // Toda rama tiene que morir en un 'end'
   const finales = Object.values(steps).filter((p) => p.kind === 'end').length;
   if (finales === 0) fallo(`${id}: no tiene ningún paso final`);
+
+  // ---- Las tres salidas de una propuesta de pedido -------------------------
+  // El fallo que más se ha repetido: el bot enseña el pedido, pregunta si lo
+  // confirmas y el único botón es «Confirmar». Quien se equivoca al modificar
+  // no puede volver a cambiarlo, ni echarse atrás, ni pedir ayuda.
+  //
+  // Se reconoce una propuesta porque lleva el total estimado y va seguida de
+  // botones. El recibo lleva total pero ya no es una propuesta —el pedido está
+  // hecho—, y se distingue porque empieza por 📝; ahí mandan otras tres plazas
+  // (añadir puesto, cancelar y cerrar).
+  const CONFIRMA = /^(confirmar|confírmalo|sí|si|vale|apúntalo)/i;
+  const RECTIFICA = /modific|cambiar/i;
+  const SALIDA = /hablar|cancel|dejar|quitar/i;
+
+  // Varios mensajes pueden desembocar en el mismo grupo de botones, y el aviso
+  // interesa una vez por grupo, no una por camino que llega a él.
+  const revisados = new Set();
+
+  for (const [nombre, paso] of Object.entries(steps)) {
+    if (paso.kind !== 'bot' || !paso.text.includes('Total estimado')) continue;
+    if (paso.text.includes('📝')) continue;
+    const siguiente = paso.next && steps[paso.next];
+    if (!siguiente || siguiente.kind !== 'buttons') continue;
+    if (revisados.has(paso.next)) continue;
+    revisados.add(paso.next);
+
+    const etiquetas = siguiente.buttons.map((b) => b.label);
+    const falta = [];
+    if (!etiquetas.some((l) => CONFIRMA.test(l))) falta.push('confirmar');
+    if (!etiquetas.some((l) => RECTIFICA.test(l))) falta.push('volver a modificar');
+    if (!etiquetas.some((l) => SALIDA.test(l))) falta.push('una salida (hablar, cancelar o dejarlo)');
+    if (falta.length)
+      fallo(
+        `${id}/${paso.next}: propone un pedido y no ofrece ${falta.join(' ni ')}. ` +
+          `Tiene [${etiquetas.join('] [')}]`
+      );
+  }
+
+  // ---- Preguntas sin manera de contestar -----------------------------------
+  // Si el bot pregunta algo y la rama muere ahí, el cliente se queda mirando
+  // una pregunta que no puede responder.
+  for (const [nombre, paso] of Object.entries(steps)) {
+    if (paso.kind !== 'bot' || !paso.text.includes('?')) continue;
+    const siguiente = paso.next && steps[paso.next];
+    if (!siguiente || siguiente.kind === 'end') {
+      const pregunta = paso.text.split('\n').filter((l) => l.includes('?')).pop().trim();
+      fallo(`${id}/${nombre}: pregunta «${pregunta}» y la rama termina sin poder contestar`);
+    }
+  }
 }
 
 // ---- Recorridos encadenados -------------------------------------------------
@@ -120,6 +199,11 @@ for (const [audiencia, codigos] of porAudiencia) {
       const id = `${code}:${nombre}`;
       if (paso.kind === 'buttons') {
         pasos[id] = { kind: 'buttons', next: paso.buttons.map((b) => `${code}:${b.next}`) };
+      } else if (paso.kind === 'list') {
+        pasos[id] = {
+          kind: 'list',
+          next: paso.sections.flatMap((s) => s.rows.map((r) => `${code}:${r.next}`)),
+        };
       } else if (paso.kind === 'end') {
         const destino = puentes.get(id);
         pasos[id] = { kind: 'end', next: destino ? [destino] : [] };

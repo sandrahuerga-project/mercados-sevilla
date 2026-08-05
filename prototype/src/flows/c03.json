@@ -121,7 +121,63 @@
     "modificar-botones": {
       "kind": "buttons",
       "timestamp": "09:06",
-      "buttons": [{ "label": "Confirmar", "next": "mod-fin" }]
+      "buttons": [
+        { "label": "Confirmar", "next": "mod-fin" },
+        { "label": "Cambiar otra cosa", "next": "modificar" },
+        { "label": "Dejarlo estar", "next": "descartar" }
+      ]
+    },
+    "descartar": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "¿Dejamos el pedido sin hacer? Todavía no se lo he pasado a Antonio.",
+      "next": "descartar-botones"
+    },
+    "descartar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:07",
+      "buttons": [
+        { "label": "Sí, déjalo", "next": "descartado" },
+        { "label": "No, sigo pidiendo", "next": "confirmacion-botones" }
+      ]
+    },
+    "descartado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Hecho, no apunto nada.\nCuando quieras pedir, escríbeme aquí.",
+      "next": "descartado-fin"
+    },
+    "descartado-fin": {
+      "kind": "end",
+      "note": "Antes de confirmar no hay pedido que cancelar, solo un borrador: por eso no se llama cancelar ni deja incidencia"
+    },
+    "cancelar": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:09",
+      "text": "Antonio todavía no ha visto tu pedido, así que puedo anularlo sin más.\n\n¿Cancelo el #SGZ-2026-0387?",
+      "next": "cancelar-botones"
+    },
+    "cancelar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:09",
+      "buttons": [
+        { "label": "Sí, cancélalo", "next": "cancelado" },
+        { "label": "No, sigo con él", "next": "recibo-botones" }
+      ]
+    },
+    "cancelado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Pedido cancelado. No te queda ninguna incidencia.\nCuando quieras pedir de nuevo, escríbeme aquí.",
+      "next": "cancelado-fin"
+    },
+    "cancelado-fin": {
+      "kind": "end",
+      "note": "Cancelación libre mientras el placero no lo haya aceptado, pero nunca de un toque: siempre media una confirmación (C10)"
     },
     "mod-fin": { "kind": "end", "note": "Confirmado con el cambio. La entrega y el recibo siguen el mismo camino que arriba, y el seguimiento llega por C07. El detalle del patrón de edición está en C09" },
     "escalado": {
@@ -174,7 +230,8 @@
       "timestamp": "09:07",
       "buttons": [
         { "label": "Hoy 10:00-12:00", "next": "recibo-reparto" },
-        { "label": "Hoy 12:00-14:00", "next": "recibo-reparto" }
+        { "label": "Hoy 12:00-14:00", "next": "recibo-reparto" },
+        { "label": "Mejor lo recojo", "next": "fulfillment-botones" }
       ]
     },
     "recibo-reparto": {
@@ -188,7 +245,8 @@
       "kind": "buttons",
       "timestamp": "09:08",
       "buttons": [
-        { "label": "Añadir puesto", "next": "multi-fin" },
+        { "label": "Añadir otro puesto", "next": "multi-fin" },
+        { "label": "Cancelar pedido", "next": "cancelar" },
         { "label": "Así está bien", "next": "fin-ok" }
       ]
     },

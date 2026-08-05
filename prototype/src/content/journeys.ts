@@ -64,10 +64,14 @@ const PUENTES: Partial<Record<AudienceKey, Record<string, string>>> = {
     'C03:mod-fin': 'C07:date',
   },
   david: {
-    // Pedido espontáneo confirmado con reparto → esa noche repasa y añade.
+    // «Así está bien» → esa tarde el bot le recuerda que puede añadir puestos.
     'C04:fin-ok': 'C05:date',
+    // «Añadir otro puesto» → directo a elegir puesto, sin el salto a la noche.
+    'C04:fin-anadir': 'C05:lista-puestos',
     // Se queda con un solo puesto → tracking del reparto.
     'C05:fin-single': 'C07:date',
+    // El pedido a dos puestos llega entero: es el final bueno de esta historia.
+    'C05:fin-entregado': 'C07:date',
   },
   antonio: {
     'P01:fin': 'P02:date',
@@ -95,6 +99,18 @@ const encadenar = (entrada: { code: string; script: FlowScript }): Record<string
       pasos[id] = {
         ...paso,
         buttons: paso.buttons.map((b) => ({ ...b, next: prefijo(code, b.next) })),
+      };
+      continue;
+    }
+
+    // La lista no tiene un `next` suyo: los destinos van fila a fila.
+    if (paso.kind === 'list') {
+      pasos[id] = {
+        ...paso,
+        sections: paso.sections.map((s) => ({
+          ...s,
+          rows: s.rows.map((r) => ({ ...r, next: prefijo(code, r.next) })),
+        })),
       };
       continue;
     }
@@ -130,6 +146,16 @@ export const buildJourney = (
       pasos[id] = {
         ...paso,
         buttons: paso.buttons.map((b) => ({ ...b, next: puentes.get(b.next) ?? b.next })),
+      };
+      continue;
+    }
+    if (paso.kind === 'list') {
+      pasos[id] = {
+        ...paso,
+        sections: paso.sections.map((s) => ({
+          ...s,
+          rows: s.rows.map((r) => ({ ...r, next: puentes.get(r.next) ?? r.next })),
+        })),
       };
       continue;
     }

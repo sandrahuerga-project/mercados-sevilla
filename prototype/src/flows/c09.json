@@ -23,9 +23,11 @@
       "timestamp": "09:05",
       "buttons": [
         { "label": "Confirmar", "next": "post-contexto" },
-        { "label": "Modificar", "next": "que-cambiar" }
+        { "label": "Modificar", "next": "que-cambiar" },
+        { "label": "Hablar con Antonio", "next": "escalado-fin" }
       ]
     },
+    "escalado-fin": { "kind": "end", "note": "Continúa en C11 — Escalado humano" },
     "que-cambiar": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
@@ -39,8 +41,15 @@
       "buttons": [
         { "label": "Las gambas", "next": "gambas" },
         { "label": "Las coquinas", "next": "coquinas" },
-        { "label": "Quitar algo", "next": "quitar" }
+        { "label": "Déjalo como está", "next": "sin-cambios" }
       ]
+    },
+    "sin-cambios": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "De acuerdo, lo dejo como estaba:\n\n• 1 kg gambas blancas — *18,00 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 22,80 €*\n\n¿Confirmas?",
+      "next": "ajustado-botones"
     },
     "gambas": {
       "kind": "bot",
@@ -54,7 +63,8 @@
       "timestamp": "09:06",
       "buttons": [
         { "label": "Medio kilo", "next": "ajustado-gambas" },
-        { "label": "Otra cantidad", "next": "manual-gambas" }
+        { "label": "Otra cantidad", "next": "manual-gambas" },
+        { "label": "Quitar las gambas", "next": "quitado-gambas" }
       ]
     },
     "ajustado-gambas": {
@@ -96,7 +106,8 @@
       "timestamp": "09:06",
       "buttons": [
         { "label": "Un kilo", "next": "ajustado-coquinas" },
-        { "label": "Otra cantidad", "next": "manual-coquinas" }
+        { "label": "Otra cantidad", "next": "manual-coquinas" },
+        { "label": "Quitar coquinas", "next": "quitado-coquinas" }
       ]
     },
     "ajustado-coquinas": {
@@ -126,21 +137,6 @@
       "text": "Actualizado:\n\n• 1 kg gambas blancas — *18,00 €*\n• ¼ kg coquinas — *2,40 €*\n\n*Total estimado: 20,40 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
       "next": "ajustado-botones"
     },
-    "quitar": {
-      "kind": "bot",
-      "puesto": "Pescadería Antonio",
-      "timestamp": "09:06",
-      "text": "¿Qué quito del pedido?",
-      "next": "quitar-botones"
-    },
-    "quitar-botones": {
-      "kind": "buttons",
-      "timestamp": "09:06",
-      "buttons": [
-        { "label": "Las gambas", "next": "quitado-gambas" },
-        { "label": "Las coquinas", "next": "quitado-coquinas" }
-      ]
-    },
     "quitado-gambas": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
@@ -158,7 +154,37 @@
     "ajustado-botones": {
       "kind": "buttons",
       "timestamp": "09:07",
-      "buttons": [{ "label": "Confirmar", "next": "pre-fin" }]
+      "buttons": [
+        { "label": "Confirmar", "next": "pre-fin" },
+        { "label": "Cambiar otra cosa", "next": "que-cambiar" },
+        { "label": "Dejarlo estar", "next": "descartar" }
+      ]
+    },
+    "descartar": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:08",
+      "text": "¿Dejamos el pedido sin hacer? Todavía no se lo he pasado a Antonio.",
+      "next": "descartar-botones"
+    },
+    "descartar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:08",
+      "buttons": [
+        { "label": "Sí, déjalo", "next": "descartado" },
+        { "label": "No, sigo pidiendo", "next": "ajustado-botones" }
+      ]
+    },
+    "descartado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:08",
+      "text": "Hecho, no apunto nada.\nCuando quieras pedir, escríbeme aquí.",
+      "next": "descartado-fin"
+    },
+    "descartado-fin": {
+      "kind": "end",
+      "note": "Antes de confirmar solo hay un borrador: no deja incidencia ni llega a avisar al placero"
     },
     "pre-fin": { "kind": "end", "note": "Happy path: modificación libre ANTES de que el placero acepte (PRD §10.5). Se pregunta qué cambiar, nunca se da por hecho" },
     "post-contexto": {

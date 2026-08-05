@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, CheckCheck } from 'lucide-react';
+import { Play, CheckCheck, List, X } from 'lucide-react';
 import { PersonaImage, type PersonaId } from '../shell/PersonaImage';
 
 // Date separator
@@ -165,6 +165,86 @@ export const TypingBubble: React.FC = () => {
     </div>
   );
 };
+
+/**
+ * Botón que abre un List Message, pegado debajo del cuerpo del mensaje.
+ *
+ * Existe porque los reply buttons se acaban en tres, y elegir puesto o mercado
+ * son listas de cinco o más. Antes esto se fingía con una pastilla gris que
+ * enumeraba los puestos y seguía igualmente por el primero: se leía como una
+ * lista, pero no se podía elegir.
+ */
+export const ListOpenButton: React.FC<{ label: string; onClick: () => void }> = ({
+  label,
+  onClick,
+}) => (
+  <button
+    onClick={onClick}
+    className="mt-2 -mx-1 pt-2 border-t border-zinc-200 w-[calc(100%+0.5rem)] flex items-center justify-center gap-1.5 text-[13px] font-bold text-[#1B4F8A] hover:text-[#153c69] transition-colors cursor-pointer"
+  >
+    <List size={15} />
+    <span className="truncate">{label}</span>
+  </button>
+);
+
+/**
+ * La hoja que se abre al pulsar el botón de la lista. Cubre la pantalla del
+ * móvil como en WhatsApp, con las filas agrupadas por sección.
+ */
+interface ListSheetProps {
+  title: string;
+  sections: {
+    title: string;
+    rows: { label: string; description?: string; next: string }[];
+  }[];
+  onPick: (label: string, next: string) => void;
+  onClose: () => void;
+}
+
+export const ListSheet: React.FC<ListSheetProps> = ({ title, sections, onPick, onClose }) => (
+  <div
+    className="absolute inset-0 z-50 flex flex-col justify-end bg-black/30 animate-fade-in"
+    onClick={onClose}
+  >
+    <div
+      className="bg-white rounded-t-2xl shadow-2xl max-h-[75%] flex flex-col animate-slide-up"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 shrink-0">
+        <h5 className="text-[15px] font-bold text-zinc-800">{title}</h5>
+        <button
+          onClick={onClose}
+          aria-label="Cerrar la lista"
+          className="p-1 text-zinc-500 hover:text-zinc-800 transition-colors cursor-pointer"
+        >
+          <X size={18} />
+        </button>
+      </div>
+
+      <div className="overflow-y-auto whatsapp-scrollbar">
+        {sections.map((section) => (
+          <div key={section.title}>
+            <div className="px-4 pt-3 pb-1 text-[11px] font-bold uppercase tracking-wide text-mercado-green">
+              {section.title}
+            </div>
+            {section.rows.map((row) => (
+              <button
+                key={row.label}
+                onClick={() => onPick(row.label, row.next)}
+                className="w-full text-left px-4 py-3 border-b border-zinc-100 hover:bg-zinc-50 active:bg-zinc-100 transition-colors cursor-pointer"
+              >
+                <div className="text-[14px] text-zinc-800">{row.label}</div>
+                {row.description && (
+                  <div className="text-[12px] text-zinc-500 mt-0.5">{row.description}</div>
+                )}
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
 
 // Interactive Reply Button Set (strictly max 3 buttons, max 20 chars per button, conforming to WhatsApp rules)
 interface ReplyButtonsProps {

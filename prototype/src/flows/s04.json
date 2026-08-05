@@ -66,12 +66,21 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:15",
-      "text": "Ahora sí:\n\n• 4 acedías\n• ½ kg boquerones\n\n¿Lo confirmo?",
-      "next": "escribe-fin"
+      "text": "Ahora sí:\n\n• 4 acedías — *4,80 €*\n• ½ kg boquerones — *1,75 €*\n\n*Total estimado: 6,55 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Lo confirmo?",
+      "next": "escribe-botones"
+    },
+    "escribe-botones": {
+      "kind": "buttons",
+      "timestamp": "09:16",
+      "buttons": [
+        { "label": "Confirmar", "next": "escribe-fin" },
+        { "label": "Modificar", "next": "escribe" },
+        { "label": "Hablar con Antonio", "next": "humano" }
+      ]
     },
     "escribe-fin": {
       "kind": "end",
-      "note": "Vuelve a C03 por el camino normal, en el punto de confirmar"
+      "note": "Vuelve a C03 por el camino normal, en el punto de elegir cómo recibirlo"
     },
     "humano": {
       "kind": "bot",
@@ -89,7 +98,16 @@
       "puesto": "Pescadería Antonio",
       "timestamp": "09:15",
       "text": "Lo de siempre es *½ kg boquerones y 2 acedías*.\n¿Te lo apunto así?",
-      "next": "siempre-fin"
+      "next": "siempre-botones"
+    },
+    "siempre-botones": {
+      "kind": "buttons",
+      "timestamp": "09:16",
+      "buttons": [
+        { "label": "Sí, apúntalo", "next": "siempre-fin" },
+        { "label": "Cambiar algo", "next": "escribe" },
+        { "label": "Hablar con Antonio", "next": "humano" }
+      ]
     },
     "siempre-fin": {
       "kind": "end",

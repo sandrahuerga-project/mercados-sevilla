@@ -11,6 +11,8 @@ import {
   VideoBubble,
   HumanBubble,
   FlowCTAButton,
+  ListOpenButton,
+  ListSheet,
 } from '../components/ChatBubbles';
 import { WhatsAppFlowModal } from '../components/WhatsAppFlowModal';
 import { personaDePuesto } from '../content/puestos';
@@ -49,6 +51,8 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
     open: false,
     next: null,
   });
+  /** Índice de la entrada cuya lista está abierta, o null si no hay ninguna. */
+  const [listaAbierta, setListaAbierta] = useState<number | null>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -63,6 +67,7 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
     setEntries([]);
     setTyping(false);
     setFlowModal({ open: false, next: null });
+    setListaAbierta(null);
     setCurrentId(script.start);
     return clearTimers;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -91,6 +96,17 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
       // Render and wait for user input
       setEntries((prev) => [...prev, { type: 'step', id: currentId, step }]);
       setCurrentId(null);
+    } else if (step.kind === 'list') {
+      // El mensaje se escribe como cualquier otro del bot, y luego espera a que
+      // se abra la lista y se elija una fila.
+      setTyping(true);
+      timers.current.push(
+        setTimeout(() => {
+          setTyping(false);
+          setEntries((prev) => [...prev, { type: 'step', id: currentId, step }]);
+          setCurrentId(null);
+        }, TYPING_DELAY)
+      );
     } else if (step.kind === 'end') {
       commit(null);
       onEnded?.();
@@ -120,6 +136,21 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
     ]);
     setCurrentId(next);
   };
+
+  /**
+   * Elegir una fila de la lista. A diferencia de los reply buttons, el mensaje
+   * NO desaparece: en WhatsApp la lista se queda en la conversación y lo que se
+   * manda es el título de la fila elegida.
+   */
+  const handleList = (label: string, next: string, timestamp: string) => {
+    setListaAbierta(null);
+    setEntries((prev) => [...prev, { type: 'echo', label, timestamp }]);
+    setCurrentId(next);
+  };
+
+  const abierta = listaAbierta !== null ? entries[listaAbierta] : null;
+  const pasoAbierto =
+    abierta?.type === 'step' && abierta.step.kind === 'list' ? abierta.step : null;
 
   return (
     <div className="flex-1 py-2">
@@ -188,6 +219,18 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
                 }}
               />
             );
+          case 'list':
+            return (
+              <BotBubble
+                key={entry.id}
+                puestoName={step.puesto}
+                puestoPersona={personaDePuesto(step.puesto)}
+                timestamp={step.timestamp}
+              >
+                <div className="whitespace-pre-wrap">{formatWa(step.text)}</div>
+                <ListOpenButton label={step.buttonLabel} onClick={() => setListaAbierta(idx)} />
+              </BotBubble>
+            );
           case 'waflow':
             return (
               <FlowCTAButton
@@ -204,6 +247,14 @@ export const FlowPlayer: React.FC<FlowPlayerProps> = ({ script, onEnded, resetKe
       })}
       {typing && <TypingBubble />}
       <div ref={scrollRef} />
+      {pasoAbierto && (
+        <ListSheet
+          title={pasoAbierto.sheetTitle ?? pasoAbierto.buttonLabel}
+          sections={pasoAbierto.sections}
+          onPick={(label, next) => handleList(label, next, pasoAbierto.timestamp)}
+          onClose={() => setListaAbierta(null)}
+        />
+      )}
       <WhatsAppFlowModal
         isOpen={flowModal.open}
         onClose={() => setFlowModal({ open: false, next: null })}

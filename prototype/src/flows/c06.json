@@ -56,7 +56,11 @@
     "cambiar-botones": {
       "kind": "buttons",
       "timestamp": "10:06",
-      "buttons": [{ "label": "Confirmar", "next": "entrega" }]
+      "buttons": [
+        { "label": "Confirmar", "next": "entrega" },
+        { "label": "Cambiar otra cosa", "next": "cambiar" },
+        { "label": "Hablar con Antonio", "next": "escalado" }
+      ]
     },
     "entrega": {
       "kind": "bot",
@@ -92,9 +96,31 @@
       "kind": "buttons",
       "timestamp": "10:07",
       "buttons": [
-        { "label": "Añadir puesto", "next": "anadir-fin" },
-        { "label": "Así está bien", "next": "gambas-agotadas" }
+        { "label": "Añadir otro puesto", "next": "anadir-fin" },
+        { "label": "Cancelar pedido", "next": "cancelar-pide" },
+        { "label": "Así está bien", "next": "espera" }
       ]
+    },
+    "cancelar-pide": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:07",
+      "text": "Antonio todavía no ha visto tu pedido, así que puedo anularlo sin más.\n\n¿Cancelo el #SGZ-2026-0429?",
+      "next": "cancelar-pide-botones"
+    },
+    "cancelar-pide-botones": {
+      "kind": "buttons",
+      "timestamp": "10:07",
+      "buttons": [
+        { "label": "Sí, cancélalo", "next": "cancelar" },
+        { "label": "No, sigo con él", "next": "confirmado-botones" }
+      ]
+    },
+    "espera": {
+      "kind": "system",
+      "tone": "default",
+      "text": "Antonio acepta el pedido y empieza a prepararlo",
+      "next": "gambas-agotadas"
     },
     "anadir-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto" },
     "gambas-agotadas": {

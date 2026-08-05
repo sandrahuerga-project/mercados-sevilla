@@ -88,6 +88,17 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - **Ningún botón sin salida**: mirar el vídeo sin pedir (C03), cerrar el pedido sin añadir
   otro puesto (C03, C05), corregir lo que trae «lo de siempre» (C06) y modificar la parte
   de cada puesto en un pedido a dos (C05).
+- **Las tres plazas de botones están decididas y las comprueba el validador**: proponer un
+  pedido es `Confirmar · Modificar · Hablar con X`; el pedido ya modificado lleva las
+  mismas tres y no solo «Confirmar»; el recibo lleva `Añadir puesto · Cancelar · Así está
+  bien`; y todo submenú tiene su «déjalo como está». Antes, cada vez que hacían falta
+  cuatro opciones en un sitio de tres, se caía la marcha atrás.
+- **Lista desplegable de verdad** (List Message, hasta 10 filas): elegir puesto en C04 y
+  C05 enseña los cinco del mercado con su categoría, y desde ahí se cambia de mercado.
+  Antes «Ver todos» sacaba una pastilla gris y seguía por el primer puesto igualmente.
+- **El pedido a dos puestos puede salir bien**: con Manolo llega entero, con Lola falta
+  género y queda parcial. Antes rechazaban los dos, así que la única forma de terminar el
+  recorrido era no comprar en dos puestos.
 - **C11** pregunta cómo quiere recibirlo; **C03** y **C06** también.
 - **S03** tiene salida: hablar con el placero, que es quien decide si readmite.
 - **C05 tiene dos ramas de verdad**: el botón de Frutería Manolo lleva a la frutería y
@@ -144,10 +155,12 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 
 ### Infraestructura
 
-- **Dos scripts de verificación**: `validar-flujos.mjs` (límites de WhatsApp, enlaces
-  entre pasos, y que cada puente del recorrido salga de un final y llegue a un paso que
-  existe) y el chequeo geométrico del mapa. Lo que ningún script puede decir es si el
-  destino de un botón tiene sentido: eso se lee en `flows/guiones/`.
+- **Tres scripts de verificación**: `validar-flujos.mjs` (límites de WhatsApp incluidas las
+  listas, enlaces entre pasos, puentes del recorrido, las tres plazas de botones y que
+  ninguna pregunta del bot muera sin poder contestarla), `leer-recorrido.mjs` (escribe un
+  recorrido entero con sus ramas, para leerlo sin ir pulsando) y el chequeo geométrico del
+  mapa. Lo que ningún script puede decir es si el destino de un botón tiene sentido: eso
+  se lee, en `flows/guiones/` o con el lector de recorridos.
 - **README que abre el repo**: qué mirar y por dónde, el mapa de los documentos y las
   decisiones con enlace a dónde está el razonamiento. Enlazado desde el pie de la web.
 - **El documento de la reunión, fuera del repo.** Es la posición negociadora con el

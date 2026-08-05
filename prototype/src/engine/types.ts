@@ -37,6 +37,28 @@ export type FlowStep =
       next: string | null;
     }
   | { kind: 'buttons'; timestamp?: string; buttons: { label: string; next: string }[] }
+  /**
+   * List Message de WhatsApp: un mensaje con un botón que abre una hoja con
+   * filas pulsables. Es el componente que toca cuando hay más de tres opciones
+   * —elegir puesto, elegir mercado—, porque los reply buttons se quedan en tres.
+   * Límites reales (wa-constraints.md §5): 10 filas en total contando todas las
+   * secciones, 24 caracteres el título de fila, 72 la descripción y 20 el botón
+   * que abre la lista.
+   */
+  | {
+      kind: 'list';
+      puesto?: string;
+      timestamp: string;
+      text: string;
+      /** Texto del botón que abre la hoja. */
+      buttonLabel: string;
+      /** Encabezado de la hoja abierta. Por defecto, el del botón. */
+      sheetTitle?: string;
+      sections: {
+        title: string;
+        rows: { label: string; description?: string; next: string }[];
+      }[];
+    }
   | {
       kind: 'video';
       puesto: string;

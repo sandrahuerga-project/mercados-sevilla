@@ -49,7 +49,8 @@
       "timestamp": "09:01",
       "buttons": [
         { "label": "Mercado de Triana", "next": "triana" },
-        { "label": "Mercado de la Feria", "next": "feria" }
+        { "label": "Mercado de la Feria", "next": "feria" },
+        { "label": "Sigo en San Gonzalo", "next": "si-video" }
       ]
     },
     "triana": {

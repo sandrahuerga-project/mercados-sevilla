@@ -97,6 +97,25 @@ function recorrer(guion) {
           }
           return;
         }
+        case 'list': {
+          lineas.push(`${margen}**BOT** ${s.timestamp}`);
+          lineas.push(sangrado(s.text, `${margen}> `));
+          lineas.push('');
+          lineas.push(`${margen}\`[lista desplegable · botón "${s.buttonLabel}"]\``);
+          for (const seccion of s.sections) {
+            lineas.push('');
+            lineas.push(`${margen}_${seccion.title}_`);
+            for (const fila of seccion.rows) {
+              lineas.push('');
+              lineas.push(
+                `${margen}**Si elige \`${fila.label}\`:**` +
+                  (fila.description ? ` _(${fila.description})_` : '')
+              );
+              paso(fila.next, nivel + 1);
+            }
+          }
+          return;
+        }
       }
       lineas.push('');
       actual = s.next ?? null;

@@ -295,9 +295,68 @@ alta si hace falta, igual que se revisa un texto.
 
 ---
 
+### 1.15 Tres botones, cuatro opciones necesarias, y siempre se caía la misma
+
+**Qué pasaba.** WhatsApp admite tres botones por mensaje. Cada vez que hicieron
+falta cuatro, alguien quitó uno — y no fue una vez, fue un goteo por todo el
+proyecto, siempre en la misma dirección:
+
+- **Los seis sitios** donde el bot enseña el pedido ya modificado ofrecían solo
+  `[Confirmar]`. Los seis, sin excepción. Quien se equivocaba al modificar no
+  podía volver a cambiarlo, ni echarse atrás, ni pedir ayuda.
+- **`[Cancelar pedido]` no existía como botón en todo el proyecto.** Cancelar
+  antes de que el placero acepte es un derecho del cliente y tiene flujo propio
+  (C10), pero solo se llegaba a él escribiéndolo a mano.
+- **`[Ver todos]` no enseñaba nada.** Se pulsaba, salía una pastilla gris con
+  cinco puestos y la conversación seguía en el primero igualmente. Se leía como
+  una lista y no se podía elegir.
+- **En los submenús no se podía volver.** En C09 entrabas en «quitar algo» y las
+  únicas salidas eran quitar una cosa u otra.
+
+**Causa de fondo.** El límite de tres no es el problema: el problema es que
+nadie había escrito **qué ocupa esas tres plazas** en cada tipo de momento. Sin
+esa regla, cada pantalla la decide quien la escribe, y bajo presión se cae
+siempre lo mismo: la marcha atrás. Y cuando de verdad hacen falta más de tres
+opciones, WhatsApp tiene otro componente —el List Message, hasta diez filas— que
+el prototipo fingía con una pastilla en vez de tenerlo.
+
+**Qué se cambió.** Las tres plazas quedan fijadas por momento: propuesta de
+pedido es `Confirmar · Modificar · Hablar con X`; pedido ya modificado son las
+mismas tres, no solo confirmar; recibo es `Añadir puesto · Cancelar · Así está
+bien`; y un submenú siempre lleva su «déjalo como está». El List Message existe
+de verdad, con sus filas pulsables y sus límites verificados. Y el validador
+falla si un mensaje propone un pedido sin las tres salidas, o si el bot pregunta
+algo y la rama muere sin poder contestar.
+
+**Lección.** Una restricción de plataforma no se absorbe improvisando en cada
+pantalla. O se decide una vez qué entra y qué sale, o se decide setenta veces
+distinto, que es lo que había.
+
+---
+
+### 1.16 El camino principal era el único que no llegaba al final
+
+**Qué pasaba.** El recorrido de David se titula «comprar en dos puestos». Si
+pulsabas `[Añadir puesto]`, el segundo placero **siempre** rechazaba: daba igual
+elegir a Manolo o a Lola, los dos se quedaban sin género. No existía ningún
+camino en el que un pedido a dos puestos se completara y se entregara. La
+historia solo llegaba al reparto si decías «así está bien», es decir, **si no
+comprabas en dos puestos**.
+
+**Causa de fondo.** El flujo se escribió para enseñar el caso difícil, que es el
+interesante de diseñar, y el caso fácil no se llegó a escribir nunca. Es el
+patrón 1.12 otra vez —la rama de muestra tomada por rama completa— pero a escala
+de recorrido en vez de a escala de botón.
+
+**Qué se cambió.** Los dos puestos cuentan historias distintas y las dos son
+reales: con Manolo el pedido sale entero y llega, con Lola falta género y el
+pedido queda parcial. El caso difícil sigue estando; ya no es el único.
+
+---
+
 ## 2. Los patrones
 
-Los catorce fallos se reducen a cinco formas:
+Los dieciséis fallos se reducen a seis formas:
 
 | Patrón | Dónde apareció |
 |---|---|
@@ -305,7 +364,8 @@ Los catorce fallos se reducen a cinco formas:
 | **Regla calibrada en un sitio, aplicada en todos** | 1.3 contraste de texto · 1.5 tope tipográfico · 1.9 cinta en porcentaje · 1.11 puentes del recorrido |
 | **Lo heredado que nadie relee** | 1.8 plantilla, documento privado, cifras viejas · 1.10 el flujo copiado de otra persona |
 | **El principio escrito que no se comprueba** | 1.6 recibos · 1.13 el total que el bot no debe decidir |
-| **La rama de muestra tomada por rama completa** | 1.7 botón de C05 · 1.12 la edición de C09 |
+| **La rama de muestra tomada por rama completa** | 1.7 botón de C05 · 1.12 la edición de C09 · 1.16 el multi-puesto que siempre fallaba |
+| **La restricción absorbida improvisando** | 1.15 tres botones y cuatro opciones |
 
 Ninguno era un fallo de programación. Todos eran de **organización de la
 información**.
@@ -339,7 +399,12 @@ puerta:
 - **Los guiones se leen enteros, no se auditan por partes.** `flows/guiones/*.md`
   existe para eso: el copy de los veinticuatro guiones en texto plano, con las
   ramas de cada botón sangradas, para leerlo de principio a fin sin abrir el
-  prototipo.
+  prototipo. Y `leer-recorrido.mjs` hace lo mismo con los recorridos cosidos,
+  que es donde estaban los fallos que más costó ver: entre un flujo y el
+  siguiente, no dentro de ninguno.
+- **Las tres plazas de botones, decididas una vez.** Qué ocupa los tres botones
+  en cada tipo de momento está escrito y lo comprueba el validador, en vez de
+  resolverse pantalla por pantalla.
 - **Y el juicio final lo da una persona.** Los dos fallos del puntero y los
   cuatro de los flujos pasaron una verificación numérica. Medir no sustituye a
   mirar, y enlazar no sustituye a leer.
