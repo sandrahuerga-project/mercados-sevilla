@@ -187,6 +187,19 @@ export const CONTEXT = {
   tabs: { producto: PRODUCTO, restricciones: RESTRICCIONES },
 };
 
+/**
+ * Nota al pie del apartado, no sección propia: el post mortem es para quien ya
+ * ha leído lo demás y quiere saber qué costó. Puesto arriba sería vender el
+ * error como reclamo, y no es eso.
+ */
+export const POSTMORTEM_NOTA = pegaTextos({
+  titulo: 'Lo que salió mal por el camino',
+  cuerpo:
+    'Un mapa de flujos que llevaba semanas contradiciendo a la lista que tiene encima, un mismo pedido que valía dos precios distintos según quién lo mirara, botones que ofrecían hablar con un placero que había cerrado hacía seis horas. Está todo escrito, con su causa y con lo que se cambió para que no se repita.',
+  enlace: 'Leer el post mortem',
+  url: 'https://github.com/sandrahuerga-project/mercados-sevilla/blob/main/POSTMORTEM.md',
+});
+
 export const FOOTER = pegaTextos({
   note: 'Prototipo de diseño. No envía mensajes reales ni procesa pagos.',
   repoLabel: 'El proyecto en GitHub',

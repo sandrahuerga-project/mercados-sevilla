@@ -2,7 +2,7 @@ import React from 'react';
 import { FLOWS } from '../content/flowCatalog';
 
 /**
- * Mapa de los veintitrés flujos. Existe para que los códigos (C03, P02, S04…)
+ * Mapa de los veinticuatro flujos. Existe para que los códigos (C03, P02, S04…)
  * dejen de ser jerga: aquí se ve de dónde sale cada uno y a dónde lleva.
  * Es el único sitio de la web donde los códigos se muestran.
  *
@@ -149,6 +149,7 @@ const NODOS: Nodo[] = [
   caja('S06', 290, R_LIMITE, 'limite'),
   caja('S03', 540, R_LIMITE, 'limite'),
   caja('S04', 790, R_LIMITE, 'limite'),
+  caja('S08', 1040, R_LIMITE, 'limite'),
   caja('P04', 1810, R_LIMITE, 'placero'),
 
   // Final del camino bueno
@@ -205,11 +206,18 @@ const ARISTAS: Arista[] = [
   // Otras formas de pedir y de tocar el pedido
   { from: 'C02', to: 'C06' },
   { from: 'C03', to: 'C05' },
+  { from: 'C04', to: 'C05' },
+  { from: 'C06', to: 'C05' },
   { from: 'C03', to: 'C09' },
   { from: 'C03', to: 'C10' },
   { from: 'C10', to: 'C12' },
   { from: 'C03', to: 'S04' },
-  { from: 'C08', to: 'C11' },
+  { from: 'C03', to: 'S08' },
+  // Hablar con el placero se ofrece desde casi cualquier pedido (C03, C05, C06,
+  // C09, C12, S03, S04). Dibujarlas todas era espagueti, y varias tendrían que
+  // retroceder, así que se traza la del flujo central y el resto lo dice la
+  // leyenda. Antes salía de C08, que es justo el único que NO lo ofrece.
+  { from: 'C03', to: 'C11' },
 
   // Lo que corta el alta
   { from: 'C01', to: 'S05' },
@@ -263,7 +271,7 @@ export const FlowMap: React.FC = () => (
       viewBox="0 0 2050 740"
       className="w-full min-w-[1180px] h-auto"
       role="img"
-      aria-label="Mapa de los veintitrés flujos: el camino que sale bien va de izquierda a derecha, y cada rombo de decisión baja a lo que pasa cuando la respuesta es no"
+      aria-label="Mapa de los veinticuatro flujos: el camino que sale bien va de izquierda a derecha, y cada rombo de decisión baja a lo que pasa cuando la respuesta es no"
     >
       <defs>
         <marker
@@ -409,6 +417,11 @@ export const FlowMapLegend: React.FC = () => (
         No
       </span>
       <span>en cada decisión</span>
+    </li>
+    <li className="w-full text-cream/55 leading-relaxed">
+      Hablar con el placero y cancelar el pedido salen desde casi cualquier punto. Se
+      dibuja solo su salida desde el flujo central, porque trazarlas todas llenaba el
+      mapa de flechas que se cruzan.
     </li>
   </ul>
 );

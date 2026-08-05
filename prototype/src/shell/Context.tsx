@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CONTEXT, FOOTER } from '../content/texts';
+import { CONTEXT, FOOTER, POSTMORTEM_NOTA } from '../content/texts';
 import { WHATSAPP_CONSTRAINTS } from '../data/mockData';
 import { Reveal } from './Reveal';
 import { SectionLabel } from './SectionLabel';
@@ -82,6 +82,25 @@ export const Context: React.FC = () => {
           </div>
         )}
 
+        {/* Nota al pie: el post mortem, para quien ha llegado hasta aquí */}
+        <Reveal delay={120}>
+          <div className="mt-16 pt-8 border-t border-line max-w-[46rem]">
+            <h3 className="font-narrow text-lg font-semibold text-ink">
+              {POSTMORTEM_NOTA.titulo}
+            </h3>
+            <p className="mt-2 text-ink-soft leading-relaxed">{POSTMORTEM_NOTA.cuerpo}</p>
+            <a
+              href={POSTMORTEM_NOTA.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 font-narrow text-base font-semibold text-ink-soft underline underline-offset-4 decoration-line hover:text-ink hover:decoration-ink transition-colors"
+            >
+              {POSTMORTEM_NOTA.enlace}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </Reveal>
+
         {/* Cierre del apartado: el género vuelve a asomar */}
         <Parallax speed={0.12} className="mt-16 flex justify-end">
           <FoodImage id="pollo" flota retraso={1.1} className="w-56 lg:w-72" />
@@ -95,7 +114,7 @@ export const Footer: React.FC = () => (
   <footer className="mx-auto max-w-[1400px] px-6 md:px-10 py-14">
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 font-narrow text-base text-ink-faint">
       <span>{FOOTER.note}</span>
-      {/* El trabajo de producto —PRD, restricciones de Meta, los 23 guiones— no
+      {/* El trabajo de producto —PRD, restricciones de Meta, los guiones— no
           cabe en la página y tampoco le toca: aquí va el enlace y ya. */}
       <a
         href={FOOTER.repoUrl}

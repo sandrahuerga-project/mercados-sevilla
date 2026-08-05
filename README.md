@@ -37,7 +37,7 @@ y la conversación avanza.
 Cada persona tiene además un modo **«De principio a fin»**: la compra entera en una sola
 conversación, sin las excepciones por medio.
 
-Son **23 flujos** con sus caminos que salen mal, no solo los felices.
+Son **24 flujos** con sus caminos que salen mal, no solo los felices.
 
 ---
 
@@ -50,7 +50,7 @@ El prototipo es la parte visible. Debajo está el trabajo de producto que lo sos
 | Documento | Qué es |
 |---|---|
 | [`PRD_Mercados_Sevilla.md`](PRD_Mercados_Sevilla.md) | El producto: usuarios, alcance, modelo de datos, reglas de negocio |
-| [`flows/`](flows/) | Los 23 flujos: el inventario y los guiones en texto plano |
+| [`flows/`](flows/) | Los 24 flujos: el inventario y los guiones en texto plano |
 | [`DESIGN.md`](DESIGN.md) | El sistema de diseño conversacional y el catálogo de mensajes aprobados |
 | [`research/`](research/) | De dónde salió todo: la investigación de partida, tal cual |
 | [`wireframes/`](wireframes/) | El primer flujo dibujado a mano, antes de que hubiera pantallas |
@@ -113,7 +113,7 @@ residencia de datos en la UE.
   fijado es dónde *no* puede partir, para que no quede una preposición colgando al final
   de una línea. → `prototype/src/content/tipografia.ts`
 
-- **Los 23 flujos son datos, no código.** Corregir una frase es editar un JSON y regenerar
+- **Los 24 flujos son datos, no código.** Corregir una frase es editar un JSON y regenerar
   los guiones. Un script valida los límites de WhatsApp y la coherencia de los recorridos.
 
 ---

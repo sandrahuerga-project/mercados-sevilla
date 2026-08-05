@@ -23,6 +23,7 @@ import s04 from '../flows/s04.json';
 import s05 from '../flows/s05.json';
 import s06 from '../flows/s06.json';
 import s07 from '../flows/s07.json';
+import s08 from '../flows/s08.json';
 
 export type AudienceKey = 'carmen' | 'david' | 'antonio' | 'limite';
 
@@ -224,6 +225,15 @@ const CATALOGO: FlowEntry[] = [
     group: 'Cuando algo falla',
     hasUnhappy: true,
     script: s07 as FlowScript,
+  },
+  {
+    code: 'S08',
+    name: 'Pides algo que hoy no hay',
+    about: 'El bot avisa de lo que falta, pero nunca decide que no lo hay.',
+    audience: 'limite',
+    group: 'Cuando algo falla',
+    hasUnhappy: true,
+    script: s08 as FlowScript,
   },
   {
     code: 'S02',

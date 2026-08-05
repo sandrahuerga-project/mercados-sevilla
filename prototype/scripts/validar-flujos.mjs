@@ -180,6 +180,58 @@ for (const archivo of archivos) {
   }
 }
 
+// ---- El mapa de flujos no puede inventarse flechas --------------------------
+// El mapa llevaba dibujando C08 → C11 —«de producto agotado se pasa a hablar
+// con el placero»— cuando C08 es justamente el único flujo que no ofrece ese
+// botón. Nadie lo vio porque el mapa se mira solo y las flechas parecen
+// razonables. Aquí se contrastan contra lo que dicen los propios flujos.
+{
+  const mapa = await readFile('src/shell/FlowMap.tsx', 'utf8');
+  const aristas = [
+    ...(mapa.match(/const ARISTAS[\s\S]*?\n\];/)?.[0] ?? '').matchAll(
+      /from: '([\w]+)', to: '([\w]+)'/g
+    ),
+  ].map((m) => [m[1], m[2]]);
+
+  if (!aristas.length) fallo('FlowMap.tsx: no se encuentran las aristas del mapa');
+
+  // Qué flujo menciona a qué otro, en las notas de sus finales y en su
+  // descripción. Es la relación que los flujos declaran de sí mismos.
+  const menciona = new Set();
+  for (const archivo of archivos) {
+    const flujo = JSON.parse(await readFile(join(DIR, archivo), 'utf8'));
+    const textos = [flujo.description ?? ''];
+    for (const paso of Object.values(flujo.steps))
+      if (paso.kind === 'end' && paso.note) textos.push(paso.note);
+    for (const t of textos)
+      for (const m of t.matchAll(/\b([CPS]\d\d)\b/g))
+        if (m[1] !== flujo.id) menciona.add(`${flujo.id}>${m[1]}`);
+  }
+
+  // Flechas que no salen de una mención sino de cómo está montado el mapa:
+  // entradas al embudo y secuencias del placero. Cada una, con su motivo.
+  const DE_COMPOSICION = {
+    'C01>C02': 'el alta deja al cliente en el saludo diario del día siguiente',
+    'C02>C06': '«lo de siempre» es otra puerta de entrada, no una decisión del embudo',
+    'C02>S03': 'el cliente bloqueado se topa con el muro al intentar entrar',
+    'C01>S05': 'S05 es el alta abandonada: sale de C01 por definición',
+    'P01>P02': 'la jornada del placero: primero se da de alta, luego manda el vídeo',
+    'P03>P04': 'los pedidos del día desembocan en el cierre del día',
+  };
+
+  const esFlujo = (n) => /^[CPS]\d\d$/.test(n);
+
+  for (const [de, a] of aristas) {
+    if (!esFlujo(de) || !esFlujo(a)) continue; // rombos de decisión y el nodo final
+    if (menciona.has(`${de}>${a}`) || menciona.has(`${a}>${de}`)) continue;
+    if (DE_COMPOSICION[`${de}>${a}`]) continue;
+    fallo(
+      `FlowMap: dibuja ${de} → ${a}, y ninguno de los dos flujos menciona al otro. ` +
+        `O la flecha sobra, o el flujo tiene que decir a dónde lleva`
+    );
+  }
+}
+
 // ---- Recorridos encadenados -------------------------------------------------
 // Reproduce lo que hace buildJourney() y comprueba que el hilo resultante se
 // recorre entero: sin referencias rotas y sin pasos a los que no se llega.

@@ -1,0 +1,138 @@
+{
+  "id": "S08",
+  "label": "S08 Pides algo que hoy no está",
+  "description": "El producto no está en la lista del día. El bot avisa, pero nunca decide que no lo hay — edge case de C03 y C04",
+  "phone": {
+    "title": "Pescadería Antonio",
+    "subtitle": "Mercado San Gonzalo • En línea",
+    "persona": "pescaderia",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "HOY · 9:30", "next": "pide" },
+    "pide": {
+      "kind": "user",
+      "timestamp": "09:30",
+      "text": "Ponme un kilo de gamba blanca y un poco de pulpo",
+      "next": "comprueba"
+    },
+    "comprueba": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Lista del día de Antonio (la confirmó él a las 8:16 en P02): boquerones, acedías y sepia. La gamba la quitó él mismo. El pulpo no lo ha nombrado.",
+      "next": "respuesta"
+    },
+    "respuesta": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:30",
+      "text": "De lo que me pides, dos cosas:\n\n• *Gamba blanca* — Antonio la quitó esta mañana, se le acabó.\n• *Pulpo* — hoy no lo ha nombrado, pero eso no quiere decir que no tenga.\n\nLo que sí ha puesto hoy: boquerones, acedías y sepia.",
+      "warning": true,
+      "next": "respuesta-botones"
+    },
+    "respuesta-botones": {
+      "kind": "buttons",
+      "timestamp": "09:30",
+      "buttons": [
+        { "label": "Ver lo de hoy", "next": "lista-dia" },
+        { "label": "Apunta el pulpo", "next": "apunta" },
+        { "label": "Hablar con Antonio", "next": "escalado" }
+      ]
+    },
+    "lista-dia": {
+      "kind": "list",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:31",
+      "text": "Esto es lo que Antonio ha puesto hoy en el mostrador.",
+      "buttonLabel": "Ver lo de hoy",
+      "sheetTitle": "Hoy en Pescadería Antonio",
+      "sections": [
+        {
+          "title": "Lo del día",
+          "rows": [
+            {
+              "label": "Boquerones de Málaga",
+              "description": "3,50 €/kg",
+              "next": "elige-boquerones"
+            },
+            { "label": "Acedías limpias", "description": "1,20 € la pieza", "next": "elige-acedias" },
+            { "label": "Sepia", "description": "4,80 €/kg", "next": "elige-sepia" }
+          ]
+        },
+        {
+          "title": "¿Nada de esto?",
+          "rows": [
+            {
+              "label": "Preguntar a Antonio",
+              "description": "Él sabe qué más tiene hoy",
+              "next": "escalado"
+            }
+          ]
+        }
+      ]
+    },
+    "elige-boquerones": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:31",
+      "text": "Apuntado:\n\n• 1 kg boquerones de Málaga — *3,50 €*\n\n*Total estimado: 3,50 €*\nEl definitivo lo pone Antonio al pesar.",
+      "next": "confirmar-botones"
+    },
+    "elige-acedias": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:31",
+      "text": "Apuntado:\n\n• 4 acedías limpias — *4,80 €*\n\n*Total estimado: 4,80 €*\nEl definitivo lo pone Antonio al pesar.",
+      "next": "confirmar-botones"
+    },
+    "elige-sepia": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:31",
+      "text": "Apuntado:\n\n• 1 kg sepia — *4,80 €*\n\n*Total estimado: 4,80 €*\nEl definitivo lo pone Antonio al pesar.",
+      "next": "confirmar-botones"
+    },
+    "confirmar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:32",
+      "buttons": [
+        { "label": "Confirmar", "next": "confirmado" },
+        { "label": "Modificar", "next": "lista-dia" },
+        { "label": "Hablar con Antonio", "next": "escalado" }
+      ]
+    },
+    "confirmado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:32",
+      "text": "📝 Pedido recibido.\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
+      "next": "confirmado-fin"
+    },
+    "confirmado-fin": {
+      "kind": "end",
+      "note": "Cambiar por lo que sí hay es la salida rápida. La lista no es un inventario: es lo que el placero nombró en el vídeo de esta mañana (P02), y a partir de ahí sigue C03"
+    },
+    "apunta": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:31",
+      "text": "Apunto el pulpo y Antonio te dice al aceptar si tiene.\n\nLa gamba no te la apunto: te la estaría prometiendo sabiendo que se le acabó.",
+      "next": "apunta-fin"
+    },
+    "apunta-fin": {
+      "kind": "end",
+      "note": "La diferencia que sostiene todo el flujo: que el placero no haya nombrado algo no prueba que no lo tenga, así que se apunta con aviso. Que haya dicho que se le acabó, sí lo prueba, y entonces no se apunta"
+    },
+    "escalado": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Te paso con Antonio. Él sabe qué más tiene hoy en el mostrador.",
+      "next": "escalado-fin"
+    },
+    "escalado-fin": {
+      "kind": "end",
+      "note": "El bot no tiene inventario y no se lo inventa: para saber lo que hay de verdad, pregunta la persona. Continúa en C11"
+    }
+  }
+}

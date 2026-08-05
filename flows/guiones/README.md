@@ -48,3 +48,4 @@ camino que sale de ese botón.
 - [S05 — Se sale a mitad del alta](s05.md)
 - [S06 — Vive fuera de la zona de reparto](s06.md)
 - [S07 — El placero no manda el vídeo](s07.md)
+- [S08 — Pides algo que hoy no hay](s08.md)

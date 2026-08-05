@@ -31,7 +31,7 @@ node scripts/generar-favicon.mjs          # favicon e iconos, desde la naranja d
 
 | Carpeta | Qué hay |
 |---|---|
-| `src/flows/` | Los 23 flujos, en JSON. **Aquí se toca el copy del chat**, no en los guiones |
+| `src/flows/` | Los 24 flujos, en JSON. **Aquí se toca el copy del chat**, no en los guiones |
 | `src/engine/` | El reproductor que convierte un JSON en una conversación paso a paso |
 | `src/components/` | Las piezas de la interfaz de WhatsApp: burbujas, botones, el marco del móvil |
 | `src/shell/` | La web que envuelve al prototipo: portada, secciones, mapa de flujos |

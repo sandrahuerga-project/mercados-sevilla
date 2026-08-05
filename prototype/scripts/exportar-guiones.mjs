@@ -1,4 +1,4 @@
-// Exporta los 23 flujos JSON a guiones legibles en Markdown, para revisar el copy
+// Exporta los flujos JSON a guiones legibles en Markdown, para revisar el copy
 // sin abrir el prototipo. Salida: flows/guiones/. Regenerar con:
 //   node scripts/exportar-guiones.mjs
 import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';

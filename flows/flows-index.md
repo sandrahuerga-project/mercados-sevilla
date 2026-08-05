@@ -7,12 +7,12 @@
 
 ## 0. Resumen ejecutivo
 
-**Total flujos identificados: 23**
+**Total flujos identificados: 24**
 
 - 6 flujos de cliente (compra)
 - 6 flujos de cliente (postventa / soporte)
 - 4 flujos de placero (operación)
-- 7 flujos de sistema / institucional
+- 8 flujos de sistema / institucional
 
 **Horarios (única fuente de verdad para todo el copy)**
 
@@ -27,6 +27,10 @@
 > C03 y P02. Al prototiparlos se vio que no eran ramas menores: tienen decisión
 > propia y consecuencias distintas, así que pasan a flujo con su propia ficha.
 > Los 23 están implementados en `prototype/src/flows/`.
+>
+> v1.3 — S08 sale del mismo sitio: pedir algo que el placero no ha nombrado hoy
+> estaba sin cubrir. Los tres flujos de producto agotado (C08, C06, C05) los
+> dispara el placero **después** de aceptar; ninguno cubría el momento de pedir.
 >
 > v1.2 — C10 se parte en dos: C10 cancela lo que aún no ha tocado nadie y C12
 > aparece cuando el placero ya está preparando el pedido y cancelar dejaría
@@ -90,6 +94,7 @@ S04   NLU no entiende el pedido            P1     Media
 S05   Alta abandonada a mitad              P2     Baja
 S06   Código postal fuera de zona          P2     Baja
 S07   El placero no sube el vídeo          P1     Media
+S08   Pides algo que hoy no hay            P2     Media
 ─────────────────────────────────────────────────────────────────
 ```
 
@@ -287,6 +292,21 @@ S07   El placero no sube el vídeo          P1     Media
 - **Estado del puesto**: *abierto, sin novedades del día*. Se puede pedir, pero no hay difusión.
 - **Escalado**: tres días seguidos sin vídeo, aviso al gestor del mercado.
 
+### S08 — Pides algo que hoy no hay
+
+- **Trigger**: el cliente pide un producto que no está en la lista del día del puesto
+  (la que el placero confirmó al mandar el vídeo, P02).
+- **Objetivo**: avisar sin decidir. El bot no tiene inventario y no se lo inventa.
+- **La distinción que sostiene el flujo**: que el placero **no haya nombrado** algo no
+  prueba que no lo tenga —nombró tres cosas de un mostrador que tiene veinte—, así que
+  se apunta con aviso. Que **haya dicho que se le acabó** sí lo prueba, y entonces no se
+  apunta: prometerlo sabiendo que no está es peor que no tenerlo.
+- **Salidas**: `[Ver lo de hoy]` (List message con la lista del día), `[Apúntalo igual]`
+  y `[Hablar con {nombre}]`.
+- **Alcance**: solo vale para pedidos del mismo día. En un pedido para mañana el vídeo
+  de mañana todavía no existe, así que el bot no puede avisar de nada y la respuesta la
+  da el placero al aceptar.
+
 ---
 
 ## 3. Dependencias críticas entre flujos
@@ -306,6 +326,9 @@ C01 → S05/S06     (el alta se puede abandonar o caer fuera de zona)
 C03 → S04         (si no se entiende el pedido, se pregunta o se escala)
 S04 → C11/C06     (salidas del malentendido: persona o «lo de siempre»)
 P02 → S07         (sin vídeo no hay difusión)
+P02 → S08         (la lista del día es lo que permite avisar de lo que falta)
+C03 → S08         (se pide algo que no está en la lista de hoy)
+S08 → C11         (para saber lo que hay de verdad, pregunta la persona)
 S07 → S01         (si además no abre, los clientes caen en fuera de horario)
 S02 → S03         (segunda incidencia sin resolver y el cliente queda bloqueado)
 ```
