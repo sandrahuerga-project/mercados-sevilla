@@ -30,6 +30,13 @@ export const CustomCursor: React.FC = () => {
       const target = e.target as HTMLElement | null;
       const interactive = target?.closest('a, button, input, select, [role="button"]');
       ring.current?.classList.toggle('is-active', Boolean(interactive));
+
+      // El verde de marca se queda en 2,22:1 sobre el verde oscuro de la
+      // sección de flujos, que es donde todo se pulsa. Ahí el puntero pasa a
+      // crema. Se mira la sección, no el elemento suelto: dentro del móvil hay
+      // trozos claros y el puntero no debe parpadear al cruzarlos.
+      const oscuro = Boolean(target?.closest('[data-fondo="oscuro"]'));
+      document.body.classList.toggle('cursor-sobre-oscuro', oscuro);
     };
 
     // El anillo persigue al punto con retardo: da la sensación de peso.
@@ -49,7 +56,7 @@ export const CustomCursor: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', onMove);
       cancelAnimationFrame(raf);
-      document.body.classList.remove('custom-cursor-on');
+      document.body.classList.remove('custom-cursor-on', 'cursor-sobre-oscuro');
     };
   }, []);
 

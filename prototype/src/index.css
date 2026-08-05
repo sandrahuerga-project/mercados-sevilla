@@ -231,6 +231,22 @@ li {
   }
 }
 
+/* El color lo pone la sección que hay debajo: el verde de marca se queda en
+   2,22:1 sobre el verde oscuro de los flujos, que es justo donde todo es
+   pulsable. Sobre crema sigue siendo verde (5,94:1) y sobre el verde oscuro
+   pasa a crema (13,19:1). */
+.cursor-dot,
+.cursor-ring {
+  --cursor-color: var(--color-mercado-green);
+  --cursor-halo: rgba(45, 106, 79, 0.1);
+}
+
+.cursor-sobre-oscuro .cursor-dot,
+.cursor-sobre-oscuro .cursor-ring {
+  --cursor-color: var(--color-cream);
+  --cursor-halo: rgba(252, 246, 236, 0.12);
+}
+
 .cursor-dot {
   position: fixed;
   top: 0;
@@ -238,10 +254,11 @@ li {
   width: 9px;
   height: 9px;
   border-radius: 9999px;
-  background-color: var(--color-mercado-green);
+  background-color: var(--cursor-color);
   pointer-events: none;
   z-index: 9999;
   transform: translate3d(-100px, -100px, 0);
+  transition: background-color 0.2s ease;
 }
 
 .cursor-ring {
@@ -251,18 +268,18 @@ li {
   width: 38px;
   height: 38px;
   border-radius: 9999px;
-  border: 1px solid var(--color-mercado-green);
+  border: 1px solid var(--cursor-color);
   pointer-events: none;
   z-index: 9998;
   transform: translate3d(-100px, -100px, 0);
   transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease,
-    opacity 0.25s ease;
+    border-color 0.2s ease, opacity 0.25s ease;
 }
 
 .cursor-ring.is-active {
   width: 62px;
   height: 62px;
-  background-color: rgba(45, 106, 79, 0.1);
+  background-color: var(--cursor-halo);
 }
 
 /* ---- Chat: fondo de WhatsApp con azulejo muy sutil ---- */

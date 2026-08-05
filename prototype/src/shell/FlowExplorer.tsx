@@ -31,8 +31,10 @@ export const FlowExplorer: React.FC = () => {
     setMode('uno');
   };
 
+  // `data-fondo` lo lee el puntero para cambiar de color: el verde de marca se
+  // queda en 2,22:1 sobre este fondo y aquí es donde todo se pulsa.
   return (
-    <section id="flujos" className="bg-green-deep text-cream scroll-mt-14">
+    <section id="flujos" data-fondo="oscuro" className="bg-green-deep text-cream scroll-mt-14">
       <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 md:py-28">
         <SectionLabel tone="deep">{FLOWS_SECTION.eyebrow}</SectionLabel>
 
