@@ -12,8 +12,18 @@ mkdirSync(dirSalida, { recursive: true });
 
 const catalogo = readFileSync(join(raiz, 'src/content/flowCatalog.ts'), 'utf8');
 
+// Variantes que solo viven dentro de un recorrido y no están en el catálogo.
+const FUERA_DE_CATALOGO = {
+  C07D: {
+    nombre: 'Seguir el reparto hasta la puerta',
+    sobre: 'Variante de C07 usada solo en el recorrido de David: reparto a domicilio con salida a taquilla.',
+    persona: 'david',
+  },
+};
+
 /** Saca name/about/audience del catálogo para cada código de flujo. */
 function metaDe(codigo) {
+  if (FUERA_DE_CATALOGO[codigo]) return FUERA_DE_CATALOGO[codigo];
   const bloque = catalogo.split(`code: '${codigo}'`)[1] ?? '';
   const corte = bloque.slice(0, 400);
   const saca = (clave) => corte.match(new RegExp(`${clave}: '([^']*)'`))?.[1] ?? '';
@@ -149,7 +159,7 @@ for (const f of indice) (porPersona[f.persona] ||= []).push(f);
 
 const readme = `# Guiones de los flujos
 
-Los 23 flujos de WhatsApp en texto plano, para revisar el copy de un vistazo.
+Los flujos de WhatsApp en texto plano, para revisar el copy de un vistazo.
 
 **Esto es una copia generada.** El original son los JSON de
 \`prototype/src/flows/\`. Para corregir un texto se edita el JSON y se regenera:

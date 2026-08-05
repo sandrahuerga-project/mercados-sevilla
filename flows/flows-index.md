@@ -18,7 +18,8 @@
 
 | Qué | Cuándo |
 | --- | --- |
-| Pedidos y recogida en el puesto | hasta las 14:00 |
+| Pedidos del día | hasta las 12:30 (ventana típica del puesto) |
+| Recogida en el puesto | hasta las 14:00 |
 | Reparto a domicilio | de 10:00 a 14:00 |
 | Taquilla refrigerada | hasta las 20:00 |
 

@@ -69,13 +69,35 @@ for (const archivo of archivos) {
 // Los recorridos se leen de journeys.ts: son a mano, no todos los flujos de la
 // persona. Las situaciones límite no tienen recorrido y por eso no salen aquí.
 const journeys = await readFile('src/content/journeys.ts', 'utf8');
-const bloque = journeys.match(/RECORRIDOS[^=]*=\s*\{([\s\S]*?)\n\};/);
+const bloque = journeys.match(/const RECORRIDOS[^=]*=\s*\{([\s\S]*?)\n\};/);
 if (!bloque) fallo('journeys.ts: no se encuentra el mapa RECORRIDOS');
 
-const CORTES = new Set(
-  [...journeys.matchAll(/CORTES = new Set\(\[([^\]]*)\]/g)]
-    .flatMap((m) => [...m[1].matchAll(/'([\w:-]+)'/g)])
-    .map((m) => m[1])
+// Solo los finales listados en PUENTES encadenan con el flujo siguiente;
+// el resto termina de verdad también dentro del recorrido.
+const bloquePuentes = journeys.match(/const PUENTES[^=]*=\s*\{([\s\S]*?)\n\};/);
+if (!bloquePuentes) fallo('journeys.ts: no se encuentra el mapa PUENTES');
+const puentesPorAudiencia = new Map(
+  [...(bloquePuentes?.[1] ?? '').matchAll(/(\w+):\s*\{([\s\S]*?)\}/g)].map((m) => [
+    m[1],
+    new Map([...m[2].matchAll(/'([\w:-]+)':\s*'([\w:-]+)'/g)].map((p) => [p[1], p[2]])),
+  ])
+);
+
+// Guiones alternativos por recorrido (p. ej. el C07 de reparto de David).
+const importes = new Map(
+  [...journeys.matchAll(/import (\w+) from '\.\.\/flows\/([\w-]+)\.json'/g)].map((m) => [
+    m[1],
+    m[2],
+  ])
+);
+const bloqueAlt = journeys.match(/const GUIONES_ALTERNATIVOS[^=]*=\s*\{([\s\S]*?)\n\};/);
+const altPorAudiencia = new Map(
+  [...(bloqueAlt?.[1] ?? '').matchAll(/(\w+):\s*\{([^}]*)\}/g)].map((m) => [
+    m[1],
+    new Map(
+      [...m[2].matchAll(/(\w+):\s*(\w+)/g)].map((p) => [p[1], importes.get(p[2]) ?? p[1].toLowerCase()])
+    ),
+  ])
 );
 
 const porAudiencia = new Map(
@@ -87,32 +109,36 @@ const porAudiencia = new Map(
 
 for (const [audiencia, codigos] of porAudiencia) {
   const pasos = {};
+  const puentes = puentesPorAudiencia.get(audiencia) ?? new Map();
+  const alternativos = altPorAudiencia.get(audiencia) ?? new Map();
+  const ficheroDe = (code) => `${alternativos.get(code) ?? code.toLowerCase()}.json`;
 
-  for (let i = 0; i < codigos.length; i++) {
-    const code = codigos[i];
-    const flujo = JSON.parse(await readFile(join(DIR, `${code.toLowerCase()}.json`), 'utf8'));
-    const siguiente = codigos[i + 1];
-    let inicioSiguiente = null;
-    if (siguiente) {
-      const sig = JSON.parse(await readFile(join(DIR, `${siguiente.toLowerCase()}.json`), 'utf8'));
-      inicioSiguiente = `${siguiente}:${sig.start}`;
-    }
+  for (const code of codigos) {
+    const flujo = JSON.parse(await readFile(join(DIR, ficheroDe(code)), 'utf8'));
 
     for (const [nombre, paso] of Object.entries(flujo.steps)) {
       const id = `${code}:${nombre}`;
       if (paso.kind === 'buttons') {
         pasos[id] = { kind: 'buttons', next: paso.buttons.map((b) => `${code}:${b.next}`) };
       } else if (paso.kind === 'end') {
-        const puentea = inicioSiguiente && !CORTES.has(id);
-        pasos[id] = { kind: 'end', next: puentea ? [inicioSiguiente] : [] };
+        const destino = puentes.get(id);
+        pasos[id] = { kind: 'end', next: destino ? [destino] : [] };
       } else {
         pasos[id] = { kind: paso.kind, next: paso.next ? [`${code}:${paso.next}`] : [] };
       }
     }
   }
 
+  // Cada puente tiene que salir de un final real y llegar a un paso que exista
+  for (const [desde, hasta] of puentes) {
+    if (!pasos[desde]) fallo(`recorrido ${audiencia}: el puente sale de "${desde}", que no existe`);
+    else if (pasos[desde].kind !== 'end')
+      fallo(`recorrido ${audiencia}: el puente "${desde}" no es un paso final`);
+    if (!pasos[hasta]) fallo(`recorrido ${audiencia}: el puente lleva a "${hasta}", que no existe`);
+  }
+
   const primero = codigos[0];
-  const flujoPrimero = JSON.parse(await readFile(join(DIR, `${primero.toLowerCase()}.json`), 'utf8'));
+  const flujoPrimero = JSON.parse(await readFile(join(DIR, ficheroDe(primero)), 'utf8'));
   const arranque = `${primero}:${flujoPrimero.start}`;
 
   if (!pasos[arranque]) fallo(`recorrido ${audiencia}: el arranque "${arranque}" no existe`);
@@ -136,7 +162,7 @@ for (const [audiencia, codigos] of porAudiencia) {
   if (sueltos.length)
     fallo(`recorrido ${audiencia}: ${sueltos.length} pasos inalcanzables (${sueltos[0]}…)`);
 
-  // El último flujo tiene que ser el único que termina de verdad
+  // Tiene que quedar al menos un final de verdad (los no puenteados lo son)
   const ultimos = Object.entries(pasos).filter(([, p]) => p.kind === 'end' && p.next.length === 0);
   if (ultimos.length === 0) fallo(`recorrido ${audiencia}: no termina en ningún sitio`);
 

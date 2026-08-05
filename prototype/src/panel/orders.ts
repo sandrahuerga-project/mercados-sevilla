@@ -40,7 +40,7 @@ export const INITIAL_ORDERS: PanelOrder[] = [
     finalTotal: '6,80 €',
   },
   {
-    id: 'SGZ-2026-0390',
+    id: 'SGZ-2026-0412',
     customer: 'David Ortiz',
     time: '21:40',
     items: [{ qty: '1 kg', name: 'Gambas blancas', price: '18,00 €' }],

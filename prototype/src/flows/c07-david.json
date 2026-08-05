@@ -1,0 +1,88 @@
+{
+  "id": "C07D",
+  "label": "C07 Tracking (reparto)",
+  "description": "Variante del tracking para el pedido de David: reparto a domicilio y salida a taquilla — solo se usa en el recorrido",
+  "phone": {
+    "title": "Pescadería Antonio",
+    "subtitle": "Mercado San Gonzalo • En línea",
+    "persona": "pescaderia",
+    "avatarBg": "bg-sevilla-tile"
+  },
+  "start": "date",
+  "steps": {
+    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0412", "next": "aceptado" },
+    "aceptado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:20",
+      "text": "✓ Antonio ha aceptado tu pedido #SGZ-2026-0412.\nSale en el reparto de esta mañana, de 10:00 a 14:00.",
+      "next": "pesado"
+    },
+    "pesado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:55",
+      "text": "🔔 Pedido pesado y cerrado.\n\n*Total: 17,60 €* + 2,50 € de reparto (el estimado eran 18,00 €)\nPagas al repartidor: efectivo, Bizum o tarjeta.",
+      "next": "en-reparto"
+    },
+    "en-reparto": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:40",
+      "text": "🛵 Tu pedido va en el reparto de esta mañana.\n¿Estarás en casa?",
+      "next": "en-reparto-botones"
+    },
+    "en-reparto-botones": {
+      "kind": "buttons",
+      "timestamp": "10:40",
+      "buttons": [
+        { "label": "Sí, estaré", "next": "entregado" },
+        { "label": "No estaré en casa", "next": "taquilla" }
+      ]
+    },
+    "taquilla": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "10:41",
+      "text": "Sin problema: lo dejo en la taquilla refrigerada del mercado.\nTe llega el enlace de Bizum para pagarlo y lo recoges hasta las 20:00, cuando salgas de trabajar.",
+      "next": "taquilla-fin"
+    },
+    "taquilla-fin": {
+      "kind": "end",
+      "note": "La taquilla salva el reparto cuando no hay nadie en casa: el pago pasa a Bizum por adelantado y la recogida se estira hasta las 20:00"
+    },
+    "entregado": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:35",
+      "text": "📦 Pedido entregado. ¡Que aproveche!\n¿Te lo guardo como «lo de siempre»? Así lo repites en un toque.",
+      "next": "entregado-botones"
+    },
+    "entregado-botones": {
+      "kind": "buttons",
+      "timestamp": "11:35",
+      "buttons": [
+        { "label": "Sí, guárdalo", "next": "repetir-si" },
+        { "label": "No, gracias", "next": "repetir-no" }
+      ]
+    },
+    "repetir-si": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:36",
+      "text": "Guardado. La próxima vez escríbeme «lo de siempre» y te lo preparo igual.",
+      "next": "fin-ok"
+    },
+    "repetir-no": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:36",
+      "text": "De acuerdo. Cuando quieras pedir de nuevo, escríbeme aquí.",
+      "next": "fin-ok"
+    },
+    "fin-ok": {
+      "kind": "end",
+      "note": "El total real lo tecleó Antonio al pesar — el bot solo lo repite. De «lo de siempre» nace C06"
+    }
+  }
+}

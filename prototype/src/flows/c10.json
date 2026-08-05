@@ -10,7 +10,7 @@
   },
   "start": "date",
   "steps": {
-    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0387 · SIN ACEPTAR", "next": "pide" },
+    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0429 · SIN ACEPTAR", "next": "pide" },
     "pide": {
       "kind": "user",
       "timestamp": "09:10",
@@ -21,7 +21,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:10",
-      "text": "Antonio todavía no ha visto tu pedido, así que puedo anularlo sin más.\n\n¿Cancelo el #SGZ-2026-0387?",
+      "text": "Antonio todavía no ha visto tu pedido, así que puedo anularlo sin más.\n\n¿Cancelo el #SGZ-2026-0429?",
       "next": "confirma-botones"
     },
     "confirma-botones": {

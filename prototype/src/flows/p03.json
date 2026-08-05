@@ -15,7 +15,7 @@
       "kind": "bot",
       "puesto": "Mercados de Sevilla",
       "timestamp": "09:41",
-      "text": "*Pedido nuevo · SGZ-0387*\nCarmen R.\n\n• ½ kg boquerones\n• 2 acedías\n\nRecogida hoy 13:00-14:00.",
+      "text": "*Pedido nuevo · #SGZ-2026-0387*\nCarmen R.\n\n• ½ kg boquerones\n• 2 acedías\n\nRecogida hoy 13:00-14:00.",
       "next": "entra-botones"
     },
     "entra-botones": {
@@ -37,14 +37,14 @@
     "pesa": {
       "kind": "user",
       "timestamp": "12:20",
-      "text": "12,40",
+      "text": "4,30",
       "next": "total"
     },
     "total": {
       "kind": "bot",
       "puesto": "Mercados de Sevilla",
       "timestamp": "12:20",
-      "text": "*12,40 €* enviados a Carmen con el aviso de que está listo.\nPasa a *Por cobrar* en el panel.",
+      "text": "*4,30 €* enviados a Carmen con el aviso de que está listo.\nPasa a *Por cobrar* en el panel.",
       "next": "total-botones"
     },
     "total-botones": {
@@ -95,14 +95,21 @@
       "timestamp": "09:43",
       "buttons": [
         { "label": "Ofrecer pescadilla", "next": "ofrecido" },
-        { "label": "Quitar del pedido", "next": "ofrecido" }
+        { "label": "Quitar del pedido", "next": "quitado" }
       ]
     },
     "ofrecido": {
       "kind": "bot",
       "puesto": "Mercados de Sevilla",
       "timestamp": "09:44",
-      "text": "Preguntado. Te aviso en cuanto conteste.",
+      "text": "Le ofrezco la pescadilla a Carmen y te aviso en cuanto conteste.\nNo cambio nada sin que ella lo diga.",
+      "next": "falta-fin"
+    },
+    "quitado": {
+      "kind": "bot",
+      "puesto": "Mercados de Sevilla",
+      "timestamp": "09:44",
+      "text": "Hecho: quito las acedías y se lo digo a Carmen.\nSu pedido se queda solo con los boquerones.",
       "next": "falta-fin"
     },
     "falta-fin": {

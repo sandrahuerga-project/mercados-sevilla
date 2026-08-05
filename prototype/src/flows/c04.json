@@ -1,7 +1,7 @@
 {
   "id": "C04",
   "label": "C04 Pedido espontáneo",
-  "description": "El usuario escribe sin venir del broadcast — enrutamiento + pedido",
+  "description": "El usuario escribe sin venir del broadcast — enrutamiento + pedido + entrega",
   "phone": {
     "title": "Mercado San Gonzalo",
     "subtitle": "Asistente oficial • En línea",
@@ -21,7 +21,7 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "11:20",
-      "text": "Buenos días Carmen. Tu mercado es San Gonzalo.\n¿A qué puesto quieres pedir?",
+      "text": "Buenos días David. Tu mercado es San Gonzalo.\n¿A qué puesto quieres pedir?",
       "next": "puestos"
     },
     "puestos": {
@@ -48,27 +48,103 @@
     "pedido": {
       "kind": "user",
       "timestamp": "11:22",
-      "text": "Un cuarto de gambas y cazón en adobo para dos",
+      "text": "Ponme un kilo de gambas blancas, que tengo cena mañana",
       "next": "confirmacion"
     },
     "confirmacion": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "11:22",
-      "text": "He entendido este pedido:\n\n• ¼ kg gambas blancas — *4,50 €*\n• Cazón en adobo (2 raciones) — *5,20 €*\n\n*Total estimado: 9,70 €*",
+      "text": "He entendido este pedido:\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €*\nEl definitivo lo pone Antonio al pesar.",
       "next": "confirmacion-botones"
     },
     "confirmacion-botones": {
       "kind": "buttons",
       "timestamp": "11:22",
       "buttons": [
-        { "label": "Confirmar", "next": "fin-ok" },
-        { "label": "Modificar", "next": "fin-mod" },
+        { "label": "Confirmar", "next": "fulfillment" },
+        { "label": "Modificar", "next": "modificar" },
         { "label": "Hablar con Antonio", "next": "fin-escalado" }
       ]
     },
-    "fin-ok": { "kind": "end", "note": "Sigue como C03: fulfillment → recibo. El NLU respeta el léxico sevillano («un cuarto», «cazón en adobo»)" },
-    "fin-mod": { "kind": "end", "note": "Edición de cantidades — patrón DESIGN.md §9.5" },
+    "modificar": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:23",
+      "text": "Dime qué cambio: cantidad, producto o quitar algo del pedido.",
+      "next": "modificar-user"
+    },
+    "modificar-user": {
+      "kind": "user",
+      "timestamp": "11:23",
+      "text": "Añade también cazón en adobo para dos",
+      "next": "modificar-ok"
+    },
+    "modificar-ok": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:24",
+      "text": "Actualizado:\n\n• 1 kg gambas blancas — *18,00 €*\n• Cazón en adobo (2 raciones) — *5,20 €*\n\n*Total estimado: 23,20 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "modificar-botones"
+    },
+    "modificar-botones": {
+      "kind": "buttons",
+      "timestamp": "11:24",
+      "buttons": [{ "label": "Confirmar", "next": "fin-mod" }]
+    },
+    "fin-mod": {
+      "kind": "end",
+      "note": "El NLU respeta el léxico sevillano («cazón en adobo para dos»). Tras confirmar, la entrega y el recibo siguen el mismo camino que el pedido sin cambios"
+    },
+    "fulfillment": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:24",
+      "text": "¿Cómo quieres recibirlo mañana?",
+      "next": "fulfillment-botones"
+    },
+    "fulfillment-botones": {
+      "kind": "buttons",
+      "timestamp": "11:24",
+      "buttons": [
+        { "label": "Reparto 10:00-14:00", "next": "recibo-reparto" },
+        { "label": "Taquilla", "next": "taquilla" },
+        { "label": "Recogida en puesto", "next": "recibo-recogida" }
+      ]
+    },
+    "recibo-reparto": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:25",
+      "text": "📝 Pedido recibido #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto mañana de 10:00 a 14:00.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
+      "next": "fin-ok"
+    },
+    "fin-ok": {
+      "kind": "end",
+      "note": "Pedido en marcha — el seguimiento llega por C07. En el recorrido de David continúa en C05: añadir un segundo puesto"
+    },
+    "taquilla": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:25",
+      "text": "📝 Pedido recibido #SGZ-2026-0412\n\nLa taquilla refrigerada se paga por adelantado: te llega ahora el enlace de Bizum.\nLo recoges mañana hasta las 20:00, aunque Antonio haya cerrado.",
+      "next": "fin-taquilla"
+    },
+    "fin-taquilla": {
+      "kind": "end",
+      "note": "Taquilla: CTA URL de Bizum en plantilla utility (wa-constraints §6.2). Es la entrega pensada para quien sale de trabajar a las 17:00"
+    },
+    "recibo-recogida": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "11:25",
+      "text": "📝 Pedido recibido #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €*\nEl definitivo lo pone Antonio al pesar.\n\nRecogida en puesto, mañana hasta las 14:00.\nPago al recoger (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
+      "next": "fin-recogida"
+    },
+    "fin-recogida": {
+      "kind": "end",
+      "note": "Recogida clásica — el seguimiento llega por C07"
+    },
     "fin-escalado": { "kind": "end", "note": "Continúa en C11 — Escalado humano" }
   }
 }

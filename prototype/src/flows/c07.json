@@ -22,7 +22,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "11:40",
-      "text": "🔔 Tu pedido está listo.\n\n*Total: 4,15 €*\nPaga en efectivo, Bizum o tarjeta al recoger.\n\nPasa antes de las 14:00.",
+      "text": "🔔 Tu pedido está listo.\n\n*Total: 4,30 €* (el estimado eran 4,15 €)\nPaga en efectivo, Bizum o tarjeta al recoger.\n\nPasa antes de las 14:00.",
       "next": "listo-botones"
     },
     "listo-botones": {
@@ -31,7 +31,7 @@
       "buttons": [
         { "label": "Voy ahora", "next": "voy" },
         { "label": "Cómo llegar", "next": "mapa" },
-        { "label": "No puedo hoy", "next": "s02-aviso2" }
+        { "label": "No puedo hoy", "next": "s02-espera" }
       ]
     },
     "voy": {
@@ -45,7 +45,13 @@
       "kind": "system",
       "tone": "blue",
       "text": "Abre Google Maps — Mercado San Gonzalo (botón CTA URL de la plantilla)",
-      "next": "entregado"
+      "next": "mapa-user"
+    },
+    "mapa-user": {
+      "kind": "user",
+      "timestamp": "11:41",
+      "text": "Ya lo veo, voy en 10 minutos",
+      "next": "voy"
     },
     "entregado": {
       "kind": "bot",
@@ -76,7 +82,12 @@
       "text": "De acuerdo. Cuando quieras pedir de nuevo, escríbeme aquí.",
       "next": "fin-ok"
     },
-    "fin-ok": { "kind": "end", "note": "El total (4,15 €) lo tecleó Antonio al marcar Listo tras pesar — el bot solo lo repite" },
+    "fin-ok": { "kind": "end", "note": "El total (4,30 €) lo tecleó Antonio al marcar Listo tras pesar — el bot solo lo repite, nunca lo calcula" },
+    "s02-espera": {
+      "kind": "system",
+      "text": "Pasan dos horas y el pedido sigue en el puesto",
+      "next": "s02-aviso2"
+    },
     "s02-aviso2": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",

@@ -1,6 +1,6 @@
 # Guiones de los flujos
 
-Los 23 flujos de WhatsApp en texto plano, para revisar el copy de un vistazo.
+Los flujos de WhatsApp en texto plano, para revisar el copy de un vistazo.
 
 **Esto es una copia generada.** El original son los JSON de
 `prototype/src/flows/`. Para corregir un texto se edita el JSON y se regenera:
@@ -27,6 +27,7 @@ camino que sale de ese botón.
 - [C04 — Pedir sin esperar al vídeo](c04.md)
 - [C05 — Comprar en dos puestos a la vez](c05.md)
 - [C06 — Repetir el pedido de siempre](c06.md)
+- [C07D — Seguir el reparto hasta la puerta](c07d.md)
 - [C09 — Cambiar algo del pedido](c09.md)
 - [C10 — Cancelar antes de que lo acepten](c10.md)
 - [C12 — Cancelar con el pedido en marcha](c12.md)

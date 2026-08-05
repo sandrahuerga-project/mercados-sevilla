@@ -1,7 +1,7 @@
 {
   "id": "C09",
   "label": "C09 Modificación",
-  "description": "Editar pedido pre-aceptado + unhappy (post-aceptado escala a humano) — PRD §10.5",
+  "description": "Editar pedido pre-aceptado: qué cambiar, cuánto y qué quitar + unhappy (post-aceptado escala a humano) — PRD §10.5",
   "phone": {
     "title": "Pescadería Antonio",
     "subtitle": "Mercado San Gonzalo • En línea",
@@ -15,7 +15,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:05",
-      "text": "He entendido este pedido:\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €*",
+      "text": "He entendido este pedido:\n\n• 1 kg gambas blancas — *18,00 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 22,80 €*\nEl definitivo lo pone Antonio al pesar.",
       "next": "confirmacion-botones"
     },
     "confirmacion-botones": {
@@ -23,50 +23,136 @@
       "timestamp": "09:05",
       "buttons": [
         { "label": "Confirmar", "next": "post-contexto" },
-        { "label": "Modificar", "next": "modificar" }
+        { "label": "Modificar", "next": "que-cambiar" }
       ]
     },
-    "modificar": {
+    "que-cambiar": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:06",
-      "text": "¿Qué cantidad de boquerones quieres? Si es otra, escríbemela.",
-      "next": "cantidad-botones"
+      "text": "¿Qué quieres cambiar?",
+      "next": "que-cambiar-botones"
     },
-    "cantidad-botones": {
+    "que-cambiar-botones": {
       "kind": "buttons",
       "timestamp": "09:06",
       "buttons": [
-        { "label": "1 kg", "next": "ajustado" },
-        { "label": "Otra cantidad", "next": "manual-pide" },
-        { "label": "Quitar del pedido", "next": "ajustado" }
+        { "label": "Las gambas", "next": "gambas" },
+        { "label": "Las coquinas", "next": "coquinas" },
+        { "label": "Quitar algo", "next": "quitar" }
       ]
     },
-    "manual-pide": {
+    "gambas": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "¿Qué cantidad de gambas te pongo?",
+      "next": "gambas-botones"
+    },
+    "gambas-botones": {
+      "kind": "buttons",
+      "timestamp": "09:06",
+      "buttons": [
+        { "label": "Medio kilo", "next": "ajustado-gambas" },
+        { "label": "Otra cantidad", "next": "manual-gambas" }
+      ]
+    },
+    "ajustado-gambas": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Actualizado:\n\n• ½ kg gambas blancas — *9,00 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 13,80 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "ajustado-botones"
+    },
+    "manual-gambas": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:06",
       "text": "Dímela como quieras: en kilos, en gramos o por piezas.",
-      "next": "manual-texto"
+      "next": "manual-gambas-user"
     },
-    "manual-texto": {
+    "manual-gambas-user": {
       "kind": "user",
       "timestamp": "09:07",
       "text": "750 gramos",
-      "next": "manual-ajustado"
+      "next": "ajustado-gambas-manual"
     },
-    "manual-ajustado": {
+    "ajustado-gambas-manual": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "Actualizado:\n\n• 750 g boquerones frescos — *2,63 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,03 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "text": "Actualizado:\n\n• 750 g gambas blancas — *13,50 €*\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 18,30 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
       "next": "ajustado-botones"
     },
-    "ajustado": {
+    "coquinas": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "¿Cuánta coquina te pongo?",
+      "next": "coquinas-botones"
+    },
+    "coquinas-botones": {
+      "kind": "buttons",
+      "timestamp": "09:06",
+      "buttons": [
+        { "label": "Un kilo", "next": "ajustado-coquinas" },
+        { "label": "Otra cantidad", "next": "manual-coquinas" }
+      ]
+    },
+    "ajustado-coquinas": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:07",
-      "text": "Actualizado:\n\n• 1 kg boquerones frescos — *3,50 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 5,90 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "text": "Actualizado:\n\n• 1 kg gambas blancas — *18,00 €*\n• 1 kg coquinas — *9,60 €*\n\n*Total estimado: 27,60 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "ajustado-botones"
+    },
+    "manual-coquinas": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "Dímela como quieras: en kilos o en gramos.",
+      "next": "manual-coquinas-user"
+    },
+    "manual-coquinas-user": {
+      "kind": "user",
+      "timestamp": "09:07",
+      "text": "Un cuarto nada más",
+      "next": "ajustado-coquinas-manual"
+    },
+    "ajustado-coquinas-manual": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Actualizado:\n\n• 1 kg gambas blancas — *18,00 €*\n• ¼ kg coquinas — *2,40 €*\n\n*Total estimado: 20,40 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "ajustado-botones"
+    },
+    "quitar": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "¿Qué quito del pedido?",
+      "next": "quitar-botones"
+    },
+    "quitar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:06",
+      "buttons": [
+        { "label": "Las gambas", "next": "quitado-gambas" },
+        { "label": "Las coquinas", "next": "quitado-coquinas" }
+      ]
+    },
+    "quitado-gambas": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Quitadas las gambas. Tu pedido queda:\n\n• ½ kg coquinas — *4,80 €*\n\n*Total estimado: 4,80 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "ajustado-botones"
+    },
+    "quitado-coquinas": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Quitadas las coquinas. Tu pedido queda:\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
       "next": "ajustado-botones"
     },
     "ajustado-botones": {
@@ -74,7 +160,7 @@
       "timestamp": "09:07",
       "buttons": [{ "label": "Confirmar", "next": "pre-fin" }]
     },
-    "pre-fin": { "kind": "end", "note": "Happy path: modificación libre ANTES de que el placero acepte (PRD §10.5)" },
+    "pre-fin": { "kind": "end", "note": "Happy path: modificación libre ANTES de que el placero acepte (PRD §10.5). Se pregunta qué cambiar, nunca se da por hecho" },
     "post-contexto": {
       "kind": "system",
       "tone": "default",
@@ -84,7 +170,7 @@
     "post-intento": {
       "kind": "user",
       "timestamp": "09:30",
-      "text": "Perdona, mejor ponme un kilo de boquerones",
+      "text": "Perdona, mejor ponme kilo y medio de gambas",
       "next": "post-respuesta"
     },
     "post-respuesta": {
@@ -104,7 +190,7 @@
       "kind": "human",
       "name": "Antonio",
       "timestamp": "09:33",
-      "text": "Sin problema Carmen, aún no lo había pesado. Un kilo entonces.",
+      "text": "Sin problema David, aún no lo había pesado. Kilo y medio entonces.",
       "next": "post-fin"
     },
     "post-fin": { "kind": "end", "note": "Unhappy path: modificación post-aceptado escala a C11 — el placero manda, no el bot" }

@@ -10,7 +10,7 @@
   },
   "start": "date",
   "steps": {
-    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0387 · PREPARANDO", "next": "contexto" },
+    "date": { "kind": "date", "text": "PEDIDO #SGZ-2026-0429 · PREPARANDO", "next": "contexto" },
     "contexto": {
       "kind": "system",
       "tone": "default",

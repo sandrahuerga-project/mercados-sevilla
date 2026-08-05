@@ -865,7 +865,7 @@ Flujo ideal sin desvíos, para validación rápida con el equipo. Etiquetas entr
     (post-pesaje)
 
 14. Bot envía plantilla pedido_listo_v1:        [plantilla utility]
-    "🔔 Listo. Total: 4,15 €. Paga en efectivo,
+    "🔔 Listo. Total: 4,30 €. Paga en efectivo,
     Bizum o tarjeta al recoger. Pasa antes de
     las 14:00"
     → pedido pasa a "Por cobrar" en el panel

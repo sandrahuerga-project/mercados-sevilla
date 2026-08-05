@@ -41,8 +41,19 @@
     "ver-mas-botones": {
       "kind": "buttons",
       "timestamp": "09:03",
-      "buttons": [{ "label": "Pedir", "next": "que-quieres" }]
+      "buttons": [
+        { "label": "Pedir", "next": "que-quieres" },
+        { "label": "Hoy no pido", "next": "hoy-no" }
+      ]
     },
+    "hoy-no": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:03",
+      "text": "De acuerdo. Mañana te llega el vídeo nuevo, y aquí me tienes si te animas antes.",
+      "next": "hoy-no-fin"
+    },
+    "hoy-no-fin": { "kind": "end", "note": "Mirar sin pedir también es un camino: el broadcast del día siguiente llega igual" },
     "baja": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
@@ -92,9 +103,27 @@
       "puesto": "Pescadería Antonio",
       "timestamp": "09:05",
       "text": "Dime qué cambio: cantidad, producto o quitar algo del pedido.",
-      "next": "modificar-fin"
+      "next": "modificar-user"
     },
-    "modificar-fin": { "kind": "end", "note": "La edición de cantidades sigue el patrón de captura DESIGN.md §9.5 (C09)" },
+    "modificar-user": {
+      "kind": "user",
+      "timestamp": "09:06",
+      "text": "Cambia las acedías por medio kilo de sepia",
+      "next": "modificar-ok"
+    },
+    "modificar-ok": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "Hecho:\n\n• ½ kg boquerones frescos — *1,75 €*\n• ½ kg sepia — *2,40 €*\n\n*Total estimado: 4,15 €*\nEl definitivo lo pone Antonio al pesar.\n\n¿Confirmas?",
+      "next": "modificar-botones"
+    },
+    "modificar-botones": {
+      "kind": "buttons",
+      "timestamp": "09:06",
+      "buttons": [{ "label": "Confirmar", "next": "mod-fin" }]
+    },
+    "mod-fin": { "kind": "end", "note": "Confirmado con el cambio. La entrega y el recibo siguen el mismo camino que arriba, y el seguimiento llega por C07. El detalle del patrón de edición está en C09" },
     "escalado": {
       "kind": "system",
       "tone": "blue",
@@ -158,8 +187,12 @@
     "recibo-botones": {
       "kind": "buttons",
       "timestamp": "09:08",
-      "buttons": [{ "label": "Añadir puesto", "next": "multi-fin" }]
+      "buttons": [
+        { "label": "Añadir puesto", "next": "multi-fin" },
+        { "label": "Así está bien", "next": "fin-ok" }
+      ]
     },
-    "multi-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto (vista David)" }
+    "multi-fin": { "kind": "end", "note": "Continúa en C05 — Pedido multi-puesto (vista David)" },
+    "fin-ok": { "kind": "end", "note": "Pedido cerrado por parte del cliente — queda esperando a Antonio y el seguimiento llega por C07" }
   }
 }

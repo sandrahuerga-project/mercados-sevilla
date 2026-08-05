@@ -1,5 +1,6 @@
 import type { FlowScript, FlowStep } from '../engine/types';
-import { FLOWS, type AudienceKey, type FlowEntry } from './flowCatalog';
+import { FLOWS, type AudienceKey } from './flowCatalog';
+import c07david from '../flows/c07-david.json';
 
 /**
  * Encadena varios flujos en UNA sola conversación, de principio a fin.
@@ -14,10 +15,13 @@ import { FLOWS, type AudienceKey, type FlowEntry } from './flowCatalog';
  * Cómo se pegan:
  *  - Los identificadores de paso se prefijan con el código del flujo, para que
  *    dos flujos puedan tener un paso «confirmar» sin pisarse.
- *  - Los finales intermedios desaparecen: quien apuntaba a ellos pasa a apuntar
- *    directamente al arranque del flujo siguiente. Como cada flujo empieza por
- *    su propio separador de fecha, el salto de tiempo se lee solo, sin avisos.
- *  - Los finales del último flujo sí son finales.
+ *  - Solo los finales de la lista de PUENTES encadenan con el flujo siguiente.
+ *    Antes puenteaba TODO final que no fuera un corte, y salían disparates:
+ *    tocabas «Modificar» en C04 y aparecía el recibo confirmado de C05, o
+ *    acababas en un tracking con el pedido de otra persona. Un final feliz
+ *    encadena; una excepción termina la historia con su nota, como en la ficha.
+ *  - Cada flujo empieza por su propio separador de fecha, así que el salto de
+ *    tiempo se lee solo, sin avisos.
  */
 
 /**
@@ -33,11 +37,46 @@ const RECORRIDOS: Partial<Record<AudienceKey, string[]>> = {
 };
 
 /**
- * Finales que cortan la conversación de verdad y no pueden hacer de puente.
- * Darse de baja y encadenar con el pedido siguiente sería tomar por tonto a
- * quien acaba de pedir que no le escriban más.
+ * En el recorrido de David el pedido va a reparto (#SGZ-2026-0412, el mismo
+ * que se ve en el panel de Antonio), así que el tracking genérico de C07
+ * —recogida, otro pedido y otro total— no le vale. Se sustituye el guion,
+ * solo dentro del recorrido; la ficha de C07 en «Flujo a flujo» no cambia.
  */
-const CORTES = new Set(['C03:baja-fin', 'P02:cerrado-fin']);
+const GUIONES_ALTERNATIVOS: Partial<Record<AudienceKey, Record<string, FlowScript>>> = {
+  david: { C07: c07david as FlowScript },
+};
+
+/**
+ * Qué final encadena con qué paso del flujo siguiente. Todo lo que no esté
+ * aquí es un final de verdad también dentro del recorrido: la nota del paso
+ * ya cuenta en qué ficha sigue esa rama.
+ */
+const PUENTES: Partial<Record<AudienceKey, Record<string, string>>> = {
+  carmen: {
+    // Esperar al vídeo → el saludo del día siguiente.
+    'C01:esperar-fin': 'C02:date',
+    // Pedir ahora → directo a «¿qué quieres pedir?», sin esperar al broadcast.
+    'C01:pedir-fin': 'C03:que-quieres',
+    // Sí, ver lo de hoy → llega el vídeo del día.
+    'C02:si-fin': 'C03:date',
+    // Pedido cerrado (con o sin modificación) → tracking hasta recogerlo.
+    'C03:fin-ok': 'C07:date',
+    'C03:mod-fin': 'C07:date',
+  },
+  david: {
+    // Pedido espontáneo confirmado con reparto → esa noche repasa y añade.
+    'C04:fin-ok': 'C05:date',
+    // Se queda con un solo puesto → tracking del reparto.
+    'C05:fin-single': 'C07:date',
+  },
+  antonio: {
+    'P01:fin': 'P02:date',
+    'P02:fin': 'P03:date',
+    // Solo el día que sale bien encadena con el cierre; rechazar el pedido
+    // o marcar agotado terminan en su nota, no en un resumen que no cuadra.
+    'P03:fin': 'P04:date',
+  },
+};
 
 const prefijo = (codigo: string, paso: string) => `${codigo}:${paso}`;
 
@@ -45,7 +84,7 @@ const prefijo = (codigo: string, paso: string) => `${codigo}:${paso}`;
 const reapuntar = (codigo: string, next: string | null | undefined) =>
   next === null || next === undefined ? null : prefijo(codigo, next);
 
-const encadenar = (entrada: FlowEntry): Record<string, FlowStep> => {
+const encadenar = (entrada: { code: string; script: FlowScript }): Record<string, FlowStep> => {
   const { code, script } = entrada;
   const pasos: Record<string, FlowStep> = {};
 
@@ -71,46 +110,35 @@ const encadenar = (entrada: FlowEntry): Record<string, FlowStep> => {
   return pasos;
 };
 
-/**
- * Resuelve un destino saltándose los finales intermedios. Encadena por si un
- * final lleva a otro; el tope corta cualquier ciclo raro entre flujos.
- */
-const resolver = (destino: string, puentes: Map<string, string>): string => {
-  let actual = destino;
-  for (let i = 0; i < 10 && puentes.has(actual); i++) actual = puentes.get(actual)!;
-  return actual;
-};
-
-export const buildJourney = (audience: AudienceKey, flujos: FlowEntry[]): FlowScript | null => {
+export const buildJourney = (
+  audience: AudienceKey,
+  flujos: { code: string; script: FlowScript }[]
+): FlowScript | null => {
   if (flujos.length === 0) return null;
 
   const pasos: Record<string, FlowStep> = {};
   flujos.forEach((entrada) => Object.assign(pasos, encadenar(entrada)));
 
-  // Cada final que no sea del último flujo es un puente al siguiente arranque.
+  // Solo puentean los finales de la lista, y solo hacia pasos que existen.
   const puentes = new Map<string, string>();
-  flujos.forEach((entrada, i) => {
-    const siguiente = flujos[i + 1];
-    if (!siguiente) return;
-    const inicioSiguiente = prefijo(siguiente.code, siguiente.script.start);
-    for (const [nombre, paso] of Object.entries(entrada.script.steps)) {
-      const id = prefijo(entrada.code, nombre);
-      if (paso.kind === 'end' && !CORTES.has(id)) puentes.set(id, inicioSiguiente);
-    }
-  });
+  for (const [desde, hasta] of Object.entries(PUENTES[audience] ?? {})) {
+    if (pasos[desde]?.kind === 'end' && pasos[hasta]) puentes.set(desde, hasta);
+  }
 
-  // Nadie apunta ya a un final intermedio, así que se pueden borrar.
   for (const [id, paso] of Object.entries(pasos)) {
     if (paso.kind === 'buttons') {
       pasos[id] = {
         ...paso,
-        buttons: paso.buttons.map((b) => ({ ...b, next: resolver(b.next, puentes) })),
+        buttons: paso.buttons.map((b) => ({ ...b, next: puentes.get(b.next) ?? b.next })),
       };
       continue;
     }
     if (paso.kind === 'end') continue;
-    if (paso.next) pasos[id] = { ...paso, next: resolver(paso.next, puentes) } as FlowStep;
+    if (paso.next && puentes.has(paso.next)) {
+      pasos[id] = { ...paso, next: puentes.get(paso.next)! } as FlowStep;
+    }
   }
+  // Nadie apunta ya a un final puenteado, así que se pueden borrar.
   for (const id of puentes.keys()) delete pasos[id];
 
   const primero = flujos[0]!;
@@ -131,9 +159,15 @@ export const journeyFor = (audience: AudienceKey) => {
   const codigos = RECORRIDOS[audience];
   if (!codigos) return null;
 
+  const alternativos = GUIONES_ALTERNATIVOS[audience] ?? {};
+
   const flujos = codigos
-    .map((code) => FLOWS.find((f) => f.code === code))
-    .filter((f): f is FlowEntry => Boolean(f));
+    .map((code) => {
+      const entrada = FLOWS.find((f) => f.code === code);
+      if (!entrada) return null;
+      return { code, script: alternativos[code] ?? entrada.script };
+    })
+    .filter((f): f is { code: string; script: FlowScript } => Boolean(f));
 
   return buildJourney(audience, flujos);
 };
