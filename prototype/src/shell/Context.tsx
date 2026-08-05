@@ -42,8 +42,11 @@ export const Context: React.FC = () => {
           </div>
         </Reveal>
 
+        {/* Cuatro columnas en escritorio: con tres, el cuarto bloque bajaba solo
+            a una segunda fila y dejaba dos huecos. En tablet van dos y dos, y en
+            móvil uno debajo de otro. */}
         {tab === 'producto' ? (
-          <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-3">
+          <div className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {CONTEXT.tabs.producto.blocks.map((b, i) => (
               <Reveal key={b.title} delay={i * 90}>
                 <div className="border-t border-line pt-6">

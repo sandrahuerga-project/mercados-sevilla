@@ -13,7 +13,7 @@
 // que no quede una preposición ni un artículo colgando al final de una línea.
 // Aquí se escribe en castellano normal y no hay que acordarse de nada.
 
-import { pegaTextos } from './tipografia';
+import { pegaAtonas, pegaTextos, TOPE } from './tipografia';
 
 export const SITE = pegaTextos({
   title: 'Mercados de Sevilla',
@@ -147,12 +147,13 @@ export const PANEL_SECTION = pegaTextos({
   lead: 'Antonio no usa WhatsApp para trabajar, sino que tiene un panel web. Recibe el pedido, teclea el total real tras pesarlo y el total le llega al cliente junto al estado de «en preparación». Tras el pago, Antonio lo marca como «cobrado» y, cuando lo entrega, como «entregado».',
 });
 
-export const CONTEXT = pegaTextos({
-  eyebrow: 'Contexto y restricciones',
-  tabs: {
-    producto: {
-      label: 'Contexto de producto',
-      blocks: [
+// Los cuatro bloques van en columnas de unos 300 px, así que llevan el tope
+// estrecho: es el mismo caso que las tarjetas de flujo. Se pegan aparte para
+// que no les pase por encima el tope ancho del resto del apartado.
+const PRODUCTO = pegaTextos(
+  {
+    label: 'Contexto de producto',
+    blocks: [
         {
           title: 'El modelo que ya funcionaba',
           body: 'Un pescadero en un mercado de barrio demostró que el canal conversacional en WhatsApp gana al comercio electrónico clásico, pese a estar presente en ambos. Lo hace a través de un vídeo del mostrador por la mañana en el chat, pedidos en lenguaje natural y cobro en mano, Bizum o tarjeta. Recoger o a domicilio. Este proyecto lleva ese modelo a WhatsApp Business y engloba más puestos y mercados.',
@@ -165,19 +166,26 @@ export const CONTEXT = pegaTextos({
           title: 'Voz y tono',
           body: 'Lenguaje cercano y cotidiano, entendible por todos los usuarios. Carmen recibe el mismo trato que David. Cambia la densidad de la información y la posibilidad de acceder a llamadas con el vendedor.',
         },
-        {
-          title: 'Decir que es un bot',
-          body: 'El reglamento europeo de IA obliga a avisar de que se está hablando con una máquina. Aquí se dice en la primera frase del alta y sin tecnicismos: «un asistente automático, no una persona». A Carmen «sistema de IA» no le dice nada; que no es una persona, sí. Y el aviso no va solo: viene con la salida, que es hablar con el placero.',
-        },
-      ],
-    },
-    restricciones: {
-      label: 'Restricciones de WhatsApp Business',
-      intro:
-        'WhatsApp Business controla el aspecto del chat (la UI). Todo el diseño ocurre dentro de estos límites, verificados contra la documentación de Meta.',
-    },
+      {
+        title: 'Decir que es un bot',
+        body: 'El reglamento europeo de IA obliga a avisar de que se está hablando con una máquina. Aquí se dice en la primera frase del alta y sin tecnicismos: «un asistente automático, no una persona». A Carmen «sistema de IA» no le dice nada; que no es una persona, sí. Y el aviso no va solo: viene con la salida, que es hablar con el placero.',
+      },
+    ],
   },
+  TOPE.estrecho
+);
+
+// La entradilla de esta pestaña va a 62ch, así que se queda con el tope ancho.
+const RESTRICCIONES = pegaTextos({
+  label: 'Restricciones de WhatsApp Business',
+  intro:
+    'WhatsApp Business controla el aspecto del chat (la UI). Todo el diseño ocurre dentro de estos límites, verificados contra la documentación de Meta.',
 });
+
+export const CONTEXT = {
+  eyebrow: pegaAtonas('Contexto y restricciones'),
+  tabs: { producto: PRODUCTO, restricciones: RESTRICCIONES },
+};
 
 export const FOOTER = pegaTextos({
   note: 'Prototipo de diseño. No envía mensajes reales ni procesa pagos.',

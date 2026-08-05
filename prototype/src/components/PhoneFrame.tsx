@@ -10,6 +10,12 @@ interface PhoneFrameProps {
   persona?: PersonaId;
   avatarBg?: string; // Tailwind class
   children: React.ReactNode;
+  /**
+   * Nombre y descripción del flujo. Ya no se pintan encima del móvil: quien
+   * abre una tarjeta acaba de leerlos en la propia tarjeta, y repetirlos dos
+   * centímetros más abajo sobraba. Se conservan para nombrar el móvil a quien
+   * navega con lector de pantalla, que sí llega aquí sin ese contexto.
+   */
   flowLabel: string;
   flowDescription: string;
   inputValue?: string;
@@ -36,15 +42,11 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      {/* Rótulo del flujo, sobre el móvil */}
-      <div className="w-[375px] mb-5 text-left">
-        <h3 className="display text-2xl text-cream">{flowLabel}</h3>
-        <p className="text-sm text-cream/65 mt-1.5 leading-snug">{flowDescription}</p>
-      </div>
-
       {/* Simulated Device Frame */}
-      <div 
-        id={id} 
+      <div
+        id={id}
+        role="group"
+        aria-label={`${flowLabel}. ${flowDescription}`}
         className="relative w-[375px] h-[812px] bg-slate-950 rounded-[40px] shadow-2xl overflow-hidden border-[12px] border-[#222] flex flex-col select-none text-slate-900 transition-all duration-300"
       >
         {/* Device Top Speaker and Notch/Island */}
