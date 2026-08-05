@@ -192,19 +192,128 @@ Del mismo tipo: el vídeo del mostrador decía `0:38` cuando dura 10 segundos.
 
 ---
 
+### 1.10 Los flujos de David hablaban con Carmen
+
+**Qué pasaba.** «Buenos días **Carmen**» en C04, que es un flujo de David. Antonio
+le contestaba «Sin problema, Carmen» en C09. Y C09, C10 y C12 usaban el pedido de
+Carmen entero —el número `#SGZ-2026-0387`, sus boquerones, su recogida a las
+14:00— en la persona que compra en dos puestos y recoge al salir de trabajar.
+
+**Causa de fondo.** Los flujos de David se escribieron copiando los de Carmen y
+cambiando lo que saltaba a la vista. El nombre dentro de una frase no salta:
+está en mitad de un párrafo que ya se ha leído tres veces.
+
+**Qué se cambió.** Cada persona tiene su pedido y su número: Carmen el `#0387`
+de recogida, David el `#0412` de reparto y el `#0429` de «lo de siempre». El
+`#0412` es además el que aparece en el panel del placero, así que un dato mal
+puesto ahora se ve en dos pantallas a la vez.
+
+**Lección.** Copiar un flujo para adaptarlo deja el original entero por debajo.
+Lo que no se cambia a propósito se queda, y lo que se queda contradice.
+
+---
+
+### 1.11 El recorrido daba por bueno cualquier final
+
+**Qué pasaba.** «De principio a fin» encadena varios flujos en una conversación
+sola. La regla era: **todo paso final salta al flujo siguiente**, salvo dos
+excepciones apuntadas a mano. Consecuencia: en el recorrido de David pulsabas
+«Modificar» y aparecía, sin transición, el recibo ya confirmado de otro pedido.
+Pulsabas «Hablar con Manolo» y te salía Antonio aceptando el pedido de Carmen,
+con su importe y su hora. En el de Carmen, «Pedir ahora» te llevaba a dormir y
+amanecer en el saludo del día siguiente.
+
+**Causa de fondo.** La regla se calibró con los finales felices, que sí encadenan,
+y se aplicó a todos. Un final que dice «esto sigue en la ficha de C11» no es un
+puente: es una salida.
+
+**Qué se cambió.** Una **lista explícita de puentes por persona**: de qué final
+concreto a qué paso concreto. Lo que no está en la lista termina donde termina,
+con su nota, igual que en su ficha. Y el recorrido de David usa una variante de
+tracking con su pedido de reparto, en vez del tracking de recogida de Carmen.
+
+---
+
+### 1.12 «Modificar» solo modificaba una cosa, y «Quitar» sumaba
+
+**Qué pasaba.** En C09, tocar «Modificar» saltaba directo a «¿qué cantidad de
+boquerones quieres?». No preguntaba qué se quería cambiar: elegía por el cliente.
+No había forma de tocar el otro producto ni la entrega, que es justo lo que el
+flujo dice hacer en su ficha.
+
+Y peor: el botón **«Quitar del pedido» llevaba al mismo paso que «1 kg»**. Pedías
+quitar y el bot te subía la cantidad y el precio.
+
+**Causa de fondo.** La rama se montó para **enseñar el patrón de edición**, no
+para cubrir el flujo. Como demostración estaba bien; como flujo, era un camino
+único disfrazado de tres botones. Nadie volvió a mirarlo porque «C09 ya está».
+
+**Qué se cambió.** C09 pregunta primero qué cambiar, cada producto tiene cantidad
+rápida y cantidad escrita a mano, y quitar quita. El mismo repaso encontró botones
+sin salida en C03, C05 y C06: mirar el vídeo sin pedir, cerrar el pedido sin
+añadir otro puesto, corregir lo que trae «lo de siempre».
+
+---
+
+### 1.13 El mismo pedido valía 4,15 € y 12,40 €
+
+**Qué pasaba.** Antonio pesaba el pedido `#0387` y tecleaba **12,40 €** en su
+flujo. El aviso que le llegaba a Carmen por ese mismo pedido decía **4,15 €**,
+que era el estimado. Tres veces la diferencia, en el número que el proyecto entero
+existe para no calcular.
+
+**Causa de fondo.** El total vive escrito a mano en dos flujos que nunca se leen
+seguidos: uno es del placero y otro de la clienta. Es el fallo 1.1 otra vez, en
+datos en vez de en nombres.
+
+**Qué se cambió.** El pedido `#0387` vale lo mismo en los tres sitios donde
+aparece: estimado 4,15 €, pesado real 4,30 €. Y el aviso enseña las dos cifras
+juntas, que además es lo que hace creíble la regla: **el bot repite el número del
+placero, no lo calcula**.
+
+---
+
+### 1.14 El validador decía OK, y la persona veía los fallos
+
+**Qué pasaba.** Los cuatro fallos anteriores estaban en producción con el
+validador en verde. `validar-flujos.mjs` comprobaba que ningún paso apunte a un
+sitio inexistente, que no haya pasos sueltos y que se respeten los límites de
+WhatsApp. Todo eso era cierto. Un botón que lleva a la rama equivocada **también
+enlaza bien**.
+
+Se descubrió porque Sandra abrió el prototipo y dijo «en los de David se dice
+buenos días Carmen». Es la tercera vez en este documento que pasa lo mismo.
+
+**Qué se cambió.** El validador ahora comprueba también los puentes del
+recorrido: que cada uno salga de un final de verdad y llegue a un paso que
+existe. Sigue sin poder juzgar si el destino tiene sentido.
+
+**Lección, y es la del documento entero.** Verificar que **enlaza** no es
+verificar que **encaja**. Lo primero lo hace una máquina; lo segundo hay que
+leerlo. Un guion de conversación se revisa leyéndolo de principio a fin, en voz
+alta si hace falta, igual que se revisa un texto.
+
+---
+
 ## 2. Los patrones
 
-Los nueve fallos se reducen a cuatro formas:
+Los catorce fallos se reducen a cinco formas:
 
 | Patrón | Dónde apareció |
 |---|---|
-| **Dos fuentes de verdad para el mismo dato** | 1.1 mapa vs catálogo · 1.2 valor por defecto silencioso |
-| **Regla calibrada en un sitio, aplicada en todos** | 1.3 contraste de texto · 1.5 tope tipográfico · 1.9 cinta en porcentaje |
-| **Lo heredado que nadie relee** | 1.8 plantilla, documento privado, cifras viejas |
-| **El principio escrito que no se comprueba** | 1.6 recibos · 1.7 botón de C05 |
+| **Dos fuentes de verdad para el mismo dato** | 1.1 mapa vs catálogo · 1.2 valor por defecto silencioso · 1.13 el total en dos flujos |
+| **Regla calibrada en un sitio, aplicada en todos** | 1.3 contraste de texto · 1.5 tope tipográfico · 1.9 cinta en porcentaje · 1.11 puentes del recorrido |
+| **Lo heredado que nadie relee** | 1.8 plantilla, documento privado, cifras viejas · 1.10 el flujo copiado de otra persona |
+| **El principio escrito que no se comprueba** | 1.6 recibos · 1.13 el total que el bot no debe decidir |
+| **La rama de muestra tomada por rama completa** | 1.7 botón de C05 · 1.12 la edición de C09 |
 
 Ninguno era un fallo de programación. Todos eran de **organización de la
 información**.
+
+Y por encima de los cinco, uno de método: **lo que la verificación automática no
+mira, no existe**. Los tres hallazgos peores —los dos del puntero y el de los
+flujos de David— los vio una persona mirando la pantalla después de que los
+scripts dieran el visto bueno (1.3, 1.4, 1.14).
 
 ---
 
@@ -221,11 +330,19 @@ puerta:
 - **Reglas con parámetro, no constantes globales.** El tope tipográfico y el
   color del puntero se declaran por contexto.
 - **Verificación automática de lo que se puede contar.** `validar-flujos.mjs`
-  comprueba los límites de WhatsApp, los enlaces entre pasos y la coherencia de
-  los recorridos. `exportar-guiones.mjs` regenera la documentación desde los
-  datos.
-- **Y el juicio visual lo da una persona.** Los dos fallos peores del puntero
-  pasaron una verificación numérica. Medir no sustituye a mirar.
+  comprueba los límites de WhatsApp, los enlaces entre pasos, que cada puente del
+  recorrido salga de un final y llegue a un paso existente, y que no queden ramas
+  muertas. `exportar-guiones.mjs` regenera la documentación desde los datos.
+- **Nada de reglas que adivinan.** El recorrido ya no deduce qué finales
+  encadenan: están escritos uno a uno. Una lista a mano de doce líneas es más
+  barata de mantener que una regla lista que acierta el ochenta por ciento.
+- **Los guiones se leen enteros, no se auditan por partes.** `flows/guiones/*.md`
+  existe para eso: el copy de los veinticuatro guiones en texto plano, con las
+  ramas de cada botón sangradas, para leerlo de principio a fin sin abrir el
+  prototipo.
+- **Y el juicio final lo da una persona.** Los dos fallos del puntero y los
+  cuatro de los flujos pasaron una verificación numérica. Medir no sustituye a
+  mirar, y enlazar no sustituye a leer.
 
 ---
 

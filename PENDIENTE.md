@@ -60,9 +60,18 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 
 ### Flujos
 
-- **Veintitrés flujos** de chat con sus unhappy paths, más el panel del placero.
+- **Veintitrés flujos** de chat con sus unhappy paths, más el panel del placero. Hay un
+  guion más, `c07-david.json`, que es la variante de reparto del seguimiento y solo se
+  usa dentro del recorrido de David: no es un flujo del catálogo.
 - **Horarios unificados** y escritos una sola vez en `flows/flows-index.md §0`: pedidos
-  y recogida hasta las 14:00, reparto de 10:00 a 14:00, taquilla hasta las 20:00.
+  hasta las 12:30, recogida hasta las 14:00, reparto de 10:00 a 14:00, taquilla hasta
+  las 20:00. Pedidos y recogida iban juntos en la misma línea y no son la misma hora.
+- **Cada persona con su pedido**: Carmen el `#0387` de recogida, David el `#0412` de
+  reparto —el mismo que se ve en el panel de Antonio— y el `#0429` de «lo de siempre».
+  Los flujos de David venían copiados de los de Carmen y le llamaban Carmen.
+- **El total del pedido vale lo mismo en todas las pantallas**: `#0387` es 4,15 €
+  estimados y 4,30 € reales tras pesar, en el flujo de Carmen, en el de Antonio y en
+  DESIGN.md. Antes el placero tecleaba 12,40 € y a la clienta le llegaban 4,15 €.
 - **C10 partido en dos**: C10 cancela lo que nadie ha tocado (siempre con confirmación,
   nunca de un toque) y **C12** aparece cuando el placero ya está preparando, donde no se
   cancela: se ofrece recogerlo mañana o dejarlo en taquilla.
@@ -73,7 +82,12 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - **S02**: Antonio llama por teléfono antes de cerrar y lo anota en su panel.
 - **S06** ofrece los mercados cercanos y no promete un reparto que no tiene fecha.
 - **C08**: la sustitución puede costar más, y se dice antes de aceptarla.
-- **C09** acepta cantidades escritas a mano, no solo botones.
+- **C09 pregunta primero qué se quiere cambiar** —un producto, el otro o quitar algo— y
+  cada uno acepta cantidad de botón o escrita a mano. Antes saltaba directo a la cantidad
+  de un solo producto, y «Quitar del pedido» llevaba al paso que la subía a 1 kg.
+- **Ningún botón sin salida**: mirar el vídeo sin pedir (C03), cerrar el pedido sin añadir
+  otro puesto (C03, C05), corregir lo que trae «lo de siempre» (C06) y modificar la parte
+  de cada puesto en un pedido a dos (C05).
 - **C11** pregunta cómo quiere recibirlo; **C03** y **C06** también.
 - **S03** tiene salida: hablar con el placero, que es quien decide si readmite.
 - **C05 tiene dos ramas de verdad**: el botón de Frutería Manolo lleva a la frutería y
@@ -93,6 +107,10 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 - **«De principio a fin»**: un recorrido elegido a mano por persona (la compra de Carmen,
   la de David, la jornada de Antonio), sin las excepciones por medio y sin costuras entre
   flujos. Las situaciones límite no tienen recorrido: son excepciones, no una historia.
+  **Los saltos de un flujo al siguiente están escritos uno a uno** en `journeys.ts`: de
+  qué final concreto a qué paso concreto. Antes encadenaba cualquier final, así que tocar
+  «Modificar» o «Hablar con el placero» te dejaba en el recibo confirmado del flujo
+  siguiente, y a veces con el pedido de otra persona.
 - **Portada con movimiento**: cinco ilustraciones entran desde fuera del encuadre y se
   asientan escalonadas en 3,1 s, y una cinta con el género desfila al 20 % por detrás del
   titular. Sin WebGL y sin librería de animación: 0 kB de JavaScript añadido.
@@ -126,8 +144,10 @@ puramente estética hay que verla en el navegador de verdad antes de darla por b
 
 ### Infraestructura
 
-- **Dos scripts de verificación**: `validar-flujos.mjs` (límites de WhatsApp y coherencia
-  de guiones y recorridos) y el chequeo geométrico del mapa.
+- **Dos scripts de verificación**: `validar-flujos.mjs` (límites de WhatsApp, enlaces
+  entre pasos, y que cada puente del recorrido salga de un final y llegue a un paso que
+  existe) y el chequeo geométrico del mapa. Lo que ningún script puede decir es si el
+  destino de un botón tiene sentido: eso se lee en `flows/guiones/`.
 - **README que abre el repo**: qué mirar y por dónde, el mapa de los documentos y las
   decisiones con enlace a dónde está el razonamiento. Enlazado desde el pie de la web.
 - **El documento de la reunión, fuera del repo.** Es la posición negociadora con el
