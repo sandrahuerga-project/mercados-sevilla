@@ -193,16 +193,22 @@
       "kind": "buttons",
       "timestamp": "11:24",
       "buttons": [
-        { "label": "Reparto 10:00-14:00", "next": "recibo-reparto" },
+        { "label": "Reparto 10:00-14:00", "next": "direccion-guardada" },
         { "label": "Taquilla", "next": "recibo-taquilla" },
         { "label": "Recogida en puesto", "next": "recibo-recogida" }
       ]
+    },
+    "direccion-guardada": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "David ya dio su dirección la primera vez que pidió reparto y está en su ficha. El bot la recupera de ahí y no la vuelve a preguntar: solo la repite para que él la vea.",
+      "next": "recibo-reparto"
     },
     "recibo-reparto": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "11:25",
-      "text": "📝 Pedido recibido #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto mañana de 10:00 a 14:00.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
+      "text": "📝 Pedido recibido #SGZ-2026-0412\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto mañana de 10:00 a 14:00 a *Betis 23, 4º izq*.\nSi hay que cambiar la dirección, dímelo.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
       "next": "recibo-botones"
     },
     "recibo-taquilla": {

@@ -45,6 +45,7 @@ export const INITIAL_ORDERS: PanelOrder[] = [
     time: '21:40',
     items: [{ qty: '1 kg', name: 'Gambas blancas', price: '18,00 €' }],
     fulfillment: 'Reparto',
+    direccion: 'Betis 23, 4º izq',
     estimated: '18,00 €',
     state: 'aceptado',
   },

@@ -228,7 +228,7 @@ export const WhatsAppFlowModal: React.FC<WhatsAppFlowModalProps> = ({
 
               {/* GDPR Legal pill */}
               <div className="text-[10px] text-zinc-400 leading-relaxed bg-zinc-50 border border-zinc-200 rounded-lg p-3">
-                📋 <strong className="text-zinc-600">Reglamento General de Protección de Datos (RGPD):</strong> Guardaremos tu nombre y número para tramitar tus pedidos con los placeros de Sevilla. Tus datos están totalmente protegidos. Puedes darte de baja en cualquier momento enviando el mensaje <code className="bg-zinc-100 px-1 py-0.5 rounded text-zinc-800 font-mono">BAJA</code>.
+                📋 <strong className="text-zinc-600">Reglamento General de Protección de Datos (RGPD):</strong> Guardaremos tu nombre, tu número y, si algún día pides reparto, tu dirección, para tramitar tus pedidos con los placeros de Sevilla. Tus datos están totalmente protegidos. Puedes darte de baja en cualquier momento enviando el mensaje <code className="bg-zinc-100 px-1 py-0.5 rounded text-zinc-800 font-mono">BAJA</code>.
               </div>
             </div>
           )}

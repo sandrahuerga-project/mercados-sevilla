@@ -102,24 +102,74 @@
       "buttons": [
         { "label": "Voy ahora", "next": "voy" },
         { "label": "Guárdalo para mañana", "next": "s02-manana" },
-        { "label": "Cancelar pedido", "next": "s02-cancelar" }
+        { "label": "Hablar con Antonio", "next": "s02-escalado" }
       ]
+    },
+    "s02-escalado": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "Te paso con Antonio, que es quien puede anularlo.",
+      "next": "s02-escalado-fin"
+    },
+    "s02-escalado-fin": {
+      "kind": "end",
+      "note": "Un pedido ya preparado no lo anula el bot: quien puede es el placero. Misma regla que C12, y se sigue por C11"
     },
     "s02-manana": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "13:46",
       "text": "De acuerdo. Antonio lo guarda para mañana.\nTe aviso a las 9:00 cuando abra el puesto.",
-      "next": "s02-manana-fin"
+      "next": "s02-dia2"
     },
-    "s02-manana-fin": { "kind": "end", "note": "Unhappy path S02 — cliente no recoge, pedido aplazado" },
-    "s02-cancelar": {
+    "s02-dia2": {
+      "kind": "date",
+      "text": "MAÑANA · 9:00",
+      "next": "s02-dia2-aviso"
+    },
+    "s02-dia2-aviso": {
       "kind": "bot",
       "puesto": "Pescadería Antonio",
-      "timestamp": "13:46",
-      "text": "Pedido cancelado.\nCuando quieras pedir de nuevo, escríbeme aquí.",
-      "next": "s02-cancelar-fin"
+      "timestamp": "09:00",
+      "text": "Buenos días. Tu pedido #SGZ-2026-0387 sigue en el frigorífico de Antonio.\nHoy es el último día que se puede guardar.",
+      "next": "s02-dia2-botones"
     },
-    "s02-cancelar-fin": { "kind": "end", "note": "Unhappy path S02 → C10 cancelación post-aceptado" }
+    "s02-dia2-botones": {
+      "kind": "buttons",
+      "timestamp": "09:00",
+      "buttons": [
+        { "label": "Voy hoy", "next": "s02-dia2-voy" },
+        { "label": "No podré ir", "next": "s02-llamada" }
+      ]
+    },
+    "s02-dia2-voy": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:01",
+      "text": "Avisado. Antonio te lo tiene apartado hasta las 14:00.",
+      "next": "s02-dia2-voy-fin"
+    },
+    "s02-dia2-voy-fin": {
+      "kind": "end",
+      "note": "Aplazar un día no deja incidencia: hubo acuerdo por las dos partes y el pedido acaba recogido"
+    },
+    "s02-llamada": {
+      "kind": "system",
+      "tone": "default",
+      "text": "Antonio llama por teléfono antes de dar el pedido por perdido, y anota en su panel lo que se hable. El bot no sustituye esa llamada",
+      "next": "s02-incidencia"
+    },
+    "s02-incidencia": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:30",
+      "text": "Hablado con Antonio. Cierra el pedido #SGZ-2026-0387 y no tienes nada que pagar.\n\nEl género se ha perdido, así que le queda anotado. Cuando quieras pedir otra vez, escríbeme aquí.",
+      "warning": true,
+      "next": "s02-incidencia-fin"
+    },
+    "s02-incidencia-fin": {
+      "kind": "end",
+      "note": "La incidencia se registra después de que Antonio haya llamado, nunca por silencio del cliente. A la segunda sin resolver entra S03"
+    }
   }
 }

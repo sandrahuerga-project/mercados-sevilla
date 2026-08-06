@@ -136,9 +136,10 @@ S08   Pides algo que hoy no hay            P2     Media
   2. Usuario escribe en lenguaje natural (texto. Audio opcional).
   3. Bot procesa NLU → devuelve resumen estructurado + `[Confirmar]` `[Modificar]` `[Hablar con alguien]`.
   4. Usuario confirma → bot ofrece fulfillment (List message con ≤3 opciones).
-  5. Si recogida/domicilio → pago al entregar (sin pasarela).
-  6. Si taquilla → CTA URL Bizum.
-  7. Bot envía recibo con ID pedido.
+  5. Si reparto a domicilio y no hay dirección en la ficha del cliente → el bot la pide una sola vez en texto libre, la repite tal cual y la guarda. No la valida, no la normaliza y no decide si entra en la zona de reparto: eso lo mira el placero al aceptar. En los pedidos siguientes la recupera de la ficha y solo la enseña en el recibo (`C04`, `C06`, `C11`).
+  6. Si recogida/domicilio → pago al entregar (sin pasarela).
+  7. Si taquilla → CTA URL Bizum.
+  8. Bot envía recibo con ID pedido, y la dirección en él cuando es reparto.
 - **Componentes WA**: texto, Reply Buttons, List message, CTA URL.
 - **Edge cases**: NLU falla, producto no disponible, fuera de horario de pedidos.
 
@@ -198,14 +199,15 @@ S08   Pides algo que hoy no hay            P2     Media
 - **Trigger**: cliente pide cancelar cuando el placero ya aceptó y está preparando.
 - **Objetivo**: el pedido ya no se cancela. Se ofrecen las dos salidas que no tiran género.
 - **Mensaje**: *"Antonio ya lo está preparando, así que este pedido ya no se puede cancelar."* `[Recojo mañana]` `[Déjalo en taquilla]` `[Hablar con Antonio]`
-- **Regla**: quien puede anular un pedido ya preparado es el placero, no el bot. Por eso la tercera salida es C11.
-- **Si mañana tampoco se recoge** → S02, con su incidencia.
+- **Regla**: quien puede anular un pedido ya preparado es el placero, no el bot. Por eso la tercera salida es C11. Rige en todos los flujos por igual, incluido el aviso de cierre de C07/S02: en cuanto el pedido está preparado desaparece el botón de cancelar.
+- **Si mañana tampoco se recoge** → S02, con su incidencia, y siempre después de que el placero haya llamado.
 
 ### C11 — Hablar con persona (escalado)
 
 - **Trigger**: cliente toca `[Hablar con {nombre}]` en cualquier punto. El botón se compone con el nombre del placero que hay en la ficha del puesto (`Hablar con Antonio`); si el nombre no cabe en los 20 caracteres de WhatsApp, cae a `Hablar con el puesto`.
 - **Objetivo**: bidireccional. El bot se aparta, el placero responde desde panel Glide/Softr.
-- **Componente**: handoff vía API a panel humano. Mensaje al cliente: *"Te paso con Antonio. Suele responder en 5-10 min."*
+- **Componente**: handoff vía API. Mensaje al cliente: *"Te paso con Antonio. Suele responder en 5-10 min."*
+- **Dónde le llega a él**: al hilo del asistente del placero en WhatsApp, con el nombre del cliente y el número de pedido por delante (`placero_escalado_v1`). Lo que escribe ahí lo reenvía el bot al chat del cliente. **Al panel no llega**: en la tablet no lo vería (DESIGN.md §4.1).
 - **Horario**: solo dentro de horario del puesto. Fuera → S01.
 - **Riesgo MVP**: el placero debe tener panel abierto. Si no, cae a "te llama después".
 
@@ -225,8 +227,9 @@ S08   Pides algo que hoy no hay            P2     Media
 ### P03 — Gestión de pedido entrante
 
 - **Trigger**: cliente confirma pedido en C03/C05.
-- **Objetivo**: placero recibe pedido en panel Glide/Softr, marca Aceptar / Sustitución / Rechazar.
-- **Componente**: panel web fuera de WA + notificación WA opcional al placero ("Nuevo pedido #SGZ-2024-0387").
+- **Objetivo**: el placero recibe el pedido y lo resuelve por donde le venga bien — WhatsApp o panel. Marca Aceptar / Producto agotado / No puedo hoy.
+- **Componente**: los dos a la vez. WhatsApp es el mando a distancia y el panel la mesa de trabajo (DESIGN.md §4): un toque o una cifra caben en el chat, y lo que exige mirar la cola entera es panel. El aviso de pedido nuevo llega fuera de ventana 24h, así que es plantilla utility con quick replies (`placero_pedido_nuevo_v1`, wa-constraints §6.7).
+- **Estado**: vive en una sola fila de la base (Airtable en el MVP), no en la conversación. WhatsApp y panel no se sincronizan entre sí porque los dos escriben ahí. **El aviso al cliente lo dispara el cambio de estado, nunca el botón**, así que aceptar desde el móvil y desde el panel producen el mismo mensaje una sola vez. Un botón antiguo del historial se resuelve contra el estado actual y no repite nada (DESIGN.md §4.2 y §4.3).
 - **Acciones placero**: `[Aceptar]` `[Producto agotado]` `[Marcar preparado]` `[Listo]` (pide total final post-pesaje) `[Marcar cobrado]` (Efectivo/Bizum/Tarjeta) `[Entregado]`.
 - **Cada acción dispara plantilla WA al cliente (C07)**, salvo `[Marcar cobrado]` que es registro interno del placero y no genera mensaje.
 - Detalle del campo total final y el sub-estado "Por cobrar": DESIGN.md §4 y §10.
@@ -252,7 +255,9 @@ S08   Pides algo que hoy no hay            P2     Media
 - **Objetivo**: 2 avisos progresivos antes del cierre del puesto.
 - **Aviso 1 (60 min listo)**: *"Tu pedido sigue esperándote. Antonio cierra a las 14:00."*
 - **Llamada del placero (cierre -15 min)**: antes del último aviso, Antonio llama por teléfono y anota lo que pase en su panel (P04). El bot no sustituye esa llamada.
-- **Aviso 2 (cierre -15 min)**: *"⏰ Antonio cierra en 15 min."* `[Voy ahora]` `[Guárdalo para mañana]` `[Cancélalo]`
+- **Aviso 2 (cierre -15 min)**: *"⏰ Antonio cierra en 15 min."* `[Voy ahora]` `[Guárdalo para mañana]` `[Hablar con Antonio]`
+- **Nada de `[Cancelar]`**: el pedido ya está pesado y envuelto, así que aquí rige la regla de C12 — un pedido preparado no lo anula el bot, lo anula el placero. Por eso la tercera salida es C11 y no una cancelación.
+- **La incidencia llega después de la llamada, no del silencio**: si al día siguiente el cliente dice que no puede ir, Antonio llama, y solo entonces se cierra el pedido con incidencia. Un cliente que no contesta no genera incidencia por sí solo.
 - **Redacción única**: la misma situación se llama igual en C07, S02 y P04 — «guardar para mañana», nunca «no puedo, mañana».
 - **Componente**: plantillas utility (fuera ventana 24h).
 

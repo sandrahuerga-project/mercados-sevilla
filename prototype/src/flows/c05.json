@@ -15,7 +15,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "21:40",
-      "text": "📝 Tu pedido #SGZ-2026-0412 sigue así:\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €* + 2,50 € de reparto\n\nFalta que Antonio lo acepte. Reparto mañana de 10:00 a 14:00.\n\n¿Quieres añadir algo de otro puesto? Llega todo junto.",
+      "text": "📝 Tu pedido #SGZ-2026-0412 sigue así:\n\n• 1 kg gambas blancas — *18,00 €*\n\n*Total estimado: 18,00 €* + 2,50 € de reparto\n\nFalta que Antonio lo acepte. Reparto mañana de 10:00 a 14:00 a *Betis 23, 4º izq*.\n\n¿Quieres añadir algo de otro puesto? Llega todo junto.",
       "next": "anadir-botones"
     },
     "anadir-botones": {
@@ -179,7 +179,7 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "21:43",
-      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nLos dos puestos han cerrado ya, así que cada uno acepta su parte mañana al abrir. Te aviso.\n\nTodo llega junto mañana de 10:00 a 14:00.",
+      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nFRUTERÍA MANOLO — *6,40 €*\n\n*Total estimado: 24,40 €* + 2,50 € de reparto\n\nLos dos puestos han cerrado ya, así que cada uno acepta su parte mañana al abrir. Te aviso.\n\nTodo llega junto mañana de 10:00 a 14:00 a *Betis 23, 4º izq*.",
       "next": "espera-fruta"
     },
     "espera-fruta": {
@@ -272,7 +272,7 @@
       "kind": "bot",
       "puesto": "Mercado San Gonzalo",
       "timestamp": "21:43",
-      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nCARNICERÍA LOLA — *11,30 €*\n\n*Total estimado: 29,30 €* + 2,50 € de reparto\n\nLos dos puestos han cerrado ya, así que cada uno acepta su parte mañana al abrir. Te aviso.\n\nTodo llega junto mañana de 10:00 a 14:00.",
+      "text": "📝 Pedido #SGZ-2026-0412 actualizado.\n\nPESCADERÍA ANTONIO — *18,00 €*\nCARNICERÍA LOLA — *11,30 €*\n\n*Total estimado: 29,30 €* + 2,50 € de reparto\n\nLos dos puestos han cerrado ya, así que cada uno acepta su parte mañana al abrir. Te aviso.\n\nTodo llega junto mañana de 10:00 a 14:00 a *Betis 23, 4º izq*.",
       "next": "espera-carne"
     },
     "espera-carne": {

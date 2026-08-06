@@ -200,8 +200,34 @@
       "buttons": [
         { "label": "Recogida en puesto", "next": "recibo-recogida" },
         { "label": "Taquilla", "next": "taquilla" },
-        { "label": "Reparto a domicilio", "next": "franja" }
+        { "label": "Reparto a domicilio", "next": "direccion" }
       ]
+    },
+    "direccion": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:06",
+      "text": "¿A qué dirección te lo llevo?\nPonme la calle, el número y el piso.",
+      "next": "direccion-user"
+    },
+    "direccion-user": {
+      "kind": "user",
+      "timestamp": "09:07",
+      "text": "Pagés del Corro 84, 3º B",
+      "next": "direccion-ok"
+    },
+    "direccion-ok": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:07",
+      "text": "Apuntado: *Pagés del Corro 84, 3º B*.\nMe la guardo, así no te la vuelvo a preguntar.",
+      "next": "direccion-nota"
+    },
+    "direccion-nota": {
+      "kind": "system",
+      "tone": "blue",
+      "text": "La dirección queda en la ficha de Carmen, donde ya están su nombre y su código postal. En los pedidos siguientes el bot la recupera de ahí y no vuelve a preguntarla.",
+      "next": "franja"
     },
     "recibo-recogida": {
       "kind": "bot",
@@ -238,7 +264,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "09:08",
-      "text": "📝 Pedido recibido #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto a domicilio en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
+      "text": "📝 Pedido recibido #SGZ-2026-0387\n\n• ½ kg boquerones frescos — *1,75 €*\n• 2 acedías limpias — *2,40 €*\n\n*Total estimado: 4,15 €* + 2,50 € de reparto\nEl definitivo lo pone Antonio al pesar.\n\nReparto a Pagés del Corro 84, 3º B, en tu franja.\nPago al entregar (efectivo, Bizum o tarjeta).\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
       "next": "recibo-botones"
     },
     "recibo-botones": {

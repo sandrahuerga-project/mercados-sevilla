@@ -29,7 +29,7 @@
       "kind": "bot",
       "puesto": "Pescadería Antonio",
       "timestamp": "10:40",
-      "text": "🛵 Tu pedido va en el reparto de esta mañana.\n¿Estarás en casa?",
+      "text": "🛵 Tu pedido va en el reparto de esta mañana, camino de Betis 23, 4º izq.\n¿Estarás en casa?",
       "next": "en-reparto-botones"
     },
     "en-reparto-botones": {

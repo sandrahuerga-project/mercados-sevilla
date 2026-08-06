@@ -135,12 +135,20 @@ PANTALLA 2 — Código postal y mercado
   Footer:        [Continuar] → navigate
 
 PANTALLA 3 — Consentimiento RGPD
-  TextBody:      "Usaré tu nombre y número para gestionar tus
+  TextBody:      "Usaré tu nombre, tu número y, si pides
+                  reparto, tu dirección, para gestionar tus
                   pedidos. Puedes borrarte cuando quieras
                   escribiendo BAJA."
   OptIn:         "Estoy de acuerdo" (obligatorio para continuar)
   Footer:        [Enviar] → complete (cierra el Flow, entrega
                   los datos al backend)
+
+La dirección NO se pide aquí. El alta es el único formulario del
+producto y la mayoría de pedidos son de recogida, así que el domicilio
+se pide la primera vez que alguien elige reparto (flows-index §C03) y
+se guarda en la ficha del cliente, junto al nombre y el código postal
+que sí salen de esta pantalla. De ahí lo recupera el bot en los pedidos
+siguientes.
 
 Si el usuario no completa el Flow: reintento a las 24h con
 plantilla utility recordatorio, máx. 1 vez.
@@ -150,9 +158,80 @@ el móvil" si abre desde escritorio.
 
 ---
 
-## 4. PANEL DEL PLACERO — spec funcional
+## 4. EL LADO DEL PLACERO — dos mandos, un solo pedido
 
-Organism 03. Es la única pieza del sistema que **no** es WhatsApp — panel web (Glide/Softr sobre Airtable), sin constraints de Meta. La piel visual vive en PORTFOLIO_DESIGN.md; aquí solo el comportamiento.
+Antonio despacha desde dos sitios y ninguno es el principal:
+
+> **WhatsApp es el mando a distancia. El panel es la mesa de trabajo.**
+
+En WhatsApp cabe lo que es un toque o una cifra: aceptar, marcar agotado, marcar
+listo con el total, cobrado, avisar de que un cliente no ha venido. Es lo que se
+hace con las manos mojadas y cola en el puesto, con el móvil que ya está encima
+del mostrador. En el panel va lo que exige mirar varias cosas a la vez: la cola
+del día entera, buscar un pedido concreto, editar líneas, el cierre y la
+liquidación. **La tablet no hace falta que esté encendida para despachar el
+día** — solo para verlo.
+
+### 4.1 Con quién habla Antonio
+
+Hay dos números y no se mezclan nunca:
+
+```
+Los clientes escriben a  →  el número de la plataforma, que se
+                            presenta como «Pescadería Antonio»
+Antonio escribe a        →  otro número distinto, «Mercados de
+                            Sevilla · Asistente del placero»
+```
+
+El WhatsApp personal de Antonio no aparece en ninguna parte del sistema: no
+recibe pedidos, no se le da a ningún cliente y no se usa para avisarle. Cuando
+un cliente pulsa `[Hablar con Antonio]` (C11), la conversación aterriza en el
+hilo del asistente con el nombre del cliente y el número de pedido por delante,
+y lo que Antonio escriba allí lo reenvía el bot al chat del cliente. **Al panel
+no llega**: si el escalado viviera en la tablet, Antonio no lo vería.
+
+### 4.2 Dónde vive el estado, y por qué no hay nada que sincronizar
+
+El pedido es **una fila en la base de datos** (Airtable en el MVP; el PRD §11
+prevé Supabase en fase 2, y nada de lo que sigue depende de cuál de las dos
+sea). Esa fila es la única verdad del sistema.
+
+WhatsApp y el panel **no se comunican entre sí**: son dos ventanas al mismo
+registro. El chat no guarda estado — un botón no almacena nada, solo pide un
+cambio en la fila. El panel tampoco guarda copia: cada vez que se abre, lee la
+fila y pinta lo que ponga.
+
+**Los avisos al cliente los dispara el cambio de estado, nunca la pulsación de
+un botón.** Es la regla que hace que dé igual por dónde entre la acción: aceptar
+desde el móvil y aceptar desde la tablet producen el mismo mensaje al cliente,
+una sola vez.
+
+```
+9:41   Carmen confirma                   → fila: nuevo
+9:42   Antonio pulsa Aceptar en WhatsApp  → fila: aceptado
+                                          → el cambio avisa a Carmen
+9:50   Antonio abre el panel              → lee la fila: «aceptado»
+12:20  Antonio teclea 4,30 en WhatsApp    → fila: listo, total 4,30 €
+                                          → el cambio avisa a Carmen
+13:52  Antonio marca Cobrado en el panel  → fila: entregado
+```
+
+### 4.3 Los botones viejos no caducan solos
+
+Un mensaje de WhatsApp se queda en el historial para siempre, así que Antonio
+puede aceptar un pedido en el panel a las 9:42 y a las 12:00, buscando otra
+cosa, pulsar el botón `[Aceptar]` del mensaje de las 9:41.
+
+**Regla: los botones se resuelven contra el estado actual de la fila, no contra
+el mensaje que los contiene.** Si el pedido ya no está donde estaba, el bot
+responde *«Ese ya lo aceptaste a las 9:42»*, no toca nada y no vuelve a avisar
+al cliente. Sin esto, cualquier pedido se puede duplicar con un dedo.
+
+---
+
+## 4.4 PANEL DEL PLACERO — spec funcional
+
+Organism 03. Es la única pieza del sistema que **no** es WhatsApp — panel web (Glide/Softr sobre Airtable, o el equivalente sobre la base que se acabe usando), sin constraints de Meta. La piel visual vive en PORTFOLIO_DESIGN.md; aquí solo el comportamiento.
 
 ```
 ESTADOS VISIBLES PARA EL PLACERO (filtro):
@@ -165,8 +244,10 @@ ACCIONES POR PEDIDO::
   Preparando  → [Listo] [Problema]
                  Al tocar [Listo]: campo obligatorio de TOTAL
                  FINAL (numérico, post-pesaje). El placero
-                 teclea el número real — el bot no lo calcula
-                 (CLAUDE.md.txt). Dispara plantilla
+                 teclea el número real aquí o por WhatsApp,
+                 como prefiera — lo que nunca cambia es que lo
+                 teclea él y el bot no lo calcula (§4, CLAUDE.md).
+                 Dispara plantilla
                  pedido_listo_v1 (wa-constraints.md §7) con
                  ese total y pasa el pedido a "Por cobrar".
   Por cobrar  → [Marcar cobrado] con desplegable de método

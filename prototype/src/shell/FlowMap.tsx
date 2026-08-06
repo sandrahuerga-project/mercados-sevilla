@@ -214,9 +214,10 @@ const ARISTAS: Arista[] = [
   { from: 'C03', to: 'S04' },
   { from: 'C03', to: 'S08' },
   // Hablar con el placero se ofrece desde casi cualquier pedido (C03, C05, C06,
-  // C09, C12, S03, S04). Dibujarlas todas era espagueti, y varias tendrían que
-  // retroceder, así que se traza la del flujo central y el resto lo dice la
-  // leyenda. Antes salía de C08, que es justo el único que NO lo ofrece.
+  // C07, C08, C09, C12, S03, S04). Dibujarlas todas era espagueti, y varias
+  // tendrían que retroceder, así que se traza la del flujo central y el resto
+  // lo dice la leyenda. Desde que un pedido preparado solo lo anula el placero,
+  // C07 y C08 acaban ahí también: su botón de cancelar lleva a la persona.
   { from: 'C03', to: 'C11' },
 
   // Lo que corta el alta

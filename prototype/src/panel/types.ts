@@ -23,6 +23,12 @@ export interface PanelOrder {
   time: string;
   items: OrderItem[];
   fulfillment: 'Recogida' | 'Taquilla' | 'Reparto';
+  /**
+   * Solo en los pedidos de reparto. Sale de la ficha del cliente, donde se
+   * guardó la primera vez que pidió que se lo llevaran a casa: el bot la
+   * recupera de ahí y el placero la ve tal cual la escribió el cliente.
+   */
+  direccion?: string;
   estimated: string;
   state: OrderState;
   finalTotal?: string;

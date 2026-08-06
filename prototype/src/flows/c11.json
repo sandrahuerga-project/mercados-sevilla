@@ -78,8 +78,15 @@
       "buttons": [
         { "label": "Recogida en puesto", "next": "confirmado" },
         { "label": "Taquilla", "next": "confirmado-taquilla" },
-        { "label": "Reparto 10:00-14:00", "next": "confirmado" }
+        { "label": "Reparto 10:00-14:00", "next": "confirmado-reparto" }
       ]
+    },
+    "confirmado-reparto": {
+      "kind": "bot",
+      "puesto": "Pescadería Antonio",
+      "timestamp": "09:18",
+      "text": "📝 Pedido recibido #SGZ-2026-0388\n\nReparto mañana de 10:00 a 14:00 a *Pagés del Corro 84, 3º B*, la dirección que tengo guardada.\nSi hay que cambiarla, dímelo.\n\nFalta que Antonio lo acepte. Te aviso en cuanto lo haga.",
+      "next": "confirmado-fin"
     },
     "confirmado": {
       "kind": "bot",

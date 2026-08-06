@@ -1,7 +1,7 @@
 # Post mortem — Mercados de Sevilla
 
 > Qué se rompió, por qué, y qué se cambió para que no vuelva a pasar.
-> Del 28 de julio al 5 de agosto de 2026. Prototipo en producción.
+> Del 28 de julio al 6 de agosto de 2026. Prototipo en producción.
 >
 > Esto no es la lista de lo que se hizo: eso está en [`PENDIENTE.md`](PENDIENTE.md).
 > Aquí solo hay lo que salió mal y qué se aprendió.
@@ -388,9 +388,107 @@ etiqueta pero no el contexto, y la etiqueta sola miente sin que se note.
 
 ---
 
+### 1.18 Reparto a domicilio sin domicilio
+
+Cuatro flujos ofrecían «Reparto a domicilio», cobraban 2,50 € por él y emitían
+el recibo, y en ningún momento de todo el producto se preguntaba **dónde**. El
+alta pedía nombre, código postal, mercado y puestos favoritos. El código postal
+servía para decidir si la zona entra en reparto (S06 existe justo para eso), y
+de ahí salió la confusión: **saber la zona se dio por saber la dirección.**
+
+Llegaba hasta el final. El panel del placero tenía `fulfillment: 'Reparto'` y
+ningún campo de dirección: Antonio veía que había que repartir y no adónde.
+
+Lo vio Sandra leyendo los flujos, no ningún script. Y no había script que
+pudiera verlo: todos los pasos enlazaban bien, ningún botón apuntaba a un sitio
+inexistente, el recibo se componía sin error. Faltaba un dato que nadie había
+declarado obligatorio en ninguna parte.
+
+**Dónde se puso.** No en el alta: es el único formulario del producto, la mayoría
+de pedidos en un mercado de barrio son de recogida, y añadir un campo obligatorio
+se lo cobra a todo el mundo antes de que nadie haya decidido comprar nada. Se
+pide **la primera vez que alguien elige reparto**, cuando la pregunta ya está
+justificada, y se guarda en la ficha del cliente. A partir de ahí el bot la
+recupera y solo la repite en el recibo.
+
+**Lección.** Un flujo puede estar entero, ser coherente y validar en verde, y aun
+así no ser ejecutable en el mundo. La pregunta que ningún script hace es *¿con
+esto se puede cumplir el pedido de verdad?*
+
+### 1.19 Carmen podía cancelar lo que David no
+
+El aviso de cierre de C07 —el pedido ya pesado, envuelto y esperando en el
+frigorífico— ofrecía **«Cancelar pedido»**, y cancelaba, sin incidencia y sin
+que Antonio se enterara. La regla contraria estaba escrita y prototipada al
+lado: C12 existe entero para decir que **un pedido preparado no lo anula el
+bot, lo anula el placero**, y el tracking de David (C07D) no ofrecía cancelar.
+La misma situación, dos respuestas opuestas, según por qué recorrido llegaras.
+
+`flows-index.md` tenía el error también, en la ficha de S02: el aviso 2 listaba
+`[Cancélalo]`. O sea que la documentación no era el sitio donde consultarlo,
+era una tercera versión.
+
+C08 tenía la variante interesante: pedido en PREPARANDO, se agota un producto y
+el botón de cancelar anulaba entero con la nota «cancelación libre». Aquí el
+cliente sí tiene derecho a irse —el puesto no tiene lo que pidió—, así que el
+botón se queda, pero lleva a Antonio, que es quien puede cerrarlo. Se cancela;
+lo cancela la persona.
+
+**Lo que faltaba, además.** La incidencia no tenía camino. Se aplazaba el pedido
+a mañana y el flujo se acababa ahí. Ahora, si al día siguiente el cliente dice
+que no puede ir, **Antonio llama por teléfono** y solo después se cierra con
+incidencia. Un cliente que no contesta no genera incidencia por sí solo: eso ya
+estaba escrito en S02 («el bot no sustituye esa llamada») y no estaba en ningún
+flujo.
+
+**Lección.** Una regla de negocio que solo vive en el flujo que la inventó no es
+una regla, es un caso particular. C12 no era «el flujo de cancelar tarde»: era
+la política de cancelación de todo el producto, y ningún otro flujo se había
+enterado.
+
+### 1.20 Del lado del placero no había arquitectura, había dos prototipos
+
+Preguntó Sandra: *«en WA, ¿a quién está escribiendo Antonio? ¿cómo se comunica
+con la tablet? ¿cómo se sincroniza?»*. No había respuesta en ningún documento,
+y al ir a buscarla salieron cuatro huecos, no uno.
+
+`flows-index.md` decía que P03 era panel «con notificación WA **opcional**», y
+`DESIGN.md` que el panel es la única pieza que no es WhatsApp. El prototipo, en
+cambio, tenía a Antonio aceptando pedidos y tecleando el total del pesaje dentro
+del chat. Dos versiones del producto conviviendo sin que ninguna supiera de la
+otra, y la del prototipo era la buena: a las 9:41, con cola en el puesto y las
+manos mojadas, nadie abre una tablet.
+
+Lo que faltaba escrito, además de eso:
+
+- **Con quién habla.** Hay dos números —el que ven los clientes y el del
+  asistente del placero— y eso ya estaba en los cuatro flujos de P sin que
+  ningún documento lo dijera. El WhatsApp personal de Antonio no se usa nunca.
+- **Las plantillas del placero.** `wa-constraints.md` tenía las seis del cliente
+  y ninguna suya, cuando el aviso de pedido nuevo le llega igual de fuera de la
+  ventana de 24h y necesita plantilla aprobada.
+- **Dónde aterriza el escalado.** C11 mandaba al cliente «con Antonio» sin que
+  nada dijera adónde llega eso. Si hubiera caído en el panel, no lo vería.
+- **El botón que no caduca.** Un mensaje de WhatsApp vive en el historial para
+  siempre: aceptar en el panel a las 9:42 y pulsar a las 12:00 el botón viejo de
+  las 9:41 habría mandado a la clienta un segundo aviso de aceptación.
+
+**Qué se decidió.** WhatsApp es el mando a distancia y el panel la mesa de
+trabajo. El estado vive en una fila de la base y en ningún otro sitio; los dos
+canales escriben ahí y no se hablan entre sí; **los avisos al cliente los
+dispara el cambio de estado, nunca la pulsación de un botón**. Esa última frase
+es la que resuelve el botón caducado y la duplicación de avisos a la vez.
+
+**Lección.** Se había diseñado con detalle la conversación del cliente y se había
+dado por hecha la del placero, que es quien usa esto ocho horas al día. Un
+producto de dos lados tiene dos lados: el segundo no se documenta solo porque
+sea el menos vistoso.
+
+---
+
 ## 2. Los patrones
 
-Los diecisiete fallos se reducen a seis formas:
+Los veinte fallos se reducen a diez formas:
 
 | Patrón | Dónde apareció |
 |---|---|
@@ -401,14 +499,18 @@ Los diecisiete fallos se reducen a seis formas:
 | **La rama de muestra tomada por rama completa** | 1.7 botón de C05 · 1.12 la edición de C09 · 1.16 el multi-puesto que siempre fallaba |
 | **La restricción absorbida improvisando** | 1.15 tres botones y cuatro opciones |
 | **La etiqueta que viaja sin su contexto** | 1.17 «dejarlo estar» y el escalado de noche |
+| **La regla que se quedó en el flujo que la inventó** | 1.19 cancelar un pedido preparado, escrito solo en C12 |
+| **El dato que nadie declaró obligatorio** | 1.18 la dirección de reparto |
+| **El lado del producto que se dio por hecho** | 1.20 la arquitectura del placero |
 
 Ninguno era un fallo de programación. Todos eran de **organización de la
 información**.
 
-Y por encima de los cinco, uno de método: **lo que la verificación automática no
-mira, no existe**. Los tres hallazgos peores —los dos del puntero y el de los
-flujos de David— los vio una persona mirando la pantalla después de que los
-scripts dieran el visto bueno (1.3, 1.4, 1.14).
+Y por encima de todos, uno de método: **lo que la verificación automática no
+mira, no existe**. Los hallazgos peores —los dos del puntero, el de los flujos
+de David, el reparto sin dirección y la cancelación contradictoria— los vio una
+persona leyendo, después de que los scripts dieran el visto bueno (1.3, 1.4,
+1.14, 1.18, 1.19).
 
 ---
 

@@ -308,6 +308,28 @@ Cada cambio de estado fuera de ventana 24h → plantilla utility. Plantillas a a
 
 (Cada una con su variable de nombre puesto, items, hora.)
 
+### 6.7 Plantillas del lado del placero
+
+El placero también es un usuario de WhatsApp y la ventana de 24h le afecta
+igual. El pedido de las 9:41 le llega sin que él haya escrito nada en todo el
+día: **fuera de ventana, así que ese aviso es plantilla utility con quick
+replies**, no texto libre. En cuanto contesta se abre su ventana y el resto de
+la jornada va en libre, botones incluidos.
+
+Plantillas a aprobar (hilo «Mercados de Sevilla · Asistente del placero», nunca
+el número que ven los clientes — DESIGN.md §4.1):
+
+- `placero_pedido_nuevo_v1` — quick replies `[Aceptar]` `[Producto agotado]` `[No puedo hoy]`
+- `placero_pedido_sin_aceptar_v1` — recordatorio si un pedido lleva rato en «nuevo»
+- `placero_cliente_no_recoge_v1` — el cliente no ha pasado y el puesto cierra (S02)
+- `placero_escalado_v1` — un cliente pide hablar con él (C11), con nombre y nº de pedido
+- `placero_cierre_dia_v1` — resumen del día (P04)
+- `placero_video_pendiente_v1` — no ha subido el vídeo del día (S07, P02)
+
+Los quick replies de estas plantillas se resuelven contra el estado actual del
+pedido, no contra el mensaje: un botón viejo no repite una acción ya hecha
+(DESIGN.md §4.3).
+
 ---
 
 ## 7. Plantillas-tipo para arrancar (borradores)

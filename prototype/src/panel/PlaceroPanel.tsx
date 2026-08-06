@@ -188,6 +188,11 @@ export const PlaceroPanel: React.FC = () => {
               {o.paidWith && <> · Cobrado en {o.paidWith}</>}
             </div>
 
+            {/* El reparto sin dirección no se puede repartir */}
+            {o.direccion && (
+              <div className="text-[12px] text-zinc-500">🛵 {o.direccion}</div>
+            )}
+
             {/* Actions per state */}
             <div className="flex flex-wrap gap-2 pt-1">
               {o.state === 'nuevo' && (
