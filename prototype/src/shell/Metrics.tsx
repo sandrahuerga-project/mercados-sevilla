@@ -4,7 +4,7 @@ import { Reveal } from './Reveal';
 import { SectionLabel } from './SectionLabel';
 
 /**
- * Los cuatro números con los que se sabría si esto funciona.
+ * Los tres números con los que se sabría si esto funciona.
  *
  * Va justo detrás del prototipo a propósito: es la pregunta que le queda a
  * cualquiera nada más ver la conversación funcionando. Y va escrito como
@@ -24,7 +24,8 @@ export const Metrics: React.FC = () => (
         </p>
       </Reveal>
 
-      <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Tres columnas directas: con sm:grid-cols-2 quedaría un huérfano en tablet */}
+      <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-3 md:max-w-[76rem]">
         {METRICAS.items.map((m, i) => (
           <Reveal key={m.titulo} delay={i * 90}>
             <div className="border-t border-line pt-6">

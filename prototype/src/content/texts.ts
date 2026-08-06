@@ -184,41 +184,37 @@ const RESTRICCIONES = pegaTextos({
 
 /**
  * Objetivos, no resultados. El bot no está desplegado y no hay datos de uso, así
- * que aquí no puede haber un solo número presentado como logrado. Lo único
- * medido es la línea base de Antonio, que sale del trabajo de campo.
+ * que aquí no puede haber un solo número presentado como logrado. Lo único que
+ * va como dato es la línea base de Antonio, que sale del trabajo de campo: los
+ * pedidos diarios y la recurrencia de su clientela. Son cifras suyas, estimadas
+ * por él, y así están escritas.
  */
 export const METRICAS = pegaTextos({
-  eyebrow: 'Cómo sabríamos que funciona',
-  lead: 'El bot no está desplegado, así que no hay datos de uso: nada de lo que sigue es un resultado. Son los cuatro números con los que decidiría si esto merece seguir, elegidos porque cada uno mata una duda distinta.',
+  eyebrow: 'Cómo mediríamos si funciona',
+  lead: 'El bot no está desplegado porque es un prototipo, así que no hay datos de uso. Nos basamos en la experiencia previa de Antonio el pescadero para definir estas métricas.',
   base: {
-    titulo: 'Lo único medido hoy',
+    titulo: 'Lo que ya sabemos de Antonio',
     cuerpo:
-      'Antonio recibe entre 15 y 40 pedidos al día por WhatsApp, apuntados a mano en un cuaderno. Sale de acompañarle en el puesto, no de una encuesta. Todo lo de abajo se compara contra eso.',
+      'Antonio recibe entre 15 y 40 pedidos al día por WhatsApp y los gestiona a mano. Y no son clientes distintos cada vez: él calcula que más de la mitad le compra varias veces al mes, unos a diario, otros cada semana o cada quince días. Son cifras aproximadas, de hablar con él, pero son el punto de partida contra el que se compararía todo lo demás: si con el bot repitiera menos gente de la que repite ahora, el bot estorba.',
   },
   items: [
     {
       cifra: '≤ 4 min',
       titulo: 'Del vídeo al pedido cerrado',
       cuerpo:
-        'Si tarda más que la cola del pescadero, no compensa. Es el objetivo del flujo central y la razón de que se pida hablando y no rellenando nada.',
+        'El objetivo del flujo central es el pedido cerrado y debería ser rápido en comparación con acudir al mercado y fácil de entender.',
     },
     {
       cifra: '8 de 10',
-      titulo: 'Altas que se terminan',
+      titulo: 'Altas que se completan',
       cuerpo:
-        'El alta es el único formulario de todo el producto y la única barrera antes de comprar. Si aquí se cae una de cada tres personas, el resto de flujos da igual.',
+        'El alta es el único formulario de todo el producto y la única barrera antes de comprar. El éxito del alta es necesario para poder seguir evaluando el resto de flujos.',
     },
     {
       cifra: '< 1 de 20',
-      titulo: 'Pedidos que acaban en incidencia',
+      titulo: 'Pedidos con incidencia',
       cuerpo:
-        'Género preparado que nadie recoge es dinero perdido del placero, y es lo primero que le haría dejar de usarlo. Mide la confianza, no la tecnología.',
-    },
-    {
-      cifra: '1 de cada 2',
-      titulo: 'Clientes que repiten en el mes',
-      cuerpo:
-        'Esto vive del hábito diario, no de captar gente nueva. Sin repetición no hay negocio, por bien que funcione lo demás.',
+        'Si nadie recoge sus pedidos preparados, el placero pierde dinero y dejaría de usar el bot. Mide la confianza entre cliente y vendedor, no la tecnología.',
     },
   ],
 });
@@ -236,7 +232,7 @@ export const CONTEXT = {
 export const POSTMORTEM_NOTA = pegaTextos({
   titulo: 'Lo que salió mal por el camino',
   cuerpo:
-    'Un mapa de flujos que llevaba semanas contradiciendo a la lista que tiene encima, un mismo pedido que valía dos precios distintos según quién lo mirara, botones que ofrecían hablar con un placero que había cerrado hacía seis horas. Está todo escrito, con su causa y con lo que se cambió para que no se repita.',
+    'Un mapa de flujos que llevaba semanas contradiciendo una lista, un mismo pedido que tenía dos precios distintos según quién lo mirara, botones que ofrecían hablar con un placero que había cerrado hacía seis horas. Está todo escrito, con su causa y con lo que se cambió para que no se repita.',
   enlace: 'Leer el post mortem',
   url: 'https://github.com/sandrahuerga-project/mercados-sevilla/blob/main/POSTMORTEM.md',
 });
