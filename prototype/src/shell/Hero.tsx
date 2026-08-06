@@ -101,8 +101,13 @@ export const Hero: React.FC = () => (
       </div>
 
       {/* Bodegón: cuatro piezas que se colocan solas al cargar y luego flotan.
-          Cada una entra desde su lado, con su giro y su retraso. */}
-      <div className="hidden lg:block absolute right-0 top-0 w-[40rem] h-[30rem] pointer-events-none">
+          Cada una entra desde su lado, con su giro y su retraso.
+
+          Va 2,5 rem por encima del borde: colgaba lo justo para que las gambas
+          y la naranja se comieran la línea de «Rol». Arriba sobra sitio porque
+          los WebP llevan margen transparente y el pez empieza mucho más abajo
+          que su caja. */}
+      <div className="hidden lg:block absolute right-0 -top-10 w-[40rem] h-[30rem] pointer-events-none">
         {BODEGON.map((pieza) => (
           <Parallax key={pieza.id} speed={pieza.parallax} className={`absolute ${pieza.pos}`}>
             <FoodImage
