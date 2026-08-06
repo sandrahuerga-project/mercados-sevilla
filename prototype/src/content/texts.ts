@@ -232,7 +232,7 @@ export const CONTEXT = {
 export const POSTMORTEM_NOTA = pegaTextos({
   titulo: 'Lo que salió mal por el camino',
   cuerpo:
-    'Un mapa de flujos que llevaba semanas contradiciendo una lista, un mismo pedido que tenía dos precios distintos según quién lo mirara, botones que ofrecían hablar con un placero que había cerrado hacía seis horas. Está todo escrito, con su causa y con lo que se cambió para que no se repita.',
+    'Un reparto a domicilio que en ningún momento preguntaba el domicilio, un mismo pedido con dos precios distintos según quién lo mirara, un pedido ya pesado y envuelto que una clienta podía cancelar y otro no. Está todo escrito, con su causa y con lo que se cambió para que no se repita.',
   enlace: 'Leer el post mortem',
   url: 'https://github.com/sandrahuerga-project/mercados-sevilla/blob/main/POSTMORTEM.md',
 });
