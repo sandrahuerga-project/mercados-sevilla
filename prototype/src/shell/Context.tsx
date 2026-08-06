@@ -66,7 +66,13 @@ export const Context: React.FC = () => {
             <dl className="mt-12 border-t border-line">
               {WHATSAPP_CONSTRAINTS.map((c, i) => (
                 <Reveal key={c.rule} delay={i * 70}>
-                  <div className="grid gap-x-10 gap-y-2 md:grid-cols-[1fr_1fr_auto] py-7 border-b border-line items-start">
+                  {/* Los tres tracks van medidos, no con `auto`: cada fila es su
+                      propio grid, así que un `auto` se ajustaba al texto de esa
+                      fila y la columna del medio arrancaba en una x distinta en
+                      cada una. En tablet los tres son proporcionales; el ancho
+                      fijo de la tercera solo entra en lg, porque a 820 px se
+                      comía el sitio de las otras dos. */}
+                  <div className="grid gap-x-10 gap-y-2 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)_minmax(0,20rem)] py-7 border-b border-line items-start">
                     <dt className="text-lg font-medium tracking-tight">{c.rule}</dt>
                     <dd className="text-ink-soft leading-relaxed">
                       <span className="block">{c.limit}</span>
