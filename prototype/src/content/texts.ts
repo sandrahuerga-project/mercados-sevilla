@@ -195,7 +195,7 @@ export const METRICAS = pegaTextos({
   base: {
     titulo: 'Lo que ya sabemos de Antonio',
     cuerpo:
-      'Antonio recibe entre 15 y 40 pedidos al día por WhatsApp y los gestiona a mano. Y no son clientes distintos cada vez: él calcula que más de la mitad le compra varias veces al mes, unos a diario, otros cada semana o cada quince días. Son cifras aproximadas, de hablar con él, pero son el punto de partida contra el que se compararía todo lo demás: si con el bot repitiera menos gente de la que repite ahora, el bot estorba.',
+      'Antonio recibe entre 15 y 40 pedidos al día por WhatsApp y los gestiona a mano. Y no son clientes distintos cada vez: él calcula que más de la mitad le compra varias veces al mes, unos a diario, otros cada semana o cada quince días. Son cifras aproximadas, de hablar con él, pero son el punto de partida contra el que se compararía todo lo demás.',
   },
   items: [
     {
