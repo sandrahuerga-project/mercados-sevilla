@@ -37,7 +37,7 @@ node scripts/generar-favicon.mjs          # favicon e iconos, desde la naranja d
 | `src/shell/` | La web que envuelve al prototipo: portada, secciones, mapa de flujos |
 | `src/panel/` | El panel del placero, que es la otra mitad del producto |
 | `src/content/` | Textos del portfolio, catálogo de flujos y las reglas de composición |
-| `public/ilustraciones/` | Las ilustraciones de Sandra. Los `web/` son las versiones ligeras |
+| `public/ilustraciones/web/` | Las ilustraciones de Sandra en WebP. Es lo que sirve la web. Los PNG originales viven fuera del repo, en `../mercados-sevilla-privado/ilustraciones-master/` |
 | `scripts/` | Verificación y generación. Se lanzan a mano |
 
 ## Dos reglas que conviene saber antes de editar

@@ -12,6 +12,12 @@
  *
  * Se lanza a mano cuando cambie la ilustración:
  *   node scripts/generar-favicon.mjs
+ *
+ * OJO: el PNG original ya no vive en el repo. Los masters están en
+ * ../mercados-sevilla-privado/ilustraciones-master/. Para relanzar esto hay que
+ * copiar naranja.png de vuelta a public/ilustraciones/alimentos/ (el .gitignore
+ * lo ignora, así que no se cuela en un commit). Los tres iconos que genera ya
+ * están versionados, de modo que la web no depende de poder ejecutarlo.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import sharp from 'sharp';

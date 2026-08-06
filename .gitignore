@@ -20,3 +20,9 @@ MAYOR_MEETING.md
 # Notas de trabajo y duplicados: viven fuera del repo (../mercados-sevilla-privado/)
 NOTAS_VERCEL_V.1.txt
 *.docx
+
+# Ilustraciones originales de Sandra (PNG 1200x1200, ~28 MB): viven fuera del
+# repo, en ../mercados-sevilla-privado/ilustraciones-master/. Lo que sirve la
+# web son los WebP de ilustraciones/web/, que SI estan versionados.
+prototype/public/ilustraciones/*.png
+prototype/public/ilustraciones/alimentos/*.png

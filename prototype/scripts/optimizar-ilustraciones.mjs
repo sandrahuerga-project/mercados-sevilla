@@ -11,6 +11,13 @@
  *
  * Se lanza a mano cuando lleguen ilustraciones nuevas:
  *   node scripts/optimizar-ilustraciones.mjs
+ *
+ * OJO: los PNG originales ya no viven en el repo, están en
+ * ../mercados-sevilla-privado/ilustraciones-master/. Pesaban 28 MB para acabar
+ * generando 880 KB de WebP, y esos WebP sí están versionados: la web tira de
+ * ellos y no necesita este script para nada. Si algún día hay ilustración
+ * nueva, copiar los masters de vuelta a public/ilustraciones/ (el .gitignore
+ * los ignora), lanzar esto, y commitear solo el WebP resultante.
  */
 import { readdir, mkdir, stat } from 'node:fs/promises';
 import { join, parse } from 'node:path';
